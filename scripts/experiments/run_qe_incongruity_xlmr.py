@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 from transformers import pipeline
 
-from feedbac.metrics import QuantumIncongruity
+from humetrix.metrics import QuantumIncongruity
 
 
 def get_qi_score(sentence, embeddings, lang):

@@ -3,7 +3,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import pandas as pd
-from feedbac.metrics import QuantumUncertainty
+from humetrix.metrics import QuantumUncertainty
 from transformers import pipeline
 
 

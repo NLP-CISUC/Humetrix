@@ -3,7 +3,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import pandas as pd
-from feedbac.metrics import QuantumIncongruity
+from humetrix.metrics import QuantumIncongruity
 from gensim.models import KeyedVectors
 
 
