@@ -8,6 +8,9 @@ pandas = "*"
 transformers = "*"
 gensim = "*"
 spacy = "*"
+humetrix = {file = ".", editable = true}
+scipy = "==1.10.1"
+tqdm = "*"
 
 [dev-packages]
 
