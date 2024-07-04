@@ -22,13 +22,18 @@ python utils/conversion/humor_recognition/humicroedit_to_json.py \
 
 python utils/conversion/humor_recognition/joker_to_json.py \
     -d ../../Resources/Corpora/JOKER-CLEF2023/Task\ 1\ -\ detection/
-python utils/conversion/humor_recognition/puntuguese_to_json.py -d ../../Resources/Corpora/BRHuM/data/classification_corpus.json
+
+python utils/conversion/humor_recognition/puntuguese_to_json.py \
+    -d ../../Resources/Corpora/BRHuM/data/classification_corpus.json
 
 python utils/conversion/humor_recognition/semeval_to_json.py \
     -td ../../Resources/Corpora/semeval2017_task7/data/test/subtask1-heterographic-test.xml \
     -tl ../../Resources/Corpora/semeval2017_task7/data/test/subtask1-heterographic-test.gold \
     -md ../../Resources/Corpora/semeval2017_task7/data/test/subtask1-homographic-test.xml \
     -ml ../../Resources/Corpora/semeval2017_task7/data/test/subtask1-homographic-test.gold
+
+python utils/conversion/humor_recognition/hindi_to_json.py \
+    -d ../../Resources/Corpora/Hindi-English-puns/AnnotatedCorpus.txt
 
 ###### HUMOR INTERPRETATION ######
 mkdir -p data/humor_interpretation
