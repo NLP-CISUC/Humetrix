@@ -3,9 +3,10 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 import pandas as pd
+import spacy
 import torch
 from gensim.models import KeyedVectors
-from humetrix import QuantumIncongruity, QuantumUncertainty
+from humetrix import SPACY_MODELS, QuantumIncongruity, QuantumUncertainty
 from tqdm import tqdm
 from transformers import pipeline
 
@@ -54,6 +55,9 @@ if not args.glove and not args.huggingface:
     print('Give at least one embedding model (GloVe or HuggingFace).')
     exit(1)
 
+# Load spacy model
+spacy_model = spacy.load(SPACY_MODELS[args.language])
+
 # Load embeddings or HuggingFace model
 glove_embeddings = KeyedVectors.load(args.glove) if args.glove else None
 hf_embeddings = (pipeline('feature-extraction', args.huggingface, device=device)
@@ -67,22 +71,22 @@ if args.incongruity and glove_embeddings:
     tqdm.pandas(desc='Incongruity + GloVe')
     df['QE-I + GloVe'] = df['text'].progress_apply(get_qi_score,
                                                    embeddings=glove_embeddings,
-                                                   lang=args.language)
+                                                   lang=spacy_model)
 if args.incongruity and hf_embeddings:
     tqdm.pandas(desc='Incongruity + HuggingFace')
     df['QE-I + HF'] = df['text'].progress_apply(get_qi_score,
                                                 embeddings=hf_embeddings,
-                                                lang=args.language)
+                                                lang=spacy_model)
 if args.uncertainty and glove_embeddings:
     tqdm.pandas(desc='Uncertainty + GloVe')
     df['QE-U + GloVe'] = df['text'].progress_apply(get_qu_score,
                                                    embeddings=glove_embeddings,
-                                                   lang=args.language)
+                                                   lang=spacy_model)
 if args.uncertainty and hf_embeddings:
     tqdm.pandas(desc='Uncertainty + HuggingFace')
     df['QE-U + HF'] = df['text'].progress_apply(get_qu_score,
                                                 embeddings=hf_embeddings,
-                                                lang=args.language)
+                                                lang=spacy_model)
 
 results_path = Path('results/quantum_entropy') / args.corpus.name
 results_path.parent.mkdir(exist_ok=True, parents=True)
