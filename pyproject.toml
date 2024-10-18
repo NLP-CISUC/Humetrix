@@ -1,0 +1,23 @@
+[project]
+name = "humetrix"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "datasets>=3.0.1",
+    "gensim>=4.3.3",
+    "humetrix",
+    "pandas>=2.2.3",
+    "scipy==1.10.1",
+    "spacy[cuda11x,transformers]>=2.3.9",
+    "torch>=2.5.0",
+    "tqdm>=4.66.5",
+    "transformers>=4.45.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+humetrix = { workspace = true }
