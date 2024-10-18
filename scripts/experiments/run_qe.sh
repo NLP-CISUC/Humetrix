@@ -68,6 +68,7 @@ python ../../scripts/experiments/run_qe.py \
 
 # ------------ Puntuguese ------------
 python ../../scripts/experiments/run_qe.py \
+    --corpus ../../data/humor_recognition/puntuguese.json \
     --language pt \
     --glove ../../../../Resources/Embeddings/Portuguese/glove_s300.gensim \
     --huggingface FacebookAI/xlm-roberta-base \
