@@ -7,10 +7,11 @@ name = "pypi"
 pandas = "*"
 transformers = "*"
 gensim = "*"
-spacy = "*"
 humetrix = {file = ".", editable = true}
 scipy = "==1.10.1"
 tqdm = "*"
+cupy-cuda11x = "*"
+spacy = {extras = ["cuda11x", "transformers"], version = "*"}
 
 [dev-packages]
 

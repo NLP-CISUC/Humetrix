@@ -7,32 +7,31 @@ import numpy as np
 import spacy
 import torch
 from gensim.models import KeyedVectors
+from spacy.language import Language
 from transformers import Pipeline, pipeline
 
-SPACY_MODELS = {'pt': 'pt_core_news_lg',
-                'en': 'en_core_web_trf',
-                'fr': 'fr_dep_news_trf',
-                'es': 'es_dep_news_trf'}
+from humetrix import SPACY_MODELS
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 class QuantumEntropy():
     def __init__(self, sentence: str,
                  embeddings: Union[KeyedVectors, Pipeline],
-                 lang: str) -> None:
+                 spacy_model: Language) -> None:
         super().__init__()
         self.text = sentence
         self.embeddings = embeddings
-        self.language = lang
+        self.spacy_model = spacy_model
 
     def tokenize_sentence(self) -> Tuple[List[str], List[str]]:
-        punct_chars = spacy.pipeline.Sentencizer.default_punct_chars
-        punct_chars.extend([',', ';'])
+        if 'sentencizer' not in self.spacy_model.pipe_names:
+            punct_chars = spacy.pipeline.Sentencizer.default_punct_chars
+            punct_chars.extend([',', ';'])
+            self.spacy_model.add_pipe('sentencizer', config={'punct_chars': punct_chars})
 
-        nlp = spacy.load(SPACY_MODELS[self.language])
-        nlp.add_pipe('sentencizer', config={'punct_chars': punct_chars})
-        with nlp.select_pipes(enable='sentencizer'):
-            doc = nlp(self.text)
+        with self.spacy_model.select_pipes(enable='sentencizer'):
+            doc = self.spacy_model(self.text)
 
         setup, punchline = list(doc.sents)
         setup_toks = [token.lower_ for token in setup]
