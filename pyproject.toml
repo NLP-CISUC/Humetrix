@@ -6,6 +6,7 @@ requires-python = ">=3.10"
 dependencies = [
     "datasets>=3.0.1",
     "gensim>=4.3.3",
+    "pyspark>=3.5.3",
     "spacy[cuda11x,transformers]>=3.7.5",
 ]
 
