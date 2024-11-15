@@ -4,20 +4,19 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.10"
 dependencies = [
-    "datasets>=3.0.1",
-    "gensim>=4.3.3",
+    "datasets>=3.1.0",
+    "markupsafe==2.1.5",
     "pyspark>=3.5.3",
     "spacy[cuda11x,transformers]>=3.7.5",
+    "torch==2.5.1+cu118",
+    "transformers>=4.36.2",
 ]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
 
 [tool.uv]
 dev-dependencies = [
     "isort>=5.13.2",
-    "pip>=24.2",
+    "pip>=24.3.1",
 ]
 
-[tool.uv.sources]
+[[tool.uv.index]]
+url = "https://download.pytorch.org/whl/cu118"
