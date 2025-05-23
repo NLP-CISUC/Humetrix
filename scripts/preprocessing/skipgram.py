@@ -32,7 +32,8 @@ def parse_arguments():
 def build_vocabulary(corpus, max_vocab, threshold):
     vocab = (corpus.explode('lemma')
              .group_by('lemma').len()
-             .sort('len', descending=True))
+             .sort('len', descending=True)
+             .collect())
     if args.max_vocab > 0:
         vocab = vocab.head(max_vocab)
     if args.threshold > 0:
@@ -54,42 +55,39 @@ def build_vocabulary(corpus, max_vocab, threshold):
     return vocab
 
 def build_skipgram(corpus, vocab, max_dist, min_dist, unk_id):
-    # Convert lemmas to vocab ids
-    corpus = (corpus.explode('lemma')
-              .join(vocab.with_row_index(), on='lemma')
-              .group_by('text', maintain_order=True)
-              .agg(pl.col('index').alias('lemma id')))
-
-    # Remove texts with length <= (max_dist - min_dit + 1)
     min_length = max_dist - min_dist + 1
-    corpus = corpus.filter(pl.col('lemma id').list.len() > min_length)
-
-    # Replicate one row for each token (to create individual context windows)
-    corpus = (corpus.with_columns(pl.int_ranges(pl.col('lemma id').list.len()).alias('token id'))
-              .explode('token id'))
-
-    # Create context windows
-    corpus = (corpus.with_columns((pl.col('token id') - max_dist).clip(lower_bound=0).alias('left start'),
-                                  (pl.col('token id') - min_dist).clip(lower_bound=0).alias('left end'),
-                                  (pl.col('token id') + min_dist + 1).alias('right start'),
-                                  (pl.col('token id') + max_dist + 1).alias('right end'))
-              .with_columns((pl.col('left end') - pl.col('left start')).alias('left length'),
-                            (pl.col('right end') - pl.col('right start')).alias('right length'))
-              .with_columns(pl.col('lemma id').list.slice(pl.col('left start'), pl.col('left length')).alias('left'),
-                            pl.col('lemma id').list.slice(pl.col('right start'), pl.col('right length')).alias('right')))
-
-    # Pad context windows to ensure they are the same size
     window_size = max_dist - min_dist
-    corpus = (corpus.select(pl.col('lemma id').list.get(pl.col('token id')),
-                            pl.lit(unk_id).repeat_by(window_size - pl.col('left').list.len()).list.concat(pl.col('left')).alias('left'),
-                            pl.col('right').list.concat(pl.lit(unk_id).repeat_by(window_size - pl.col('right').list.len())))
-              .select(pl.col('lemma id'), pl.col('left').list.concat(pl.col('right'))))
-    print(corpus)
 
+    skipgram = (corpus.lazy()
+                # Convert lemmas to vocab ids
+                .explode('lemma')
+                .join(vocab.lazy().with_row_index(), on='lemma')
+                .group_by('text', maintain_order=True)
+                .agg(pl.col('index').alias('lemma id'))
+                # Remove texts with length <= (max_dist - min_dit + 1)
+                .filter(pl.col('lemma id').list.len() > min_length)
+                # Replicate one row for each token (to create individual context windows)
+                .with_columns(pl.int_ranges(pl.col('lemma id').list.len()).alias('token id'))
+                .explode('token id')
+                # Create context windows
+                .with_columns((pl.col('token id') - max_dist).clip(lower_bound=0).alias('left start'),
+                              (pl.col('token id') - min_dist).clip(lower_bound=0).alias('left end'),
+                              (pl.col('token id') + min_dist + 1).alias('right start'),
+                              (pl.col('token id') + max_dist + 1).alias('right end'))
+                .with_columns((pl.col('left end') - pl.col('left start')).alias('left length'),
+                              (pl.col('right end') - pl.col('right start')).alias('right length'))
+                .with_columns(pl.col('lemma id').list.slice(pl.col('left start'), pl.col('left length')).alias('left'),
+                              pl.col('lemma id').list.slice(pl.col('right start'), pl.col('right length')).alias('right'))
+                # Pad context windows to ensure they are the same size
+                .select(pl.col('lemma id').list.get(pl.col('token id')),
+                        pl.lit(unk_id).repeat_by(window_size - pl.col('left').list.len()).list.concat(pl.col('left')).alias('left'),
+                        pl.col('right').list.concat(pl.lit(unk_id).repeat_by(window_size - pl.col('right').list.len())))
+                .select(pl.col('lemma id'), pl.col('left').list.concat(pl.col('right'))))
+    return skipgram.collect()
 
 def main(args):
     # Read the corpus
-    corpus = pl.read_csv(args.corpus, separator='\t', has_header=False,
+    corpus = pl.scan_csv(args.corpus, separator='\t', has_header=False,
                          quote_char=None, new_columns=['text'])
 
     # Get only lemmas
