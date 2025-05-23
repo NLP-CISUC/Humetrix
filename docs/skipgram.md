@@ -32,7 +32,7 @@ output = 'wiki-zh-simplified-seg.txt'
 ### Bookcorpus
 
 1. Download the dataset from [here](https://storage.googleapis.com/huggingface-nlp/datasets/bookcorpus/bookcorpus.tar.bz2).
-2. Concatenate the two parts with `cat bookcorpus_large_p*.txt > bookcorpus.txt`
+2. Concatenate the two parts with `cat books_large_p*.txt > bookcorpus.txt`
 
 ### CroissantLLM Dataset
 
