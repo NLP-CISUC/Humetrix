@@ -101,7 +101,16 @@ def main(args):
     unk_id = vocab.with_row_index().filter(pl.col('lemma') == '<unk>')['index'].item()
     skipgram = build_skipgram(corpus, vocab, args.max_dist, args.min_dist, unk_id)
 
-    # print(vocab.write_csv(separator=' ', include_header=False))
+    # Save files
+    output_dir = args.output
+    output_dir.mkdir(parents=True, exist_ok=True)
+    vocab_filepath = output_dir / 'vocab.parquet'
+    skipgram_filepath = output_dir / 'data.parquet'
+
+    vocab.write_parquet(vocab_filepath, compression='zstd',
+                        compression_level=22, statistics=False)
+    skipgram.write_parquet(skipgram_filepath, compression='zstd',
+                            compression_level=22, statistics=False)
 
 if __name__ == '__main__':
     args = parse_arguments()
