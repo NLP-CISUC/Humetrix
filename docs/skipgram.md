@@ -1,6 +1,6 @@
 # How to train skip-gram models
 
-The skip-gram models were trained using [pungen's](https://github.com/hhexiy/pungen) scripts. These script require that the input data follows a specific format. This document explains how to download and prepare the data for using pungen.
+The skip-gram models were trained using scripts based on [pungen's](https://github.com/hhexiy/pungen) implementation. These script require that the input data follows a specific preprocessing. This document explains how to download and prepare the data for using training the skip-gram models.
 
 ## Where to download the data from
 
@@ -44,7 +44,7 @@ from datasets import load_dataset
 ds = load_dataset('croissantllm/croissant_dataset', data_files='french_303b_1/*/*.arrow')
 df = ds['train'].to_pandas()
 
-with open('data/croissant.txt', 'w', encoding='utf-8') as f:
+with open('croissant.txt', 'w', encoding='utf-8') as f:
     for text in df['text']:
         f.write(f'{text}\n')
 ```
@@ -54,6 +54,12 @@ with open('data/croissant.txt', 'w', encoding='utf-8') as f:
 1. Request access through the corpus' official [website](https://www.inf.ufrgs.br/pln/wiki/index.php?title=BrWaC).
 2. Download the corpus and extract the files.
 3. We use the CoNLL-U format, so we can take advantage of the text being already tokenized.
+4. Use our `scripts/preprocessing/brwac_conll.sh` script to convert the CoNLL-U format to a simple text file. Make sure to edit the script to use the correct input and output files.
+
+```bash
+corpus_file="brwac.conll"
+out_file="brwac.txt"
+```
 
 ### SBWC
 
@@ -63,51 +69,24 @@ with open('data/croissant.txt', 'w', encoding='utf-8') as f:
 
 With the previous steps, you should have one file for each dataset, with one sentence per line. All files should be in the `data` directory. The next steps will convert the text to the format required by pungen.
 
-In sum, all datasets, except for BRWaC, require using the `scripts/convert_skipgram/convert_txt.py` script. The BRWaC dataset requires using the `scripts/convert_skipgram/brwac.sh` script.
+### Tokenize the texts
 
-### Chinese Wikipedia (维基百科)
-
-Run the following command to prepare the data for training.
+For each dataset, we need to tokenize the texts using spacy with the `scripts/preprocessing/large_corpora.py` script. This script will save the tokenized texts in the `data/skipgram` directory using the Parquet format for efficiency.
 
 ```bash
-python scripts/convert_skipgram/convert_txt.py --input data/wiki-zh-simplified-seg.txt \
-                                               --model zh_core_web_sm
+python scripts/preprocessing/large_corpora.py --input {corpus name}.txt \
+                                               --model {spacy model name}
 ```
 
-### Bookcorpus
+Make sure to use the corresponding spacy model for each language:
 
-Run the following command to prepare the data for training.
+- Chinese: `zh_core_web_sm`
+- English: `en_core_web_sm`
+- French: `fr_core_news_sm`
+- Portuguese: `pt_core_news_sm`
+- Spanish: `es_core_news_sm`
 
-```bash
-python scripts/convert_skipgram/convert_txt.py --input data/bookcorpus.txt \
-                                               --model en_core_web_sm
-```
-
-### CroissantLLM Dataset
-
-Run the following command to prepare the data for training.
-
-```bash
-python scripts/convert_skipgram/convert_txt.py --input data/croissant.txt \
-                                               --model fr_core_news_sm
-```
-
-### BRWaC
-
-Run the following command to prepare the data for training.
-
-```bash
-./scripts/convert_skipgram/brwac.sh
-```
-
-### SBWC
-
-Run the following command to prepare the data for training.
-
-```bash
-python scripts/convert_skipgram/convert_txt.py --input data/sbwc.txt \
-                                               --model es_core_news_sm
-```
+If the dataset is already tokenized (such as BRWAC or Bookcorpus), you can skip this step with the `--no-spacy` flag.
 
 ## How to train the models
 
