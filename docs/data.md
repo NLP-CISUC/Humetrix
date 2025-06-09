@@ -182,7 +182,7 @@ To train the skipgram model and get word frequency counts, we needed to download
 - **French**: [Croissant](https://huggingface.co/datasets/croissantllm/croissant_dataset)
 - **Chinese**: [Wikipedia](https://dumps.wikimedia.org/)
 
-For more details on how to download and preprocess the data, please refer to [`docs/skipgram.md`](docs/skipgram.md).
+For more details on how to download and preprocess the data, please refer to [`docs/skipgram.md`](skipgram.md).
 
 ## Word Embeddings (GloVe)
 
