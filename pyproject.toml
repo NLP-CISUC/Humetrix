@@ -8,12 +8,14 @@ dependencies = [
     "datasets>=3.5.0",
     "es-core-news-sm",
     "flair>=0.15.1",
+    "polars-u64-idx>=1.30.0",
     "polars>=1.27.1",
     "pyspark>=3.5.5",
     "spacy>=3.8.5",
     "torch>=2.6.0",
     "transformers>=4.49.0",
     "zh-core-web-sm",
+    "fr-core-news-sm",
 ]
 
 [build-system]
@@ -30,3 +32,4 @@ dev-dependencies = [
 [tool.uv.sources]
 zh-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_sm-3.8.0/zh_core_web_sm-3.8.0-py3-none-any.whl" }
 es-core-news-sm = { url = "https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.8.0/es_core_news_sm-3.8.0-py3-none-any.whl" }
+fr-core-news-sm = { url = "https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.8.0/fr_core_news_sm-3.8.0-py3-none-any.whl" }
