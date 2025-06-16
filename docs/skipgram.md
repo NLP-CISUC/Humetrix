@@ -6,21 +6,22 @@ The skip-gram models were trained using scripts based on [pungen's](https://gith
 
 ### Chinese Wikipedia (维基百科)
 
-1. Download the dataset from [here](https://dumps.wikimedia.org/zhwiki/20241001/zhwiki-20241001-pages-articles-multistream.xml.bz2).
-2. Use [candlewill's](https://github.com/candlewill/Chinsese_word_vectors) `process_wiki.py` script to extract the text from the wiki dump. Remember to edit the script to use the correct input and output files.
+1. Download the dataset using [HuggingFace](https://huggingface.co/datasets/wikimedia/wikipedia/viewer/20231101.zh).
 
 ```python
-...
-inp, outp = 'zhwiki-20241001-pages-articles-multistream.xml.bz2', 'wiki-zh.txt'
-...
+from datasets import load_dataset
+
+ds = load_dataset('wikimedia/wikipedia', '20231101.zh')
+df = ds['train'].to_pandas()
+df.to_csv('wiki-zh.txt', sep='\0', header=False, index=False, columns=['text'])
 ```
 
-3. Convert all the text to simplified Chinese using [OpenCC](https://github.com/BYVoid/OpenCC).
+2. Convert all the text to simplified Chinese using [OpenCC](https://github.com/BYVoid/OpenCC).
 
 ```bash
 opencc -i wiki-zh.txt -o wiki-zh-simplified.txt -c t2s.json
 ```
-4. Tokenize the text using [Jieba](https://github.com/fxsjy/jieba) through candlewill's `tokenization.py` script. Remember to edit the script to use the correct input and output files.
+3. Tokenize the text using [Jieba](https://github.com/fxsjy/jieba) through candlewill's `tokenization.py` script. Remember to edit the script to use the correct input and output files.
 
 ```python
 ...
