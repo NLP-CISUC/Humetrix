@@ -26,49 +26,51 @@ def parse_arguments():
     parser.add_argument('--threshold', type=int,
                         help='Minimum word count threshold',
                         default=-1)
+    parser.add_argument('--no-data', action="store_true",
+                        help='Avoid building skipgram data')
     args = parser.parse_args()
     return args
 
 def build_vocabulary(corpus, max_vocab, threshold):
+    print('Building vocabulary')
     vocab = (corpus.explode('lemma')
              .group_by('lemma').len()
              .sort('len', descending=True)
-             .collect())
+             .with_columns(pl.col('len').cast(pl.UInt32)))
     if args.max_vocab > 0:
         vocab = vocab.head(max_vocab)
     if args.threshold > 0:
         vocab = vocab.filter(pl.col('len') >= threshold)
 
     # Add special symbols
-    special_symbols = pl.DataFrame({'lemma': ['<pad>', '<unk>', '<s>', '</s>'],
+    print('Finalizing vocabulary')
+    special_symbols = pl.LazyFrame({'lemma': ['<pad>', '<unk>', '<s>', '</s>'],
                                     'len': [1, 1, 1, 1]},
                                    schema={'lemma': pl.Utf8, 'len': pl.UInt32})
-    vocab = vocab.vstack(special_symbols)
-
-    # Pad to multiple of 8
-    pad_len = 8 - (len(vocab) % 8)
-    if pad_len != 8:
-        pad_df = pl.DataFrame({'lemma': [f'madeupword{i:04d}' for i in range(pad_len)],
-                               'len': [0] * pad_len},
-                              schema={'lemma': pl.Utf8, 'len': pl.UInt32})
-        vocab = vocab.vstack(pad_df)
+    vocab = pl.concat([vocab, special_symbols])
     return vocab
 
-def build_skipgram(corpus, vocab, max_dist, min_dist, unk_id):
+def build_skipgram(corpus, vocab, max_dist, min_dist):
+    print('Building skipgram data')
     min_length = max_dist - min_dist + 1
     window_size = max_dist - min_dist
 
     skipgram = (corpus.lazy()
+                # Remove texts with length <= (max_dist - min_dit + 1)
+                .filter(pl.col('lemma').list.len() > min_length)
+                # Replicate one row for each token (to create individual context windows)
+                .with_columns(pl.int_ranges(pl.col('lemma').list.len()).alias('token id'))
+                .explode('token id')
+                # Pad sides to ensure every token has same window size
+                .with_columns(pl.lit('<unk>').repeat_by(max_dist).list.concat(pl.col('lemma')).alias('lemma'))
+                .with_columns(pl.col('lemma').list.concat(pl.lit('<unk>').repeat_by(max_dist)).alias('lemma'))
+                # Fix token ids because of padding
+                .with_columns(pl.col('token id') + max_dist)
                 # Convert lemmas to vocab ids
                 .explode('lemma')
-                .join(vocab.lazy().with_row_index(), on='lemma')
-                .group_by('text', maintain_order=True)
+                .join(vocab.with_row_index(), on='lemma')
+                .group_by(['text id', 'token id'], maintain_order=True)
                 .agg(pl.col('index').alias('lemma id'))
-                # Remove texts with length <= (max_dist - min_dit + 1)
-                .filter(pl.col('lemma id').list.len() > min_length)
-                # Replicate one row for each token (to create individual context windows)
-                .with_columns(pl.int_ranges(pl.col('lemma id').list.len()).alias('token id'))
-                .explode('token id')
                 # Create context windows
                 .with_columns((pl.col('token id') - max_dist).clip(lower_bound=0).alias('left start'),
                               (pl.col('token id') - min_dist).clip(lower_bound=0).alias('left end'),
@@ -78,39 +80,40 @@ def build_skipgram(corpus, vocab, max_dist, min_dist, unk_id):
                               (pl.col('right end') - pl.col('right start')).alias('right length'))
                 .with_columns(pl.col('lemma id').list.slice(pl.col('left start'), pl.col('left length')).alias('left'),
                               pl.col('lemma id').list.slice(pl.col('right start'), pl.col('right length')).alias('right'))
-                # Pad context windows to ensure they are the same size
                 .select(pl.col('lemma id').list.get(pl.col('token id')),
-                        pl.lit(unk_id).repeat_by(window_size - pl.col('left').list.len()).list.concat(pl.col('left')).alias('left'),
-                        pl.col('right').list.concat(pl.lit(unk_id).repeat_by(window_size - pl.col('right').list.len())))
-                .select(pl.col('lemma id'), pl.col('left').list.concat(pl.col('right'))))
-    return skipgram.collect()
+                        pl.col('left').list.concat(pl.col('right'))))
+    return skipgram
 
 def main(args):
+    output_dir = args.output
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     # Read the corpus
     corpus = pl.scan_csv(args.corpus, separator='\t', has_header=False,
                          quote_char=None, new_columns=['text'])
 
     # Get only lemmas
-    corpus = (corpus.with_columns(pl.col('text').str.split(' ').alias('token'))
+    corpus = (corpus.with_row_index()
+              .with_columns(pl.col('text').str.split(' ').alias('token'))
               .explode('token')
-              .select(pl.col('text'),
+              .select(pl.col('index').alias('text id'),
                       pl.col('token').str.split('|').list.get(1).alias('lemma'))
-              .group_by('text', maintain_order=True).agg(pl.col('lemma')))
+              .group_by('text id', maintain_order=True).agg(pl.col('lemma')))
 
     vocab = build_vocabulary(corpus, args.max_vocab, args.threshold)
-    unk_id = vocab.with_row_index().filter(pl.col('lemma') == '<unk>')['index'].item()
-    skipgram = build_skipgram(corpus, vocab, args.max_dist, args.min_dist, unk_id)
+    print(vocab.collect())
 
-    # Save files
-    output_dir = args.output
-    output_dir.mkdir(parents=True, exist_ok=True)
-    vocab_filepath = output_dir / 'vocab.parquet'
-    skipgram_filepath = output_dir / 'data.parquet'
+    # print('Saving vocabulary')
+    # vocab_filepath = output_dir / 'vocab.parquet'
+    # vocab.sink_parquet(vocab_filepath, compression='zstd',
+    #                    compression_level=22, statistics=False)
 
-    vocab.write_parquet(vocab_filepath, compression='zstd',
-                        compression_level=22, statistics=False)
-    skipgram.write_parquet(skipgram_filepath, compression='zstd',
-                            compression_level=22, statistics=False)
+    if not args.no_data:
+        skipgram = build_skipgram(corpus, vocab, args.max_dist, args.min_dist)
+        print('Saving skipgram data')
+        skipgram_filepath = output_dir / 'data.parquet'
+        skipgram.sink_parquet(skipgram_filepath, compression='zstd',
+                              compression_level=22, statistics=False)
 
 if __name__ == '__main__':
     args = parse_arguments()
