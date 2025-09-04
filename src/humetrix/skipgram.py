@@ -1,4 +1,7 @@
 import polars as pl
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
 
 def build_vocabulary(vocab_file):
@@ -57,3 +60,58 @@ def create_context_windows(sentences_df, max_dist, min_dist, unk_id):
                                pl.col('left').list.concat(pl.col('right')).alias('context')))
     return context_windows
 
+# Implementation of SGNS.
+# Based on the implementation by hhexiy/pungen.
+
+class SGNS(nn.Module):
+    def __init__(self, vocab, embedding_dim, vocab_counts=None,
+                 negative_samples=20):
+        super().__init__()
+        self.vocab_size = len(vocab)
+        self.embedding_dim = embedding_dim
+        self.negative_samples = negative_samples
+
+        self.embeddings = nn.Embedding(self.vocab_size, embedding_dim, sparse=True)
+        self.output_embeddings = nn.Embedding(self.vocab_size, embedding_dim, sparse=True)
+
+        # Initialize weights
+        initrange = 0.5 / embedding_dim
+        self.embeddings.weight.data.uniform_(-initrange, initrange)
+        self.output_embeddings.weight.data.uniform_(-initrange, initrange)
+
+        self.neg_sampling_weights = None
+        if vocab_counts is not None:
+            freq_df = (vocab.join(vocab_counts, on='ngram', how='left')
+                            .fill_null(1)
+                            .sort('index')
+                            .with_columns(pl.col('freq').pow(0.75).alias('pow freq'))
+                            .with_columns(pl.col('pow freq').truediv(pl.col('pow freq').sum()).alias('weight')))
+            self.neg_sampling_weights = freq_df.select('weight').to_torch().squeeze(1)
+
+    def forward(self, target_words, context_words):
+        # Negative sampling
+        device = target_words.device
+        batch_size = target_words.size(0)
+        context_size = context_words.size(1)
+        num_neg_words = context_size * self.negative_samples
+        if self.neg_sampling_weights is not None:
+            negative_words = (torch.multinomial(self.neg_sampling_weights,
+                                               batch_size * num_neg_words,
+                                               replacement=True)
+                                   .view(batch_size, -1))
+        else:
+            negative_words = torch.randint(0, self.vocab_size, (batch_size, num_neg_words))
+        negative_words = negative_words.to(device)
+
+        target_emb = self.embeddings(target_words)
+        context_emb = self.output_embeddings(context_words)
+        neg_emb = self.output_embeddings(negative_words)
+
+        pos_score = torch.bmm(context_emb, target_emb.unsqueeze(2)).squeeze(2)
+        neg_scores = torch.bmm(neg_emb, target_emb.unsqueeze(2)).squeeze(2)
+
+        pos_loss = -F.logsigmoid(pos_score).mean()
+        neg_loss = -F.logsigmoid(-neg_scores).sum(dim=1).mean()
+        total_loss = pos_loss + neg_loss
+
+        return total_loss
