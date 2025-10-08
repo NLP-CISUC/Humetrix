@@ -12,10 +12,11 @@ from humetrix.skipgram import SGNS, build_vocabulary
 
 
 class KaoConfig():
-    def __init__(self, sentence: str, spacy_model: Language, skipgram: SGNS) -> None:
+    def __init__(self, sentence: str, language: str, spacy_model: Language, skipgram: SGNS) -> None:
         self.spacy_model = spacy_model
         self.skipgram = skipgram
         self.text = sentence
+        self.language = language
         self.tokens = self.tokenize_sentence()
         self.f_configs = [list(p) for p in product([0, 1], repeat=len(self.tokens))]
         self.f_config_prior = 1/(2 ** len(self.tokens)) # p(\vec{f})
@@ -23,7 +24,8 @@ class KaoConfig():
 
     def tokenize_sentence(self) -> List[str]:
         doc = self.spacy_model(self.text)
-        tokens = [token.lower_ for token in doc]
+        tokens = [token.lower_ for token in doc
+                  if tok.pos_ in CONTENT_WORD_TAGS[self.language]]
         return tokens
 
 class KaoAmbiguity():
@@ -141,7 +143,7 @@ if __name__ == '__main__':
     skipgram.eval()
 
     sentence_idx = 2
-    config = KaoConfig(sentences[sentence_idx], spacy_model, skipgram)
+    config = KaoConfig(sentences[sentence_idx], 'pt', spacy_model, skipgram)
     kao_ambiguity = KaoAmbiguity(config, signs[sentence_idx], alt_signs[sentence_idx], ngram1, ngram3)
     score = kao_ambiguity.score()
     print(f'Score: {score}')
