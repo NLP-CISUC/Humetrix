@@ -8,7 +8,7 @@ import torch
 from spacy.language import Language
 
 from humetrix import SPACY_MODELS
-from humetrix.skipgram import build_vocabulary, SGNS
+from humetrix.skipgram import SGNS, build_vocabulary
 
 
 class KaoConfig():
@@ -36,20 +36,27 @@ class KaoAmbiguity():
         self.config = config
         self.ngram1 = ngram1
         self.ngram3 = ngram3
+        self._prepare_ngram_freqs()
         self.pun_sign = pun_sign
         self.alt_sign = alt_sign
+
+    def _prepare_ngram_freqs(self):
+        prior_smooth = (pl.col('freq') + 1) / (pl.col('freq').sum() + pl.col('freq').len())
+        self.ngram1 = self.ngram1.with_columns(prior_smooth.alias('prob'))
+
+        bigram = pl.col('ngram').str.extract(r'^(.*) ')
+        bigram_sum = pl.col('freq').sum().over(bigram)
+        posterior_smooth = ((pl.col('freq') + 1) / (bigram_sum + pl.col('freq').len()))
+        self.ngram3 = self.ngram3.with_columns(posterior_smooth.alias('prob'))
+        self.ngram2 = self.ngram3.group_by(bigram).sum()
 
 
     def sign_prior(self, sign: str):
         '''P(m)'''
-        vocab_size = self.ngram1.height
         sign_lower = sign.lower()
-        row = self.ngram1.filter(pl.col('ngram') == sign_lower)
-        freq_sign = 0
-        if row.height > 0:
-            freq_sign = row.select(pl.col('freq')).item()
-        freq_cum = self.ngram1.select(pl.col('freq')).sum().item()
-        prob_sign = (freq_sign + 1) / (freq_cum + vocab_size)
+        if sign_lower in self.ngram1['ngram']:
+            return self.ngram1.filter(pl.col('ngram') == sign_lower)['prob'].item()
+        prob_sign = 1 / (self.ngram1['freq'].sum() + len(self.ngram1))
         return prob_sign
 
     def word_posterior(self, f_config: List[int], idx: int, sign: str) -> float:
@@ -60,13 +67,14 @@ class KaoAmbiguity():
             return 1e-5 # TODO: Implement logic
 
         trigram = ' '.join(self.config.tokens[max(0, idx-2):min(len(self.config.tokens), idx+1)])
+        if trigram in self.ngram3['ngram']:
+            return self.ngram3.filter(pl.col('ngram') == trigram)['prob'].item()
+
         bigram = ' '.join(self.config.tokens[max(0, idx-2):min(len(self.config.tokens), idx)])
-        row = self.ngram3.filter(pl.col('ngram') == trigram)
-        freq_trigram = 0
-        if row.height > 0:
-            freq_trigram = row.select(pl.col('freq')).item()
-        freq_bigram = self.ngram3.filter(pl.col('ngram').str.starts_with(bigram)).select(pl.col('freq')).sum().item()
-        prob_trigram = (freq_trigram + 1) / (freq_bigram + self.ngram3.height)
+        freq_bigram = 0
+        if bigram in self.ngram2['ngram']:
+            freq_bigram = self.ngram2.filter(pl.col('ngram') == bigram)['freq'].item()
+        prob_trigram = 1 / (freq_bigram + len(self.ngram3))
         return prob_trigram
 
     def sign_posterior(self, sign: str) -> float:
@@ -74,10 +82,14 @@ class KaoAmbiguity():
         # Work on log scale to avoid underflow
         log_sign_prior = np.log2(self.sign_prior(sign))
         total_prob = 0.0
+        posteriors = {}
         for f_config in self.config.f_configs:
             sum_log_word_posteriors = 0.0
             for i in range(len(self.config.tokens)):
-                sum_log_word_posteriors += np.log2(self.word_posterior(f_config, i, sign))
+                # Dynamic programming to make script faster
+                if (i, f_config[i]) not in posteriors:
+                    posteriors[(i, f_config[i])] = self.word_posterior(f_config, i, sign)
+                sum_log_word_posteriors += np.log2(posteriors[(i, f_config[i])])
             total_prob += np.exp2(log_sign_prior + self.config.log_f_config_prior + sum_log_word_posteriors)
         return total_prob
 
