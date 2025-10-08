@@ -110,7 +110,7 @@ def parse_args() -> argparse.Namespace:
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--embeddings', '-e',
-                        help='Embeddings file in word2vec format.',
+                        help='Embeddings file in gensim format.',
                         required=True, type=Path)
     return parser.parse_args()
 
@@ -119,6 +119,7 @@ def main(args: argparse.Namespace):
     """Run script directly to test"""
     embeddings = KeyedVectors.load(str(args.embeddings))
     pipe = pipeline('feature-extraction', 'FacebookAI/xlm-roberta-base')
+    nlp = spacy.load(SPACY_MODELS['pt'])
     sentences = ['O que diz um coelho quando abre uma porta? Primeiro as cenouras.',
                  'O que diz um coelho quando abre uma porta? Primeiro as senhoras.',
                  'Qual é o youtuber que mais economiza na luz? O Jovem Led.',
@@ -131,13 +132,13 @@ def main(args: argparse.Namespace):
                  'O que é que acontece quando o Frodo morre? Passam-lhe uma certidão de óbito.']
 
     for sentence in sentences:
-        qe_uncertainty = QuantumUncertainty(sentence, embeddings, 'pt')
-        qe_incongruity = QuantumIncongruity(sentence, embeddings, 'pt')
+        qe_uncertainty = QuantumUncertainty(sentence, embeddings, nlp)
+        qe_incongruity = QuantumIncongruity(sentence, embeddings, nlp)
         print(f'{sentence}')
         print(f'QE-Uncertainty GloVe: {qe_uncertainty.score():.2f}')
         print(f'QE-Incongruity GloVe: {qe_incongruity.score():.2f}')
-        qe_uncertainty = QuantumUncertainty(sentence, pipe, 'pt')
-        qe_incongruity = QuantumIncongruity(sentence, pipe, 'pt')
+        qe_uncertainty = QuantumUncertainty(sentence, pipe, nlp)
+        qe_incongruity = QuantumIncongruity(sentence, pipe, nlp)
         print(f'QE-Uncertainty XLM-R: {qe_uncertainty.score():.2f}')
         print(f'QE-Incongruity XLM-R: {qe_incongruity.score():.2f}')
         print('*****************')
