@@ -1,11 +1,9 @@
-import argparse
 import re
 
 import numpy as np
 import spacy
 import torch
-from transformers import (AutoModelForMaskedLM, AutoTokenizer, PreTrainedModel,
-                          PreTrainedTokenizer)
+from transformers import PreTrainedModel, PreTrainedTokenizer
 
 
 class LocalGlobalSurprise():
@@ -86,47 +84,3 @@ class LocalGlobalSurprise():
         if global_s <= 0 or local_s < 0:
             return -1
         return local_s/global_s
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    return parser.parse_args()
-
-
-def main(args: argparse.Namespace):
-    """Run script directly to test"""
-    sentences = ['O que diz um coelho quando abre uma porta? Primeiro as cenouras.',
-                 'O que diz um coelho quando abre uma porta? Primeiro as senhoras.',
-                 'Qual é o youtuber que mais economiza na luz? O Jovem Led.',
-                 'Qual é o youtuber que mais economiza na luz? O Whindersson Nunes.',
-                 'Porque é que o computador não pára de espirrar? Porque apanhou um vírus.',
-                 'Porque é que o computador não pára de avariar? Porque apanhou um vírus.',
-                 'Qual o livro que conta a história dos imigrantes do sertão??? Vim das secas.',
-                 'Qual o livro que conta a história dos imigrantes do sertão??? O quinze',
-                 'O que é que acontece quando o Frodo morre? Passam-lhe uma certidão de Hobbit.',
-                 'O que é que acontece quando o Frodo morre? Passam-lhe uma certidão de óbito.']
-    signs = ['cenouras', 'cenouras',
-             'led', 'led',
-             'vírus', 'vírus',
-             'vim das secas', 'vim das secas',
-             'hobbit', 'hobbit']
-    alt_signs = ['senhoras', 'senhoras',
-                 'nerd', 'nerd',
-                 'vírus', 'vírus',
-                 'vidas secas', 'vidas secas',
-                 'óbito', 'óbito']
-
-    checkpoint = 'neuralmind/bert-base-portuguese-cased'
-    tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-    lm = AutoModelForMaskedLM.from_pretrained(checkpoint)
-
-    print('----------------------')
-    for sentence, sign, alt_sign in zip(sentences, signs, alt_signs):
-        lg_surprise = LocalGlobalSurprise(sentence, sign, alt_sign)
-        print(f'{sentence}\nScore: {lg_surprise.score(tokenizer, lm):.2f}')
-        print('*****************')
-
-
-if __name__ == '__main__':
-    args = parse_args()
-    main(args)
