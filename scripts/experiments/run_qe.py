@@ -1,94 +1,52 @@
-import gc
-from argparse import ArgumentParser
 from pathlib import Path
 
 import pandas as pd
-import spacy
-import torch
-from gensim.models import KeyedVectors
-from humetrix import SPACY_MODELS, QuantumIncongruity, QuantumUncertainty
 from tqdm import tqdm
-from transformers import pipeline
+from humetrix import HumorAnalyzer
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+corpora = {'en': ['semeval', 'humicroedit', 'joker_clef_en'],
+           'fr': ['joker_clef_fr'],
+           'es': ['joker_clef_es', 'HAHA@IberLEF2019', 'HAHA@IberLEF2021', 'HUHU@IberLEF2023'],
+           'pt': ['clemencio', 'puntuguese']}
+paths = {'semeval': 'data/humor_recognition/semeval.json',
+         'humicroedit': 'data/humor_recognition/humicroedit.json',
+         'joker_clef_en': 'data/humor_recognition/joker_clef_en.json',
+         'joker_clef_fr': 'data/humor_recognition/joker_clef_fr.json',
+         'joker_clef_es': 'data/humor_recognition/joker_clef_es.json',
+         'HAHA@IberLEF2019': 'data/humor_recognition/HAHA@IberLEF2019.json',
+         'HAHA@IberLEF2021': 'data/humor_recognition/HAHA@IberLEF2021.json',
+         'HUHU@IberLEF2023': 'data/humor_recognition/HUHU@IberLEF2023.json',
+         'clemencio': 'data/humor_recognition/clemencio.json',
+         'puntuguese': 'data/humor_recognition/puntuguese.json'}
+glove = {'en': 'data/embeddings/en/glove_s300.gensim',
+         'es': 'data/embeddings/es/glove_s300.gensim',
+         'fr': 'data/embeddings/fr/glove_s300.gensim',
+         'pt': 'data/embeddings/pt/glove_s300.gensim'}
+xlmr = 'FacebookAI/xlm-roberta-base'
+results_path = Path('results/quantum_entropy')
+results_path.mkdir(exist_ok=True, parents=True)
 
-def get_qu_score(sentence, embeddings, spacy_model):
-    qu = QuantumUncertainty(sentence, embeddings, spacy_model)
-    score = qu.score()
-    del qu
-    gc.collect()
-    return score
+for language, datasets in corpora.items():
+    analyzer = HumorAnalyzer(language,
+                             embeddings_path=glove[language],
+                             transformer_model_name=xlmr)
+    for corpus in datasets:
+        print('- '*10 + corpus + ' -'*10)
+        df = pd.read_json(paths[corpus], orient='index').reset_index().head()
 
+        tqdm.pandas(desc='Incongruity + GloVe')
+        df['QE-I + GloVe'] = df['text'].progress_apply(analyzer.quantum_incongruity)
+        
+        tqdm.pandas(desc='Incongruity + Huggingface')
+        df['QE-I + HF'] = df['text'].progress_apply(analyzer.quantum_incongruity,
+                                                    backend='transformer')
 
-def get_qi_score(sentence, embeddings, spacy_model):
-    qi = QuantumIncongruity(sentence, embeddings, spacy_model)
-    score = qi.score()
-    del qi
-    gc.collect()
-    return score
+        tqdm.pandas(desc='Uncertainty + GloVe')
+        df['QE-U + GloVe'] = df['text'].progress_apply(analyzer.quantum_uncertainty)
+        
+        tqdm.pandas(desc='Uncertainty + Huggingface')
+        df['QE-U + HF'] = df['text'].progress_apply(analyzer.quantum_uncertainty,
+                                                    backend='transformer')
 
-
-parser = ArgumentParser()
-parser.add_argument('--corpus', '-c',
-                    help='Corpus to calculate QE metric.',
-                    required=True, type=Path)
-parser.add_argument('--glove', '-g',
-                    help='GLoVe embeddings path.',
-                    required=False, type=str)
-parser.add_argument('--huggingface', '-hf',
-                    help='HuggingFace model name.',
-                    required=False, type=str)
-parser.add_argument('--language', '-l',
-                    help='Corpus language.',
-                    required=True, type=str,
-                    choices=['en', 'es', 'fr', 'pt'])
-parser.add_argument('--incongruity', '-i', action='store_true',
-                    help='Calculate QE-Incongruity.')
-parser.add_argument('--uncertainty', '-u', action='store_true',
-                    help='Calculate QE-Uncertainty.')
-args=parser.parse_args()
-
-if not args.incongruity and not args.uncertainty:
-    print('Select at least one metric to compute.')
-    exit(1)
-if not args.glove and not args.huggingface:
-    print('Give at least one embedding model (GloVe or HuggingFace).')
-    exit(1)
-
-# Load spacy model
-spacy_model = spacy.load(SPACY_MODELS[args.language])
-
-# Load embeddings or HuggingFace model
-glove_embeddings = KeyedVectors.load(args.glove) if args.glove else None
-hf_embeddings = (pipeline('feature-extraction', args.huggingface, device=device)
-                 if args.huggingface else None)
-
-# Load corpus
-df = pd.read_json(args.corpus, orient='index')
-
-# Compute metrics
-if args.incongruity and glove_embeddings:
-    tqdm.pandas(desc='Incongruity + GloVe')
-    df['QE-I + GloVe'] = df['text'].progress_apply(get_qi_score,
-                                                   embeddings=glove_embeddings,
-                                                   spacy_model=spacy_model)
-if args.incongruity and hf_embeddings:
-    tqdm.pandas(desc='Incongruity + HuggingFace')
-    df['QE-I + HF'] = df['text'].progress_apply(get_qi_score,
-                                                embeddings=hf_embeddings,
-                                                spacy_model=spacy_model)
-if args.uncertainty and glove_embeddings:
-    tqdm.pandas(desc='Uncertainty + GloVe')
-    df['QE-U + GloVe'] = df['text'].progress_apply(get_qu_score,
-                                                   embeddings=glove_embeddings,
-                                                   spacy_model=spacy_model)
-if args.uncertainty and hf_embeddings:
-    tqdm.pandas(desc='Uncertainty + HuggingFace')
-    df['QE-U + HF'] = df['text'].progress_apply(get_qu_score,
-                                                embeddings=hf_embeddings,
-                                                spacy_model=spacy_model)
-
-results_path = Path('results/quantum_entropy') / args.corpus.name
-results_path.parent.mkdir(exist_ok=True, parents=True)
-df.to_json(results_path, orient='index', force_ascii=False, indent=4)
-
+        savepath = (results_path / corpus).with_suffix('.jsonl')
+        df.to_json(savepath, orient='records', lines=True, force_ascii=False)
