@@ -35,6 +35,7 @@ for sent, sign, alt_sign in zip(sentences, signs, alt_signs):
     lgs_score = analyzer.local_global_surprise(sent, sign, alt_sign)
     kao_amb_score = analyzer.kao_ambiguity(sent, sign, alt_sign)
     print(f'Sentence: {sent}')
+    print(f'Sign: {sign} | Alt sign: {alt_sign}')
     print(f'  QE-Incongruity GloVe: {qi_score:.4f}')
     print(f'  QE-Uncertainty GloVe: {qu_score:.4f}')
     print(f'  QE-Incongruity XLM-R: {qi_xlm_score:.4f}')

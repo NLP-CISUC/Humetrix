@@ -2,6 +2,7 @@ import polars as pl
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from typing import List
 
 
 def build_vocabulary(vocab_file):
@@ -67,26 +68,44 @@ class SGNS(nn.Module):
     def __init__(self, vocab, embedding_dim, vocab_counts=None,
                  negative_samples=20):
         super().__init__()
+        self.vocab_df = vocab
         self.vocab_size = len(vocab)
         self.embedding_dim = embedding_dim
         self.negative_samples = negative_samples
+
+        self.word_to_idx = {row['ngram']: row['index'] for row in vocab.to_dicts()}
+        self.unk_id = self.word_to_idx.get('<unk>')
 
         self.embeddings = nn.Embedding(self.vocab_size, embedding_dim, sparse=True)
         self.output_embeddings = nn.Embedding(self.vocab_size, embedding_dim, sparse=True)
 
         # Initialize weights
-        initrange = 0.5 / embedding_dim
+        initrange = 0.5 / self.embedding_dim
         self.embeddings.weight.data.uniform_(-initrange, initrange)
         self.output_embeddings.weight.data.uniform_(-initrange, initrange)
 
         self.neg_sampling_weights = None
         if vocab_counts is not None:
-            freq_df = (vocab.join(vocab_counts, on='ngram', how='left')
+            freq_df = (self.vocab_df.join(vocab_counts, on='ngram', how='left')
                             .fill_null(1)
                             .sort('index')
                             .with_columns(pl.col('freq').pow(0.75).alias('pow freq'))
                             .with_columns(pl.col('pow freq').truediv(pl.col('pow freq').sum()).alias('weight')))
             self.neg_sampling_weights = freq_df.select('weight').to_torch().squeeze(1)
+
+    def get_word_idx(self, word: str) -> int:
+        return self.word_to_idx.get(word, self.unk_id)
+
+    def predict_prob(self, target_word_idx: int, context_word_indices: List[int]) -> float:
+        device = self.embeddings.weight.device
+        context_indices_tensor = torch.LongTensor(context_word_indices).to(device)
+        context_emb = self.embeddings(context_indices_tensor).mean(dim=0)
+
+        all_output_embs = self.output_embeddings.weight
+        all_scores = torch.matmul(all_output_embs, context_emb)
+
+        probs = F.softmax(all_scores, dim=0)
+        return probs[target_word_idx].item()
 
     def forward(self, target_words, context_words):
         # Negative sampling

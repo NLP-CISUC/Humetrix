@@ -64,7 +64,27 @@ class KaoAmbiguity():
         f_i = f_config[idx]
 
         if f_i == 1:
-            return 1e-5 # TODO: Implement logic
+            min_dist = 5
+            max_dist = 10
+
+            tokens = self.config.tokens
+            unk_token = '<unk>'
+            padded_tokens = ([unk_token] * max_dist) + tokens + ([unk_token] * max_dist)
+            padded_idx = idx + max_dist
+
+            left_context = []
+            right_context = []
+            for d in range(min_dist, max_dist + 1):
+                left_context.append(padded_tokens[padded_idx - d])
+                right_context.append(padded_tokens[padded_idx + d])
+            context_tokens = left_context + right_context
+
+            skipgram_model = self.config.skipgram
+
+            target_word = tokens[idx]
+            target_word_idx = skipgram_model.get_word_idx(target_word)
+            context_word_indices = [skipgram_model.get_word_idx(w) for w in context_tokens]
+            return skipgram_model.predict_prob(target_word_idx, context_word_indices)
 
         trigram = ' '.join(self.config.tokens[max(0, idx-2):min(len(self.config.tokens), idx+1)])
         if trigram in self.ngram3['ngram']:
