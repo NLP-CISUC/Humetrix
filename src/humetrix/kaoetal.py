@@ -3,12 +3,10 @@ from typing import List
 
 import numpy as np
 import polars as pl
-import spacy
-import torch
 from spacy.language import Language
 
-from humetrix import SPACY_MODELS
-from humetrix.skipgram import SGNS, build_vocabulary
+from .configs import CONTENT_WORD_TAGS
+from .skipgram import SGNS
 
 
 class KaoConfig():
@@ -25,7 +23,7 @@ class KaoConfig():
     def tokenize_sentence(self) -> List[str]:
         doc = self.spacy_model(self.text)
         tokens = [token.lower_ for token in doc
-                  if tok.pos_ in CONTENT_WORD_TAGS[self.language]]
+                  if token.pos_ in CONTENT_WORD_TAGS[self.language]]
         return tokens
 
 class KaoAmbiguity():
@@ -105,45 +103,6 @@ class KaoAmbiguity():
         prob_alt_sign /= prob_sum
 
         if prob_pun_sign <= 0 or prob_alt_sign <= 0:
-            return -1
+            return 0 # 0xlog0 = 0
         return -(prob_pun_sign * np.log2(prob_pun_sign) + prob_alt_sign * np.log2(prob_alt_sign))
 
-if __name__ == '__main__':
-    sentences = ['O que diz um coelho quando abre uma porta? Primeiro as cenouras.',
-                 'O que diz um coelho quando abre uma porta? Primeiro as senhoras.',
-                 'Qual é o youtuber que mais economiza na luz? O Jovem Led.',
-                 'Qual é o youtuber que mais economiza na luz? O Whindersson Nunes.',
-                 'Porque é que o computador não pára de espirrar? Porque apanhou um vírus.',
-                 'Porque é que o computador não pára de avariar? Porque apanhou um vírus.',
-                 'Qual o livro que conta a história dos imigrantes do sertão??? Vim das secas.',
-                 'Qual o livro que conta a história dos imigrantes do sertão??? O quinze',
-                 'O que é que acontece quando o Frodo morre? Passam-lhe uma certidão de Hobbit.',
-                 'O que é que acontece quando o Frodo morre? Passam-lhe uma certidão de óbito.']
-    signs = ['cenouras', 'cenouras',
-             'led', 'led',
-             'vírus', 'vírus',
-             'vim das secas', 'vim das secas',
-             'hobbit', 'hobbit']
-    alt_signs = ['senhoras', 'senhoras',
-                 'nerd', 'nerd',
-                 'vírus', 'vírus',
-                 'vidas secas', 'vidas secas',
-                 'óbito', 'óbito']
-
-    ngram1 = pl.read_csv('data/ngrams/pt/1gram.csv')
-    ngram3 = pl.read_csv('data/ngrams/pt/3gram.csv')
-    spacy_model = spacy.load(SPACY_MODELS['pt'])
-
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    vocab = build_vocabulary('data/ngrams/pt/1gram.csv')
-    skipgram = SGNS(vocab, 300)
-    state_dict = torch.load('results/skipgram/pt.pt', weights_only=True,
-                            map_location=device)
-    skipgram.load_state_dict(state_dict)
-    skipgram.eval()
-
-    sentence_idx = 2
-    config = KaoConfig(sentences[sentence_idx], 'pt', spacy_model, skipgram)
-    kao_ambiguity = KaoAmbiguity(config, signs[sentence_idx], alt_signs[sentence_idx], ngram1, ngram3)
-    score = kao_ambiguity.score()
-    print(f'Score: {score}')
