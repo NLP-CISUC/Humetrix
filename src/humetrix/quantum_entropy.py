@@ -1,6 +1,4 @@
-import argparse
 from abc import abstractmethod
-from pathlib import Path
 from typing import List, Tuple, Union
 
 import numpy as np
@@ -8,9 +6,7 @@ import spacy
 import torch
 from gensim.models import KeyedVectors
 from spacy.language import Language
-from transformers import Pipeline, pipeline
-
-from humetrix import SPACY_MODELS
+from transformers import Pipeline
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -80,7 +76,7 @@ class QuantumUncertainty(QuantumEntropy):
 class QuantumIncongruity(QuantumEntropy):
     """Liu and Hou (2023) QE-Incongruity scoring"""
 
-    def score(self):
+    def score(self) -> float:
         setup_toks, punchline_toks = self.tokenize_sentence()
         setup_d_matrix = self.density_matrix(setup_toks)
         punch_d_matrix = self.density_matrix(punchline_toks)
@@ -103,46 +99,3 @@ class QuantumIncongruity(QuantumEntropy):
         setup_entropy = -torch.trace(setup_entropy)
 
         return (sp_entropy - setup_entropy).item()
-
-
-def parse_args() -> argparse.Namespace:
-    """Parse arguments"""
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--embeddings', '-e',
-                        help='Embeddings file in word2vec format.',
-                        required=True, type=Path)
-    return parser.parse_args()
-
-
-def main(args: argparse.Namespace):
-    """Run script directly to test"""
-    embeddings = KeyedVectors.load(str(args.embeddings))
-    pipe = pipeline('feature-extraction', 'FacebookAI/xlm-roberta-base')
-    sentences = ['O que diz um coelho quando abre uma porta? Primeiro as cenouras.',
-                 'O que diz um coelho quando abre uma porta? Primeiro as senhoras.',
-                 'Qual é o youtuber que mais economiza na luz? O Jovem Led.',
-                 'Qual é o youtuber que mais economiza na luz? O Whindersson Nunes.',
-                 'Porque é que o computador não pára de espirrar? Porque apanhou um vírus.',
-                 'Porque é que o computador não pára de avariar? Porque apanhou um vírus.',
-                 'Qual o livro que conta a história dos imigrantes do sertão??? Vim das secas.',
-                 'Qual o livro que conta a história dos imigrantes do sertão??? O quinze',
-                 'O que é que acontece quando o Frodo morre? Passam-lhe uma certidão de Hobbit.',
-                 'O que é que acontece quando o Frodo morre? Passam-lhe uma certidão de óbito.']
-
-    for sentence in sentences:
-        qe_uncertainty = QuantumUncertainty(sentence, embeddings, 'pt')
-        qe_incongruity = QuantumIncongruity(sentence, embeddings, 'pt')
-        print(f'{sentence}')
-        print(f'QE-Uncertainty GloVe: {qe_uncertainty.score():.2f}')
-        print(f'QE-Incongruity GloVe: {qe_incongruity.score():.2f}')
-        qe_uncertainty = QuantumUncertainty(sentence, pipe, 'pt')
-        qe_incongruity = QuantumIncongruity(sentence, pipe, 'pt')
-        print(f'QE-Uncertainty XLM-R: {qe_uncertainty.score():.2f}')
-        print(f'QE-Incongruity XLM-R: {qe_incongruity.score():.2f}')
-        print('*****************')
-
-
-if __name__ == '__main__':
-    args = parse_args()
-    main(args)
