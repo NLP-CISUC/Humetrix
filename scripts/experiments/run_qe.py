@@ -32,7 +32,7 @@ for language, datasets in corpora.items():
                              transformer_model_name=xlmr)
     for corpus in datasets:
         print('- '*10 + corpus + ' -'*10)
-        df = pd.read_json(paths[corpus], orient='index').reset_index().head()
+        df = pd.read_json(paths[corpus], orient='index').reset_index()
 
         tqdm.pandas(desc='Incongruity + GloVe')
         df['QE-I + GloVe'] = df['text'].progress_apply(analyzer.quantum_incongruity)
