@@ -57,16 +57,20 @@ class QuantumEntropy():
         return d_matrix
 
     @abstractmethod
-    def score(self) -> float:
+    def score(self) -> Union[float, None]:
         ...
 
 
 class QuantumUncertainty(QuantumEntropy):
     """Liu and Hou (2023) QE-Uncertainty scoring"""
 
-    def score(self) -> float:
+    def score(self) -> Union[float, None]:
         setup_toks, _ = self.tokenize_sentence()
         d_matrix = self.density_matrix(setup_toks)
+
+        if d_matrix is None:
+            return None
+
         entropy = d_matrix * torch.log(d_matrix)
         entropy[entropy.isnan()] = 0 # 0xlog0 = 0
         entropy = -torch.trace(entropy)
@@ -76,7 +80,7 @@ class QuantumUncertainty(QuantumEntropy):
 class QuantumIncongruity(QuantumEntropy):
     """Liu and Hou (2023) QE-Incongruity scoring"""
 
-    def score(self) -> float:
+    def score(self) -> Union[float, None]:
         setup_toks, punchline_toks = self.tokenize_sentence()
         setup_d_matrix = self.density_matrix(setup_toks)
         punch_d_matrix = self.density_matrix(punchline_toks)
