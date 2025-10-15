@@ -21,6 +21,10 @@ dependencies = [
     "fr-dep-news-trf",
     "es-dep-news-trf",
     "pt-core-news-lg",
+    "ipython>=9.6.0",
+    "seaborn>=0.13.2",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.7",
 ]
 
 [build-system]
