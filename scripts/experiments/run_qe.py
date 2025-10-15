@@ -7,7 +7,8 @@ from humetrix import HumorAnalyzer
 corpora = {'en': ['semeval', 'humicroedit', 'joker_clef_en'],
            'fr': ['joker_clef_fr'],
            'es': ['joker_clef_es', 'HAHA@IberLEF2019', 'HAHA@IberLEF2021', 'HUHU@IberLEF2023'],
-           'pt': ['clemencio', 'puntuguese']}
+           'pt': ['clemencio', 'puntuguese'],
+           'zh': ['chumor']}
 paths = {'semeval': 'data/humor_recognition/semeval.json',
          'humicroedit': 'data/humor_recognition/humicroedit.json',
          'joker_clef_en': 'data/humor_recognition/joker_clef_en.json',
@@ -17,11 +18,13 @@ paths = {'semeval': 'data/humor_recognition/semeval.json',
          'HAHA@IberLEF2021': 'data/humor_recognition/HAHA@IberLEF2021.json',
          'HUHU@IberLEF2023': 'data/humor_recognition/HUHU@IberLEF2023.json',
          'clemencio': 'data/humor_recognition/clemencio.json',
-         'puntuguese': 'data/humor_recognition/puntuguese.json'}
+         'puntuguese': 'data/humor_recognition/puntuguese.json',
+         'chumor': 'data/humor_recognition/chumor.json'}
 glove = {'en': 'data/embeddings/en/glove_s300.gensim',
          'es': 'data/embeddings/es/glove_s300.gensim',
          'fr': 'data/embeddings/fr/glove_s300.gensim',
-         'pt': 'data/embeddings/pt/glove_s300.gensim'}
+         'pt': 'data/embeddings/pt/glove_s300.gensim',
+         'zh': 'data/embeddings/zh/glove_s300.gensim'}
 xlmr = 'FacebookAI/xlm-roberta-base'
 results_path = Path('results/quantum_entropy')
 results_path.mkdir(exist_ok=True, parents=True)
