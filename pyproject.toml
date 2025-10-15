@@ -21,10 +21,12 @@ dependencies = [
     "fr-dep-news-trf",
     "es-dep-news-trf",
     "pt-core-news-lg",
+    "zh-core-web-trf",
     "ipython>=9.6.0",
     "seaborn>=0.13.2",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.7",
+    "python-dotenv>=1.1.1",
 ]
 
 [build-system]
@@ -47,3 +49,4 @@ en-core_web_trf = { url = "https://github.com/explosion/spacy-models/releases/do
 fr-dep_news_trf = { url = "https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl" }
 es-dep_news_trf = { url = "https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.8.0/es_dep_news_trf-3.8.0-py3-none-any.whl" }
 pt-core-news-lg = { url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_lg-3.8.0/pt_core_news_lg-3.8.0-py3-none-any.whl" }
+zh-core_web_trf = { url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" }
