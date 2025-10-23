@@ -1,58 +1,34 @@
-import time
-from datetime import timedelta
 from pathlib import Path
 
 import pandas as pd
-from humetrix.metrics import LocalGlobalSurprise
-from transformers import AutoModelForMaskedLM, AutoTokenizer
+from tqdm import tqdm
+from humetrix import HumorAnalyzer
+
+# Only use corpora for humor interpretation (we need pun and alternative words)
+corpora = {'en': ['humicroedit'],
+           'pt': ['puntuguese']}
+paths = {'humicroedit': 'data/humor_interpretation/humicroedit.json',
+         'puntuguese': 'data/humor_interpretation/puntuguese.json'}
+results_path = Path('results/local_global_surprise')
+results_path.mkdir(exist_ok=True, parents=True)
 
 
-def get_surprise_score(row, tokenizer, lm):
-    surprise = LocalGlobalSurprise(row['text'],
-                                   row['location'],
-                                   row['interpretation'])
-    return surprise.score(tokenizer, lm)
+def get_surprise_score(row, analyzer):
+    return analyzer.local_global_surprise(row['text'],
+                                          row['location'],
+                                          row['interpretation'])
 
 
-results = list()
+for language, datasets in corpora.items():
+    analyzer = HumorAnalyzer(language)
+    for corpus in datasets:
+        print('- '*10 + corpus + ' -'*10)
+        df = pd.read_json(paths[corpus], orient='index').reset_index()
 
-# Semeval 2020 task 7 (Humicroedit)
+        tqdm.pandas(desc='Local Global Surprise')
+        df['local global surprise'] = df.progress_apply(get_surprise_score,
+                                                        axis='columns',
+                                                        analyzer=analyzer)
 
-print('------------ Humicroedit ------------')
-start_time = time.time()
-corpus_path = Path('data/humor_interpretation/humicroedit.json')
-df = pd.read_json(corpus_path, orient='index')
-checkpoint = 'bert-base-cased'
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-lm = AutoModelForMaskedLM.from_pretrained(checkpoint)
-df['local global surprise'] = df.apply(get_surprise_score,
-                                       axis='columns',
-                                       tokenizer=tokenizer,
-                                       lm=lm)
-results.append(df.copy())
-end_time = time.time()
-elapsed_time = end_time - start_time
-print(timedelta(seconds=elapsed_time))
-
-# Puntuguese
-
-print('------------ Puntuguese ------------')
-start_time = time.time()
-corpus_path = Path('data/humor_interpretation/puntuguese.json')
-df = pd.read_json(corpus_path, orient='index')
-checkpoint = 'neuralmind/bert-base-portuguese-cased'
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-lm = AutoModelForMaskedLM.from_pretrained(checkpoint)
-df['local global surprise'] = df.apply(get_surprise_score,
-                                       axis='columns',
-                                       tokenizer=tokenizer,
-                                       lm=lm)
-results.append(df.copy())
-end_time = time.time()
-elapsed_time = end_time - start_time
-print(timedelta(seconds=elapsed_time))
-
-df = pd.concat(results).set_index('id')
-df = df[['text', 'location', 'interpretation',
-         'local global surprise', 'funniness']]
-df.to_csv('results/metrics_behavior/local_global_surprise_multicorpus.csv')
+        savepath = (results_path / corpus).with_suffix('.jsonl')
+        df.to_json(savepath, orient='records', lines=True, force_ascii=False)
