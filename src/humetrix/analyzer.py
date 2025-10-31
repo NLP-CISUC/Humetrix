@@ -8,7 +8,7 @@ from gensim.models import KeyedVectors
 from transformers import AutoModelForMaskedLM, AutoTokenizer, pipeline
 
 from .configs import SPACY_MODELS, TRANSFORMER_MODELS
-from .kaoetal import KaoAmbiguity, KaoConfig
+from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
 from .quantum_entropy import QuantumIncongruity, QuantumUncertainty
 from .skipgram import SGNS, build_vocabulary
 from .surprise import LocalGlobalSurprise
@@ -113,4 +113,17 @@ class HumorAnalyzer():
                               alt_sign=alt_sign,
                               ngram1=kao_models['ngram1'],
                               ngram3=kao_models['ngram3'])
+        return scorer.score()
+
+    def kao_distinctiveness(self, sentence: str, pun_sign: str, alt_sign: str) -> float:
+        kao_models = self._load_model('kao_models')
+        config = KaoConfig(sentence=sentence,
+                           language=self.language,
+                           spacy_model=self._load_model('spacy'),
+                           skipgram=kao_models['skipgram'])
+        scorer = KaoDistinctiveness(config=config,
+                                    pun_sign=pun_sign,
+                                    alt_sign=alt_sign,
+                                    ngram1=kao_models['ngram1'],
+                                    ngram3=kao_models['ngram3'])
         return scorer.score()

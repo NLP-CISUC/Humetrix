@@ -34,6 +34,7 @@ for sent, sign, alt_sign in zip(sentences, signs, alt_signs):
     qu_xlm_score = analyzer.quantum_uncertainty(sent, backend='transformer')
     lgs_score = analyzer.local_global_surprise(sent, sign, alt_sign)
     kao_amb_score = analyzer.kao_ambiguity(sent, sign, alt_sign)
+    kao_dist_score = analyzer.kao_distinctiveness(sent, sign, alt_sign)
     print(f'Sentence: {sent}')
     print(f'Sign: {sign} | Alt sign: {alt_sign}')
     print(f'  QE-Incongruity GloVe: {qi_score:.4f}')
@@ -42,4 +43,5 @@ for sent, sign, alt_sign in zip(sentences, signs, alt_signs):
     print(f'  QE-Uncertainty XLM-R: {qu_xlm_score:.4f}')
     print(f'  Local-Global Surprise: {lgs_score:.4f}')
     print(f'  Kao et al. Ambiguity: {kao_amb_score:.4f}')
+    print(f'  Kao et al. Distinctiveness: {kao_dist_score}')
     print('*****************')
