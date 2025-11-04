@@ -33,11 +33,10 @@ def create_context_windows(sentences_df, max_dist, min_dist, unk_id):
     unk_id: ID for unknown tokens (e.g., <unk>).
     """
     min_length = max_dist - min_dist + 1
-    window_size = max_dist - min_dist
     unk_id_lit = pl.lit(unk_id, dtype=pl.UInt64)
 
     context_windows = (sentences_df
-                       # Remove texts with length <= (max_dist - min_dit + 1)
+                       # Remove texts with length <= (max_dist - min_dist + 1)
                        .filter(pl.col('token ids').list.len() > min_length)
                        # Replicate one row for each token (to create individual context windows)
                        .with_columns(pl.int_ranges(pl.col('token ids').list.len()).alias('token index'))
@@ -64,6 +63,7 @@ def create_context_windows(sentences_df, max_dist, min_dist, unk_id):
 # Implementation of SGNS.
 # Based on the implementation by hhexiy/pungen.
 
+# TODO: Fix model to be skipgram instead of CBOW
 class SGNS(nn.Module):
     def __init__(self, vocab, embedding_dim, vocab_counts=None,
                  negative_samples=20):
