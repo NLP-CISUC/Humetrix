@@ -2,8 +2,16 @@
 **/__pycache__/
 **/.ipynb_checkpoints/*
 
-data/
-.vim/
+# Virtual environment
+.venv/
 .env
 
+# Data and results
+data/
 results/skipgram/
+
+# Editor files
+.vim/
+
+# Distribution files
+dist/

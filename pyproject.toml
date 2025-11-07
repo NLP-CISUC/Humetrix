@@ -2,6 +2,22 @@
 name = "humetrix"
 version = "0.2.0"
 description = "Automatic metrics for evaluation of humorous content"
+authors = [
+    {name = "Marcio Lima Inácio", email = "mlinacio@dei.uc.pt"},
+]
+readme = "README.md"
+license = {text = "MIT"}
+license-files = ["LICENSE"]
+keywords = ["humor", "computational humor", "nlp", "natural language processing",
+            "nlg", "natural language generation", "evaluation"]
+classifiers = [
+    "Private :: Do Not Upload",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 requires-python = ">=3.12"
 dependencies = [
     "cupy-cuda12x>=13.4.1",
@@ -39,6 +55,7 @@ dev-dependencies = [
     "huggingface-hub[hf-xet]>=0.30.2",
     "isort>=6.0.1",
     "pip>=25.0.1",
+    "ruff>=0.5.5",
 ]
 
 [tool.uv.sources]
