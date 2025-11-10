@@ -186,8 +186,8 @@ class KaoMetricBase:
             # Using skip-gram to calculate P(word | sign), where the sign is
             # treated as the target and the word as the context.
             return skipgram_model.predict_prob(
-                target_word_idx=sign_word_idx,
-                context_word_idx=target_word_idx,
+                target_word_idx=target_word_idx,
+                context_word_indices=[sign_word_idx],
             )
 
         trigram = ' '.join(

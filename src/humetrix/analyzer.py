@@ -14,8 +14,9 @@ from typing import Dict, Union
 from gensim.models import KeyedVectors
 import polars as pl
 import spacy
+from spacy.language import Language
 import torch
-from transformers import AutoModelForMaskedLM, AutoTokenizer, pipeline, Pipeline
+from transformers import AutoModelForMaskedLM, AutoTokenizer, Pipeline, pipeline
 
 from .configs import SPACY_MODELS, TRANSFORMER_MODELS
 from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
@@ -78,9 +79,7 @@ class HumorAnalyzer:
 
     def _load_model(
         self, name: str
-    ) -> Union[
-        spacy.Language, Dict, KeyedVectors, pl.DataFrame, SGNS, Pipeline
-    ]:
+    ) -> Union[Language, Dict, KeyedVectors, pl.DataFrame, SGNS, Pipeline]:
         """
         Load and cache the specified model.
 
