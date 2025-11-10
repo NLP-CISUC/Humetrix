@@ -2,6 +2,8 @@
 
 The skip-gram models were trained using scripts based on [pungen's](https://github.com/hhexiy/pungen) implementation. These script require that the input data follows a specific preprocessing. This document explains how to download and prepare the data for using training the skip-gram models.
 
+All commands are expected to be run from the root directory of the repository.
+
 ## Where to download the data from
 
 ### Chinese Wikipedia (维基百科)
@@ -75,8 +77,8 @@ With the previous steps, you should have one file for each dataset, with one sen
 For each dataset, we need to tokenize the texts using spacy with the `scripts/preprocessing/large_corpora.py` script. This script will save the tokenized texts in the `data/skipgram` directory using the Parquet format for efficiency.
 
 ```bash
-python scripts/preprocessing/large_corpora.py --input {corpus name}.txt \
-                                               --model {spacy model name}
+python scripts/preprocessing/large_corpora.py --input [CORPUS_NAME].txt \
+                                               --model [SPACY_MODEL_NAME]
 ```
 
 Make sure to use the corresponding spacy model for each language:
@@ -89,33 +91,42 @@ Make sure to use the corresponding spacy model for each language:
 
 If the dataset is already tokenized (such as BRWAC or Bookcorpus), you can skip this step with the `--no-spacy` flag.
 
+### Build vocabulary and convert tokens to IDs
+
+With the tokenized texts, we can now build the vocabulary from Google N-grams and convert the tokens to IDs using the `scripts/preprocessing/skipgram/convert_corpus_to_ids.py` script.
+
+The N-grams csv files should follow the format as in [orgtre/google-books-ngram-frequency](https://github.com/orgtre/google-books-ngram-frequency). For more information check [`docs/data.md`](data.md).
+
+```bash
+python scripts/preprocessing/skipgram/convert_corpus_to_ids.py \
+    --corpus data/skipgram/[CORPUS_NAME].parquet \
+    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
+    --output data/preprocessed_skipgram/[CORPUS_NAME]/corpus_ids.parquet
+```
+
+### Create training data
+
+Finally, we can create the training data for the skip-gram model using the `scripts/preprocessing/skipgram/create_context_windows.py` script. This script will create the context windows for each word in the corpus, saving them in a Parquet file.
+
+```bash
+python scripts/preprocessing/skipgram/create_context_windows.py \
+    --corpus data/preprocessed_skipgram/[CORPUS_NAME]/corpus_ids.parquet \
+    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
+    --output data/preprocessed_skipgram/[CORPUS_NAME]/context_windows.parquet \
+    --min-dist 5
+    --max-dist 10
+```
+
 ## How to train the models
 
-First, you need to install [pungen](https://github.com/hhexiy/pungen). We recommend doing this in a separate python environment, as it requires installing an older version of python and its libraries. The environment we used contains the following packages:
-
-- Python 3.6.13
-- Fairseq 0.6.0
-- Numpy 1.19.5
-- PyTorch 1.10.1 with CUDA 11.3
-- Spacy 2.2.0
-- Tqdm 4.64.1
-
-To train the models, you need to first preprocess the data using the following command.
+We provide a script to train the distant skip-gram models. The script is `scripts/training/train_skipgram.py`. To train a model, run:
 
 ```bash
-python -m pungen.wordvec.preprocess --data-dir data/{corpus name}/skipgram \
-       --corpus {output file from the previous step} \
-       --min-dist 5 --max-dist 10 --threshold 80 \
-       --vocab data/{corpus name}/skipgram/dict.txt
+python scripts/training/train_skipgram.py \
+    --context-windows data/preprocessed_skipgram/[CORPUS_NAME]/context_windows.parquet \
+    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
+    --output results/skipgram/[LANGUAGE].pt \
+    --epochs 10
 ```
 
-After preprocessing the data, you can train the model using the following command.
-
-```bash
-python -m pungen.wordvec.train --weights --cuda --data data/{corpus name}/skipgram/train.bin \
-    --save_dir models/{corpus name}/skipgram \
-    --mb 3500 --epoch 15 \
-    --vocab data/{corpus name}/skipgram/dict.txt
-```
-
-Remember to replace `{corpus name}` with the name of the dataset you are using and `{output file from the previous step}` with the file generated in the previous step.
+To check the parameters we used for training our models, check the `scripts/experiments/run_skipgram_training.sh` script.

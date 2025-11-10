@@ -9,62 +9,43 @@ data/
 │   │   ├── glove_s300.gensim
 │   │   └── glove_s300.gensim.vectors.npy
 │   ├── es
-│   │   ├── glove_s300.gensim
-│   │   └── glove_s300.gensim.vectors.npy
+│   │   └── ...
 │   ├── fr
-│   │   ├── glove_s300.gensim
-│   │   └── glove_s300.gensim.vectors.npy
+│   │   └── ...
 │   ├── pt
-│   │   ├── glove_s300.gensim
-│   │   └── glove_s300.gensim.vectors.npy
+│   │   └── ...
 │   └── zh
-│       ├── glove_s300.gensim
-│       └── glove_s300.gensim.vectors.npy
-├── humor_interpretation/
+│       └── ...
+├── humor_interpretation
 │   ├── humicroedit.json
 │   └── puntuguese.json
-├── humor_recognition/
+├── humor_recognition
+│   ├── chumor.json
 │   ├── clemencio.json
 │   ├── HAHA@IberLEF2019.json
-│   ├── HAHA@IberLEF2021.json
-│   ├── HUHU@IberLEF2023.json
-│   ├── humicroedit.json
-│   ├── joker_clef_en.json
-│   ├── joker_clef_es.json
-│   ├── joker_clef_fr.json
-│   ├── puntuguese.json
-│   └── semeval.json
-├── large_corpora/
+│   └── ...
+├── large_corpora
 │   ├── bookcorpus.txt
 │   ├── brwac.txt
 │   ├── croissant.txt
-│   ├── sbwc.txt
-│   └── wiki-zh-simplified-seg.txt
-├── ngrams
-│   ├── en
-│   │   ├── 1gram.csv
-│   │   └── 3gram.csv
-│   ├── es
-│   │   ├── 1gram.csv
-│   │   └── 3gram.csv
-│   ├── fr
-│   │   ├── 1gram.csv
-│   │   └── 3gram.csv
-│   ├── pt
-│   │   ├── 1gram.csv
-│   │   └── 3gram.csv
-│   └── zh
-│       ├── 1gram.csv
-│       └── 3gram.csv
-└── skipgram/
-    ├── bookcorpus.txt
-    ├── brwac.txt
-    ├── croissant.txt
-    ├── sbwc.txt
-    └── wiki-zh-simplified-seg.txt
+│   └── ...
+└── ngrams
+    ├── en
+    │   ├── 1gram.csv
+    │   └── 3gram.csv
+    ├── es
+    │   └── ...
+    ├── fr
+    │   └── ...
+    ├── pt
+    │   └── ...
+    └── zh
+        └── ...
 ```
 
 The `data/` directory is organized according to the different tasks that the datasets are used for. In the following sections, we detail the datasets used, where to download them from, and how to prepare them.
+
+All commands below should be run from the root directory of the project.
 
 ## Humor datasets
 
@@ -79,15 +60,15 @@ After the dataset is downloaded and decompressed, we use the scripts `utils/conv
 ```bash
 # Humor interpretation
 python utils/conversion/humor_interpretation/humicroedit_to_json.py \
-       -t <path_to_dataset>/subtask-1/train.csv \
-       -d <path_to_dataset>/subtask-1/dev.csv \
-       -s <path_to_dataset>/subtask-1/test.csv
+       -t [PATH_TO_DATASET]/subtask-1/train.csv \
+       -d [PATH_TO_DATASET]/subtask-1/dev.csv \
+       -s [PATH_TO_DATASET]/subtask-1/test.csv
 
 # Humor recognition
 python utils/conversion/humor_recognition/humicroedit_to_json.py \
-       -t <path_to_dataset>/subtask-1/train.csv \
-       -d <path_to_dataset>/subtask-1/dev.csv \
-       -s <path_to_dataset>/subtask-1/test.csv
+       -t [PATH_TO_DATASET]/subtask-1/train.csv \
+       -d [PATH_TO_DATASET]/subtask-1/dev.csv \
+       -s [PATH_TO_DATASET]/subtask-1/test.csv
 ```
 
 ### Puntuguese
@@ -97,11 +78,11 @@ This corpus can be downloaded from the following Github page: [https://github.co
 ```bash
 # Humor interpretation
 python utils/conversion/humor_interpretation/puntuguese_to_json.py \
-       -c <path_to_dataset>/data/puns.json
+       -c [PATH_TO_DATASET]/data/puns.json
 
 # Humor recognition
 python utils/conversion/humor_recognition/puntuguese_to_json.py \
-       -d <path_to_dataset>/data/classification_corpus.json
+       -d [PATH_TO_DATASET]/data/classification_corpus.json
 ```
 
 Note that the input file that is passed to the scripts is different for the two tasks.
@@ -113,7 +94,7 @@ This Portuguese dataset can be downloaded from [the project's Github page](https
 ```bash
 # Humor recognition
 python utils/conversion/humor_recognition/clemencio_to_json.py \
-       -d <path_to_dataset>/Datasets/Balanceados/all.txt
+       -d [PATH_TO_DATASET]/Datasets/Balanceados/all.txt
 ```
 
 ### HAHA@IberLEF 2019
@@ -123,8 +104,8 @@ This dataset can be downloaded from [here](https://www.fing.edu.uy/inco/grupos/p
 ```bash
 # Humor recognition
 python utils/conversion/humor_recognition/haha_to_json.py \
-       -t <path_to_dataset>/haha_2019_train.csv \
-       -s <path_to_dataset>/haha_2019_test_gold.csv
+       -t [PATH_TO_DATASET]/haha_2019_train.csv \
+       -s [PATH_TO_DATASET]/haha_2019_test_gold.csv
 ```
 
 ### HAHA@IberLEF 2021
@@ -134,9 +115,9 @@ The 2021 version of the HAHA corpus can be obtained from their [CodaLab page](ht
 ```bash
 # Humor recognition
 python utils/conversion/humor_recognition/haha_to_json.py \
-       -t <path_to_dataset>/haha_2021_train.csv \
-       -d <path_to_dataset>/haha_2021_dev_gold.csv \
-       -s <path_to_dataset>/haha_2021_test_gold.csv
+       -t [PATH_TO_DATASET]/haha_2021_train.csv \
+       -d [PATH_TO_DATASET]/haha_2021_dev_gold.csv \
+       -s [PATH_TO_DATASET]/haha_2021_test_gold.csv
 ```
 
 ### HUHU@IberLEF 2023
@@ -146,7 +127,7 @@ The HUHU dataset is unfortunately close-sourced, so we cannot provide an easy wa
 ```bash
 # Humor recognition
 python utils/conversion/humor_recognition/huhu_to_json.py \
-       -d <path_to_dataset>/train.csv
+       -d [PATH_TO_DATASET]/train.csv
 ```
 
 ### Joker CLEF
@@ -156,7 +137,7 @@ The JOKER shared task provided datasets in multiple languages, but unfortunately
 ```bash
 # Humor recognition
 python utils/conversion/humor_recognition/joker_to_json.py \
-       -d <path_to_dataset>/Task\ 1\ -\ detection/
+       -d [PATH_TO_DATASET]/Task\ 1\ -\ detection/
 ```
 
 ### SemEval 2017 Task 7
@@ -166,10 +147,18 @@ The data for this task can be downloaded from their [official page](https://alt.
 ```bash
 # Humor recognition
 python utils/conversion/humor_recognition/semeval_to_json.py \
-       -td <path_to_dataset>/data/test/subtask1-heterographic-test.xml \
-       -tl <path_to_dataset>/data/test/subtask1-heterographic-test.gold \
-       -md <path_to_dataset>/data/test/subtask1-homographic-test.xml \
-       -ml <path_to_dataset>/data/test/subtask1-homographic-test.gold
+       -td [PATH_TO_DATASET]/data/test/subtask1-heterographic-test.xml \
+       -tl [PATH_TO_DATASET]/data/test/subtask1-heterographic-test.gold \
+       -md [PATH_TO_DATASET]/data/test/subtask1-homographic-test.xml \
+       -ml [PATH_TO_DATASET]/data/test/subtask1-homographic-test.gold
+```
+
+### Chumor
+
+The Chinese humor dataset is available through their [HuggingFace page](https://huggingface.co/datasets/MichiganNLP/Chumor). We can download and convert it using the `utils/conversion/humor_recognition/chumor_to_json.py` script:
+
+```bash
+python utils/conversion/humor_recognition/chumor_to_json.py
 ```
 
 ## Large corpora
@@ -186,7 +175,7 @@ For more details on how to download and preprocess the data, please refer to [`d
 
 ## Word Embeddings (GloVe)
 
-For the Quantum Entropy-based metrics, we use GloVe embeddings with 300 dimensions, following the original work. The embeddings are to be included to the `data/embeddings/<language>/` directory, all under the name `glove_s300.gensim`. The embeddings are available from different sources:
+For the Quantum Entropy-based metrics, we use GloVe embeddings with 300 dimensions, following the original work. The embeddings are to be included to the `data/embeddings/[LANGUAGE]/` directory, all under the name `glove_s300.gensim`. The embeddings are available from different sources:
 
 - **English**: [GloVe](https://nlp.stanford.edu/projects/glove/)
 - **Portuguese**: [NILC Embeddings](https://www.nilc.icmc.usp.br/embeddings)
