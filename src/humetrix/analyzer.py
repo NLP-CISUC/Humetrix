@@ -263,7 +263,10 @@ class HumorAnalyzer:
         """
         bert_models = self._load_model('bert')
         scorer = LocalGlobalSurprise(
-            sentence=sentence, pun_sign=pun_sign, alt_sign=alt_sign
+            sentence=sentence,
+            pun_sign=pun_sign,
+            alt_sign=alt_sign,
+            spacy_model=self._load_model('spacy'),
         )
         return scorer.score(
             tokenizer=bert_models['tokenizer'], lm=bert_models['lm']

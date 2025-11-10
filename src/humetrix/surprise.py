@@ -10,6 +10,7 @@ import re
 
 import numpy as np
 import spacy
+from spacy.language import Language
 import torch
 from transformers import PreTrainedModel, PreTrainedTokenizer
 
@@ -28,11 +29,14 @@ class LocalGlobalSurprise:
         The alternative sign. The word or phrase that is evoked by the pun sign.
     """
 
-    def __init__(self, sentence: str, pun_sign: str, alt_sign: str):
+    def __init__(
+        self, sentence: str, pun_sign: str, alt_sign: str, spacy_model: Language
+    ):
         super().__init__()
         self.text = sentence
         self.pun_sign = pun_sign
         self.alt_sign = alt_sign
+        self.spacy_model = spacy_model
 
     def surprisal(
         self, context: str, tokenizer: PreTrainedTokenizer, lm: PreTrainedModel
@@ -99,8 +103,6 @@ class LocalGlobalSurprise:
         """
         Get the local context around the pun sign.
 
-        .. todo:: Fix hardcoded spacy model
-
         Parameters
         ----------
         window_size : int
@@ -122,9 +124,7 @@ class LocalGlobalSurprise:
                 break
         sign_start, sign_end = sign_loc.span()
 
-        # TODO: Fix hardcoded spacy model
-        nlp = spacy.load('pt_core_news_sm')
-        doc = nlp(self.text)
+        doc = self.spacy_model(self.text)
         tokens_idx = [
             i
             for i, token in enumerate(doc)
