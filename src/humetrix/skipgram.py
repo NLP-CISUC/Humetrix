@@ -140,7 +140,6 @@ def create_context_windows(
 
 # Implementation of SGNS.
 # Based on the implementation by hhexiy/pungen.
-# TODO: Fix predict_prob to be skipgram instead of CBOW
 
 
 class SGNS(nn.Module):
@@ -225,38 +224,32 @@ class SGNS(nn.Module):
         return self.word_to_idx.get(word, self.unk_id)
 
     def predict_prob(
-        self, target_word_idx: int, context_word_indices: List[int]
+        self, input_word_idx: int, output_word_idx: int
     ) -> float:
         """
         Predict the probability of a target word given a context.
 
-        .. todo::
-            Fix `predict_prob` to be skipgram instead of CBOW.
-
-
         Parameters
         ----------
-        target_word_idx : int
-            The index of the target word.
-        context_word_indices : list of int
-            A list of indices for the context words.
+        input_word_idx : int
+            The index of the input (or center) word.
+        output_word_idx : int
+            The index of the output (or context) word to predict.
 
         Returns
         -------
         float
-            The probability of the target word.
+            The probability of the context word given the center word.
         """
         device = self.embeddings.weight.device
-        context_indices_tensor = torch.LongTensor(context_word_indices).to(
-            device
-        )
-        context_emb = self.embeddings(context_indices_tensor).mean(dim=0)
+
+        input_idx_tensor = torch.LongTensor([input_word_idx]).to(device)
+        input_emb = self.embeddings(input_idx_tensor).squeeze(0)
 
         all_output_embs = self.output_embeddings.weight
-        all_scores = torch.matmul(all_output_embs, context_emb)
-
+        all_scores = torch.matmul(all_output_embs, input_emb)
         probs = F.softmax(all_scores, dim=0)
-        return probs[target_word_idx].item()
+        return probs[output_word_idx].item()
 
     def forward(
         self, target_words: torch.Tensor, context_words: torch.Tensor

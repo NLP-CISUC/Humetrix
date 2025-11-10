@@ -31,7 +31,7 @@ class KaoConfig:
     spacy_model : Language
         The spaCy language model to use for tokenization.
     skipgram : SGNS
-        Distant skipgram model_[1] used to approximate the empirical association
+        Distant skip-gram model_[1] used to approximate the empirical association
         measures from the original paper.
 
     References
@@ -165,7 +165,7 @@ class KaoMetricBase:
         Notes
         -----
         If the hidden variable :math:`f_i = 1`, we estimate the association
-        measures using a distant skipgram model_[1] to calculate the probability
+        measures using a distant skip-gram model_[1] to calculate the probability
         :math:`P(w_i|m)`. Otherwise, we use smoothed n-gram probabilities
         :math:`P(w_i|\mathrm{bigram}_i)`.
 
@@ -179,15 +179,15 @@ class KaoMetricBase:
             skipgram_model = self.config.skipgram
             tokens = self.config._tokens
 
-            target_word = tokens[idx]
-            target_word_idx = skipgram_model.get_word_idx(target_word)
+            current_word = tokens[idx]
+            current_word_idx = skipgram_model.get_word_idx(current_word)
             sign_word_idx = skipgram_model.get_word_idx(sign)
 
             # Using skip-gram to calculate P(word | sign), where the sign is
-            # treated as the target and the word as the context.
+            # treated as the target and the current word as the context.
             return skipgram_model.predict_prob(
-                target_word_idx=target_word_idx,
-                context_word_indices=[sign_word_idx],
+                input_word_idx=sign_word_idx,
+                output_word_idx=current_word_idx,
             )
 
         trigram = ' '.join(
