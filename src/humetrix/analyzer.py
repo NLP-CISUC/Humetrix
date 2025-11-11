@@ -103,9 +103,12 @@ class HumorAnalyzer:
                 model_name = SPACY_MODELS[self.language]
                 self._models[name] = spacy.load(model_name)
             elif name == 'bert':
+                device = torch.device(
+                    'cuda' if torch.cuda.is_available() else 'cpu'
+                )
                 model_name = TRANSFORMER_MODELS[self.language]
                 tokenizer = AutoTokenizer.from_pretrained(model_name)
-                lm = AutoModelForMaskedLM.from_pretrained(model_name)
+                lm = AutoModelForMaskedLM.from_pretrained(model_name, device_map=device)
                 self._models[name] = {'tokenizer': tokenizer, 'lm': lm}
             elif name == 'embeddings':
                 if not self._paths['embeddings']:

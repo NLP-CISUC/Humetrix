@@ -80,9 +80,13 @@ class LocalGlobalSurprise:
         torch.set_grad_enabled(False)
 
         # Prepare input
-        token_ids = tokenizer.encode(masked_txt, return_tensors='pt')
+        first_layer_name = list(lm.hf_device_map.keys())[0]
+        device = lm.hf_device_map[first_layer_name]
+
+        token_ids = tokenizer.encode(masked_txt, return_tensors='pt').to(device)
         masked_position = token_ids.squeeze() == tokenizer.mask_token_id
         masked_position = masked_position.nonzero().item()
+
 
         # Get global probabilities
         output = lm(token_ids)

@@ -44,6 +44,7 @@ dependencies = [
     "matplotlib>=3.10.7",
     "python-dotenv>=1.1.1",
     "statsmodels>=0.14.5",
+    "accelerate>=1.11.0",
 ]
 
 [build-system]
