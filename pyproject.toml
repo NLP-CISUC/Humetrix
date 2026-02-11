@@ -46,6 +46,7 @@ dependencies = [
     "statsmodels>=0.14.5",
     "accelerate>=1.11.0",
     "scikit-posthocs>=0.11.4",
+    "func-timeout>=4.3.5",
 ]
 
 [build-system]
