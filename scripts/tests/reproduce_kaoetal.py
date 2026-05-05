@@ -21,21 +21,28 @@ class TestBase(KaoMetricBase):
     def _word_posterior(self, f_config, idx, sign):
         f_i = f_config[idx]
         word = self.config._tokens[idx]
+        col = 'm1_trigram' if sign == self.pun_sign else 'm2_trigram'
+        df_slice = self.ngram3_df.filter(pl.col('index') == self.row_index)
+        trigram_prob = df_slice[col].to_list()[idx] if len(df_slice) > idx else 1e-10
 
-        if f_i == 1: # Get value from the relatedness annotation
-            r = self.relatedness_df.filter(
-                (pl.col('word1') == sign) & (pl.col('word2') == word)
-            )
-            if len(r) == 0:
-                return 1e-10
-            return float(np.exp(r['relatedness'].to_list()[0]))
-        else: # Get trigram probability
-            col = 'm1_trigram' if sign == self.pun_sign else 'm2_trigram'
-            df_slice = self.ngram3_df.filter(pl.col('index') == self.row_index)
-            if len(df_slice) > idx:
-                return df_slice[col].to_list()[idx]
+        if f_i == 0: # Get trigram probability
+            return trigram_prob
+
+        # f_i == 1, get value from the relatedness annotation
+        if word == sign:
+            return float(np.exp(13.0) * trigram_prob)
+        if word in (self.pun_sign, self.alt_sign):
+            return float(np.exp(0.0) * trigram_prob)
+
+        r = self.relatedness_df.filter(
+            ((pl.col('word1') == sign) & (pl.col('word2') == word)) |
+            ((pl.col('word1') == word) & (pl.col('word2') == sign))
+        )
+        if len(r) == 0:
             return 1e-10
 
+        r_val = r['relatedness'].to_list()[0]
+        return float(np.exp(r_val) * trigram_prob)
 
 class TestAmbiguity(TestBase):
     # Changed to use Kao et al.'s unigram probabilities
@@ -47,14 +54,14 @@ class TestAmbiguity(TestBase):
 
     # Exact same implementation, just changing the base class
     def _sign_posterior(self, sign: str) -> float:
-        log_sign_prior = np.log2(self._sign_prior(sign))
+        log_sign_prior = np.log(self._sign_prior(sign))
         total_prob = 0.0
         posteriors = self._f_config_posteriors(sign)
         for f_config in self.config._f_configs:
             sum_log_word_posteriors = 0.0
             for i in range(len(self.config._tokens)):
-                sum_log_word_posteriors += np.log2(posteriors[(i, f_config[i])])
-            total_prob += np.exp2(
+                sum_log_word_posteriors += np.log(posteriors[(i, f_config[i])])
+            total_prob += np.exp(
                 log_sign_prior
                 + self.config._log_f_config_prior
                 + sum_log_word_posteriors
@@ -75,8 +82,8 @@ class TestAmbiguity(TestBase):
         if prob_pun_sign <= 0 or prob_alt_sign <= 0:
             return 0  # 0xlog0 = 0
         return -(
-            prob_pun_sign * np.log2(prob_pun_sign)
-            + prob_alt_sign * np.log2(prob_alt_sign)
+            prob_pun_sign * np.log(prob_pun_sign)
+            + prob_alt_sign * np.log(prob_alt_sign)
         )
 
 
@@ -84,12 +91,11 @@ nlp = load(SPACY_MODELS['en'])
 kaoetal_data = (pl.read_csv('data/kaoetal/data-agg.csv')
                   .filter(pl.col('sentenceType') == 'pun')
                   .with_columns(pl.col('sentence').str.replace('#', '')))
-kaoetal_results = pl.read_csv('data/kaoetal/data-agg-measures.csv')
+kaoetal_results = pl.read_csv('data/kaoetal/data.csv')
 kaoetal_relatedness = pl.read_csv('data/kaoetal/relatedness_clean.csv')
 kaoetal_ngram1 = pl.read_csv('data/kaoetal/unigrams_clean.csv')
 kaoetal_ngram3 = pl.read_csv('data/kaoetal/trigrams_clean.csv')
 
-results = []
 for row in kaoetal_data.iter_rows(named=True):
     row_idx = row[''] - 1
     tokens = kaoetal_ngram3.filter(pl.col('index') == row_idx)['word'].to_list()
@@ -110,7 +116,7 @@ for row in kaoetal_data.iter_rows(named=True):
     kao_config._tokens = tokens
     kao_config._f_configs = [list(p) for p in product([0, 1], repeat=len(tokens))]
     kao_config._f_config_prior = 1 / (2 ** len(tokens))
-    kao_config._log_f_config_prior = -len(tokens)
+    kao_config._log_f_config_prior = len(tokens) * np.log(0.5)
 
     ambiguity_metric = TestAmbiguity(
         config=kao_config,
@@ -124,6 +130,9 @@ for row in kaoetal_data.iter_rows(named=True):
 
     score = ambiguity_metric.score()
     target_score = kaoetal_results.filter(pl.col('idx') == row_idx)['ambiguity'].item()
-    print(f"SentenceID {row_idx}: calculated {score:.6f}, target {target_score:.6f}")
+    score_diff = abs(score - target_score)
 
-    break
+    try:
+        assert score_diff <= 1e-5
+    except AssertionError:
+        print(f"id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}")
