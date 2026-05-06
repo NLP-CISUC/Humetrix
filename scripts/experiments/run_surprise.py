@@ -5,9 +5,9 @@ from tqdm import tqdm
 from humetrix import HumorAnalyzer
 
 # Only use corpora for humor interpretation (we need pun and alternative words)
-corpora = {'en': ['humicroedit'],
+corpora = {'en': ['cup'],
            'pt': ['puntuguese']}
-paths = {'humicroedit': 'data/humor_interpretation/humicroedit.json',
+paths = {'cup': 'data/humor_interpretation/cup.json',
          'puntuguese': 'data/humor_interpretation/puntuguese.json'}
 results_path = Path('results/local_global_surprise')
 results_path.mkdir(exist_ok=True, parents=True)
