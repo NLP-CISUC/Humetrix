@@ -141,6 +141,23 @@ class KaoMetricBase:
         self.ngram3 = self.ngram3.with_columns(posterior_smooth.alias('prob'))
         self.ngram2 = self.ngram3.group_by(bigram).sum()
 
+    def _get_trigram_prob(self, idx: int) -> float:
+        """Calculate the smoothed trigram probability with bigram backoff."""
+        tokens = self.config._tokens
+        start_idx = max(0, idx - 2)
+        
+        trigram = ' '.join(tokens[start_idx : idx + 1])
+        trigram_match = self.ngram3.filter(pl.col('ngram') == trigram)
+        
+        if len(trigram_match) > 0:
+            return trigram_match['prob'].item()
+            
+        bigram = ' '.join(tokens[start_idx : idx])
+        bigram_match = self.ngram2.filter(pl.col('ngram') == bigram)
+        
+        freq_bigram = bigram_match['freq'].item() if len(bigram_match) > 0 else 0
+        return 1.0 / (freq_bigram + len(self.ngram3))
+
     def _word_posterior(
         self, f_config: List[int], idx: int, sign: str
     ) -> float:
@@ -164,52 +181,37 @@ class KaoMetricBase:
 
         Notes
         -----
-        If the hidden variable :math:`f_i = 1`, we estimate the association
-        measures using a distant skip-gram model_[1] to calculate the probability
-        :math:`P(w_i|m)`. Otherwise, we use smoothed n-gram probabilities
-        :math:`P(w_i|\mathrm{bigram}_i)`.
+        If the hidden variable :math:`f_i = 1`, we estimate the relatedness
+        measures :math:`R(w_i,m)` using a distant skip-gram model_[1]
+        to calculate the probability :math:`P(w_i|m) = e^{R(w_i,m)*p(w_i|\mathrm{bigram}_i)}`.
+        Otherwise, we use smoothed n-gram probabilities :math:`P(w_i|\mathrm{bigram}_i)`.
 
         References
         ----------
         [1] He He, Nanyun Peng, and Percy Liang. 2019. Pun Generation with Surprise. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 2019. Association for Computational Linguistics, Minneapolis, 1734–1744. https://doi.org/10.18653/v1/N19-1172
         """
         f_i = f_config[idx]
+        word = self.config._tokens[idx]
 
-        if f_i == 1:
-            skipgram_model = self.config.skipgram
-            tokens = self.config._tokens
+        prob_trigram = self._get_trigram_prob(idx)
 
-            current_word = tokens[idx]
-            current_word_idx = skipgram_model.get_word_idx(current_word)
-            sign_word_idx = skipgram_model.get_word_idx(sign)
+        if f_i == 0:
+            return prob_trigram
 
-            # Using skip-gram to calculate P(word | sign), where the sign is
-            # treated as the target and the current word as the context.
-            return skipgram_model.predict_prob(
-                input_word_idx=sign_word_idx,
-                output_word_idx=current_word_idx,
-            )
-
-        trigram = ' '.join(
-            self.config._tokens[
-                max(0, idx - 2) : min(len(self.config._tokens), idx + 1)
-            ]
+        if word == sign:
+            return float(np.exp(13.0) * prob_trigram)
+        if word in (self.pun_sign, self.alt_sign):
+            return float(np.exp(0.0) * prob_trigram)
+        
+        # Using skip-gram to calculate e^{R(w_i,m)}, where the sign is
+        # treated as the target and the current word as the context.
+        skipgram_model = self.config.skipgram
+        exp_relatedness = skipgram_model.predict_prob(
+            input_word_idx=skipgram_model.get_word_idx(sign), 
+            output_word_idx=skipgram_model.get_word_idx(word)
         )
-        if trigram in self.ngram3['ngram']:
-            return self.ngram3.filter(pl.col('ngram') == trigram)['prob'].item()
-
-        bigram = ' '.join(
-            self.config._tokens[
-                max(0, idx - 2) : min(len(self.config._tokens), idx)
-            ]
-        )
-        freq_bigram = 0
-        if bigram in self.ngram2['ngram']:
-            freq_bigram = self.ngram2.filter(pl.col('ngram') == bigram)[
-                'freq'
-            ].item()
-        prob_trigram = 1 / (freq_bigram + len(self.ngram3))
-        return prob_trigram
+        
+        return exp_relatedness * prob_trigram
 
     def _f_config_posteriors(self, sign: str) -> Dict:
         """
@@ -291,14 +293,14 @@ class KaoAmbiguity(KaoMetricBase):
         We work on the log scale to avoid underflow.
         """
         # Work on log scale to avoid underflow
-        log_sign_prior = np.log2(self._sign_prior(sign))
+        log_sign_prior = np.log(self._sign_prior(sign))
         total_prob = 0.0
         posteriors = self._f_config_posteriors(sign)
         for f_config in self.config._f_configs:
             sum_log_word_posteriors = 0.0
             for i in range(len(self.config._tokens)):
-                sum_log_word_posteriors += np.log2(posteriors[(i, f_config[i])])
-            total_prob += np.exp2(
+                sum_log_word_posteriors += np.log(posteriors[(i, f_config[i])])
+            total_prob += np.exp(
                 log_sign_prior
                 + self.config._log_f_config_prior
                 + sum_log_word_posteriors
@@ -330,8 +332,8 @@ class KaoAmbiguity(KaoMetricBase):
         if prob_pun_sign <= 0 or prob_alt_sign <= 0:
             return 0  # 0xlog0 = 0
         return -(
-            prob_pun_sign * np.log2(prob_pun_sign)
-            + prob_alt_sign * np.log2(prob_alt_sign)
+            prob_pun_sign * np.log(prob_pun_sign)
+            + prob_alt_sign * np.log(prob_alt_sign)
         )
 
 
@@ -349,19 +351,23 @@ class KaoDistinctiveness(KaoMetricBase):
         """
         sampled_pun_sign = []
         sampled_alt_sign = []
+
+        pun_posteriors = self._f_config_posteriors(self.pun_sign)
+        alt_posteriors = self._f_config_posteriors(self.alt_sign)
+
+        pun_log_posteriors = {k: np.log(v) for k, v in pun_posteriors.items()}
+        alt_log_posteriors = {k: np.log(v) for k, v in alt_posteriors.items()}
+
         for f_config in self.config._f_configs:
             pun_log_prob = self.config._log_f_config_prior
-            posteriors = self._f_config_posteriors(self.pun_sign)
-            for i in range(len(self.config._tokens)):
-                pun_log_prob += np.log2(posteriors[(i, f_config[i])])
-
             alt_log_prob = self.config._log_f_config_prior
-            posteriors = self._f_config_posteriors(self.alt_sign)
-            for i in range(len(self.config._tokens)):
-                alt_log_prob += np.log2(posteriors[(i, f_config[i])])
 
-            sampled_pun_sign.append(np.exp2(pun_log_prob))
-            sampled_alt_sign.append(np.exp2(alt_log_prob))
+            for i in range(len(self.config._tokens)):
+                pun_log_prob += pun_log_posteriors[(i, f_config[i])]
+                alt_log_prob += alt_log_posteriors[(i, f_config[i])]
+
+            sampled_pun_sign.append(np.exp(pun_log_prob))
+            sampled_alt_sign.append(np.exp(alt_log_prob))
 
         kl1 = entropy(sampled_pun_sign, sampled_alt_sign)
         kl2 = entropy(sampled_alt_sign, sampled_pun_sign)
