@@ -4,21 +4,23 @@ import pandas as pd
 from tqdm import tqdm
 from humetrix import HumorAnalyzer
 
-corpora = {'en': ['semeval', 'humicroedit', 'joker_clef_en'],
+corpora = {'en': ['semeval', 'humicroedit', 'joker_clef_en', 'expunations', 'cup'],
            'fr': ['joker_clef_fr'],
-           'es': ['joker_clef_es', 'HAHA@IberLEF2019', 'HAHA@IberLEF2021', 'HUHU@IberLEF2023'],
-           'pt': ['clemencio', 'puntuguese'],
+           'es': ['joker_clef_es', 'HAHA@IberLEF2021', 'HUHU@IberLEF2023'],
+           'pt': ['clemencio', 'puntuguese', 'joker_clef_pt'],
            'zh': ['chumor']}
 paths = {'semeval': 'data/humor_recognition/semeval.json',
          'humicroedit': 'data/humor_recognition/humicroedit.json',
          'joker_clef_en': 'data/humor_recognition/joker_clef_en.json',
+         'expunations': 'data/humor_recognition/expunations.json',
+         'cup': 'data/humor_interpretation/cup.json',
          'joker_clef_fr': 'data/humor_recognition/joker_clef_fr.json',
          'joker_clef_es': 'data/humor_recognition/joker_clef_es.json',
-         'HAHA@IberLEF2019': 'data/humor_recognition/HAHA@IberLEF2019.json',
          'HAHA@IberLEF2021': 'data/humor_recognition/HAHA@IberLEF2021.json',
          'HUHU@IberLEF2023': 'data/humor_recognition/HUHU@IberLEF2023.json',
          'clemencio': 'data/humor_recognition/clemencio.json',
          'puntuguese': 'data/humor_recognition/puntuguese.json',
+         'joker_clef_pt': 'data/humor_recognition/joker_clef_pt.json',
          'chumor': 'data/humor_recognition/chumor.json'}
 glove = {'en': 'data/embeddings/en/glove_s300.gensim',
          'es': 'data/embeddings/es/glove_s300.gensim',
@@ -39,14 +41,14 @@ for language, datasets in corpora.items():
 
         tqdm.pandas(desc='Incongruity + GloVe')
         df['QE-I + GloVe'] = df['text'].progress_apply(analyzer.quantum_incongruity)
-        
+
         tqdm.pandas(desc='Incongruity + Huggingface')
         df['QE-I + HF'] = df['text'].progress_apply(analyzer.quantum_incongruity,
                                                     backend='transformer')
 
         tqdm.pandas(desc='Uncertainty + GloVe')
         df['QE-U + GloVe'] = df['text'].progress_apply(analyzer.quantum_uncertainty)
-        
+
         tqdm.pandas(desc='Uncertainty + Huggingface')
         df['QE-U + HF'] = df['text'].progress_apply(analyzer.quantum_uncertainty,
                                                     backend='transformer')
