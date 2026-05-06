@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 import pandas as pd
+import spacy
 
 
 parser = ArgumentParser()
@@ -22,6 +23,16 @@ df = df.rename(
     }
 )
 df.index = 'cup.' + df.index.astype(str)
+
+# Filter out texts
+punct_chars = spacy.pipeline.Sentencizer.default_punct_chars
+punct_chars.extend([',', ';'])
+nlp = spacy.load('en_core_web_trf')
+nlp.add_pipe('sentencizer', config={'punct_chars': punct_chars})
+with nlp.select_pipes(enable='sentencizer'):
+    docs = pd.Series(nlp.pipe(df['text']), index=df.index)
+num_sents = docs.apply(lambda x: len(list(x.sents)))
+df = df.loc[num_sents == 2, :]
 
 df.to_json(
     'data/humor_interpretation/cup.json',
