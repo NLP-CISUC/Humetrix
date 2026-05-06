@@ -2,6 +2,7 @@ from itertools import product
 
 import numpy as np
 import polars as pl
+from scipy.stats import entropy
 from spacy import load
 
 from humetrix.configs import CONTENT_WORD_TAGS, SPACY_MODELS
@@ -86,6 +87,40 @@ class TestAmbiguity(TestBase):
             + prob_alt_sign * np.log(prob_alt_sign)
         )
 
+class TestDistinctiveness(TestBase):
+    # Exact same implementation, changing the base class
+    def score(self) -> float:
+        """
+        Calculate the distinctiveness score.
+
+        Returns
+        -------
+        float
+            Distinctiveness score.
+        """
+        sampled_pun_sign = []
+        sampled_alt_sign = []
+
+        pun_posteriors = self._f_config_posteriors(self.pun_sign)
+        alt_posteriors = self._f_config_posteriors(self.alt_sign)
+
+        pun_log_posteriors = {k: np.log(v) for k, v in pun_posteriors.items()}
+        alt_log_posteriors = {k: np.log(v) for k, v in alt_posteriors.items()}
+
+        for f_config in self.config._f_configs:
+            pun_log_prob = self.config._log_f_config_prior
+            alt_log_prob = self.config._log_f_config_prior
+
+            for i in range(len(self.config._tokens)):
+                pun_log_prob += pun_log_posteriors[(i, f_config[i])]
+                alt_log_prob += alt_log_posteriors[(i, f_config[i])]
+
+            sampled_pun_sign.append(np.exp(pun_log_prob))
+            sampled_alt_sign.append(np.exp(alt_log_prob))
+
+        kl1 = entropy(sampled_pun_sign, sampled_alt_sign)
+        kl2 = entropy(sampled_alt_sign, sampled_pun_sign)
+        return kl1 + kl2
 
 nlp = load(SPACY_MODELS['en'])
 kaoetal_data = (pl.read_csv('data/kaoetal/data-agg.csv')
@@ -135,4 +170,23 @@ for row in kaoetal_data.iter_rows(named=True):
     try:
         assert score_diff <= 1e-5
     except AssertionError:
-        print(f"id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}")
+        print(f"Ambiguity: id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}")
+
+    distinctiveness_metric = TestDistinctiveness(
+        config=kao_config,
+        pun_sign=row['m1'],
+        alt_sign=row['m2'],
+        row_index=row_idx,
+        ngram1_df=kaoetal_ngram1,
+        ngram3_df=kaoetal_ngram3,
+        relatedness_df=kaoetal_relatedness
+    )
+
+    score = distinctiveness_metric.score()
+    target_score = kaoetal_results.filter(pl.col('idx') == row_idx)['distinctiveness'].item()
+    score_diff = abs(score - target_score)
+
+    try:
+        assert score_diff <= 1e-5
+    except AssertionError:
+        print(f"Distinctiveness: id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}")
