@@ -1,15 +1,15 @@
 from pathlib import Path
 
+import func_timeout
+import pandas as pd
 from tqdm import tqdm
 
-import func_timeout
 from humetrix import HumorAnalyzer
-import pandas as pd
 
 # Only use corpora for humor interpretation (we need pun and alternative words)
-corpora = {'en': ['humicroedit'],
+corpora = {'en': ['cup'],
            'pt': ['puntuguese']}
-paths = {'humicroedit': 'data/humor_interpretation/humicroedit.json',
+paths = {'cup': 'data/humor_interpretation/cup.json',
          'puntuguese': 'data/humor_interpretation/puntuguese.json'}
 results_path = Path('results/kaoetal')
 results_path.mkdir(exist_ok=True, parents=True)
