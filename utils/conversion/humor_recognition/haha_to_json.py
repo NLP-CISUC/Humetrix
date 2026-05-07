@@ -7,30 +7,50 @@ import pandas as pd
 import spacy
 
 parser = ArgumentParser()
-parser.add_argument('--train', '-t',
-                    help='Train CSV file from HAHA@IberLEF 2021.',
-                    required=True, type=Path)
-parser.add_argument('--test', '-s',
-                    help='Test CSV file from HAHA@IberLEF 2021.',
-                    required=True, type=Path)
-parser.add_argument('--dev', '-d',
-                    help='Dev CSV file from HAHA@IberLEF 2021.',
-                    required=False, type=Path)
+parser.add_argument(
+    '--train',
+    '-t',
+    help='Train CSV file from HAHA@IberLEF 2021.',
+    required=True,
+    type=Path,
+)
+parser.add_argument(
+    '--test',
+    '-s',
+    help='Test CSV file from HAHA@IberLEF 2021.',
+    required=True,
+    type=Path,
+)
+parser.add_argument(
+    '--dev',
+    '-d',
+    help='Dev CSV file from HAHA@IberLEF 2021.',
+    required=False,
+    type=Path,
+)
 args = parser.parse_args()
 
 
 corpus_name = args.train.parent.stem
 all_dfs = list()
-train_df = pd.read_csv(args.train, usecols=['id', 'text', 'is_humor'])
-test_df = pd.read_csv(args.test, usecols=['id', 'text', 'is_humor'])
+train_df = pd.read_csv(
+    args.train, usecols=['id', 'text', 'is_humor', 'humor_rating']
+)
+test_df = pd.read_csv(
+    args.test, usecols=['id', 'text', 'is_humor', 'humor_rating']
+)
 if args.dev:
-    dev_df = pd.read_csv(args.dev, usecols=['id', 'text', 'is_humor'])
+    dev_df = pd.read_csv(
+        args.dev, usecols=['id', 'text', 'is_humor', 'humor_rating']
+    )
     all_dfs.append(dev_df)
 all_dfs.append(train_df)
 all_dfs.append(test_df)
 
 
-new_df = pd.concat(all_dfs).rename(columns={'is_humor': 'label'})
+new_df = pd.concat(all_dfs).rename(
+    columns={'is_humor': 'label', 'humor_rating': 'funniness'}
+)
 new_df['id'] = f'{corpus_name}.' + new_df['id'].astype(str)
 new_df = new_df.set_index('id')
 
@@ -44,7 +64,9 @@ with nlp.select_pipes(enable='sentencizer'):
 num_sents = docs.apply(lambda x: len(list(x.sents)))
 new_df = new_df.loc[num_sents == 2, :]
 
-new_df.to_json(f'data/humor_recognition/{corpus_name}.json',
-               force_ascii=False,
-               indent=4,
-               orient='index')
+new_df.to_json(
+    f'data/humor_recognition/{corpus_name}.json',
+    force_ascii=False,
+    indent=4,
+    orient='index',
+)

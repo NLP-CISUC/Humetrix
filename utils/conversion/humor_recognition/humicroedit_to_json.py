@@ -7,15 +7,27 @@ import pandas as pd
 import spacy
 
 parser = ArgumentParser()
-parser.add_argument('--train', '-t',
-                    help='Train CSV file from Humicroedit.',
-                    required=True, type=Path)
-parser.add_argument('--dev', '-d',
-                    help='Dev CSV file from Humicroedit.',
-                    required=True, type=Path)
-parser.add_argument('--test', '-s',
-                    help='Test CSV file from Humicroedit.',
-                    required=True, type=Path)
+parser.add_argument(
+    '--train',
+    '-t',
+    help='Train CSV file from Humicroedit.',
+    required=True,
+    type=Path,
+)
+parser.add_argument(
+    '--dev',
+    '-d',
+    help='Dev CSV file from Humicroedit.',
+    required=True,
+    type=Path,
+)
+parser.add_argument(
+    '--test',
+    '-s',
+    help='Test CSV file from Humicroedit.',
+    required=True,
+    type=Path,
+)
 args = parser.parse_args()
 
 
@@ -32,19 +44,17 @@ df['id'] = 'humicroedit.' + df['id'].astype(str) + '.N'
 df['humorous'] = df.apply(do_edit, axis='columns')
 
 original_df = df.loc[:, ['id', 'original']]
-original_df['text'] = original_df['original'].str.replace(r'<(.*)/>',
-                                                          r'\1',
-                                                          regex=True)
+original_df['text'] = original_df['original'].str.replace(
+    r'<(.*)/>', r'\1', regex=True
+)
 original_df['label'] = 0
 original_df = original_df.drop(columns='original')
 
 
-humorous_df = df.loc[:, ['id', 'humorous']]
-humorous_df['id'] = humorous_df['id'].str.replace('.N$',
-                                                  '.H',
-                                                  regex=True)
+humorous_df = df.loc[:, ['id', 'humorous', 'meanGrade']]
+humorous_df['id'] = humorous_df['id'].str.replace('.N$', '.H', regex=True)
 humorous_df['label'] = 1
-humorous_df.columns = ['id', 'text', 'label']
+humorous_df.columns = ['id', 'text', 'funniness', 'label']
 
 new_df = pd.concat([original_df, humorous_df]).set_index('id')
 
@@ -58,7 +68,9 @@ with nlp.select_pipes(enable='sentencizer'):
 num_sents = docs.apply(lambda x: len(list(x.sents)))
 new_df = new_df.loc[num_sents == 2, :]
 
-new_df.to_json('data/humor_recognition/humicroedit.json',
-               force_ascii=False,
-               indent=4, orient='index')
-
+new_df.to_json(
+    'data/humor_recognition/humicroedit.json',
+    force_ascii=False,
+    indent=4,
+    orient='index',
+)
