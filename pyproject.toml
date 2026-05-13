@@ -20,12 +20,10 @@ classifiers = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "cupy-cuda12x>=13.4.1",
     "datasets>=3.5.0",
     "polars-u64-idx>=1.30.0",
     "polars>=1.27.1",
     "pyspark>=3.5.5",
-    "spacy>=3.8.5",
     "torch>=2.6.0",
     "transformers>=4.49.0",
     "gensim>=4.3.3",
@@ -47,6 +45,9 @@ dependencies = [
     "accelerate>=1.11.0",
     "scikit-posthocs>=0.11.4",
     "func-timeout>=4.3.5",
+    "spacy>=3.8.0",
+    "thinc>=8.3.0",
+    "cupy-cuda13x[ctk]>=14.0.1",
 ]
 
 [build-system]
@@ -67,8 +68,8 @@ zh-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/dow
 es-core-news-sm = { url = "https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.8.0/es_core_news_sm-3.8.0-py3-none-any.whl" }
 fr-core-news-sm = { url = "https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.8.0/fr_core_news_sm-3.8.0-py3-none-any.whl" }
 pt-core-news-sm = { url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_sm-3.8.0/pt_core_news_sm-3.8.0-py3-none-any.whl" }
-en-core_web_trf = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl" }
-fr-dep_news_trf = { url = "https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl" }
-es-dep_news_trf = { url = "https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.8.0/es_dep_news_trf-3.8.0-py3-none-any.whl" }
+en-core-web-trf = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl" }
+fr-dep-news-trf = { url = "https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl" }
+es-dep-news-trf = { url = "https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.8.0/es_dep_news_trf-3.8.0-py3-none-any.whl" }
 pt-core-news-lg = { url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_lg-3.8.0/pt_core_news_lg-3.8.0-py3-none-any.whl" }
-zh-core_web_trf = { url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" }
+zh-core-web-trf = { url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" }
