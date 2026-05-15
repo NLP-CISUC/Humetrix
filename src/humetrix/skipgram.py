@@ -296,7 +296,9 @@ class SGNS(nn.Module):
         pos_score = torch.bmm(context_emb, target_emb.unsqueeze(2)).squeeze(2)
         neg_scores = torch.bmm(neg_emb, target_emb.unsqueeze(2)).squeeze(2)
 
-        pos_loss = -F.logsigmoid(pos_score).mean()
+        non_pad = (context_words != self.unk_id).float()
+
+        pos_loss = -(F.logsigmoid(pos_score) * non_pad).sum(dim=1).mean()
         neg_loss = -F.logsigmoid(-neg_scores).sum(dim=1).mean()
         total_loss = pos_loss + neg_loss
 
