@@ -63,6 +63,7 @@ class HumorAnalyzer:
         language: str,
         embeddings_path: Union[str, None] = None,
         skipgram_path: Union[str, None] = None,
+        skipgram_vocab_path: Union[str, None] = None,
         ngram_dir_path: Union[str, None] = None,
         transformer_model_name: Union[str, None] = None,
     ) -> None:
@@ -73,6 +74,7 @@ class HumorAnalyzer:
         self._paths = {
             'embeddings': embeddings_path,
             'skipgram': skipgram_path,
+            'skipgram_vocab': skipgram_vocab_path,
             'ngram_dir': ngram_dir_path,
         }
         self._models = {}
@@ -127,18 +129,18 @@ class HumorAnalyzer:
                 ngram_path = ngram_dir_path / f'{name[-1]}gram.csv'
                 self._models[name] = pl.read_csv(ngram_path)
             elif name == 'kao_models':
-                if not self._paths['skipgram'] or not self._paths['ngram_dir']:
+                if not self._paths['skipgram'] or not self._paths['skipgram_vocab'] or not self._paths['ngram_dir']:
                     raise ValueError(
-                        'To use Kao et al. (2016) models, provide `skipgram_path` and `ngram_dir_path`.'
+                        'To use Kao et al. (2016) models, provide `skipgram_path`, `skipgram_vocab_path`, and `ngram_dir_path`.'
                     )
-                ngram_dir_path = Path(self._paths['ngram_dir'])
-                vocab = build_vocabulary(ngram_dir_path / '1gram.csv')
+                vocab = build_vocabulary(self._paths['skipgram_vocab'])
                 device = torch.device(
                     'cuda' if torch.cuda.is_available() else 'cpu'
                 )
                 sgns = SGNS(vocab, 300)
                 sgns.load_state_dict(
-                    torch.load(self._paths['skipgram'], map_location=device)
+                    torch.load(self._paths['skipgram'], map_location=device),
+                    strict=False
                 )
                 sgns.eval()
                 self._models[name] = {

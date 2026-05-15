@@ -50,29 +50,30 @@ class KaoConfig:
         self.skipgram = skipgram
         self.text = sentence
         self.language = language
-        self._tokens = self._tokenize_sentence()
+        self._tokens, self._lemmas = self._tokenize_sentence()
         self._f_configs = [
             list(p) for p in product([0, 1], repeat=len(self._tokens))
         ]
         self._f_config_prior = 1 / (2 ** len(self._tokens))  # p(\vec{f})
         self._log_f_config_prior = -len(self._tokens)
 
-    def _tokenize_sentence(self) -> List[str]:
+    def _tokenize_sentence(self):
         """
         Tokenize the sentence and filter to content words only.
 
         Returns
         -------
-        list of str
-            A list of content word tokens.
+        tuple of (list of str, list of str)
+            A tuple containing (tokens, lemmas) for content words.
         """
         doc = self.spacy_model(self.text)
-        tokens = [
-            token.lower_
-            for token in doc
-            if token.pos_ in CONTENT_WORD_TAGS[self.language]
-        ]
-        return tokens
+        tokens = []
+        lemmas = []
+        for token in doc:
+            if token.pos_ in CONTENT_WORD_TAGS[self.language]:
+                tokens.append(token.lower_)
+                lemmas.append(token.lemma_.lower() if token.lemma_ else token.lower_)
+        return tokens, lemmas
 
 
 class KaoMetricBase:
@@ -120,6 +121,13 @@ class KaoMetricBase:
         self._prepare_ngram_freqs()
         self.pun_sign = pun_sign
         self.alt_sign = alt_sign
+        
+        # Lemmatize signs for skip-gram lookups
+        doc_pun = self.config.spacy_model(self.pun_sign)
+        self.pun_sign_lemma = doc_pun[0].lemma_.lower() if doc_pun[0].lemma_ else doc_pun[0].lower_
+        
+        doc_alt = self.config.spacy_model(self.alt_sign)
+        self.alt_sign_lemma = doc_alt[0].lemma_.lower() if doc_alt[0].lemma_ else doc_alt[0].lower_
 
     def _prepare_ngram_freqs(self):
         """
@@ -192,6 +200,7 @@ class KaoMetricBase:
         """
         f_i = f_config[idx]
         word = self.config._tokens[idx]
+        lemma = self.config._lemmas[idx]
 
         prob_trigram = self._get_trigram_prob(idx)
 
@@ -205,10 +214,13 @@ class KaoMetricBase:
         
         # Using skip-gram to calculate e^{R(w_i,m)}, where the sign is
         # treated as the target and the current word as the context.
+        # We must use lemmas because the skip-gram vocabulary was lemmatized.
+        sign_lemma = self.pun_sign_lemma if sign == self.pun_sign else self.alt_sign_lemma
+        
         skipgram_model = self.config.skipgram
         exp_relatedness = skipgram_model.predict_prob(
-            input_word_idx=skipgram_model.get_word_idx(sign), 
-            output_word_idx=skipgram_model.get_word_idx(word)
+            input_word_idx=skipgram_model.get_word_idx(sign_lemma), 
+            output_word_idx=skipgram_model.get_word_idx(lemma)
         )
         
         return exp_relatedness * prob_trigram
