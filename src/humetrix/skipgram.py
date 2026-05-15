@@ -244,12 +244,13 @@ class SGNS(nn.Module):
         device = self.embeddings.weight.device
 
         input_idx_tensor = torch.LongTensor([input_word_idx]).to(device)
-        input_emb = self.embeddings(input_idx_tensor).squeeze(0)
+        output_idx_tensor = torch.LongTensor([output_word_idx]).to(device)
 
-        all_output_embs = self.output_embeddings.weight
-        all_scores = torch.matmul(all_output_embs, input_emb)
-        probs = F.softmax(all_scores, dim=0)
-        return probs[output_word_idx].item()
+        input_emb = self.embeddings(input_idx_tensor)
+        output_emb = self.output_embeddings(output_idx_tensor)
+
+        score = torch.matmul(input_emb, output_emb.t())
+        return torch.sigmoid(score).item()
 
     def forward(
         self, target_words: torch.Tensor, context_words: torch.Tensor
