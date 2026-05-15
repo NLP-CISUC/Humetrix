@@ -2,10 +2,13 @@
 # Check the original version in:
 # https://github.com/hhexiy/pungen
 
+import logging
 from argparse import ArgumentParser
 from pathlib import Path
 
 import polars as pl
+import pyarrow as pa
+import pyarrow.parquet as pq
 from humetrix.skipgram import build_vocabulary, create_context_windows
 
 
@@ -18,7 +21,7 @@ def parse_arguments():
                         help='Vocabulary file path (.csv)',
                         required=True)
     parser.add_argument('--output', type=Path,
-                        help='Output directory to save preprocessed corpus',
+                        help='Output file path (.parquet)',
                         required=True)
     parser.add_argument('--min-dist', type=int,
                         help='Minimum distance to the word',
@@ -30,18 +33,44 @@ def parse_arguments():
     return args
 
 def main(args):
+    logger = logging.getLogger('context_windows')
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        level=logging.INFO)
+
     # Build vocabulary
+    logger.info('Loading vocabulary...')
     vocab = build_vocabulary(args.vocab)
     unk_id = vocab.filter(pl.col('ngram') == '<unk>')['index'].item()
 
-    corpus = pl.scan_parquet(args.corpus)
-    context_df = create_context_windows(corpus, args.max_dist, args.min_dist, unk_id)
-
-    output_dir = args.output
-    output_dir.mkdir(parents=True, exist_ok=True)
-    context_filepath = output_dir / 'context_windows.parquet'
-    context_df.sink_parquet(context_filepath, compression='zstd',
-                            compression_level=22, statistics=False)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    
+    logger.info(f'Reading corpus from {args.corpus} in batches...')
+    pf = pq.ParquetFile(args.corpus)
+    
+    writer = None
+    
+    for i, batch in enumerate(pf.iter_batches(batch_size=100000)):
+        df = pl.from_arrow(batch)
+        context_lazy = create_context_windows(df.lazy(), args.max_dist, args.min_dist, unk_id)
+        processed = context_lazy.collect()
+        processed = processed.with_columns([
+            pl.col('token ids').cast(pl.UInt64),
+            pl.col('context').cast(pl.List(pl.UInt64))
+        ])
+        out_batch = processed.to_arrow()
+        
+        if writer is None:
+            writer = pq.ParquetWriter(args.output, out_batch.schema, compression='zstd', compression_level=22)
+            
+        writer.write_table(out_batch)
+        
+        if (i + 1) % 10 == 0:
+            logger.info(f'Processed batch {i + 1}')
+            
+    if writer:
+        writer.close()
+        
+    logger.info(f'Finished processing. Saved to {args.output}')
 
 if __name__ == '__main__':
     args = parse_arguments()
