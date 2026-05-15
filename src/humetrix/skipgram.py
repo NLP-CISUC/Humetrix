@@ -190,7 +190,6 @@ class SGNS(nn.Module):
         self.embeddings.weight.data.uniform_(-initrange, initrange)
         self.output_embeddings.weight.data.uniform_(-initrange, initrange)
 
-        self.neg_sampling_weights = None
         if vocab_counts is not None:
             freq_df = (
                 self.vocab_df.join(vocab_counts, on='ngram', how='left')
@@ -203,9 +202,11 @@ class SGNS(nn.Module):
                     .alias('weight')
                 )
             )
-            self.neg_sampling_weights = (
+            self.register_buffer('neg_sampling_weights', 
                 freq_df.select('weight').to_torch().squeeze(1)
             )
+        else:
+            self.neg_sampling_weights = None
 
     def get_word_idx(self, word: str) -> int:
         """
