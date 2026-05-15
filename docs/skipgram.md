@@ -23,7 +23,7 @@ df.to_csv('wiki-zh.txt', sep='\0', header=False, index=False, columns=['text'])
 ```bash
 opencc -i wiki-zh.txt -o wiki-zh-simplified.txt -c t2s.json
 ```
-3. Tokenize the text using [Jieba](https://github.com/fxsjy/jieba) through candlewill's `tokenization.py` script. Remember to edit the script to use the correct input and output files.
+3. Tokenize the text using [Jieba](https://github.com/fxsjy/jieba) through [candlewill's `tokenization.py` script](https://github.com/candlewill/Chinsese_word_vectors) using Python 3.11. Remember to edit the script to use the correct input and output files.
 
 ```python
 ...
@@ -72,16 +72,16 @@ out_file="brwac.txt"
 
 With the previous steps, you should have one file for each dataset, with one sentence per line. All files should be in the `data` directory. The next steps will convert the text to the format required by pungen.
 
-### Tokenize the texts
+### Tokenize and lemmatize the texts
 
-For each dataset, we need to tokenize the texts using spacy with the `scripts/preprocessing/large_corpora.py` script. This script will save the tokenized texts in the `data/skipgram` directory using the Parquet format for efficiency.
+For each dataset, we need to tokenize and lemmatize the texts using spacy with the `scripts/preprocessing/large_corpora.py` script. This script will save the tokenized and lemmatized texts in the `data/skipgram` directory using the Parquet format for efficiency.
 
 ```bash
 python scripts/preprocessing/large_corpora.py --input [CORPUS_NAME].txt \
                                                --model [SPACY_MODEL_NAME]
 ```
 
-Make sure to use the corresponding spacy model for each language:
+Make sure to use the corresponding spacy model for each language.:
 
 - Chinese: `zh_core_web_sm`
 - English: `en_core_web_sm`
@@ -89,18 +89,28 @@ Make sure to use the corresponding spacy model for each language:
 - Portuguese: `pt_core_news_sm`
 - Spanish: `es_core_news_sm`
 
-If the dataset is already tokenized (such as BRWAC or Bookcorpus), you can skip this step with the `--no-spacy` flag.
+If the dataset is already tokenized and lemmatized (such as BRWAC or Bookcorpus), you can skip this step with the `--no-spacy` flag.
 
-### Build vocabulary and convert tokens to IDs
+### Build vocabulary
 
-With the tokenized texts, we can now build the vocabulary from Google N-grams and convert the tokens to IDs using the `scripts/preprocessing/skipgram/convert_corpus_to_ids.py` script.
+With the lemmatized texts, we first need to build a vocabulary of the most frequent lemmas in the corpus. We use the `scripts/preprocessing/skipgram/build_vocab.py` script for this.
 
-The N-grams csv files should follow the format as in [orgtre/google-books-ngram-frequency](https://github.com/orgtre/google-books-ngram-frequency). For more information check [`docs/data.md`](data.md).
+```bash
+python scripts/preprocessing/skipgram/build_vocab.py \
+    --corpus data/skipgram/[CORPUS_NAME].parquet \
+    --output data/preprocessed_skipgram/[CORPUS_NAME]/vocab.csv \
+    --max-vocab 50000 \
+    --min-freq 5
+```
+
+### Convert tokens to IDs
+
+With the vocabulary generated, we can now convert the corpus text into token IDs using the `scripts/preprocessing/skipgram/convert_corpus_to_ids.py` script.
 
 ```bash
 python scripts/preprocessing/skipgram/convert_corpus_to_ids.py \
     --corpus data/skipgram/[CORPUS_NAME].parquet \
-    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
+    --vocab data/preprocessed_skipgram/[CORPUS_NAME]/vocab.csv \
     --output data/preprocessed_skipgram/[CORPUS_NAME]/corpus_ids.parquet
 ```
 
@@ -111,9 +121,9 @@ Finally, we can create the training data for the skip-gram model using the `scri
 ```bash
 python scripts/preprocessing/skipgram/create_context_windows.py \
     --corpus data/preprocessed_skipgram/[CORPUS_NAME]/corpus_ids.parquet \
-    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
+    --vocab data/preprocessed_skipgram/[CORPUS_NAME]/vocab.csv \
     --output data/preprocessed_skipgram/[CORPUS_NAME]/context_windows.parquet \
-    --min-dist 5
+    --min-dist 5 \
     --max-dist 10
 ```
 
@@ -124,7 +134,7 @@ We provide a script to train the distant skip-gram models. The script is `script
 ```bash
 python scripts/training/train_skipgram.py \
     --context-windows data/preprocessed_skipgram/[CORPUS_NAME]/context_windows.parquet \
-    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
+    --vocab data/preprocessed_skipgram/[CORPUS_NAME]/vocab.csv \
     --output results/skipgram/[LANGUAGE].pt \
     --epochs 10
 ```
