@@ -148,9 +148,9 @@ class QuantumUncertainty(QuantumEntropy):
         if d_matrix is None:
             return None
 
-        entropy = d_matrix * torch.log(d_matrix)
-        entropy[entropy.isnan()] = 0  # 0xlog0 = 0
-        entropy = -torch.trace(entropy)
+        eigenvalues = torch.linalg.eigvalsh(d_matrix)
+        eigenvalues = eigenvalues[eigenvalues > 1e-12]
+        entropy = -torch.sum(eigenvalues * torch.log(eigenvalues))
         return entropy.item()
 
 
@@ -176,16 +176,20 @@ class QuantumIncongruity(QuantumEntropy):
         if punch_d_matrix is None:
             return None
 
-        sp_d_matrix = punch_d_matrix * setup_d_matrix
+        sp_d_matrix = torch.matmul(punch_d_matrix, setup_d_matrix)
+        # Normalize the combined matrix so its trace (sum of diagonal probabilities) equals 1
+        sp_trace = torch.trace(sp_d_matrix)
+        if sp_trace > 0:
+            sp_d_matrix = sp_d_matrix / sp_trace
 
         # Setup and punchline uncertainty
-        sp_entropy = sp_d_matrix * torch.log(sp_d_matrix)
-        sp_entropy[sp_entropy.isnan()] = 0  # 0xlog0 = 0
-        sp_entropy = -torch.trace(sp_entropy)
+        sp_eigenvalues = torch.linalg.eigvals(sp_d_matrix).real
+        sp_eigenvalues = sp_eigenvalues[sp_eigenvalues > 1e-12]
+        sp_entropy = -torch.sum(sp_eigenvalues * torch.log(sp_eigenvalues))
 
         # Setup uncertainty
-        setup_entropy = setup_d_matrix * torch.log(setup_d_matrix)
-        setup_entropy[setup_entropy.isnan()] = 0  # 0xlog0 = 0
-        setup_entropy = -torch.trace(setup_entropy)
+        setup_eigenvalues = torch.linalg.eigvalsh(setup_d_matrix)
+        setup_eigenvalues = setup_eigenvalues[setup_eigenvalues > 1e-12]
+        setup_entropy = -torch.sum(setup_eigenvalues * torch.log(setup_eigenvalues))
 
         return (sp_entropy - setup_entropy).item()
