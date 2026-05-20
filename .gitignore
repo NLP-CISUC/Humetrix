@@ -15,3 +15,6 @@ results/skipgram/
 
 # Distribution files
 dist/
+
+# Marimo runs
+**/__marimo__/
