@@ -124,6 +124,96 @@ def _(df, pl):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### Correlation
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Since $I(\vec{w}) = U(\vec{s}\vec{p}) - U(\vec{w})$, the values of $I(\vec{w})$ tend to approximate $-U(\vec{w})$ if $U(\vec{s}\vec{p}) \approx 0$. Therefore, we want to check the correlation between Incongruity and Uncertainty to see if this is the case.
+    """)
+    return
+
+
+@app.cell
+def _(df_unpivot, mo, pl):
+    mo.ui.table(
+        df_unpivot
+        .pivot('metric', index=['index', 'label', 'corpus'])
+        .group_by(['corpus', 'label'])
+        .agg(pl.corr('QE-I + GloVe', 'QE-U + GloVe').alias('correlation'))
+        .sort('corpus', 'label')
+        .pivot('label', values='correlation'),
+        selection=None,
+        pagination=False,
+        format_mapping={
+            'Humor': '{:.4g}',
+            'Non-humor': '{:.4g}'
+        }
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    How many sentences have $I(\vec{w}) = -U(\vec{w})$?
+    """)
+    return
+
+
+@app.cell
+def _(df_unpivot, pl):
+    (
+        df_unpivot
+        .pivot('metric', values='value')
+        .filter(pl.col('QE-I + GloVe') == -pl.col('QE-U + GloVe'))
+        .height
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    And how are the values of $U(\vec{s}\vec{p}) = I(\vec{w}) + U(\vec{w})$ distributed?
+    """)
+    return
+
+
+@app.cell
+def _(df_unpivot, mo, pl):
+    mo.ui.table(
+        df_unpivot
+        .pivot('metric', values='value')
+        .with_columns(
+            (pl.col('QE-I + GloVe') + pl.col('QE-U + GloVe')).alias('sp entropy')
+        )
+        .group_by(['corpus', 'label'])
+        .agg(
+            pl.col('sp entropy').mean().alias('avg sp entropy'),
+            pl.col('sp entropy').quantile(0.25).alias('sp entropy Q1'),
+            pl.col('sp entropy').quantile(0.5).alias('sp entropy Q2'),
+            pl.col('sp entropy').quantile(0.75).alias('sp entropy Q3')
+        )
+        .sort('corpus', 'label'),
+        selection=None,
+        pagination=False,
+        format_mapping={
+            'avg sp entropy': '{:.4g}',
+            'sp entropy Q1': '{:.4g}',
+            'sp entropy Q2': '{:.4g}',
+            'sp entropy Q3': '{:.4g}',
+        }
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ## Plots
     """)
     return
@@ -144,6 +234,7 @@ def _(df_unpivot, mo, plt, sns):
         density_norm="width",
         sharex=False,
         linewidth=1,
+        col_order=['QE-U + GloVe', 'QE-I + GloVe']
     )
 
     _g.fig.suptitle("Quantum Entropy metrics using GloVe embeddings")
@@ -153,6 +244,12 @@ def _(df_unpivot, mo, plt, sns):
         _label = "Incongruity" if _metric_name.startswith("QE-I") else "Uncertainty"
         _ax.set_xlabel(_label)
     _g.legend.set_title("Label")
+    _separator_positions = [3.5, 6.5, 7.5, 10.5]
+    for _ax in _g.axes.flat:
+        for _y_pos in _separator_positions:
+            _ax.axhline(
+                _y_pos, color="gray", linestyle="--", linewidth=1, alpha=0.5, zorder=0
+            )
     mo.mpl.interactive(plt.gcf())
     return
 
@@ -186,6 +283,31 @@ def _(df_unpivot, mo, pl, plt, sns):
     _g.set_titles("{col_name}")
     mo.mpl.interactive(plt.gcf())
     return (df_microedit,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    How are the distributions of $I(\vec{w}) + U(\vec{w}) = U(\vec{s}\vec{p})$?
+    """)
+    return
+
+
+@app.cell
+def _(df_unpivot, mo, pl, sns):
+    mo.mpl.interactive(
+        sns.boxplot(
+            (
+                df_unpivot
+                    .pivot('metric', values='value')
+                    .with_columns((pl.col('QE-I + GloVe') + pl.col('QE-U + GloVe')).alias('sp entropy'))
+            ),
+            x='sp entropy',
+            y='corpus',
+            showfliers=False
+        )
+    )
+    return
 
 
 @app.cell(hide_code=True)
@@ -252,7 +374,7 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
 
     mo.ui.table(
         _results_df,
-        format_mapping={"p-value": "{:.4g}".format},
+        format_mapping={"p-value": "{:.3g}".format},
         selection=None,
         pagination=False,
     )
@@ -323,12 +445,12 @@ def _(df_unpivot, mo, pl):
         .pivot("label", index=["corpus", "metric"])
         .with_columns(_cohen_d_expr.alias("cohen d"))
         .select(["corpus", "metric", "cohen d"])
-        .sort("corpus", "metric")
+        .sort("metric", "corpus")
     )
 
     mo.ui.table(
         _results_df,
-        format_mapping={"cohen d": "{:.4g}"},
+        format_mapping={"cohen d": "{:.3g}"},
         selection=None,
         pagination=False,
     )
