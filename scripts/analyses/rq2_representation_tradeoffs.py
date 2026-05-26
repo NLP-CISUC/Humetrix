@@ -100,6 +100,96 @@ def _(df, pl):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ## Premliminary analysis
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Correlation
+    """)
+    return
+
+
+@app.cell
+def _(df_unpivot, mo, pl):
+    mo.ui.table(
+        df_unpivot
+        .pivot('metric', index=['index', 'label', 'corpus'])
+        .group_by(['corpus', 'label'])
+        .agg(pl.corr('QE-I + HF', 'QE-U + HF').alias('correlation'))
+        .sort('corpus', 'label')
+        .pivot('label', values='correlation'),
+        selection=None,
+        pagination=False,
+        format_mapping={
+            'Humor': '{:.3g}',
+            'Non-humor': '{:.3g}'
+        }
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    How many sentences have $I(\vec{w}) = -U(\vec{w})$?
+    """)
+    return
+
+
+@app.cell
+def _(df_unpivot, pl):
+    (
+        df_unpivot
+        .pivot('metric', values='value')
+        .filter(pl.col('QE-I + HF') == -pl.col('QE-U + HF'))
+        .height
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    And how are the values of $U(\vec{s}\vec{p}) = I(\vec{w}) + U(\vec{w})$ distributed?
+    """)
+    return
+
+
+@app.cell
+def _(df_unpivot, mo, pl):
+    mo.ui.table(
+        df_unpivot
+        .pivot('metric', values='value')
+        .with_columns(
+            (pl.col('QE-I + HF') + pl.col('QE-U + HF')).alias('sp entropy')
+        )
+        .group_by(['corpus', 'label'])
+        .agg(
+            pl.col('sp entropy').mean().alias('avg sp entropy'),
+            pl.col('sp entropy').quantile(0.25).alias('sp entropy Q1'),
+            pl.col('sp entropy').quantile(0.5).alias('sp entropy Q2'),
+            pl.col('sp entropy').quantile(0.75).alias('sp entropy Q3')
+        )
+        .sort('corpus', 'label'),
+        selection=None,
+        pagination=False,
+        format_mapping={
+            'avg sp entropy': '{:.4g}',
+            'sp entropy Q1': '{:.4g}',
+            'sp entropy Q2': '{:.4g}',
+            'sp entropy Q3': '{:.4g}',
+        }
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ## Plots
     """)
     return
@@ -120,6 +210,7 @@ def _(df_unpivot, mo, plt, sns):
         density_norm="width",
         sharex=False,
         linewidth=1,
+        col_order=['QE-U + HF', 'QE-I + HF']
     )
 
     _g.fig.suptitle("Quantum Entropy metrics using multilingual embeddings")
@@ -129,6 +220,12 @@ def _(df_unpivot, mo, plt, sns):
         _label = "Incongruity" if _metric_name.startswith("QE-I") else "Uncertainty"
         _ax.set_xlabel(_label)
     _g.legend.set_title("Label")
+    _separator_positions = [3.5, 6.5, 7.5, 10.5]
+    for _ax in _g.axes.flat:
+        for _y_pos in _separator_positions:
+            _ax.axhline(
+                _y_pos, color="gray", linestyle="--", linewidth=1, alpha=0.5, zorder=0
+            )
     mo.mpl.interactive(plt.gcf())
     return
 

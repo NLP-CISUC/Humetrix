@@ -116,6 +116,14 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Quantiles before removing outliers
+    """)
+    return
+
+
 @app.cell
 def _(df, mo, pl):
     quantiles = (
@@ -148,8 +156,16 @@ def _(df, mo, pl):
     return (quantiles,)
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Quantiles after removing outliers
+    """)
+    return
+
+
 @app.cell
-def _(df, pl, quantiles):
+def _(df, mo, pl, quantiles):
     df_with_quantiles = df.join(quantiles, on=["corpus", "metric"])
     is_low_outlier = pl.col("value") < pl.col("F1")
     is_high_outlier = pl.col("value") > pl.col("F2")
@@ -157,8 +173,61 @@ def _(df, pl, quantiles):
         ~(is_low_outlier | is_high_outlier)
     ).select(df.columns)
 
-    df_no_outliers.group_by(["corpus", "metric"], maintain_order=True).len()
+    _df_no_outliers_quantiles = (
+        df.group_by(["corpus", "metric"])
+        .agg(
+            pl.col("value").quantile(0.25).alias("Q1"),
+            pl.col("value").quantile(0.5).alias("Q2"),
+            pl.col("value").quantile(0.75).alias("Q3"),
+        )
+        .with_columns((pl.col("Q3") - pl.col("Q1")).alias("IQR"))
+        .with_columns(
+            (pl.col("Q1") - 1.5 * pl.col("IQR")).alias("F1"),
+            (pl.col("Q3") + 1.5 * pl.col("IQR")).alias("F2"),
+        )
+    )
+
+    mo.ui.table(
+        _df_no_outliers_quantiles.sort("metric", "corpus"),
+        selection=None,
+        format_mapping={
+            "Q1": "{:.4g}",
+            "Q2": "{:.4g}",
+            "Q3": "{:.4g}",
+            "Q4": "{:.4g}",
+            "IQR": "{:.4g}",
+            "F1": "{:.4g}",
+            "F2": "{:.4g}",
+        },
+    )
     return (df_no_outliers,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Mean and standard deviation without outliers
+    """)
+    return
+
+
+@app.cell
+def _(df_no_outliers, mo, pl):
+    mo.ui.table(
+        df_no_outliers
+        .group_by(['metric', 'corpus'])
+        .agg(
+            pl.col('value').mean().alias('mean'),
+            pl.col('value').std().alias('std')
+        )
+        .sort('metric', 'corpus'),
+        selection=None,
+        format_mapping={
+            'mean': '{:.3g}',
+            'std': '{:.3g}'
+        }
+    )
+    return
 
 
 @app.cell(hide_code=True)
