@@ -154,7 +154,13 @@ def _(mo):
 def _(df_no_outliers, mo, pl):
     corr_df = (
         df_no_outliers.group_by(["corpus", "metric"])
-        .agg(pl.corr(pl.col("funniness"), pl.col("value")).alias("correlation"))
+        .agg(
+            pl.corr(
+                pl.col("funniness"),
+                pl.col("value"),
+                method='spearman'
+            ).alias("correlation"),
+        )
         .sort("corpus", "metric")
     )
 
@@ -241,7 +247,7 @@ def _(corpora_enum, corpus_palette, df_no_outliers, sns):
 
 @app.cell
 def _(corpora_enum, corpus_palette, corr_df, mo, plt, sns):
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(15, 6))
     _g = sns.barplot(
         data=corr_df,
         x="correlation",
@@ -249,14 +255,15 @@ def _(corpora_enum, corpus_palette, corr_df, mo, plt, sns):
         hue="corpus",
         palette=corpus_palette,
         hue_order=corpora_enum.categories,
+        order=['QE-U + GloVe', 'QE-U + HF', 'QE-I + GloVe', 'QE-I + HF'],
     )
 
     for _container in _g.containers:
         _g.bar_label(_container, fontsize=10, fmt="%.3f", padding=5)
 
     _g.axvline(0, color="black", linewidth=1, linestyle="--")
-    _g.set_title("Pearson Correlation between Metrics and Funniness")
-    _g.set_xlabel("Pearson Correlation Coefficient (r)")
+    _g.set_title("Spearman Correlation between Metrics and Funniness")
+    _g.set_xlabel("Correlation")
     _g.set_ylabel("Metric")
     _g.legend(title="Corpus", bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.tight_layout()
@@ -278,6 +285,7 @@ def _(df_no_outliers, pl):
         pl.col("funniness")
         .qcut(3, labels=["low", "mid", "high"])
         .over(["corpus", "metric"])
+        .cast(pl.Enum(['low', 'mid', 'high']))
         .alias("funniness bin")
     )
     binned_df
@@ -302,6 +310,7 @@ def _(binned_df, corpora_enum, corpus_palette, sns):
         markers=["o", "s", "D"],
         linewidth=2.5,
         hue_order=corpora_enum.categories,
+        col_order=['QE-U + GloVe', 'QE-U + HF', 'QE-I + GloVe', 'QE-I + HF']
     )
 
     _g.set_titles(col_template="{col_name}")
@@ -314,7 +323,7 @@ def _(binned_df, corpora_enum, corpus_palette, sns):
 
 
 @app.cell
-def _(binned_df, corpus_palette, sns):
+def _(binned_df, corpora_enum, corpus_palette, sns):
     sns.catplot(
         data=binned_df,
         x="funniness bin",
@@ -329,6 +338,8 @@ def _(binned_df, corpus_palette, sns):
         showfliers=False,
         width=0.6,
         linewidth=1.2,
+        hue_order=corpora_enum.categories,
+        col_order=['QE-U + GloVe', 'QE-U + HF', 'QE-I + GloVe', 'QE-I + HF']
     )
     return
 
@@ -360,7 +371,8 @@ def _(binned_df, corpora_enum, kruskal, mo, pl, posthoc_dunn):
                     (pl.col("metric") == _metric) & (pl.col("corpus") == _corpus)
                 )
                 .select(["value", "funniness bin"])
-                .group_by("funniness bin")
+                .sort('funniness bin')
+                .group_by("funniness bin", maintain_order=True)
                 .all()["value"]
                 .to_numpy()
             )
@@ -384,7 +396,20 @@ def _(binned_df, corpora_enum, kruskal, mo, pl, posthoc_dunn):
                     }
                 )
 
-    _results_df = pl.DataFrame(_results).sort("metric", "metric")
+    _results_df = (
+        pl.DataFrame(_results)
+            .sort(
+                pl.col('metric').cast(
+                    pl.Enum([
+                        'QE-U + GloVe',
+                        'QE-I + GloVe', 
+                        'QE-U + HF',
+                        'QE-I + HF'
+                    ])
+                ),
+                pl.col('corpus').cast(corpora_enum)
+            )
+    )
 
     mo.ui.table(
         _results_df,
