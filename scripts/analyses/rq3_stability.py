@@ -214,18 +214,11 @@ def _(mo):
 @app.cell
 def _(df_no_outliers, mo, pl):
     mo.ui.table(
-        df_no_outliers
-        .group_by(['metric', 'corpus'])
-        .agg(
-            pl.col('value').mean().alias('mean'),
-            pl.col('value').std().alias('std')
-        )
-        .sort('metric', 'corpus'),
+        df_no_outliers.group_by(["metric", "corpus"])
+        .agg(pl.col("value").mean().alias("mean"), pl.col("value").std().alias("std"))
+        .sort("metric", "corpus"),
         selection=None,
-        format_mapping={
-            'mean': '{:.3g}',
-            'std': '{:.3g}'
-        }
+        format_mapping={"mean": "{:.3g}", "std": "{:.3g}"},
     )
     return
 

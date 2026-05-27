@@ -155,11 +155,9 @@ def _(df_no_outliers, mo, pl):
     corr_df = (
         df_no_outliers.group_by(["corpus", "metric"])
         .agg(
-            pl.corr(
-                pl.col("funniness"),
-                pl.col("value"),
-                method='spearman'
-            ).alias("correlation"),
+            pl.corr(pl.col("funniness"), pl.col("value"), method="spearman").alias(
+                "correlation"
+            ),
         )
         .sort("corpus", "metric")
     )
@@ -255,7 +253,7 @@ def _(corpora_enum, corpus_palette, corr_df, mo, plt, sns):
         hue="corpus",
         palette=corpus_palette,
         hue_order=corpora_enum.categories,
-        order=['QE-U + GloVe', 'QE-U + HF', 'QE-I + GloVe', 'QE-I + HF'],
+        order=["QE-U + GloVe", "QE-U + HF", "QE-I + GloVe", "QE-I + HF"],
     )
 
     for _container in _g.containers:
@@ -285,7 +283,7 @@ def _(df_no_outliers, pl):
         pl.col("funniness")
         .qcut(3, labels=["low", "mid", "high"])
         .over(["corpus", "metric"])
-        .cast(pl.Enum(['low', 'mid', 'high']))
+        .cast(pl.Enum(["low", "mid", "high"]))
         .alias("funniness bin")
     )
     binned_df
@@ -310,7 +308,7 @@ def _(binned_df, corpora_enum, corpus_palette, sns):
         markers=["o", "s", "D"],
         linewidth=2.5,
         hue_order=corpora_enum.categories,
-        col_order=['QE-U + GloVe', 'QE-U + HF', 'QE-I + GloVe', 'QE-I + HF']
+        col_order=["QE-U + GloVe", "QE-U + HF", "QE-I + GloVe", "QE-I + HF"],
     )
 
     _g.set_titles(col_template="{col_name}")
@@ -339,7 +337,7 @@ def _(binned_df, corpora_enum, corpus_palette, sns):
         width=0.6,
         linewidth=1.2,
         hue_order=corpora_enum.categories,
-        col_order=['QE-U + GloVe', 'QE-U + HF', 'QE-I + GloVe', 'QE-I + HF']
+        col_order=["QE-U + GloVe", "QE-U + HF", "QE-I + GloVe", "QE-I + HF"],
     )
     return
 
@@ -371,7 +369,7 @@ def _(binned_df, corpora_enum, kruskal, mo, pl, posthoc_dunn):
                     (pl.col("metric") == _metric) & (pl.col("corpus") == _corpus)
                 )
                 .select(["value", "funniness bin"])
-                .sort('funniness bin')
+                .sort("funniness bin")
                 .group_by("funniness bin", maintain_order=True)
                 .all()["value"]
                 .to_numpy()
@@ -396,19 +394,11 @@ def _(binned_df, corpora_enum, kruskal, mo, pl, posthoc_dunn):
                     }
                 )
 
-    _results_df = (
-        pl.DataFrame(_results)
-            .sort(
-                pl.col('metric').cast(
-                    pl.Enum([
-                        'QE-U + GloVe',
-                        'QE-I + GloVe', 
-                        'QE-U + HF',
-                        'QE-I + HF'
-                    ])
-                ),
-                pl.col('corpus').cast(corpora_enum)
-            )
+    _results_df = pl.DataFrame(_results).sort(
+        pl.col("metric").cast(
+            pl.Enum(["QE-U + GloVe", "QE-I + GloVe", "QE-U + HF", "QE-I + HF"])
+        ),
+        pl.col("corpus").cast(corpora_enum),
     )
 
     mo.ui.table(

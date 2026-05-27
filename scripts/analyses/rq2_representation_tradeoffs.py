@@ -116,18 +116,14 @@ def _(mo):
 @app.cell
 def _(df_unpivot, mo, pl):
     mo.ui.table(
-        df_unpivot
-        .pivot('metric', index=['index', 'label', 'corpus'])
-        .group_by(['corpus', 'label'])
-        .agg(pl.corr('QE-I + HF', 'QE-U + HF').alias('correlation'))
-        .sort('corpus', 'label')
-        .pivot('label', values='correlation'),
+        df_unpivot.pivot("metric", index=["index", "label", "corpus"])
+        .group_by(["corpus", "label"])
+        .agg(pl.corr("QE-I + HF", "QE-U + HF").alias("correlation"))
+        .sort("corpus", "label")
+        .pivot("label", values="correlation"),
         selection=None,
         pagination=False,
-        format_mapping={
-            'Humor': '{:.3g}',
-            'Non-humor': '{:.3g}'
-        }
+        format_mapping={"Humor": "{:.3g}", "Non-humor": "{:.3g}"},
     )
     return
 
@@ -143,9 +139,8 @@ def _(mo):
 @app.cell
 def _(df_unpivot, pl):
     (
-        df_unpivot
-        .pivot('metric', values='value')
-        .filter(pl.col('QE-I + HF') == -pl.col('QE-U + HF'))
+        df_unpivot.pivot("metric", values="value")
+        .filter(pl.col("QE-I + HF") == -pl.col("QE-U + HF"))
         .height
     )
     return
@@ -162,27 +157,24 @@ def _(mo):
 @app.cell
 def _(df_unpivot, mo, pl):
     mo.ui.table(
-        df_unpivot
-        .pivot('metric', values='value')
-        .with_columns(
-            (pl.col('QE-I + HF') + pl.col('QE-U + HF')).alias('sp entropy')
-        )
-        .group_by(['corpus', 'label'])
+        df_unpivot.pivot("metric", values="value")
+        .with_columns((pl.col("QE-I + HF") + pl.col("QE-U + HF")).alias("sp entropy"))
+        .group_by(["corpus", "label"])
         .agg(
-            pl.col('sp entropy').mean().alias('avg sp entropy'),
-            pl.col('sp entropy').quantile(0.25).alias('sp entropy Q1'),
-            pl.col('sp entropy').quantile(0.5).alias('sp entropy Q2'),
-            pl.col('sp entropy').quantile(0.75).alias('sp entropy Q3')
+            pl.col("sp entropy").mean().alias("avg sp entropy"),
+            pl.col("sp entropy").quantile(0.25).alias("sp entropy Q1"),
+            pl.col("sp entropy").quantile(0.5).alias("sp entropy Q2"),
+            pl.col("sp entropy").quantile(0.75).alias("sp entropy Q3"),
         )
-        .sort('corpus', 'label'),
+        .sort("corpus", "label"),
         selection=None,
         pagination=False,
         format_mapping={
-            'avg sp entropy': '{:.4g}',
-            'sp entropy Q1': '{:.4g}',
-            'sp entropy Q2': '{:.4g}',
-            'sp entropy Q3': '{:.4g}',
-        }
+            "avg sp entropy": "{:.4g}",
+            "sp entropy Q1": "{:.4g}",
+            "sp entropy Q2": "{:.4g}",
+            "sp entropy Q3": "{:.4g}",
+        },
     )
     return
 
@@ -210,7 +202,7 @@ def _(df_unpivot, mo, plt, sns):
         density_norm="width",
         sharex=False,
         linewidth=1,
-        col_order=['QE-U + HF', 'QE-I + HF']
+        col_order=["QE-U + HF", "QE-I + HF"],
     )
 
     _g.fig.suptitle("Quantum Entropy metrics using multilingual embeddings")
