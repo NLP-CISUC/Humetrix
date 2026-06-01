@@ -288,7 +288,7 @@ def _(corpus_palette, df_no_outliers, sns):
         y="corpus",
         hue="corpus",
         col="metric",
-        col_wrap=3,
+        col_wrap=2,
         sharex=False,
         palette=corpus_palette,
         kind="violin",
