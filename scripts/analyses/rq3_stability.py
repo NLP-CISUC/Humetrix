@@ -16,8 +16,9 @@ def _():
     import numpy as np
 
     from scipy.stats import mannwhitneyu
+    from statsmodels.stats.weightstats import ttost_ind
 
-    return Path, mannwhitneyu, mo, pl, sns
+    return Path, mannwhitneyu, mo, np, pl, sns, ttost_ind
 
 
 @app.cell(hide_code=True)
@@ -174,7 +175,7 @@ def _(df, mo, pl, quantiles):
     ).select(df.columns)
 
     _df_no_outliers_quantiles = (
-        df.group_by(["corpus", "metric"])
+        df_no_outliers.group_by(["corpus", "metric"])
         .agg(
             pl.col("value").quantile(0.25).alias("Q1"),
             pl.col("value").quantile(0.5).alias("Q2"),
@@ -321,9 +322,10 @@ def _(mo):
 
 
 @app.cell
-def _(corpora_enum, df_no_outliers, mannwhitneyu, pl):
+def _(corpora_enum, df_no_outliers, mannwhitneyu, np, pl, ttost_ind):
     import itertools
 
+    _d_margin = 0.2
     _metrics = df_no_outliers["metric"].unique()
 
     _results = []
@@ -333,39 +335,56 @@ def _(corpora_enum, df_no_outliers, mannwhitneyu, pl):
         for _corpus_a, _corpus_b in _combinations:
             _data_a = _df_metric.filter(pl.col("corpus") == _corpus_a)[
                 "value"
-            ].drop_nulls()
+            ].drop_nulls().to_numpy()
             _data_b = _df_metric.filter(pl.col("corpus") == _corpus_b)[
                 "value"
-            ].drop_nulls()
+            ].drop_nulls().to_numpy()
 
-            if _data_a.len() > 0 and _data_b.len() > 0:
+            if len(_data_a) > 1 and len(_data_b) > 1:
                 _statistic, _pvalue = mannwhitneyu(
                     _data_a, _data_b, alternative="two-sided"
                 )
+
+                _n_a, _n_b = len(_data_a), len(_data_b)
+                _pooled_sd = np.sqrt(
+                    (
+                        (_n_a - 1) * np.var(_data_a, ddof=1)
+                        + (_n_b - 1) * np.var(_data_b, ddof=1)
+                    )
+                    / (_n_a + _n_b - 2)
+                )
+                _delta = _d_margin * _pooled_sd
+                _tost_p, _, _ = ttost_ind(
+                    _data_a, _data_b, -_delta, _delta, usevar="unequal"
+                )
+                _d = (np.mean(_data_a) - np.mean(_data_b)) / _pooled_sd
+            
                 _results.append(
                     {
                         "metric": _metric,
                         "corpus_a": _corpus_a,
                         "corpus_b": _corpus_b,
                         "u_statistic": _statistic,
-                        "p_value": _pvalue,
+                        "mw_p_value": _pvalue,
+                        "cohen_d": _d,
+                        "tost_p_value": _tost_p,
                         "significantly different": _pvalue < 0.05,
-                        "stable": _pvalue >= 0.05,
+                        "equivalent": _tost_p < 0.05,
                     }
                 )
 
-    results_df = pl.DataFrame(_results).sort(["metric", "p_value"])
+    results_df = pl.DataFrame(_results).sort(["metric", "tost_p_value"])
 
     (
         results_df.group_by(["metric"])
         .agg(
             [
-                pl.col("stable").sum().alias("stable pairs"),
-                pl.col("stable").len().alias("total pairs"),
+                pl.col("equivalent").sum().alias("equivalent pairs"),
+                pl.col("equivalent").len().alias("total pairs"),
             ]
         )
         .with_columns(
-            (pl.col("stable pairs") / pl.col("total pairs") * 100)
+            (pl.col("equivalent pairs") / pl.col("total pairs") * 100)
             .round(2)
             .alias("stability percentage")
         )
@@ -383,7 +402,13 @@ def _(mo, pl, results_df):
     ).select(pl.all().exclude("u_statistic"))
 
     mo.ui.table(
-        non_qe_results, format_mapping={"p_value": "{:.4g}".format}, selection=None
+        non_qe_results,
+        format_mapping={
+            "mw_p_value": "{:.4g}".format,
+            "cohen_d": "{:.4g}".format,
+            "tost_p_value": "{:.4g}".format,
+        },
+        selection=None
     )
     return
 
