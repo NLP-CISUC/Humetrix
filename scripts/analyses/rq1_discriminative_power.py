@@ -330,6 +330,9 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
         "test": list(),
         "statistic": list(),
         "p-value": list(),
+        "n humor": list(),
+        "n non-humor": list(),
+        "auc": list(),
     }
 
     for _metric in df_unpivot["metric"].unique():
@@ -358,11 +361,20 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
             _statistic, _pvalue = _test(
                 _humor, _non_humor, alternative="greater", nan_policy="omit"
             )
+
+            _auc = _statistic / (_humor.len() * _non_humor.len())
+            if _corpus in ["humicroedit", "puntuguese"]:
+                _diff = _humor - _non_humor
+                _auc = (_diff > 0).mean() + 0.5 * (_diff == 0).mean()
+        
             _results["metric"].append(_metric)
             _results["corpus"].append(_corpus)
             _results["test"].append(_test.__name__)
             _results["statistic"].append(_statistic)
             _results["p-value"].append(_pvalue)
+            _results["n humor"].append(_humor.len())
+            _results["n non-humor"].append(_non_humor.len())
+            _results["auc"].append(_auc)
 
     _results_df = pl.DataFrame(_results).with_columns(
         (pl.col("p-value") < 0.05).alias("different distributions")
@@ -370,7 +382,10 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
 
     mo.ui.table(
         _results_df,
-        format_mapping={"p-value": "{:.3g}".format},
+        format_mapping={
+            "p-value": "{:.3g}".format,
+            "auc": "{:.2%}"
+        },
         selection=None,
         pagination=False,
     )
@@ -449,6 +464,28 @@ def _(df_unpivot, mo, pl):
         format_mapping={"cohen d": "{:.3g}"},
         selection=None,
         pagination=False,
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Calculate paired Cohen's d for microedited corpora
+    """)
+    return
+
+
+@app.cell
+def _(df_microedit, mo, pl):
+    _diff = pl.col("Humor") - pl.col("Non-humor")
+    _df_paired_d = df_microedit.group_by("corpus", "metric").agg(d_z=_diff.mean() / _diff.std(ddof=1))
+
+    mo.ui.table(
+        _df_paired_d.sort("metric", "corpus"),
+        selection=None,
+        pagination=False,
+        format_mapping={"d_z": "{:.2%}"}
     )
     return
 
