@@ -33,7 +33,7 @@ def _():
 
 
 @app.cell
-def _(Path):
+def _(Path, pl):
     root = Path("/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix")
     results_path = root / "results/quantum_entropy"
 
@@ -57,7 +57,25 @@ def _(Path):
         "zh": "zh_core_web_trf",
 
     }
-    return corpora, glove, results_path, spacy_models
+
+    corpora_enum = pl.Enum(
+        [
+            "semeval",
+            "humicroedit",
+            "expunations",
+            "joker_clef_en",
+            "cup",
+            "joker_clef_es",
+            "HAHA@IberLEF2021",
+            "HUHU@IberLEF2023",
+            "joker_clef_fr",
+            "joker_clef_pt",
+            "clemencio",
+            "puntuguese",
+            "chumor",
+        ]
+    )
+    return corpora, corpora_enum, glove, results_path, spacy_models
 
 
 @app.cell(hide_code=True)
@@ -78,7 +96,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(disabled=True)
 def _(
     KeyedVectors,
     QuantumUncertainty,
@@ -137,14 +155,17 @@ def _(mo):
 
 
 @app.cell
-def _(pl, results_path):
-    shortcuts_df = pl.read_ndjson(results_path.parent / "qe_shortcuts.jsonl", infer_schema_length=None)
+def _(corpora_enum, pl, results_path):
+    shortcuts_df = (
+        pl.read_ndjson(results_path.parent / "qe_shortcuts.jsonl", infer_schema_length=None)
+        .with_columns(pl.col("corpus").cast(corpora_enum))
+    )
     shortcuts_df
     return (shortcuts_df,)
 
 
 @app.cell
-def _(pl, shortcuts_df):
+def _(mo, pl, shortcuts_df):
     _qe = pl.col("QE-U + GloVe")
     _valid = (
         shortcuts_df
@@ -171,11 +192,20 @@ def _(pl, shortcuts_df):
             (_qe > pl.col("rank").log() + 1e-4).sum().alias("bound violations"),
             pl.corr(_qe, "n_setup", method="spearman").alias("correlation QE-U, n_setup"),
             pl.corr(_qe, "rank", method="spearman").alias("correlation QE-U, rank"),
-            pl.corr(_qe, "oov_rate", method="spearman").alias("correlation QE-U OOV"),
+            pl.corr(_qe, "oov_rate", method="spearman").alias("correlation QE-U, OOV"),
         )
     )
 
-    _by_corpus.join(_by_label, on="corpus").sort("corpus")
+    mo.ui.table(
+        _by_corpus.join(_by_label, on="corpus").sort("corpus"),
+        selection=None,
+        pagination=False,
+        format_mapping={
+            "correlation QE-U, n_setup": "{:.2g}",
+            "correlation QE-U, rank": "{:.2g}",
+            "correlation QE-U, OOV": "{:.2g}"
+        }
+    )
     return
 
 
@@ -230,7 +260,7 @@ def _(mo, pl, shortcuts_df, sns):
 
 
 @app.cell
-def _(pl, shortcuts_df, smf):
+def _(corpora_enum, mo, pl, shortcuts_df, smf):
     _rows = []
     _corpora = [c for c in shortcuts_df["corpus"].unique(maintain_order=True) if c != "cup"]
     for _corpus in _corpora:
@@ -256,17 +286,30 @@ def _(pl, shortcuts_df, smf):
             "corpus": _corpus,
             "n": len(_data),
             "humor coef (M0)": _m0.params["humor"],
-            "hhumor p (M0)": _m0.pvalues["humor"],
+            "humor p (M0)": _m0.pvalues["humor"],
             "humor coef (M1)": _m1.params["humor"],
             "humor p (M1)": _m1.pvalues["humor"],
-            "% of effect left": 100 * _m1.params["humor"] / _m0.params["humor"],
             "log_n coef (M1)": _m1.params["log_n"],
             "R2 (M0)": _m0.rsquared,
             "R2 (M1)": _m1.rsquared,
         })
 
     regression_df = pl.DataFrame(_rows)
-    regression_df
+
+    mo.ui.table(
+        regression_df.with_columns(pl.col("corpus").cast(corpora_enum)).sort("corpus"),
+        selection=None,
+        pagination=False,
+        format_mapping={
+            "humor coef (M0)": "{:.3f}",
+            "humor p (M0)": "{:.4g}",
+            "humor coef (M1)": "{:.3f}",
+            "humor p (M1)": "{:.4g}",
+            "log_n coef (M1)": "{:.3f}",
+            "R2 (M0)": "{:.4g}",
+            "R2 (M1)": "{:.4g}",
+        }
+    )
     return
 
 
