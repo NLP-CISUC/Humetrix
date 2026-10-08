@@ -48,6 +48,7 @@ dependencies = [
     "spacy[cuda12x]>=3.8.0",
     "marimo>=0.23.6",
     "altair>=6.1.0",
+    "ollama>=0.6.3",
 ]
 
 [build-system]
