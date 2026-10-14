@@ -33,7 +33,7 @@ def matches(col):
     )
     return [
         exact.fill_null(False).alias(f"{col} exact"),
-        (exact | contained).fill_null(False).alias(f"{col} lenient"),
+        (exact | contained).fill_null(False).alias(f"{col} partial"),
     ]
 
 
@@ -68,11 +68,22 @@ for path in LLM_PATH.glob("*/*.jsonl"):
             pl.col(
                 "location in text",
                 "location exact",
-                "location lenient",
+                "location partial",
                 "interpretation exact",
-                "interpretation lenient",
+                "interpretation partial",
             ).mean(),
         )
     )
 
-print(pl.concat(dfs))
+print(
+    pl.concat(dfs).select(
+        [
+            "corpus",
+            "model",
+            "location exact",
+            "location partial",
+            "interpretation exact",
+            "interpretation partial",
+        ]
+    )
+)
