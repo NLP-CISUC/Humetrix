@@ -76,6 +76,50 @@ class QuantumEntropy:
         punchline_toks = [token.lower_ for token in punchline]
         return setup_toks, punchline_toks
 
+    def token_embeddings(self, tokens: List[str]) -> torch.Tensor:
+        r"""
+        Calculate the embeddings for each given token.
+
+        Parameters
+        ----------
+        tokens : list of str
+            The tokens to calculate word embeddings for.
+
+        Returns
+        -------
+        torch.Tensor
+            Word embeddings.
+
+        Notes
+        -----
+        If the embedding model is a Transformer, we average the subtokens into one single word embedding.
+        """
+        if isinstance(self.embeddings, KeyedVectors):
+            tok_embeddings = [
+                self.embeddings[token] for token in tokens if token in self.embeddings
+            ]
+        else:
+            tokenized = self.embeddings.tokenizer(
+                tokens, is_split_into_words=True, return_tensors="pt"
+            )
+            tokenized = tokenized.to(self.embeddings.model.device)
+            word_ids = tokenized.word_ids()
+            with torch.no_grad():
+                outputs = self.embeddings.model(**tokenized)
+            last_hidden_state = outputs.last_hidden_state[0]
+
+            tok_embeddings = []
+            for word_id in range(len(tokens)):
+                token_indices = [i for i, w in enumerate(word_ids) if w == word_id]
+                if not token_indices:
+                    continue
+                token_embeddings = last_hidden_state[token_indices]
+                tokens_avg = torch.mean(token_embeddings, dim=0).cpu()
+                tok_embeddings.append(tokens_avg)
+        tok_embeddings = np.array(tok_embeddings)
+        tok_embeddings = torch.tensor(tok_embeddings).to(device)
+        return tok_embeddings
+
     def density_matrix(self, tokens: List[str]) -> Union[torch.Tensor, None]:
         r"""
         Calculate the density matrix for a list of tokens.
@@ -97,17 +141,7 @@ class QuantumEntropy:
         :math:`\rho = \frac{1}{|l|} \sum_{i=1}^l |w_i\rangle\langle w_i|`,
         where :math:`|w_i\rangle = \frac{\vec{w_i}}{\|\vec{w_i}\|}`.
         """
-        if isinstance(self.embeddings, KeyedVectors):
-            tok_embeddings = [
-                self.embeddings[token]
-                for token in tokens
-                if token in self.embeddings
-            ]
-        else:
-            text = ' '.join(tokens)
-            tok_embeddings = self.embeddings(text)[0]
-        tok_embeddings = np.array(tok_embeddings)
-        tok_embeddings = torch.tensor(tok_embeddings).to(device)
+        tok_embeddings = self.token_embeddings(tokens)
 
         if len(tok_embeddings) == 0:
             return None
