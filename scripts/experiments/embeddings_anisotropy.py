@@ -46,6 +46,9 @@ xlmr = "FacebookAI/xlm-roberta-base"
 results_path = Path("results/quantum_entropy")
 results_path.mkdir(exist_ok=True, parents=True)
 
+mean_vectors_path = Path("results/mean_vectors")
+mean_vectors_path.mkdir(exist_ok=True, parents=True)
+
 
 def setup_embeddings(texts, embedding_model, spacy_model):
     embeddings = []
@@ -58,14 +61,15 @@ def setup_embeddings(texts, embedding_model, spacy_model):
         setup_toks, _ = qeu.tokenize_sentence()
         setup_embeddings = qeu.token_embeddings(setup_toks)
         if len(setup_embeddings) >= 2:
-            embeddings.append(F.normalize(setup_embeddings.float()))
+            embeddings.append(setup_embeddings.float())
     return embeddings
 
 
 def intra_similarity(embeddings):
     means = []
     for sentence_embeddings in embeddings:
-        similarities = sentence_embeddings @ sentence_embeddings.T
+        normalized_embeds = F.normalize(sentence_embeddings)
+        similarities = normalized_embeds @ normalized_embeds.T
         mask = torch.tril(torch.ones_like(similarities), diagonal=-1).bool()
         means.append(torch.mean(similarities[mask]).item())
     return sum(means) / len(means)
@@ -75,10 +79,15 @@ def inter_similarity(embeddings, n_pairs=NUM_PAIRS):
     total = 0.0
     for _ in range(n_pairs):
         sent1, sent2 = random.sample(embeddings, 2)
-        emb1 = random.choice(sent1)
-        emb2 = random.choice(sent2)
+        emb1 = F.normalize(random.choice(sent1), dim=0)
+        emb2 = F.normalize(random.choice(sent2), dim=0)
         total += (emb1 @ emb2).item()
     return total / n_pairs
+
+
+def mean_embedding(embeddings):
+    flatten = torch.cat(embeddings, dim=0)
+    return torch.mean(flatten, dim=0)
 
 
 rows = []
@@ -101,6 +110,7 @@ for language, datasets in corpora.items():
             embeddings = setup_embeddings(
                 texts, embedding_models[model_name], spacy_model
             )
+
             intra, inter = intra_similarity(embeddings), inter_similarity(embeddings)
             rows.append(
                 {
@@ -111,6 +121,9 @@ for language, datasets in corpora.items():
                     "intra-inter difference": intra - inter,
                 }
             )
+
+            mean_vector = mean_embedding(embeddings)
+            torch.save(mean_vector, mean_vectors_path / f"{corpus}_{model_name}.pt")
 
 df = pl.from_records(rows)
 df.write_ndjson("results/anisotropy.jsonl")
