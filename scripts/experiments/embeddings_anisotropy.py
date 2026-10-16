@@ -125,5 +125,22 @@ for language, datasets in corpora.items():
             mean_vector = mean_embedding(embeddings)
             torch.save(mean_vector, mean_vectors_path / f"{corpus}_{model_name}.pt")
 
+            embeddings_centered = [X - mean_vector for X in embeddings]
+            intra_centered, inter_centered = (
+                intra_similarity(embeddings_centered),
+                inter_similarity(embeddings_centered),
+            )
+            centered_difference = intra_centered - inter_centered
+            rows.append(
+                {
+                    "corpus": corpus,
+                    "embedding model": f"{model_name} (centered)",
+                    "intrasentence similarity": intra_centered,
+                    "intersentence similarity": inter_centered,
+                    "intra-inter difference": centered_difference,
+                }
+            )
+
+
 df = pl.from_records(rows)
 df.write_ndjson("results/anisotropy.jsonl")

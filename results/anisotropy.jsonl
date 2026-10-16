@@ -1,26 +1,52 @@
-{"corpus":"semeval","embedding model":"GloVe","intrasentence similarity":0.30951685993370825,"intersentence similarity":0.3056854635105468,"intra-inter difference":0.0038313964231614372}
-{"corpus":"semeval","embedding model":"XLM-R","intrasentence similarity":0.985264385745665,"intersentence similarity":0.9830938787400723,"intra-inter difference":0.0021705070055927367}
-{"corpus":"humicroedit","embedding model":"GloVe","intrasentence similarity":0.23193539143563272,"intersentence similarity":0.216590317763458,"intra-inter difference":0.01534507367217472}
-{"corpus":"humicroedit","embedding model":"XLM-R","intrasentence similarity":0.9861487649679184,"intersentence similarity":0.9834685732007027,"intra-inter difference":0.0026801917672156783}
-{"corpus":"joker_clef_en","embedding model":"GloVe","intrasentence similarity":0.31706735499575733,"intersentence similarity":0.30485820326544344,"intra-inter difference":0.012209151730313894}
-{"corpus":"joker_clef_en","embedding model":"XLM-R","intrasentence similarity":0.9848521492481231,"intersentence similarity":0.9827784632980824,"intra-inter difference":0.00207368595004076}
-{"corpus":"expunations","embedding model":"GloVe","intrasentence similarity":0.3021802950943454,"intersentence similarity":0.30320864690491,"intra-inter difference":-0.0010283518105645983}
-{"corpus":"expunations","embedding model":"XLM-R","intrasentence similarity":0.9850772492001566,"intersentence similarity":0.9832083949446678,"intra-inter difference":0.0018688542554887722}
-{"corpus":"cup","embedding model":"GloVe","intrasentence similarity":0.30636946112845337,"intersentence similarity":0.29716182386536383,"intra-inter difference":0.009207637263089541}
-{"corpus":"cup","embedding model":"XLM-R","intrasentence similarity":0.9856935110810685,"intersentence similarity":0.9842641610503197,"intra-inter difference":0.0014293500307488438}
-{"corpus":"joker_clef_fr","embedding model":"GloVe","intrasentence similarity":0.08382605986617137,"intersentence similarity":0.07928903062171302,"intra-inter difference":0.0045370292444583404}
-{"corpus":"joker_clef_fr","embedding model":"XLM-R","intrasentence similarity":0.9827080907821655,"intersentence similarity":0.9811557072460652,"intra-inter difference":0.0015523835361003213}
-{"corpus":"joker_clef_es","embedding model":"GloVe","intrasentence similarity":0.3216881096573601,"intersentence similarity":0.3034206278225407,"intra-inter difference":0.01826748183481941}
-{"corpus":"joker_clef_es","embedding model":"XLM-R","intrasentence similarity":0.9840245903730392,"intersentence similarity":0.9823730935752392,"intra-inter difference":0.0016514967978000783}
-{"corpus":"HAHA@IberLEF2021","embedding model":"GloVe","intrasentence similarity":0.3312287051828543,"intersentence similarity":0.30889522543615894,"intra-inter difference":0.02233347974669536}
-{"corpus":"HAHA@IberLEF2021","embedding model":"XLM-R","intrasentence similarity":0.9841110229492187,"intersentence similarity":0.9815794549286365,"intra-inter difference":0.0025315680205821867}
-{"corpus":"HUHU@IberLEF2023","embedding model":"GloVe","intrasentence similarity":0.30610442372281305,"intersentence similarity":0.27127988349625376,"intra-inter difference":0.034824540226559286}
-{"corpus":"HUHU@IberLEF2023","embedding model":"XLM-R","intrasentence similarity":0.9833472826381122,"intersentence similarity":0.9809258498966694,"intra-inter difference":0.002421432741442797}
-{"corpus":"clemencio","embedding model":"GloVe","intrasentence similarity":0.299435971058659,"intersentence similarity":0.29268659125550184,"intra-inter difference":0.006749379803157152}
-{"corpus":"clemencio","embedding model":"XLM-R","intrasentence similarity":0.9822273710370064,"intersentence similarity":0.9802923234701156,"intra-inter difference":0.0019350475668907796}
-{"corpus":"puntuguese","embedding model":"GloVe","intrasentence similarity":0.3226940438821912,"intersentence similarity":0.32323478194987404,"intra-inter difference":-0.0005407380676828444}
-{"corpus":"puntuguese","embedding model":"XLM-R","intrasentence similarity":0.9815953057408333,"intersentence similarity":0.9803028170704842,"intra-inter difference":0.0012924886703491456}
-{"corpus":"joker_clef_pt","embedding model":"GloVe","intrasentence similarity":0.33180144640246034,"intersentence similarity":0.304563287154329,"intra-inter difference":0.027238159248131333}
-{"corpus":"joker_clef_pt","embedding model":"XLM-R","intrasentence similarity":0.9827271931767464,"intersentence similarity":0.9801041613161564,"intra-inter difference":0.002623031860589986}
-{"corpus":"chumor","embedding model":"GloVe","intrasentence similarity":0.2783180564978399,"intersentence similarity":0.28623924560300074,"intra-inter difference":-0.00792118910516082}
-{"corpus":"chumor","embedding model":"XLM-R","intrasentence similarity":0.9887278801761568,"intersentence similarity":0.9872675375282765,"intra-inter difference":0.0014603426478803083}
+{"corpus":"semeval","embedding model":"GloVe","intrasentence similarity":0.30951685993370825,"intersentence similarity":0.3056854634911753,"intra-inter difference":0.0038313964425329416}
+{"corpus":"semeval","embedding model":"GloVe (centered)","intrasentence similarity":0.00831016118449477,"intersentence similarity":0.005920426311367191,"intra-inter difference":0.002389734873127579}
+{"corpus":"semeval","embedding model":"XLM-R","intrasentence similarity":0.985264385745665,"intersentence similarity":0.9831841849684715,"intra-inter difference":0.0020802007771935083}
+{"corpus":"semeval","embedding model":"XLM-R (centered)","intrasentence similarity":0.12994503722275927,"intersentence similarity":0.005265157430013641,"intra-inter difference":0.12467987979274563}
+{"corpus":"humicroedit","embedding model":"GloVe","intrasentence similarity":0.23193539143563272,"intersentence similarity":0.21664588925940917,"intra-inter difference":0.015289502176223546}
+{"corpus":"humicroedit","embedding model":"GloVe (centered)","intrasentence similarity":0.024121839893052093,"intersentence similarity":0.009238029194343834,"intra-inter difference":0.014883810698708259}
+{"corpus":"humicroedit","embedding model":"XLM-R","intrasentence similarity":0.9861487649679184,"intersentence similarity":0.9837225655913353,"intra-inter difference":0.0024261993765830603}
+{"corpus":"humicroedit","embedding model":"XLM-R (centered)","intrasentence similarity":0.15950601628702135,"intersentence similarity":0.007827961825346574,"intra-inter difference":0.1516780544616748}
+{"corpus":"joker_clef_en","embedding model":"GloVe","intrasentence similarity":0.31706735499575733,"intersentence similarity":0.3078968442474492,"intra-inter difference":0.009170510748308158}
+{"corpus":"joker_clef_en","embedding model":"GloVe (centered)","intrasentence similarity":0.015867049970870538,"intersentence similarity":0.0002141392421675846,"intra-inter difference":0.015652910728702955}
+{"corpus":"joker_clef_en","embedding model":"XLM-R","intrasentence similarity":0.9848521492481231,"intersentence similarity":0.9828476357281208,"intra-inter difference":0.0020045135200023045}
+{"corpus":"joker_clef_en","embedding model":"XLM-R (centered)","intrasentence similarity":0.12533419865212636,"intersentence similarity":0.000574896428710781,"intra-inter difference":0.12475930222341558}
+{"corpus":"expunations","embedding model":"GloVe","intrasentence similarity":0.3021802950943454,"intersentence similarity":0.30070667082937436,"intra-inter difference":0.0014736242649710518}
+{"corpus":"expunations","embedding model":"GloVe (centered)","intrasentence similarity":0.006187143906127051,"intersentence similarity":0.005206845511775464,"intra-inter difference":0.000980298394351587}
+{"corpus":"expunations","embedding model":"XLM-R","intrasentence similarity":0.9850772492001566,"intersentence similarity":0.983153582239151,"intra-inter difference":0.0019236669610056545}
+{"corpus":"expunations","embedding model":"XLM-R (centered)","intrasentence similarity":0.11516662534742271,"intersentence similarity":0.00746750485165976,"intra-inter difference":0.10769912049576295}
+{"corpus":"cup","embedding model":"GloVe","intrasentence similarity":0.30636946112845337,"intersentence similarity":0.29984381979894825,"intra-inter difference":0.006525641329505116}
+{"corpus":"cup","embedding model":"GloVe (centered)","intrasentence similarity":0.010551263330781057,"intersentence similarity":0.007260385658801534,"intra-inter difference":0.0032908776719795235}
+{"corpus":"cup","embedding model":"XLM-R","intrasentence similarity":0.9856935110810685,"intersentence similarity":0.9843644029080868,"intra-inter difference":0.0013291081729817078}
+{"corpus":"cup","embedding model":"XLM-R (centered)","intrasentence similarity":0.08865047364057434,"intersentence similarity":0.0031385850860271604,"intra-inter difference":0.08551188855454718}
+{"corpus":"joker_clef_fr","embedding model":"GloVe","intrasentence similarity":0.08382605986617137,"intersentence similarity":0.0784635467349086,"intra-inter difference":0.005362513131262764}
+{"corpus":"joker_clef_fr","embedding model":"GloVe (centered)","intrasentence similarity":0.009267221752545362,"intersentence similarity":0.03131634223135188,"intra-inter difference":-0.022049120478806517}
+{"corpus":"joker_clef_fr","embedding model":"XLM-R","intrasentence similarity":0.9827080907821655,"intersentence similarity":0.9810546818435192,"intra-inter difference":0.0016534089386462947}
+{"corpus":"joker_clef_fr","embedding model":"XLM-R (centered)","intrasentence similarity":0.08900893249536239,"intersentence similarity":0.007559972744458355,"intra-inter difference":0.08144895975090403}
+{"corpus":"joker_clef_es","embedding model":"GloVe","intrasentence similarity":0.3216881096573601,"intersentence similarity":0.30629403281707784,"intra-inter difference":0.015394076840282267}
+{"corpus":"joker_clef_es","embedding model":"GloVe (centered)","intrasentence similarity":0.01675139188530979,"intersentence similarity":0.006299895860312973,"intra-inter difference":0.010451496024996818}
+{"corpus":"joker_clef_es","embedding model":"XLM-R","intrasentence similarity":0.9840245903730392,"intersentence similarity":0.9823463767826557,"intra-inter difference":0.0016782135903835593}
+{"corpus":"joker_clef_es","embedding model":"XLM-R (centered)","intrasentence similarity":0.10225798739283345,"intersentence similarity":0.0008378695359453559,"intra-inter difference":0.10142011785688809}
+{"corpus":"HAHA@IberLEF2021","embedding model":"GloVe","intrasentence similarity":0.3312287051828543,"intersentence similarity":0.30769747912638123,"intra-inter difference":0.023531226056473065}
+{"corpus":"HAHA@IberLEF2021","embedding model":"GloVe (centered)","intrasentence similarity":0.029531609687087998,"intersentence similarity":0.0016644104155013337,"intra-inter difference":0.027867199271586665}
+{"corpus":"HAHA@IberLEF2021","embedding model":"XLM-R","intrasentence similarity":0.9841110229492187,"intersentence similarity":0.9815788799464703,"intra-inter difference":0.0025321430027483993}
+{"corpus":"HAHA@IberLEF2021","embedding model":"XLM-R (centered)","intrasentence similarity":0.14204219245072455,"intersentence similarity":0.005717869465099648,"intra-inter difference":0.1363243229856249}
+{"corpus":"HUHU@IberLEF2023","embedding model":"GloVe","intrasentence similarity":0.30610442372281305,"intersentence similarity":0.26912327918291556,"intra-inter difference":0.03698114453989748}
+{"corpus":"HUHU@IberLEF2023","embedding model":"GloVe (centered)","intrasentence similarity":0.039344819713782724,"intersentence similarity":0.0043350783653790135,"intra-inter difference":0.03500974134840371}
+{"corpus":"HUHU@IberLEF2023","embedding model":"XLM-R","intrasentence similarity":0.9833472826381122,"intersentence similarity":0.9808995147585868,"intra-inter difference":0.0024477678795253865}
+{"corpus":"HUHU@IberLEF2023","embedding model":"XLM-R (centered)","intrasentence similarity":0.13017421670302978,"intersentence similarity":0.005818544027395546,"intra-inter difference":0.12435567267563424}
+{"corpus":"clemencio","embedding model":"GloVe","intrasentence similarity":0.299435971058659,"intersentence similarity":0.28942073644537014,"intra-inter difference":0.010015234613288848}
+{"corpus":"clemencio","embedding model":"GloVe (centered)","intrasentence similarity":-0.002821251516296842,"intersentence similarity":0.0018095801890827714,"intra-inter difference":-0.004630831705379613}
+{"corpus":"clemencio","embedding model":"XLM-R","intrasentence similarity":0.9822273710370064,"intersentence similarity":0.9803032157003879,"intra-inter difference":0.0019241553366184938}
+{"corpus":"clemencio","embedding model":"XLM-R (centered)","intrasentence similarity":0.10183497775038268,"intersentence similarity":0.002349417808558792,"intra-inter difference":0.09948555994182388}
+{"corpus":"puntuguese","embedding model":"GloVe","intrasentence similarity":0.3226940438821912,"intersentence similarity":0.3219741571433726,"intra-inter difference":0.0007198867388186203}
+{"corpus":"puntuguese","embedding model":"GloVe (centered)","intrasentence similarity":-0.014592367535913581,"intersentence similarity":0.002755249225255102,"intra-inter difference":-0.017347616761168683}
+{"corpus":"puntuguese","embedding model":"XLM-R","intrasentence similarity":0.9815953057408333,"intersentence similarity":0.9804607294976712,"intra-inter difference":0.0011345762431621553}
+{"corpus":"puntuguese","embedding model":"XLM-R (centered)","intrasentence similarity":0.05780066306688968,"intersentence similarity":0.0014957684697583318,"intra-inter difference":0.05630489459713135}
+{"corpus":"joker_clef_pt","embedding model":"GloVe","intrasentence similarity":0.33180144640246034,"intersentence similarity":0.30299951290159954,"intra-inter difference":0.0288019335008608}
+{"corpus":"joker_clef_pt","embedding model":"GloVe (centered)","intrasentence similarity":0.024845275155309134,"intersentence similarity":0.00564288008036092,"intra-inter difference":0.019202395074948215}
+{"corpus":"joker_clef_pt","embedding model":"XLM-R","intrasentence similarity":0.9827271931767464,"intersentence similarity":0.9800121103167534,"intra-inter difference":0.002715082859993001}
+{"corpus":"joker_clef_pt","embedding model":"XLM-R (centered)","intrasentence similarity":0.14666551528236596,"intersentence similarity":0.014516530021093786,"intra-inter difference":0.13214898526127217}
+{"corpus":"chumor","embedding model":"GloVe","intrasentence similarity":0.2783180564978399,"intersentence similarity":0.2903831680473406,"intra-inter difference":-0.012065111549500684}
+{"corpus":"chumor","embedding model":"GloVe (centered)","intrasentence similarity":-0.020340994191224007,"intersentence similarity":0.0033909624696709215,"intra-inter difference":-0.023731956660894928}
+{"corpus":"chumor","embedding model":"XLM-R","intrasentence similarity":0.9887278801761568,"intersentence similarity":0.9872387358188629,"intra-inter difference":0.001489144357293859}
+{"corpus":"chumor","embedding model":"XLM-R (centered)","intrasentence similarity":0.12553035671589896,"intersentence similarity":0.0025960535066667945,"intra-inter difference":0.12293430320923217}

@@ -89,6 +89,7 @@ def _(df, mo, pl):
              maximum=pl.col("value").max())
         .sort("embedding model", pl.col("similarity").cast(_sim_enum)),
         selection=None,
+        pagination=False,
         format_mapping={
             "minimum": "{:.3f}",
             "maximum": "{:.3f}"
