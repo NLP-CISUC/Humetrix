@@ -35,6 +35,8 @@ class QuantumEntropy:
         The embedding model to use for token representations.
     spacy_model : spaCy model
         The spaCy language model for tokenization.
+    mean_vector : Torch tensor or None
+        Average vector to remove anisotropy.
     """
 
     def __init__(
@@ -42,11 +44,13 @@ class QuantumEntropy:
         sentence: str,
         embeddings: Union[KeyedVectors, Pipeline],
         spacy_model: Language,
+        mean_vector: Union[None, torch.Tensor] = None,
     ) -> None:
         super().__init__()
         self.text = sentence
         self.embeddings = embeddings
         self.spacy_model = spacy_model
+        self.mean_vector = mean_vector
 
     def tokenize_sentence(self) -> Tuple[List[str], List[str]]:
         """
@@ -140,11 +144,18 @@ class QuantumEntropy:
         the normalized token embeddings:
         :math:`\rho = \frac{1}{|l|} \sum_{i=1}^l |w_i\rangle\langle w_i|`,
         where :math:`|w_i\rangle = \frac{\vec{w_i}}{\|\vec{w_i}\|}`.
+
+        If the underlying QuantumEntropy object has a mean vector, all embeddings
+        are first centralized before normalization.
         """
         tok_embeddings = self.token_embeddings(tokens)
 
         if len(tok_embeddings) == 0:
             return None
+
+        if self.mean_vector is not None:
+            tok_embeddings -= self.mean_vector
+
         dim = tok_embeddings[0].shape[0]
         d_matrix = torch.zeros(dim, dim)
 
