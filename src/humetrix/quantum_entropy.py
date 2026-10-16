@@ -154,7 +154,7 @@ class QuantumEntropy:
             return None
 
         if self.mean_vector is not None:
-            tok_embeddings -= self.mean_vector
+            tok_embeddings -= self.mean_vector.to(tok_embeddings)
 
         dim = tok_embeddings[0].shape[0]
         d_matrix = torch.zeros(dim, dim)
@@ -165,6 +165,41 @@ class QuantumEntropy:
         )
         d_matrix = torch.mean(d_matrix, dim=0)
         return d_matrix
+
+    def von_neumann_entropy(
+        self, d_matrix: torch.Tensor, hermitian: bool = True
+    ) -> float:
+        r"""
+        Calculate the von Neumann entropy of a density matrix.
+
+        Parameters
+        ----------
+        d_matrix : torch.Tensor
+            The density matrix, with trace equal to 1.
+        hermitian : bool, default=True
+            Whether `d_matrix` is Hermitian. If True, eigenvalues are computed
+            with a symmetric solver; otherwise, a general solver is used and
+            only the real part of the eigenvalues if kept.
+
+        Returns
+        _______
+        float
+            The von Neumann entropy.
+
+        Notes
+        -----
+        The entropy is calculated from the eigenvalues:
+        :math:`-\sum_i \lambda_i \log \lambda_i`, ignoring eigenvalues
+        smaller than :math:`10^{-12}`. We use ln.
+        """
+        eigenvalues = (
+            torch.linalg.eigvalsh(d_matrix)
+            if hermitian
+            else torch.linalg.eigvals(d_matrix).real
+        )
+        eigenvalues = eigenvalues[eigenvalues > 1e-12]
+        entropy = -torch.sum(eigenvalues * torch.log(eigenvalues))
+        return entropy.item()
 
     @abstractmethod
     def score(self) -> Union[float, None]:
@@ -193,10 +228,8 @@ class QuantumUncertainty(QuantumEntropy):
         if d_matrix is None:
             return None
 
-        eigenvalues = torch.linalg.eigvalsh(d_matrix)
-        eigenvalues = eigenvalues[eigenvalues > 1e-12]
-        entropy = -torch.sum(eigenvalues * torch.log(eigenvalues))
-        return entropy.item()
+        entropy = self.von_neumann_entropy(d_matrix)
+        return entropy
 
 
 class QuantumIncongruity(QuantumEntropy):
@@ -228,13 +261,9 @@ class QuantumIncongruity(QuantumEntropy):
             sp_d_matrix = sp_d_matrix / sp_trace
 
         # Setup and punchline uncertainty
-        sp_eigenvalues = torch.linalg.eigvals(sp_d_matrix).real
-        sp_eigenvalues = sp_eigenvalues[sp_eigenvalues > 1e-12]
-        sp_entropy = -torch.sum(sp_eigenvalues * torch.log(sp_eigenvalues))
+        sp_entropy = self.von_neumann_entropy(sp_d_matrix, hermitian=False)
 
         # Setup uncertainty
-        setup_eigenvalues = torch.linalg.eigvalsh(setup_d_matrix)
-        setup_eigenvalues = setup_eigenvalues[setup_eigenvalues > 1e-12]
-        setup_entropy = -torch.sum(setup_eigenvalues * torch.log(setup_eigenvalues))
+        setup_entropy = self.von_neumann_entropy(setup_d_matrix)
 
-        return (sp_entropy - setup_entropy).item()
+        return sp_entropy - setup_entropy
