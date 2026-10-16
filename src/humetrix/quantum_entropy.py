@@ -35,8 +35,9 @@ class QuantumEntropy:
         The embedding model to use for token representations.
     spacy_model : spaCy model
         The spaCy language model for tokenization.
-    mean_vector : Torch tensor or None
-        Average vector to remove anisotropy.
+    mean_vector : torch.Tensor or None, default=None
+        A vector of shape (dim,) subtracted from every embedding before
+        normalization. If None, no centering is applied.
     """
 
     def __init__(
@@ -64,6 +65,9 @@ class QuantumEntropy:
         Notes
         -----
         The spaCy model is modified to include a sentencizer component.
+        Sentences are also split at commas and semicolons, and tokens are
+        lowercased. A ValueError is raised unless the text produces exactly
+        two segments.
         """
         if 'sentencizer' not in self.spacy_model.pipe_names:
             punct_chars = spacy.pipeline.Sentencizer.default_punct_chars
@@ -92,11 +96,15 @@ class QuantumEntropy:
         Returns
         -------
         torch.Tensor
-            Word embeddings.
+            A tensor of shape (n, dim), one row per token with a valid
+            embedding. Tokens absent from the static vocabulary, or that
+            have no subtokens, are skipped, so n may be smaller than len(tokens).
 
         Notes
         -----
-        If the embedding model is a Transformer, we average the subtokens into one single word embedding.
+        If the embedding model is a Transformer, we average the subtokens into
+        one single word embedding, special tokens are discarted, and embeddings
+        come from the model's last layer.
         """
         if isinstance(self.embeddings, KeyedVectors):
             tok_embeddings = [
@@ -142,11 +150,9 @@ class QuantumEntropy:
         -----
         The density matrix is calculated as the mean of the outer products of
         the normalized token embeddings:
-        :math:`\rho = \frac{1}{|l|} \sum_{i=1}^l |w_i\rangle\langle w_i|`,
-        where :math:`|w_i\rangle = \frac{\vec{w_i}}{\|\vec{w_i}\|}`.
-
-        If the underlying QuantumEntropy object has a mean vector, all embeddings
-        are first centralized before normalization.
+        :math:`\rho = \frac{1}{n} \sum_{i=1}^n |w_i\rangle\langle w_i|`,
+        where :math:`|w_i\rangle = \frac{\vec{w_i} - \mu}{\|\vec{w_i} - \mu\|}`
+        and :math:`\mu` is the mean vector (zero if not provided).
         """
         tok_embeddings = self.token_embeddings(tokens)
 
@@ -179,10 +185,10 @@ class QuantumEntropy:
         hermitian : bool, default=True
             Whether `d_matrix` is Hermitian. If True, eigenvalues are computed
             with a symmetric solver; otherwise, a general solver is used and
-            only the real part of the eigenvalues if kept.
+            only the real part of the eigenvalues is kept.
 
         Returns
-        _______
+        -------
         float
             The von Neumann entropy.
 
@@ -190,7 +196,7 @@ class QuantumEntropy:
         -----
         The entropy is calculated from the eigenvalues:
         :math:`-\sum_i \lambda_i \log \lambda_i`, ignoring eigenvalues
-        smaller than :math:`10^{-12}`. We use ln.
+        smaller than :math:`10^{-12}`. We use the natural logarithm.
         """
         eigenvalues = (
             torch.linalg.eigvalsh(d_matrix)
@@ -236,7 +242,7 @@ class QuantumIncongruity(QuantumEntropy):
     """Liu and Hou (2023) quantum entropy Incongruity scoring."""
 
     def score(self) -> Union[float, None]:
-        """
+        r"""
         Calculate the quantum incongruity score.
 
         Returns
@@ -244,6 +250,12 @@ class QuantumIncongruity(QuantumEntropy):
         float or None
             The quantum incongruity score, or None if the density matrices
             could not be calculated.
+
+        Notes
+        -----
+        :math:`\rho_p\rho_s` is usually non-Hermitian nor has a unit trace.
+        We normalize it by its trace and calculate its entropy using
+        `hermitian=False`.
         """
         setup_toks, punchline_toks = self.tokenize_sentence()
         setup_d_matrix = self.density_matrix(setup_toks)
