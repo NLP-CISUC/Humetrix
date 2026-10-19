@@ -1,0 +1,871 @@
+{"index":"semeval.het_1","text":"'' I'm halfway up a mountain,'' Tom alleged.","label":1,"QE-U + GloVe (centered)":1.9508061409,"QE-U + HF (centered)":1.9621896744}
+{"index":"semeval.het_2","text":"I'd like to be a Chinese laborer, said Tom coolly.","label":1,"QE-U + GloVe (centered)":2.0844898224,"QE-U + HF (centered)":2.0731823444}
+{"index":"semeval.het_3","text":"No, baby oil does NOT come from squeezing dead babies.","label":0,"QE-U + GloVe (centered)":0.6929562092,"QE-U + HF (centered)":0.6264075041}
+{"index":"semeval.het_6","text":"If you can't be good, be careful.","label":0,"QE-U + GloVe (centered)":1.6403707266,"QE-U + HF (centered)":1.8542984724}
+{"index":"semeval.het_8","text":"My name is Avery. I raise birds.","label":1,"QE-U + GloVe (centered)":1.5810643435,"QE-U + HF (centered)":1.5009857416}
+{"index":"semeval.het_10","text":"In the winter, some horses are Friesian.","label":1,"QE-U + GloVe (centered)":1.3412238359,"QE-U + HF (centered)":1.3363652229}
+{"index":"semeval.hom_5","text":"She was only a Blacksmith's daughter, but she knew how to forge ahead.","label":1,"QE-U + GloVe (centered)":2.0356416702,"QE-U + HF (centered)":1.9960819483}
+{"index":"semeval.hom_7","text":"Did you hear about the new pinata? It's a huge hit.","label":1,"QE-U + GloVe (centered)":1.9628419876,"QE-U + HF (centered)":1.9793360233}
+{"index":"semeval.hom_12","text":"Precepts teach, examples move.","label":0,"QE-U + GloVe (centered)":1.053006649,"QE-U + HF (centered)":0.9919563532}
+{"index":"semeval.hom_14","text":"'' There's room for one more,'' Tom admitted.","label":1,"QE-U + GloVe (centered)":2.010948658,"QE-U + HF (centered)":1.9629691839}
+{"index":"semeval.hom_15","text":"They threw a party for the inventor of the toaster. And he was toasted.","label":1,"QE-U + GloVe (centered)":2.1829066277,"QE-U + HF (centered)":2.0880613327}
+{"index":"semeval.hom_19","text":"Jesus changes grave situations. Happy Easter.","label":1,"QE-U + GloVe (centered)":1.5902432203,"QE-U + HF (centered)":1.3644609451}
+{"index":"semeval.hom_20","text":"I got angry when my cell phone battery died. My counselor suggested I find an outlet.","label":1,"QE-U + GloVe (centered)":2.1805663109,"QE-U + HF (centered)":2.123609066}
+{"index":"semeval.hom_26","text":"If you leave alphabet soup on the stove and go out, it could spell disaster.","label":1,"QE-U + GloVe (centered)":2.3306331635,"QE-U + HF (centered)":2.2608032227}
+{"index":"semeval.hom_29","text":"My name is Sandy, I just hang around the beach.","label":1,"QE-U + GloVe (centered)":1.5732467175,"QE-U + HF (centered)":1.4686851501}
+{"index":"semeval.hom_30","text":"I've struck oil! Tom gushed.","label":1,"QE-U + GloVe (centered)":1.4894711971,"QE-U + HF (centered)":1.4213283062}
+{"index":"semeval.hom_33","text":"My name is John. I'm a plumber","label":1,"QE-U + GloVe (centered)":1.5866941214,"QE-U + HF (centered)":1.5555245876}
+{"index":"semeval.hom_34","text":"'' Pretend we were in the days before railways,'' Tom coached.","label":1,"QE-U + GloVe (centered)":2.1648321152,"QE-U + HF (centered)":2.1752593517}
+{"index":"semeval.hom_35","text":"Stick em up!< BANG> Okay.... DON'T stick em'up!","label":0,"QE-U + GloVe (centered)":1.3616367579,"QE-U + HF (centered)":1.2606401443}
+{"index":"semeval.hom_39","text":"Did you hear about the crime that happened in a parking garage? It was wrong on so many levels.","label":1,"QE-U + GloVe (centered)":2.410877943,"QE-U + HF (centered)":2.2662193775}
+{"index":"semeval.hom_42","text":"A wise man changes his mind, but a fool never does.","label":0,"QE-U + GloVe (centered)":1.8957442045,"QE-U + HF (centered)":1.8485571146}
+{"index":"semeval.hom_48","text":"OLD QUILTERS never die, they just go under cover.","label":1,"QE-U + GloVe (centered)":1.5798301697,"QE-U + HF (centered)":1.5400490761}
+{"index":"semeval.hom_51","text":"OLD GUITARISTS never die, they just fret their lives away","label":1,"QE-U + GloVe (centered)":1.5878885984,"QE-U + HF (centered)":1.5578389168}
+{"index":"semeval.hom_55","text":"I made a batch of fish eye soup, it should see me through the week.","label":1,"QE-U + GloVe (centered)":2.142136097,"QE-U + HF (centered)":2.0570731163}
+{"index":"semeval.hom_58","text":"When he kicked the invoice, it didn't mean he wanted to foot the bill.","label":1,"QE-U + GloVe (centered)":1.7596559525,"QE-U + HF (centered)":1.7221037149}
+{"index":"semeval.hom_60","text":"Even though the well was a mystery to her, she didn't want to get to the bottom of it.","label":1,"QE-U + GloVe (centered)":2.2313451767,"QE-U + HF (centered)":2.1694762707}
+{"index":"semeval.hom_61","text":"Old math teachers never die, they just become irrational.","label":1,"QE-U + GloVe (centered)":1.737849474,"QE-U + HF (centered)":1.6385329962}
+{"index":"semeval.hom_63","text":"OLD LOGICIANS never die, they just vacate the premises.","label":1,"QE-U + GloVe (centered)":1.5877780914,"QE-U + HF (centered)":1.4445319176}
+{"index":"semeval.hom_65","text":"If all appears to go well, you missed something...","label":0,"QE-U + GloVe (centered)":1.8719041348,"QE-U + HF (centered)":1.7909168005}
+{"index":"semeval.hom_68","text":"I'll have one brain on drugs with bacon, toast and juice.","label":0,"QE-U + GloVe (centered)":2.226480484,"QE-U + HF (centered)":2.1150383949}
+{"index":"semeval.hom_70","text":"Vines are extremely short- tempered. They snap at the slightest wind.","label":1,"QE-U + GloVe (centered)":1.5806096792,"QE-U + HF (centered)":1.7191479206}
+{"index":"semeval.hom_72","text":"OLD ACADEMICIANS never die, they just lose their faculties","label":1,"QE-U + GloVe (centered)":1.5791063309,"QE-U + HF (centered)":1.5181022882}
+{"index":"semeval.hom_77","text":"The phone call interrupted my nap, and I never did get the rest.","label":1,"QE-U + GloVe (centered)":1.8636496067,"QE-U + HF (centered)":1.8066452742}
+{"index":"semeval.hom_78","text":"When potato chips don't sell fast enough, the maker knows it will soon be crunch time.","label":1,"QE-U + GloVe (centered)":2.0232629776,"QE-U + HF (centered)":2.0675573349}
+{"index":"semeval.hom_80","text":"Save the whales, spouted Tom.","label":1,"QE-U + GloVe (centered)":1.3613017797,"QE-U + HF (centered)":1.3102705479}
+{"index":"semeval.hom_83","text":"Superglue! Tom rejoined.","label":1,"QE-U + GloVe (centered)":0.6929191947,"QE-U + HF (centered)":0.6508402824}
+{"index":"semeval.hom_84","text":"96. 37% of all statistics are useless..","label":0,"QE-U + GloVe (centered)":0.6917991638,"QE-U + HF (centered)":0.5005767345}
+{"index":"semeval.hom_85","text":"Admitting a mistake:'' Like the orthopedist's patient, I stand corrected.''","label":1,"QE-U + GloVe (centered)":2.3248047829,"QE-U + HF (centered)":2.2185599804}
+{"index":"semeval.hom_86","text":"For every 45 I collected, I would write down the song and the artist so I could keep records.","label":1,"QE-U + GloVe (centered)":1.736634016,"QE-U + HF (centered)":1.6416503191}
+{"index":"semeval.hom_91","text":"A lot of trees were dying, but they needed to figure out the root of the problem.","label":1,"QE-U + GloVe (centered)":1.911822319,"QE-U + HF (centered)":1.8882590532}
+{"index":"semeval.hom_92","text":"OLD PILOTS never die, they just get more turbulent.","label":1,"QE-U + GloVe (centered)":1.5899965763,"QE-U + HF (centered)":1.5069191456}
+{"index":"semeval.hom_95","text":"I'm NOT\" white,\" I'm\" melanin- challenged.\"","label":0,"QE-U + GloVe (centered)":1.6502701044,"QE-U + HF (centered)":1.7165323496}
+{"index":"semeval.hom_98","text":"She was only a Wrestler's daughter, but you oughtta see her box..","label":1,"QE-U + GloVe (centered)":2.0470631123,"QE-U + HF (centered)":1.9964306355}
+{"index":"semeval.hom_99","text":"OLD DOOR FRAMERS never die, they just become unhinged.","label":1,"QE-U + GloVe (centered)":1.7664296627,"QE-U + HF (centered)":1.6444275379}
+{"index":"semeval.hom_103","text":"I'm dying, Tom croaked.","label":1,"QE-U + GloVe (centered)":1.2396118641,"QE-U + HF (centered)":1.2325236797}
+{"index":"semeval.hom_111","text":"Garbage in, garbage out.","label":0,"QE-U + GloVe (centered)":1.0805934668,"QE-U + HF (centered)":1.0665647984}
+{"index":"semeval.hom_116","text":"My father slept under the bed, I think he was a little potty.","label":1,"QE-U + GloVe (centered)":1.8477077484,"QE-U + HF (centered)":1.8307373524}
+{"index":"semeval.hom_120","text":"Old math profs never die, they just can't differentiate.","label":1,"QE-U + GloVe (centered)":1.7505699396,"QE-U + HF (centered)":1.7140473127}
+{"index":"semeval.hom_126","text":"Hell!... I’d forgotten about that!","label":1,"QE-U + GloVe (centered)":0.9938809276,"QE-U + HF (centered)":0.6499642134}
+{"index":"semeval.hom_127","text":"She was only a Pitcher's daughter, but you should have seen her curves.","label":1,"QE-U + GloVe (centered)":2.0429830551,"QE-U + HF (centered)":2.0042614937}
+{"index":"semeval.hom_130","text":"'' Use your own toothbrush!'' Tom bristled.","label":1,"QE-U + GloVe (centered)":1.6819828749,"QE-U + HF (centered)":1.7262680531}
+{"index":"semeval.hom_131","text":"To err is human, to forgive is against my policy","label":0,"QE-U + GloVe (centered)":1.5960099697,"QE-U + HF (centered)":1.5059664249}
+{"index":"semeval.hom_132","text":"My name is Bill. I run a collection agency","label":1,"QE-U + GloVe (centered)":1.5883790255,"QE-U + HF (centered)":1.5310118198}
+{"index":"semeval.hom_133","text":"OLD BAKERS never die, they just stop making lots of dough.","label":1,"QE-U + GloVe (centered)":1.5851351023,"QE-U + HF (centered)":1.5274019241}
+{"index":"semeval.hom_134","text":"Tonight's forecast: Dark, scattered light toward dawn.","label":0,"QE-U + GloVe (centered)":1.775379777,"QE-U + HF (centered)":1.6067738533}
+{"index":"semeval.hom_138","text":"If you sing while playing baseball, you won't get a good pitch.","label":1,"QE-U + GloVe (centered)":1.8389174938,"QE-U + HF (centered)":1.7665367126}
+{"index":"semeval.hom_139","text":"OLD PINEAPPLE GROWERS never die, they just get on the dole.","label":1,"QE-U + GloVe (centered)":1.7347532511,"QE-U + HF (centered)":1.7007381916}
+{"index":"semeval.hom_140","text":"Some commands given by the army are specific, others are General.","label":1,"QE-U + GloVe (centered)":2.1173195839,"QE-U + HF (centered)":2.0455369949}
+{"index":"semeval.hom_141","text":"If a horse could predict the weather, it would probably say that the weather is stable.","label":1,"QE-U + GloVe (centered)":1.9886181355,"QE-U + HF (centered)":1.9410338402}
+{"index":"semeval.hom_142","text":"She was only a Weatherman'' s daughter, but she sure had a warm front.","label":1,"QE-U + GloVe (centered)":2.1496384144,"QE-U + HF (centered)":2.0996675491}
+{"index":"semeval.hom_147","text":"OLD STATISTICIANS never die, they just average out.","label":1,"QE-U + GloVe (centered)":1.5866891146,"QE-U + HF (centered)":1.5043456554}
+{"index":"semeval.hom_149","text":"With certain cashiers, things are slow to register.","label":1,"QE-U + GloVe (centered)":1.3695417643,"QE-U + HF (centered)":1.2971487045}
+{"index":"semeval.hom_151","text":"'' Perhaps I will,'' said Tom with all his might.","label":1,"QE-U + GloVe (centered)":1.5344247818,"QE-U + HF (centered)":1.5345568657}
+{"index":"semeval.hom_152","text":"The comedian stopped at the fabric store on his way to a comedy gig. He was looking for new material.","label":1,"QE-U + GloVe (centered)":2.5250692368,"QE-U + HF (centered)":2.3933506012}
+{"index":"semeval.hom_153","text":"- Call me a taxi.- OK, you're a taxi.","label":1,"QE-U + GloVe (centered)":1.7341455221,"QE-U + HF (centered)":1.7064272165}
+{"index":"semeval.hom_155","text":"If you want her to show emotion, cut up her credit cards.","label":0,"QE-U + GloVe (centered)":1.9399373531,"QE-U + HF (centered)":1.9563734531}
+{"index":"semeval.hom_157","text":"OLD PLUMBERS never die, they just pipe down.","label":1,"QE-U + GloVe (centered)":1.5889365673,"QE-U + HF (centered)":1.5360291004}
+{"index":"semeval.hom_159","text":"The surgeon really did not know how to perform quick surgeries on insects, but he did one on the fly.","label":1,"QE-U + GloVe (centered)":2.4262604713,"QE-U + HF (centered)":2.4310183525}
+{"index":"semeval.hom_160","text":"OLD STATISTICIANS never die, they just get mean.","label":1,"QE-U + GloVe (centered)":1.5866891146,"QE-U + HF (centered)":1.5043456554}
+{"index":"semeval.hom_164","text":"He and his partner made knives, and they shared a cut.","label":1,"QE-U + GloVe (centered)":1.8598326445,"QE-U + HF (centered)":1.842471838}
+{"index":"semeval.hom_165","text":"A baseball player was a thief. He was always trying to steal.","label":1,"QE-U + GloVe (centered)":1.7081042528,"QE-U + HF (centered)":1.7568740845}
+{"index":"semeval.hom_166","text":"First deserve, then desire.","label":0,"QE-U + GloVe (centered)":1.0660821199,"QE-U + HF (centered)":1.003993392}
+{"index":"semeval.hom_169","text":"OLD DIVERS never die, they just flop.","label":1,"QE-U + GloVe (centered)":1.5860872269,"QE-U + HF (centered)":1.3273313046}
+{"index":"semeval.hom_172","text":"OLD MINERS never die, they just lose their veins.","label":1,"QE-U + GloVe (centered)":1.5856467485,"QE-U + HF (centered)":1.5376120806}
+{"index":"semeval.hom_174","text":"'' I make the armour out of chain links,'' Tom replied by mail.","label":1,"QE-U + GloVe (centered)":2.2019386292,"QE-U + HF (centered)":2.1738908291}
+{"index":"semeval.hom_178","text":"I couldn't figure out how to fasten my seatbelt. Then it clicked.","label":1,"QE-U + GloVe (centered)":2.2117893696,"QE-U + HF (centered)":2.1611583233}
+{"index":"semeval.hom_179","text":"OLD PHOTOGRAPHERS never die, they just lose their focus.","label":1,"QE-U + GloVe (centered)":1.5875028372,"QE-U + HF (centered)":1.5569212437}
+{"index":"semeval.hom_181","text":"The trapeze artist had to buy his own safety equipment. Every Friday he drew his net wages.","label":1,"QE-U + GloVe (centered)":2.3048496246,"QE-U + HF (centered)":2.1665670872}
+{"index":"semeval.hom_182","text":"Do not think that one enemy is insignificant, or that a thousand friends are too many.","label":0,"QE-U + GloVe (centered)":2.0759544373,"QE-U + HF (centered)":2.0899415016}
+{"index":"semeval.hom_184","text":"I'd love to, but my bathroom tiles need grouting.","label":0,"QE-U + GloVe (centered)":1.474801898,"QE-U + HF (centered)":1.5411205292}
+{"index":"semeval.hom_185","text":"Math class is full of drama. There are so many problems to work out.","label":1,"QE-U + GloVe (centered)":1.9060308933,"QE-U + HF (centered)":1.8201489449}
+{"index":"semeval.hom_186","text":"Her exam was on the human skeleton, so she decided to bone up.","label":1,"QE-U + GloVe (centered)":2.051317215,"QE-U + HF (centered)":1.9550430775}
+{"index":"semeval.hom_187","text":"Once the pin is pulled, Mr. Grenade is no longer a friend...","label":0,"QE-U + GloVe (centered)":1.7663223743,"QE-U + HF (centered)":1.6691670418}
+{"index":"semeval.hom_190","text":"Any key will commence hard drive format. Continue( y\/ n)?","label":0,"QE-U + GloVe (centered)":2.0338923931,"QE-U + HF (centered)":1.8273310661}
+{"index":"semeval.hom_191","text":"OLD TRIGONOMETRY TEACHERS never die, they just lose their identities.","label":1,"QE-U + GloVe (centered)":1.7667099237,"QE-U + HF (centered)":1.6931533813}
+{"index":"semeval.hom_192","text":"I'm not afraid of flying, I'm afraid of crashing.","label":0,"QE-U + GloVe (centered)":1.8086774349,"QE-U + HF (centered)":1.868214488}
+{"index":"semeval.hom_193","text":"She was only a Catcher's daughter, but she had many balls bounce off her chin.","label":1,"QE-U + GloVe (centered)":2.0417659283,"QE-U + HF (centered)":1.9894607067}
+{"index":"semeval.hom_195","text":"Jesus did the only extreme world makeover, the flood","label":1,"QE-U + GloVe (centered)":2.0388638973,"QE-U + HF (centered)":1.9678270817}
+{"index":"semeval.hom_198","text":"I like marching songs, in any month.","label":1,"QE-U + GloVe (centered)":1.5685503483,"QE-U + HF (centered)":1.5626959801}
+{"index":"semeval.hom_200","text":"\" I'm sick! I ought to be home in bed with a nurse.\"","label":0,"QE-U + GloVe (centered)":1.4539119005,"QE-U + HF (centered)":1.487962842}
+{"index":"semeval.hom_202","text":"I used to have a fear of hurdles, but I got over it.","label":1,"QE-U + GloVe (centered)":2.1528308392,"QE-U + HF (centered)":2.0657258034}
+{"index":"semeval.hom_204","text":"'' I have to check the score on this exam again,'' Tom remarked.","label":1,"QE-U + GloVe (centered)":2.385635376,"QE-U + HF (centered)":2.3063993454}
+{"index":"semeval.hom_206","text":"She was only a Gardener's daughter, but she knows all the rakes.","label":1,"QE-U + GloVe (centered)":2.0373933315,"QE-U + HF (centered)":1.9929215908}
+{"index":"semeval.hom_209","text":"She was only a Real estate agent'' s daughter, but she gave a lot away.","label":1,"QE-U + GloVe (centered)":2.3384058475,"QE-U + HF (centered)":2.2182841301}
+{"index":"semeval.hom_210","text":"If you can't make it good, make it expensive.","label":0,"QE-U + GloVe (centered)":1.790631175,"QE-U + HF (centered)":1.9682478905}
+{"index":"semeval.hom_214","text":"When you're wearing a watch on an airplane, time flies.","label":1,"QE-U + GloVe (centered)":2.2270236015,"QE-U + HF (centered)":2.1314134598}
+{"index":"semeval.hom_219","text":"Old bakers never die, they just keep making lots of dough.","label":1,"QE-U + GloVe (centered)":1.5851351023,"QE-U + HF (centered)":1.5274019241}
+{"index":"semeval.hom_221","text":"Did you hear about the guy whose whole left side was cut off? He's all right now.","label":1,"QE-U + GloVe (centered)":2.5086803436,"QE-U + HF (centered)":2.4563200474}
+{"index":"semeval.hom_223","text":"OLD MOONSHINERS never die, they just keep still.","label":1,"QE-U + GloVe (centered)":1.588996768,"QE-U + HF (centered)":1.4591386318}
+{"index":"semeval.hom_227","text":"She was only a Globetrotter's daughter, but she manages to get around.","label":1,"QE-U + GloVe (centered)":2.0342268944,"QE-U + HF (centered)":2.0059630871}
+{"index":"semeval.hom_230","text":"My name is Chuck, I'm a butcher.","label":1,"QE-U + GloVe (centered)":1.5732967854,"QE-U + HF (centered)":1.4712462425}
+{"index":"semeval.hom_233","text":"There was a massive outcry against the plan to build a power line across a nature preserve. The public couldn't bear the tension.","label":1,"QE-U + GloVe (centered)":2.6080508232,"QE-U + HF (centered)":2.3520972729}
+{"index":"semeval.hom_236","text":"Even though Catholics in space are weightless, do they have mass?","label":1,"QE-U + GloVe (centered)":2.0004134178,"QE-U + HF (centered)":1.965136528}
+{"index":"semeval.hom_237","text":"OLD PILOTS never die, they just buzz off.","label":1,"QE-U + GloVe (centered)":1.5899965763,"QE-U + HF (centered)":1.5069191456}
+{"index":"semeval.hom_240","text":"My name is Emmy, I'm a T. V. star","label":1,"QE-U + GloVe (centered)":1.5722435713,"QE-U + HF (centered)":1.5045249462}
+{"index":"semeval.hom_243","text":"A new type of broom came out, it is sweeping the nation.","label":1,"QE-U + GloVe (centered)":2.0456056595,"QE-U + HF (centered)":1.9453010559}
+{"index":"semeval.hom_245","text":"OLD TREE SURGEONS never die, they are just uprooted.","label":1,"QE-U + GloVe (centered)":1.7680323124,"QE-U + HF (centered)":1.6901105642}
+{"index":"semeval.hom_247","text":"My name is Brooks. I'm an irrrigation consultant","label":1,"QE-U + GloVe (centered)":1.5849779844,"QE-U + HF (centered)":1.5361939669}
+{"index":"semeval.hom_248","text":"In zen skiing, you learn to become one with the snow.","label":0,"QE-U + GloVe (centered)":1.3706586361,"QE-U + HF (centered)":1.2492932081}
+{"index":"semeval.hom_252","text":"The more you stroke the cat's tail, the more he raises his back.","label":0,"QE-U + GloVe (centered)":1.9933645725,"QE-U + HF (centered)":2.0565841198}
+{"index":"semeval.hom_253","text":"Are you a Klingon, or is that a turtle on your head?","label":0,"QE-U + GloVe (centered)":1.5659326315,"QE-U + HF (centered)":1.5466985703}
+{"index":"semeval.hom_260","text":"Two brothers collaborated on haunted stories, but one was a ghost writer.","label":1,"QE-U + GloVe (centered)":1.8863608837,"QE-U + HF (centered)":1.869104147}
+{"index":"semeval.hom_265","text":"OLD COWBOYS never die, they just get the boot.","label":1,"QE-U + GloVe (centered)":1.5883388519,"QE-U + HF (centered)":1.5545858145}
+{"index":"semeval.hom_268","text":"Never lie to an x- ray technician. They can see right through you.","label":1,"QE-U + GloVe (centered)":1.9137083292,"QE-U + HF (centered)":1.9476115704}
+{"index":"semeval.hom_278","text":"A job circumcising elephants isn't so bad. The base salary is small but the tips are big.","label":1,"QE-U + GloVe (centered)":2.0998945236,"QE-U + HF (centered)":2.1080794334}
+{"index":"semeval.hom_282","text":"'' How long will I have to wait for a table?'' asked Tom without reservation.","label":1,"QE-U + GloVe (centered)":2.3491797447,"QE-U + HF (centered)":2.2762210369}
+{"index":"semeval.hom_283","text":"The designer wondered why his pirate room wasn't perfect, and the judge told him he went a little overboard.","label":1,"QE-U + GloVe (centered)":2.2919855118,"QE-U + HF (centered)":2.280241251}
+{"index":"semeval.hom_284","text":"'' Consult an investment broker,'' was Tom's stock answer.","label":1,"QE-U + GloVe (centered)":1.705768466,"QE-U + HF (centered)":1.6254038811}
+{"index":"semeval.hom_287","text":"My name is Sly. I'm a detective.","label":1,"QE-U + GloVe (centered)":1.5816563368,"QE-U + HF (centered)":1.5405162573}
+{"index":"semeval.hom_294","text":"OLD BLASTING TECHNICIANS never die, they just lose their spark.","label":1,"QE-U + GloVe (centered)":1.7509949207,"QE-U + HF (centered)":1.6023240089}
+{"index":"semeval.hom_295","text":"Love me tender\/ love me sweet\/ push me out at 12, 000 ft","label":0,"QE-U + GloVe (centered)":1.7645611763,"QE-U + HF (centered)":1.9941208363}
+{"index":"semeval.hom_299","text":"More haste, less speed.","label":0,"QE-U + GloVe (centered)":1.0912065506,"QE-U + HF (centered)":1.0595295429}
+{"index":"semeval.hom_301","text":"I watched a movie about a baby hen, it was a real chick flick.","label":1,"QE-U + GloVe (centered)":2.013897419,"QE-U + HF (centered)":1.9969962835}
+{"index":"semeval.hom_303","text":"How does a card player party? They shuffle.","label":1,"QE-U + GloVe (centered)":1.8829271793,"QE-U + HF (centered)":1.8070693016}
+{"index":"semeval.hom_304","text":"I noticed that the sun was out, and nobody had bothered to relight it.","label":1,"QE-U + GloVe (centered)":2.0436000824,"QE-U + HF (centered)":1.9609247446}
+{"index":"semeval.hom_318","text":"I suspected our new house guest was a terrorist. He asked to sleep on a blow up mattress.","label":1,"QE-U + GloVe (centered)":2.2183964252,"QE-U + HF (centered)":2.1238615513}
+{"index":"semeval.hom_322","text":"OLD BOTANISTS never die, they're just deflowered.","label":1,"QE-U + GloVe (centered)":1.5866658688,"QE-U + HF (centered)":1.525161624}
+{"index":"semeval.hom_324","text":"If you sight a whale, it could be a fluke.","label":1,"QE-U + GloVe (centered)":1.712428093,"QE-U + HF (centered)":1.7107061148}
+{"index":"semeval.hom_328","text":"'' I didn't look at all!'' Tom peeped.","label":1,"QE-U + GloVe (centered)":1.8954225779,"QE-U + HF (centered)":2.006998539}
+{"index":"semeval.hom_329","text":"My name is Melody. A Musician","label":1,"QE-U + GloVe (centered)":1.5836843252,"QE-U + HF (centered)":1.4672529697}
+{"index":"semeval.hom_334","text":"Why was the car embarrassed? Because it had gas!","label":1,"QE-U + GloVe (centered)":1.7095328569,"QE-U + HF (centered)":1.7103953362}
+{"index":"semeval.hom_337","text":"Three can keep a secret, if two of them are dead.","label":0,"QE-U + GloVe (centered)":1.7577967644,"QE-U + HF (centered)":1.7094758749}
+{"index":"semeval.hom_341","text":"OLD FLORISTS never die, they just make alternative arrangements.","label":1,"QE-U + GloVe (centered)":1.5818980932,"QE-U + HF (centered)":1.5044891834}
+{"index":"semeval.hom_342","text":"When entering a funeral home, remember to stay alert and always look alive!","label":1,"QE-U + GloVe (centered)":1.7807877064,"QE-U + HF (centered)":1.7284562588}
+{"index":"semeval.hom_345","text":"Two blackberries met. They were both in a jam.","label":1,"QE-U + GloVe (centered)":1.3786145449,"QE-U + HF (centered)":1.300291419}
+{"index":"semeval.hom_347","text":"Behind every man, there's a woman with nothing to wear.","label":0,"QE-U + GloVe (centered)":1.35648036,"QE-U + HF (centered)":1.2948344946}
+{"index":"semeval.hom_348","text":"My boyfriend and I started to date after he backed his car into mine. We met by accident.","label":1,"QE-U + GloVe (centered)":2.5735139847,"QE-U + HF (centered)":2.4975168705}
+{"index":"semeval.hom_352","text":"I am not 40, I'm 18 with 22 years experience","label":0,"QE-U + GloVe (centered)":1.5452651978,"QE-U + HF (centered)":1.5115658045}
+{"index":"semeval.hom_359","text":"I travel all over America, Tom stated.","label":1,"QE-U + GloVe (centered)":1.7629401684,"QE-U + HF (centered)":1.7290436029}
+{"index":"semeval.hom_360","text":"OLD PYROMANIACS never die, they just lose their spark","label":1,"QE-U + GloVe (centered)":1.5752813816,"QE-U + HF (centered)":1.5131394863}
+{"index":"semeval.hom_362","text":"Be true to your teeth, or they will be false to you.","label":1,"QE-U + GloVe (centered)":1.7461972237,"QE-U + HF (centered)":1.7310204506}
+{"index":"semeval.hom_364","text":"Five brothers wanted to buy a horse, so they all had to pony up.","label":1,"QE-U + GloVe (centered)":2.0289773941,"QE-U + HF (centered)":1.9687418938}
+{"index":"semeval.hom_366","text":"When the plums dry on your tree, it's time to prune.","label":1,"QE-U + GloVe (centered)":2.0259037018,"QE-U + HF (centered)":1.9597859383}
+{"index":"semeval.hom_381","text":"OLD GOLFERS never die, they just lose their drive.","label":1,"QE-U + GloVe (centered)":1.5880595446,"QE-U + HF (centered)":1.5081174374}
+{"index":"semeval.hom_386","text":"Two florists got married. It was an arranged marriage.","label":1,"QE-U + GloVe (centered)":1.59991014,"QE-U + HF (centered)":1.4795767069}
+{"index":"semeval.hom_387","text":"OLD GEOMETRY TEACHERS never die, they just go off on a tangent.","label":1,"QE-U + GloVe (centered)":1.7666441202,"QE-U + HF (centered)":1.7033542395}
+{"index":"semeval.hom_391","text":"It's a fact, taller people sleep longer in bed.","label":1,"QE-U + GloVe (centered)":1.591750145,"QE-U + HF (centered)":1.5584385395}
+{"index":"semeval.hom_396","text":"An undertaker can be one of your best friends, he is always the last one to let you down.","label":1,"QE-U + GloVe (centered)":2.2042088509,"QE-U + HF (centered)":2.1232538223}
+{"index":"semeval.hom_399","text":"Two pencils decided to have a race. The outcome was a draw.","label":1,"QE-U + GloVe (centered)":2.0217404366,"QE-U + HF (centered)":1.9767665863}
+{"index":"semeval.hom_401","text":"You know what happens after you miss math class? It starts adding up.","label":1,"QE-U + GloVe (centered)":1.8723723888,"QE-U + HF (centered)":2.1332864761}
+{"index":"semeval.hom_402","text":"I crossed a cell phone with a skunk, and now the service stinks.","label":1,"QE-U + GloVe (centered)":1.9824445248,"QE-U + HF (centered)":1.9801270962}
+{"index":"semeval.hom_405","text":"He collects mouthwash bottles, and they're all in mint condition.","label":1,"QE-U + GloVe (centered)":1.5417774916,"QE-U + HF (centered)":1.5442689657}
+{"index":"semeval.hom_409","text":"OLD AUTO MECHANICS never die, they just become exhausted.","label":1,"QE-U + GloVe (centered)":1.7492926121,"QE-U + HF (centered)":1.6810190678}
+{"index":"semeval.hom_410","text":"If all goes well, you've overlooked something!","label":0,"QE-U + GloVe (centered)":1.5576028824,"QE-U + HF (centered)":1.5129445791}
+{"index":"semeval.hom_413","text":"Hope for the best, but prepare for the worst.","label":0,"QE-U + GloVe (centered)":1.5852679014,"QE-U + HF (centered)":1.4379837513}
+{"index":"semeval.hom_414","text":"I tried to pack myself in a suitcase. I could hardly contain myself.","label":1,"QE-U + GloVe (centered)":2.0775232315,"QE-U + HF (centered)":2.0443425179}
+{"index":"semeval.hom_415","text":"My name is Leo. A lion trainer.","label":1,"QE-U + GloVe (centered)":1.5794951916,"QE-U + HF (centered)":1.4888130426}
+{"index":"semeval.hom_417","text":"When video arcades switched to a system of tokens, there was no quarter asked or given.","label":1,"QE-U + GloVe (centered)":2.2412233353,"QE-U + HF (centered)":2.168607235}
+{"index":"semeval.hom_422","text":"If you wear a blindfold at the shooting range, you won't know what you're missing.","label":1,"QE-U + GloVe (centered)":2.2170004845,"QE-U + HF (centered)":2.063270092}
+{"index":"semeval.hom_430","text":"The ice at the rink has many ruts. I think the maintenance crew is slipping up.","label":1,"QE-U + GloVe (centered)":1.9716713428,"QE-U + HF (centered)":2.0526750088}
+{"index":"semeval.hom_431","text":"There was a contest on a slippery rock slope. I won in a landslide.","label":1,"QE-U + GloVe (centered)":2.0961918831,"QE-U + HF (centered)":2.0412149429}
+{"index":"semeval.hom_433","text":"OLD FARMERS never die, they just turn into vegetables.","label":1,"QE-U + GloVe (centered)":1.5890057087,"QE-U + HF (centered)":1.5613863468}
+{"index":"semeval.hom_435","text":"... So simple a child could do it? Go find me a child!","label":0,"QE-U + GloVe (centered)":2.0628697872,"QE-U + HF (centered)":2.0807356834}
+{"index":"semeval.hom_443","text":"OLD ELECTRICIANS never die, they just lose their potential.","label":1,"QE-U + GloVe (centered)":1.5855776072,"QE-U + HF (centered)":1.5052771568}
+{"index":"semeval.hom_444","text":"Success comes in cans, failure comes in cant’s","label":1,"QE-U + GloVe (centered)":1.590192914,"QE-U + HF (centered)":1.5544155836}
+{"index":"semeval.hom_447","text":"I know road rage is an awful thing but when someone bumped my car I just couldn't help it. I got out my camera and snapped at the offender.","label":1,"QE-U + GloVe (centered)":2.6838407516,"QE-U + HF (centered)":2.6845936775}
+{"index":"semeval.hom_449","text":"She was only a Cattleman's daughter, but she couldn't keep her calves together.","label":1,"QE-U + GloVe (centered)":2.0315158367,"QE-U + HF (centered)":1.9958566427}
+{"index":"semeval.hom_450","text":"Dogs wags their tails, not as much to you as to your bread.","label":0,"QE-U + GloVe (centered)":1.5301605463,"QE-U + HF (centered)":1.5532226562}
+{"index":"semeval.hom_454","text":"OLD PRESIDENTS never die, they just go through their cabinets","label":1,"QE-U + GloVe (centered)":1.5928195715,"QE-U + HF (centered)":1.525067687}
+{"index":"semeval.hom_457","text":"I've spotted more blackbirds than you have, Tom crowed.","label":1,"QE-U + GloVe (centered)":1.8991457224,"QE-U + HF (centered)":2.0785799026}
+{"index":"semeval.hom_458","text":"OLD TYPISTS never die, they just lose their justification.","label":1,"QE-U + GloVe (centered)":1.5845301151,"QE-U + HF (centered)":1.5472459793}
+{"index":"semeval.hom_459","text":"No longer foster, no longer friend.","label":0,"QE-U + GloVe (centered)":1.3568594456,"QE-U + HF (centered)":1.2787749767}
+{"index":"semeval.hom_460","text":"Don't lend people money. It causes amnesia.","label":0,"QE-U + GloVe (centered)":1.6482458115,"QE-U + HF (centered)":1.7006219625}
+{"index":"semeval.hom_462","text":"I'll glue the sheets of wood back together, Tom replied.","label":1,"QE-U + GloVe (centered)":2.1684455872,"QE-U + HF (centered)":2.0925793648}
+{"index":"semeval.hom_463","text":"Old lumberjacks never die, they just pine away.","label":1,"QE-U + GloVe (centered)":1.5892373323,"QE-U + HF (centered)":1.5447803736}
+{"index":"semeval.hom_466","text":"To test a man's character, give him power.","label":0,"QE-U + GloVe (centered)":1.9200496674,"QE-U + HF (centered)":1.8676098585}
+{"index":"semeval.hom_467","text":"He was facinated by his new welding job. It was riveting.","label":1,"QE-U + GloVe (centered)":2.0004968643,"QE-U + HF (centered)":2.0845794678}
+{"index":"semeval.hom_472","text":"None of you exist. The sysop types it all in...","label":0,"QE-U + GloVe (centered)":1.5670162439,"QE-U + HF (centered)":1.5669301748}
+{"index":"semeval.hom_476","text":"Better to remain silent and be thought a fool, than to open your mouth and remove all doubt.","label":0,"QE-U + GloVe (centered)":2.2199854851,"QE-U + HF (centered)":2.1310539246}
+{"index":"semeval.hom_479","text":"When you give to god, you always get back change","label":1,"QE-U + GloVe (centered)":1.7178740501,"QE-U + HF (centered)":1.7034189701}
+{"index":"semeval.hom_480","text":"I'm not paranoid! Which of my enemies told you this?","label":0,"QE-U + GloVe (centered)":1.4692485332,"QE-U + HF (centered)":1.532456398}
+{"index":"semeval.hom_481","text":"I was going to buy some loose tea, but the price was too steep.","label":1,"QE-U + GloVe (centered)":2.1288018227,"QE-U + HF (centered)":2.0965585709}
+{"index":"semeval.hom_483","text":"OLD COUPON CLIPPERS never die, they just expire.","label":1,"QE-U + GloVe (centered)":1.7606999874,"QE-U + HF (centered)":1.6154104471}
+{"index":"semeval.hom_484","text":"Oh sure! But what's the speed of dark?","label":0,"QE-U + GloVe (centered)":0.9975591302,"QE-U + HF (centered)":0.8065309525}
+{"index":"semeval.hom_485","text":"She was only a Electrician's daughter, but she certainly had good connections.","label":1,"QE-U + GloVe (centered)":2.0390350819,"QE-U + HF (centered)":1.9846118689}
+{"index":"semeval.hom_487","text":"When the woman got paid for being in a study at the sleep clinic, she said it was her dream job.","label":1,"QE-U + GloVe (centered)":2.5350060463,"QE-U + HF (centered)":2.4311900139}
+{"index":"semeval.hom_491","text":"We don’t read palms; we wave them.","label":1,"QE-U + GloVe (centered)":1.6816082001,"QE-U + HF (centered)":1.7456117868}
+{"index":"semeval.hom_495","text":"The tongue weighs very little, but few people can hold it.","label":1,"QE-U + GloVe (centered)":1.7695355415,"QE-U + HF (centered)":1.7081067562}
+{"index":"semeval.hom_498","text":"My name is Herb. I'm a cook.","label":1,"QE-U + GloVe (centered)":1.5814583302,"QE-U + HF (centered)":1.5440073013}
+{"index":"semeval.hom_500","text":"There was a report of shots fired in a local bar. The police don't know what triggered the commotion.","label":1,"QE-U + GloVe (centered)":2.312076807,"QE-U + HF (centered)":2.2126972675}
+{"index":"semeval.hom_503","text":"When the wino suspected his muscatel was watered down, he needed more proof.","label":1,"QE-U + GloVe (centered)":2.2251200676,"QE-U + HF (centered)":2.1629564762}
+{"index":"semeval.hom_504","text":"The bargain store promised a free abacus with every purchase, but I wouldn't count on it.","label":1,"QE-U + GloVe (centered)":2.3319690228,"QE-U + HF (centered)":2.1982269287}
+{"index":"semeval.hom_508","text":"OLD NITPICKERS never die, they just feel lousy.","label":1,"QE-U + GloVe (centered)":1.5846556425,"QE-U + HF (centered)":1.4769148827}
+{"index":"semeval.hom_509","text":"Comedians, the biggest joke going.","label":1,"QE-U + GloVe (centered)":0.6886519194,"QE-U + HF (centered)":0.5759019852}
+{"index":"semeval.hom_511","text":"Why didn't the little boy ask the flight attendant for a snack? He didn't have the nuts.","label":1,"QE-U + GloVe (centered)":2.3542115688,"QE-U + HF (centered)":2.3473932743}
+{"index":"semeval.hom_512","text":"Why did the agricultural presentation go so smoothly? They planted questions.","label":1,"QE-U + GloVe (centered)":2.0662999153,"QE-U + HF (centered)":2.1056802273}
+{"index":"semeval.hom_513","text":"I couldn't quite remember how to throw a boomerang, but eventually it came back to me.","label":1,"QE-U + GloVe (centered)":2.2175679207,"QE-U + HF (centered)":2.203496933}
+{"index":"semeval.hom_514","text":"OLD FORGERS never die, they just leave no trace.","label":1,"QE-U + GloVe (centered)":1.5852282047,"QE-U + HF (centered)":1.4988247156}
+{"index":"semeval.hom_515","text":"Speed doesn't kill. Stopping very fast kills.","label":0,"QE-U + GloVe (centered)":1.5315318108,"QE-U + HF (centered)":1.5517859459}
+{"index":"semeval.hom_517","text":"If you want a thing done right, do it yourself.","label":0,"QE-U + GloVe (centered)":1.8577024937,"QE-U + HF (centered)":1.9662511349}
+{"index":"semeval.hom_530","text":"Laugh and the world laughs with you, cry and you cry alone.","label":0,"QE-U + GloVe (centered)":1.9215567112,"QE-U + HF (centered)":1.9405697584}
+{"index":"semeval.hom_534","text":"My name is Sandy. I'm a lifeguard.","label":1,"QE-U + GloVe (centered)":1.5869477987,"QE-U + HF (centered)":1.4892898798}
+{"index":"semeval.hom_536","text":"If ignorance is bliss, why aren't there more happy folks?","label":0,"QE-U + GloVe (centered)":1.5518586636,"QE-U + HF (centered)":1.5682330132}
+{"index":"semeval.hom_541","text":"Like father, like son.","label":0,"QE-U + GloVe (centered)":1.0957529545,"QE-U + HF (centered)":1.0874713659}
+{"index":"semeval.hom_554","text":"I'm blind enough to look at the situation in the wrong fashion, so I changed my clothes.","label":1,"QE-U + GloVe (centered)":2.3947455883,"QE-U + HF (centered)":2.3649160862}
+{"index":"semeval.hom_555","text":"Before he sold Christmas trees, he got himself spruced up.","label":1,"QE-U + GloVe (centered)":1.7574896812,"QE-U + HF (centered)":1.7146987915}
+{"index":"semeval.hom_556","text":"OLD SOCCER PLAYERS never die, they just lose their kick.","label":1,"QE-U + GloVe (centered)":1.7397860289,"QE-U + HF (centered)":1.693300128}
+{"index":"semeval.hom_559","text":"My name is Ray. I'm a roentgenologist.","label":1,"QE-U + GloVe (centered)":1.5871711969,"QE-U + HF (centered)":1.4734658003}
+{"index":"semeval.hom_563","text":"If pride goes before a fall, humility should arrive by that winter","label":1,"QE-U + GloVe (centered)":1.9165258408,"QE-U + HF (centered)":1.8622090816}
+{"index":"semeval.hom_566","text":"After they had it out in the boxing ring, they called it square.","label":1,"QE-U + GloVe (centered)":2.2197768688,"QE-U + HF (centered)":2.1068525314}
+{"index":"semeval.hom_569","text":"Power corrupts, especially at the electric company.","label":1,"QE-U + GloVe (centered)":1.0648927689,"QE-U + HF (centered)":0.9739293456}
+{"index":"semeval.hom_570","text":"OLD PSYCHIATRISTS never die, they just shrink away.","label":1,"QE-U + GloVe (centered)":1.5884737968,"QE-U + HF (centered)":1.5383512974}
+{"index":"semeval.hom_576","text":"OLD SHOEMAKERS never die, they are just given the boot.","label":1,"QE-U + GloVe (centered)":1.5845029354,"QE-U + HF (centered)":1.5049011707}
+{"index":"semeval.hom_581","text":"OLD METEOROLOGISTS never die, they just get under the weather.","label":1,"QE-U + GloVe (centered)":1.5883523226,"QE-U + HF (centered)":1.5240323544}
+{"index":"semeval.hom_584","text":"Any golfer will tell you the gospel truth. Your next shot always depends on the lie.","label":1,"QE-U + GloVe (centered)":2.1044330597,"QE-U + HF (centered)":2.0854854584}
+{"index":"semeval.hom_588","text":"OLD PICKPOCKETS never die, they just steal away.","label":1,"QE-U + GloVe (centered)":1.5821695328,"QE-U + HF (centered)":1.5456410646}
+{"index":"semeval.hom_589","text":"Curiosity didn't kill the cat. I got'im with the mower!","label":0,"QE-U + GloVe (centered)":1.8409471512,"QE-U + HF (centered)":1.8728314638}
+{"index":"semeval.hom_591","text":"The stock market crashes, but Viagra beats the flop.","label":1,"QE-U + GloVe (centered)":1.5152862072,"QE-U + HF (centered)":1.4641191959}
+{"index":"semeval.hom_598","text":"OLD ESKIMOS never die, they just go cold.","label":1,"QE-U + GloVe (centered)":1.5896722078,"QE-U + HF (centered)":1.4225239754}
+{"index":"semeval.hom_599","text":"You really are addicted to soccer, you should think of kicking the habit.","label":1,"QE-U + GloVe (centered)":1.8547978401,"QE-U + HF (centered)":1.8496346474}
+{"index":"semeval.hom_600","text":"She was only a Magistrates daughter, but she knew what to do on the bench.","label":1,"QE-U + GloVe (centered)":1.9078836441,"QE-U + HF (centered)":1.8493653536}
+{"index":"semeval.hom_604","text":"I wanted to lose weight so I went to the paint store. I heard I could get thinner there.","label":1,"QE-U + GloVe (centered)":2.2814567089,"QE-U + HF (centered)":2.240118742}
+{"index":"semeval.hom_608","text":"OLD PLAGIARISTS never die, they just steal away.","label":1,"QE-U + GloVe (centered)":1.5780670643,"QE-U + HF (centered)":1.5439223051}
+{"index":"semeval.hom_609","text":"I used to be addicted to soap, but I'm clean now.","label":1,"QE-U + GloVe (centered)":1.8554854393,"QE-U + HF (centered)":1.9404597282}
+{"index":"semeval.hom_610","text":"Profanity, the language of computer professionals","label":0,"QE-U + GloVe (centered)":0.6927562952,"QE-U + HF (centered)":0.5733156204}
+{"index":"semeval.hom_614","text":"I went to buy some property with a hill on it, but it was a little steep.","label":1,"QE-U + GloVe (centered)":2.425955534,"QE-U + HF (centered)":2.2820866108}
+{"index":"semeval.hom_616","text":"If it's obvious, it's obviously wrong.","label":0,"QE-U + GloVe (centered)":1.5737707615,"QE-U + HF (centered)":1.5750792027}
+{"index":"semeval.hom_623","text":"My name is Bet. I'm a coupier.","label":1,"QE-U + GloVe (centered)":1.5890215635,"QE-U + HF (centered)":1.5071225166}
+{"index":"semeval.hom_626","text":"Give and you might receive. Take and be sure of it.","label":0,"QE-U + GloVe (centered)":1.7116168737,"QE-U + HF (centered)":1.7123687267}
+{"index":"semeval.hom_629","text":"OLD BREAD MEN never die, they just lose their dough.","label":1,"QE-U + GloVe (centered)":1.7731015682,"QE-U + HF (centered)":1.5614789724}
+{"index":"semeval.hom_637","text":"The hot dog vendor answered, with a tone quite frank.","label":1,"QE-U + GloVe (centered)":1.7542471886,"QE-U + HF (centered)":1.5636481047}
+{"index":"semeval.hom_638","text":"OLD MATH PROFESSORS never die, they just use strange expressions.","label":1,"QE-U + GloVe (centered)":1.7429267168,"QE-U + HF (centered)":1.7084329128}
+{"index":"semeval.hom_639","text":"When all is said and done, more is said then done.","label":0,"QE-U + GloVe (centered)":1.8884758949,"QE-U + HF (centered)":1.7403831482}
+{"index":"semeval.hom_642","text":"The thief had a bold plan. He figured he could carry it off.","label":1,"QE-U + GloVe (centered)":1.9134465456,"QE-U + HF (centered)":1.848749876}
+{"index":"semeval.hom_646","text":"Everyday is a gift from god, that is why it is called the present","label":1,"QE-U + GloVe (centered)":1.9025971889,"QE-U + HF (centered)":1.8394882679}
+{"index":"semeval.hom_649","text":"OLD LAUNDRY WORKERS never die, they just are decreased.","label":1,"QE-U + GloVe (centered)":1.7629971504,"QE-U + HF (centered)":1.6538113356}
+{"index":"semeval.hom_650","text":"She was only a Moonshiner's daughter, but I love her still.","label":1,"QE-U + GloVe (centered)":2.0296378136,"QE-U + HF (centered)":1.9994450808}
+{"index":"semeval.hom_654","text":"OLD UNIVERSITY PRESIDENTS never die, they just lose their faculties","label":1,"QE-U + GloVe (centered)":1.7666851282,"QE-U + HF (centered)":1.7146120071}
+{"index":"semeval.hom_655","text":"I was going to buy a book on phobias, but I was afraid it wouldn't help me.","label":1,"QE-U + GloVe (centered)":2.2271504402,"QE-U + HF (centered)":2.1418013573}
+{"index":"semeval.hom_663","text":"When they told him that his drum couldn't be fixed, it didn't resonate very well.","label":1,"QE-U + GloVe (centered)":2.314218998,"QE-U + HF (centered)":2.269659996}
+{"index":"semeval.hom_664","text":"A fisherman tried boxing, but he only threw hooks.","label":1,"QE-U + GloVe (centered)":1.5858089924,"QE-U + HF (centered)":1.53109622}
+{"index":"semeval.hom_667","text":"During his lifetime, the composer Bach was a noted success.","label":1,"QE-U + GloVe (centered)":1.3630440235,"QE-U + HF (centered)":1.3175195456}
+{"index":"semeval.hom_668","text":"OLD POKER PLAYERS never die, they are just discarded.","label":1,"QE-U + GloVe (centered)":1.7614256144,"QE-U + HF (centered)":1.6185836792}
+{"index":"semeval.hom_670","text":"'' I can take photographs if I want to!'' Tom snapped.","label":1,"QE-U + GloVe (centered)":1.9585995674,"QE-U + HF (centered)":2.1172316074}
+{"index":"semeval.hom_672","text":"Our bikinis are exciting. They are simply the tops.","label":1,"QE-U + GloVe (centered)":1.5836677551,"QE-U + HF (centered)":1.5039937496}
+{"index":"semeval.hom_673","text":"High on a ladder he saw a beautiful girl below. He fell for her.","label":1,"QE-U + GloVe (centered)":2.2208433151,"QE-U + HF (centered)":2.2000291348}
+{"index":"semeval.hom_674","text":"When underwear fell in the vat at a beer- makers, a scandal was brewing.","label":1,"QE-U + GloVe (centered)":2.2401227951,"QE-U + HF (centered)":2.2553792}
+{"index":"semeval.hom_675","text":"Pencils could be made with erasers at both ends, but what would be the point?","label":1,"QE-U + GloVe (centered)":2.1720294952,"QE-U + HF (centered)":2.1129083633}
+{"index":"semeval.hom_678","text":"My name is Grant, I am a loan officer.","label":1,"QE-U + GloVe (centered)":1.5681862831,"QE-U + HF (centered)":1.4894895554}
+{"index":"semeval.hom_680","text":"She was only a Farmer's daughter, but she knew hundreds of ways to fertilize.","label":1,"QE-U + GloVe (centered)":2.0360579491,"QE-U + HF (centered)":1.9556353092}
+{"index":"semeval.hom_684","text":"My name is Joe, an espresso vender","label":1,"QE-U + GloVe (centered)":1.5746766329,"QE-U + HF (centered)":1.4858008623}
+{"index":"semeval.hom_689","text":"'' I told you not to ride that horse,'' Tom nagged.","label":1,"QE-U + GloVe (centered)":2.1301343441,"QE-U + HF (centered)":2.1956400871}
+{"index":"semeval.hom_695","text":"OLD RAILROADERS never die, they just derail.","label":1,"QE-U + GloVe (centered)":1.5864236355,"QE-U + HF (centered)":1.5158807039}
+{"index":"semeval.hom_700","text":"OLD CARD PLAYERS never die, they just fold.","label":1,"QE-U + GloVe (centered)":1.7639935017,"QE-U + HF (centered)":1.6228429079}
+{"index":"semeval.hom_702","text":"Walk softly, carry a big stick.","label":0,"QE-U + GloVe (centered)":1.0695052147,"QE-U + HF (centered)":0.8985571861}
+{"index":"semeval.hom_709","text":"First come, first served.","label":0,"QE-U + GloVe (centered)":1.0901890993,"QE-U + HF (centered)":1.0108562708}
+{"index":"semeval.hom_710","text":"In high school I recall having a beautiful but difficult math teacher. She was easy on the eyes and hard on the pupils!","label":1,"QE-U + GloVe (centered)":2.4371833801,"QE-U + HF (centered)":2.3408460617}
+{"index":"semeval.hom_715","text":"OLD PROGRAMMERS never die, they just get bugged with life.","label":1,"QE-U + GloVe (centered)":1.5878871679,"QE-U + HF (centered)":1.5345423222}
+{"index":"semeval.hom_716","text":"Christians, keep the faith... but not from others!","label":1,"QE-U + GloVe (centered)":0.6927579641,"QE-U + HF (centered)":0.5934063196}
+{"index":"semeval.hom_723","text":"'' This must be an aerobics class,'' Tom worked out.","label":1,"QE-U + GloVe (centered)":1.9673433304,"QE-U + HF (centered)":2.009604454}
+{"index":"semeval.hom_730","text":"Spare the rod, spoil the child.","label":0,"QE-U + GloVe (centered)":1.3694094419,"QE-U + HF (centered)":1.1972813606}
+{"index":"semeval.hom_731","text":"OLD MATHEMATICIANS never die, they just go off on a tangent","label":1,"QE-U + GloVe (centered)":1.5883822441,"QE-U + HF (centered)":1.5417650938}
+{"index":"semeval.hom_732","text":"A thief fell and broke his leg in wet cement. He became a hardened criminal.","label":1,"QE-U + GloVe (centered)":2.3334114552,"QE-U + HF (centered)":2.2210476398}
+{"index":"semeval.hom_736","text":"In parking lots, arguments often start from scratch.","label":1,"QE-U + GloVe (centered)":1.3279440403,"QE-U + HF (centered)":1.2312546968}
+{"index":"semeval.hom_738","text":"When the town removed billboards, they told people that's how it was designed.","label":1,"QE-U + GloVe (centered)":1.7591307163,"QE-U + HF (centered)":1.7312319279}
+{"index":"semeval.hom_742","text":"The lumber company downsized. They got rid of the deadwood.","label":1,"QE-U + GloVe (centered)":1.5757341385,"QE-U + HF (centered)":1.5532889366}
+{"index":"semeval.hom_745","text":"Tailors enjoy hanging out in internet fora, as they are full of threads.","label":1,"QE-U + GloVe (centered)":2.0365509987,"QE-U + HF (centered)":1.9804623127}
+{"index":"semeval.hom_747","text":"If you make yourself into a doormat, people will wipe their feet on you.","label":0,"QE-U + GloVe (centered)":1.9395753145,"QE-U + HF (centered)":1.9352160692}
+{"index":"semeval.hom_749","text":"Old artists never die, they just put things in perspective.","label":1,"QE-U + GloVe (centered)":1.5915272236,"QE-U + HF (centered)":1.5623806715}
+{"index":"semeval.hom_752","text":"Whom God will destroy, he first make mad.","label":0,"QE-U + GloVe (centered)":1.583742857,"QE-U + HF (centered)":1.496270895}
+{"index":"semeval.hom_753","text":"I never understood why people liked to play soft ball. It's a very underhanded thing to do.","label":1,"QE-U + GloVe (centered)":2.2716314793,"QE-U + HF (centered)":2.1878120899}
+{"index":"semeval.hom_754","text":"Tom was so tired, he lied about his bed.","label":1,"QE-U + GloVe (centered)":1.5822502375,"QE-U + HF (centered)":1.497729063}
+{"index":"semeval.hom_756","text":"She was only an Artist's daughter, but what a crowd she could draw.","label":1,"QE-U + GloVe (centered)":2.0377073288,"QE-U + HF (centered)":1.990165472}
+{"index":"semeval.hom_758","text":"OLD KENTUCKY FRIED CHICKEN FRANCHISERS never die, they just chicken out.","label":1,"QE-U + GloVe (centered)":1.9734090567,"QE-U + HF (centered)":1.9271850586}
+{"index":"semeval.hom_760","text":"My name is Marshall. I'm a peace officier.","label":1,"QE-U + GloVe (centered)":1.5814949274,"QE-U + HF (centered)":1.5444318056}
+{"index":"semeval.hom_761","text":"Goose, gander and gosling are three sounds but one thing.","label":0,"QE-U + GloVe (centered)":0.6894165874,"QE-U + HF (centered)":0.4311209321}
+{"index":"semeval.hom_763","text":"OLD CRICKETERS never die, they just get bowled over.","label":1,"QE-U + GloVe (centered)":1.5856318474,"QE-U + HF (centered)":1.5491293669}
+{"index":"semeval.hom_766","text":"She was only a Dairyman's daughter, but what a calf","label":1,"QE-U + GloVe (centered)":2.0263330936,"QE-U + HF (centered)":1.9943356514}
+{"index":"semeval.hom_769","text":"I just got back from a statistical probability conference. It was average.","label":1,"QE-U + GloVe (centered)":2.1866044998,"QE-U + HF (centered)":2.0533597469}
+{"index":"semeval.hom_770","text":"OLD HIPPIES never die, they just take a trip.","label":1,"QE-U + GloVe (centered)":1.582011342,"QE-U + HF (centered)":1.531229496}
+{"index":"semeval.hom_771","text":"I finally found a spotter at the gym, it's like a huge weight has been lifted off my shoulders.","label":1,"QE-U + GloVe (centered)":2.1518986225,"QE-U + HF (centered)":2.0157961845}
+{"index":"semeval.hom_772","text":"If you trust before you try, you may repent before you die.","label":0,"QE-U + GloVe (centered)":1.6585894823,"QE-U + HF (centered)":1.7199575901}
+{"index":"semeval.hom_777","text":"No one knows where the shoe pinches, but he who wears it.","label":0,"QE-U + GloVe (centered)":2.0310869217,"QE-U + HF (centered)":1.9976642132}
+{"index":"semeval.hom_778","text":"OLD AIR CONDITIONER REPAIRMEN never die, they just lose their cool.","label":1,"QE-U + GloVe (centered)":1.8623585701,"QE-U + HF (centered)":1.7844325304}
+{"index":"semeval.hom_780","text":"What do they call all that lumber on the Star Trek's Enterprise? Captain's log.","label":1,"QE-U + GloVe (centered)":2.4742693901,"QE-U + HF (centered)":2.479057312}
+{"index":"semeval.hom_782","text":"PRESS To test.< click> RELEASE to detonate.","label":0,"QE-U + GloVe (centered)":1.3728741407,"QE-U + HF (centered)":1.2709735632}
+{"index":"semeval.hom_790","text":"A husband and wife argued over the weather, but it soon blew over.","label":1,"QE-U + GloVe (centered)":2.0708470345,"QE-U + HF (centered)":2.0185420513}
+{"index":"semeval.hom_791","text":"I needed a raise in my allowance. Mowing the grass all summer just wasn't cutting it.","label":1,"QE-U + GloVe (centered)":1.985430479,"QE-U + HF (centered)":1.993068099}
+{"index":"semeval.hom_792","text":"I think Santa has riverfront property in Brazil. All our presents came from Amazon this year.","label":1,"QE-U + GloVe (centered)":2.1064653397,"QE-U + HF (centered)":2.0526328087}
+{"index":"semeval.hom_793","text":"Husbands are like fires. They go out when unattended.","label":1,"QE-U + GloVe (centered)":1.5840214491,"QE-U + HF (centered)":1.5307554007}
+{"index":"semeval.hom_794","text":"Success is just a matter of luck. Ask any failure.","label":0,"QE-U + GloVe (centered)":2.032053709,"QE-U + HF (centered)":1.8802784681}
+{"index":"semeval.hom_803","text":"If anything can go wrong, it will.","label":0,"QE-U + GloVe (centered)":1.6035823822,"QE-U + HF (centered)":1.6383990049}
+{"index":"semeval.hom_804","text":"Before a plumber retired, he took the final plunge.","label":1,"QE-U + GloVe (centered)":1.5791727304,"QE-U + HF (centered)":1.5531426668}
+{"index":"semeval.hom_805","text":"Firefighters can rescue you, but only Jesus saves.","label":1,"QE-U + GloVe (centered)":1.4605971575,"QE-U + HF (centered)":1.5349858999}
+{"index":"semeval.hom_809","text":"If Version 1. 0 works someone goofed...","label":0,"QE-U + GloVe (centered)":1.3666594028,"QE-U + HF (centered)":1.2017109394}
+{"index":"semeval.hom_811","text":"After he bought his two- year- old a felt pen, he was a marked man.","label":1,"QE-U + GloVe (centered)":2.1363387108,"QE-U + HF (centered)":2.2263586521}
+{"index":"semeval.hom_812","text":"OLD CARTOONISTS never die, they just draw their last breath.","label":1,"QE-U + GloVe (centered)":1.5841958523,"QE-U + HF (centered)":1.5185739994}
+{"index":"semeval.hom_814","text":"The plums for sale dried out, so the profits were pruned.","label":1,"QE-U + GloVe (centered)":1.88422966,"QE-U + HF (centered)":1.7856434584}
+{"index":"semeval.hom_820","text":"Elephants will toil all day, and they work for peanuts.","label":1,"QE-U + GloVe (centered)":1.7631834745,"QE-U + HF (centered)":1.7240896225}
+{"index":"semeval.hom_821","text":"OLD AUDITORS never die, they just lose their figures.","label":1,"QE-U + GloVe (centered)":1.5878641605,"QE-U + HF (centered)":1.5251817703}
+{"index":"semeval.hom_824","text":"Take my advice, I don't use it anyway.","label":0,"QE-U + GloVe (centered)":1.342869401,"QE-U + HF (centered)":1.2915681601}
+{"index":"semeval.hom_828","text":"The racers all had shorts on that were too small for them, so it was a tight race.","label":1,"QE-U + GloVe (centered)":2.4602046013,"QE-U + HF (centered)":2.4031245708}
+{"index":"semeval.hom_829","text":"She was only a Convict's daughter, but she sure knew all of the bars.","label":1,"QE-U + GloVe (centered)":2.0399959087,"QE-U + HF (centered)":2.0023918152}
+{"index":"semeval.hom_831","text":"Life is a game. Money is how we keep score.","label":0,"QE-U + GloVe (centered)":1.5837346315,"QE-U + HF (centered)":1.4401720762}
+{"index":"semeval.hom_833","text":"Some clockmakers are normal, but others are a little cuckoo.","label":1,"QE-U + GloVe (centered)":1.5669910908,"QE-U + HF (centered)":1.547501564}
+{"index":"semeval.hom_835","text":"A man stole a case of soap from the corner store. The police said he made a clean getaway.","label":1,"QE-U + GloVe (centered)":2.3050615788,"QE-U + HF (centered)":2.2619214058}
+{"index":"semeval.hom_839","text":"Keyboard not connected. Think F1 to continue.","label":0,"QE-U + GloVe (centered)":1.361299634,"QE-U + HF (centered)":1.283885479}
+{"index":"semeval.hom_841","text":"The politician is not one for Indian food. But he's good at currying favors.","label":1,"QE-U + GloVe (centered)":2.1584596634,"QE-U + HF (centered)":2.0548939705}
+{"index":"semeval.hom_843","text":"If you are what you eat, I'm staying away from the nuts!","label":1,"QE-U + GloVe (centered)":1.6048920155,"QE-U + HF (centered)":1.7333576679}
+{"index":"semeval.hom_844","text":"My name is Clay. I make pottery.","label":1,"QE-U + GloVe (centered)":1.5868548155,"QE-U + HF (centered)":1.4766358137}
+{"index":"semeval.hom_848","text":"I went to the dentist without lunch, and he gave me a plate.","label":1,"QE-U + GloVe (centered)":2.0381360054,"QE-U + HF (centered)":1.8994385004}
+{"index":"semeval.hom_850","text":"To our sweethearts and wives. May they never meet!","label":0,"QE-U + GloVe (centered)":1.7372717857,"QE-U + HF (centered)":1.7053633928}
+{"index":"semeval.hom_853","text":"OLD SHOE SHINE BOYS never die, they are just rebuffed..","label":1,"QE-U + GloVe (centered)":1.9008250237,"QE-U + HF (centered)":1.7742289305}
+{"index":"semeval.hom_855","text":"How do I handle change? I put it in the parking meter.","label":1,"QE-U + GloVe (centered)":1.6393630505,"QE-U + HF (centered)":1.7096590996}
+{"index":"semeval.hom_856","text":"I've never taken an elevator to the basement floor, that's just beneath me.","label":1,"QE-U + GloVe (centered)":2.2191743851,"QE-U + HF (centered)":2.1769161224}
+{"index":"semeval.hom_866","text":"I got a great bargain the other day when I bought a forklift for half- price. It's amazing what you can pick up these days.","label":1,"QE-U + GloVe (centered)":2.501645565,"QE-U + HF (centered)":2.4545350075}
+{"index":"semeval.hom_867","text":"Professionals built the Titanic, amateurs built the ark.","label":0,"QE-U + GloVe (centered)":1.6004654169,"QE-U + HF (centered)":1.4789977074}
+{"index":"semeval.hom_869","text":"If the shoe fits, wear it.","label":0,"QE-U + GloVe (centered)":1.5561962128,"QE-U + HF (centered)":1.5648828745}
+{"index":"semeval.hom_870","text":"Dutch shoes used to be made in a factory machine, until it got clogged up.","label":1,"QE-U + GloVe (centered)":2.3380475044,"QE-U + HF (centered)":2.2199244499}
+{"index":"semeval.hom_872","text":"Even if you're on the right track, you'll get run over if you just sit there.","label":1,"QE-U + GloVe (centered)":2.0565524101,"QE-U + HF (centered)":2.066224575}
+{"index":"semeval.hom_875","text":"Courage lost, all lost.","label":0,"QE-U + GloVe (centered)":1.0863075256,"QE-U + HF (centered)":1.021099329}
+{"index":"semeval.hom_876","text":"Old electricians never die, they just keep plugging away.","label":1,"QE-U + GloVe (centered)":1.5855776072,"QE-U + HF (centered)":1.5052771568}
+{"index":"semeval.hom_877","text":"OLD GARDENERS never die, they just get uprooted.","label":1,"QE-U + GloVe (centered)":1.5849606991,"QE-U + HF (centered)":1.5304108858}
+{"index":"semeval.hom_881","text":"How do you find a missing train? Follow the tracks.","label":1,"QE-U + GloVe (centered)":1.874907136,"QE-U + HF (centered)":1.9145809412}
+{"index":"semeval.hom_882","text":"My name is Brandy. The bartender.","label":1,"QE-U + GloVe (centered)":1.5824172497,"QE-U + HF (centered)":1.5386272669}
+{"index":"semeval.hom_884","text":"My name is Ham. I raise pigs","label":1,"QE-U + GloVe (centered)":1.5875726938,"QE-U + HF (centered)":1.4416481256}
+{"index":"semeval.hom_887","text":"A man of words and not of deeds, is like a garden full of weeds.","label":0,"QE-U + GloVe (centered)":1.9822211266,"QE-U + HF (centered)":1.9521698952}
+{"index":"semeval.hom_888","text":"The math professor went crazy with the blackboard. He did a number on it.","label":1,"QE-U + GloVe (centered)":1.9946229458,"QE-U + HF (centered)":2.0267422199}
+{"index":"semeval.hom_895","text":"I had some back trouble, but it's all behind me now.","label":1,"QE-U + GloVe (centered)":1.7638090849,"QE-U + HF (centered)":1.716724515}
+{"index":"semeval.hom_896","text":"Daddy, how come my magnet won't pick up these disks?","label":0,"QE-U + GloVe (centered)":0.6701414585,"QE-U + HF (centered)":0.6195541024}
+{"index":"semeval.hom_897","text":"Just after thimbles were invented there was a shortage, so many people got stuck without one.","label":1,"QE-U + GloVe (centered)":2.1986279488,"QE-U + HF (centered)":2.1900298595}
+{"index":"semeval.hom_902","text":"My name is Sue. I'm also a lawyer.","label":1,"QE-U + GloVe (centered)":1.5785245895,"QE-U + HF (centered)":1.4861531258}
+{"index":"semeval.hom_904","text":"In the house of the hanged man, mention not the rope.","label":0,"QE-U + GloVe (centered)":1.8176044226,"QE-U + HF (centered)":1.8350362778}
+{"index":"semeval.hom_907","text":"One grasshopper told another about eating corn. It went in one ear and out the other.","label":1,"QE-U + GloVe (centered)":2.0041906834,"QE-U + HF (centered)":1.9311630726}
+{"index":"semeval.hom_908","text":"Did you hear about the guy who planted bullets? He wanted to see a lot of little shoots.","label":1,"QE-U + GloVe (centered)":2.199057579,"QE-U + HF (centered)":2.2100024223}
+{"index":"semeval.hom_911","text":"The parsley farmer couldn't pay his child support, so the courts garnished his wages.","label":1,"QE-U + GloVe (centered)":2.2256839275,"QE-U + HF (centered)":2.1393785477}
+{"index":"semeval.hom_913","text":"She always paints night scenes. Other artists pale by comparison.","label":1,"QE-U + GloVe (centered)":1.7554880381,"QE-U + HF (centered)":1.7142401934}
+{"index":"semeval.hom_915","text":"To a person who is attentive to minutiae:'' You're certainly observant, even if you're not religious.''","label":1,"QE-U + GloVe (centered)":2.4551303387,"QE-U + HF (centered)":2.5008087158}
+{"index":"semeval.hom_919","text":"Measure twice, cut once.","label":0,"QE-U + GloVe (centered)":1.0982035398,"QE-U + HF (centered)":0.9864795208}
+{"index":"semeval.hom_922","text":"After a day of changing her triplet's diapers, the new mother was feeling rather pooped.","label":1,"QE-U + GloVe (centered)":2.2338483334,"QE-U + HF (centered)":2.17532444}
+{"index":"semeval.hom_926","text":"OLD EXORCISTS never die, they just get repossessed.","label":1,"QE-U + GloVe (centered)":1.5778690577,"QE-U + HF (centered)":1.5047688484}
+{"index":"semeval.hom_927","text":"Lead me not into temptation, I can find my own way","label":0,"QE-U + GloVe (centered)":1.7596795559,"QE-U + HF (centered)":1.6650543213}
+{"index":"semeval.hom_929","text":"She was only a Electrician's daughter, but she went haywire.","label":1,"QE-U + GloVe (centered)":2.0390350819,"QE-U + HF (centered)":1.9846118689}
+{"index":"semeval.hom_931","text":"Don't be sexist! Chicks hate that.","label":0,"QE-U + GloVe (centered)":1.4512937069,"QE-U + HF (centered)":1.5208977461}
+{"index":"semeval.hom_932","text":"And on the seventh day, He took an aspirin.","label":0,"QE-U + GloVe (centered)":1.723623395,"QE-U + HF (centered)":1.6923283339}
+{"index":"semeval.hom_933","text":"Brag is a good dog, but holdfast is better.","label":0,"QE-U + GloVe (centered)":1.7440835238,"QE-U + HF (centered)":1.6950361729}
+{"index":"semeval.hom_934","text":"OLD MEDIUMS never die, they just lose their spirits.","label":1,"QE-U + GloVe (centered)":1.5897839069,"QE-U + HF (centered)":1.5230014324}
+{"index":"semeval.hom_937","text":"I used to be afraid of purchasing residential property for the purpose of renting, but now I have an apartment complex.","label":1,"QE-U + GloVe (centered)":2.4544429779,"QE-U + HF (centered)":2.3931715488}
+{"index":"semeval.hom_938","text":"OLD LUMBERJACKS never die, they just split.","label":1,"QE-U + GloVe (centered)":1.5892373323,"QE-U + HF (centered)":1.5447803736}
+{"index":"semeval.hom_939","text":"Martians welcome. We have space for everyone.","label":1,"QE-U + GloVe (centered)":1.075422287,"QE-U + HF (centered)":0.7426197529}
+{"index":"semeval.hom_940","text":"It's not that the man did not know how to juggle, he just didn't have the balls to do it.","label":1,"QE-U + GloVe (centered)":2.245023489,"QE-U + HF (centered)":2.3302521706}
+{"index":"semeval.hom_941","text":"A small boy swallowed some coins and was taken to a hospital. When his grandmother telephoned to ask how he was a nurse said'No change yet'.","label":1,"QE-U + GloVe (centered)":2.3848729134,"QE-U + HF (centered)":2.3444628716}
+{"index":"semeval.hom_942","text":"OLD SWIMMERS never die, they just have a stroke.","label":1,"QE-U + GloVe (centered)":1.5880533457,"QE-U + HF (centered)":1.5470376015}
+{"index":"semeval.hom_945","text":"She was only a Bricklayer's daughter, but she was certainly stacked.","label":1,"QE-U + GloVe (centered)":2.0299868584,"QE-U + HF (centered)":1.9895472527}
+{"index":"semeval.hom_949","text":"When I commented on a friend's psychedelic door he said, Don't Knock It.","label":1,"QE-U + GloVe (centered)":2.4155311584,"QE-U + HF (centered)":2.3129441738}
+{"index":"semeval.hom_951","text":"\" I'd like to buy a schwa, Pat.\"","label":0,"QE-U + GloVe (centered)":2.0818400383,"QE-U + HF (centered)":2.0397882462}
+{"index":"semeval.hom_955","text":"OLD CONTORTIONISTS never die, they just meet their end.","label":1,"QE-U + GloVe (centered)":1.5875030756,"QE-U + HF (centered)":1.5350202322}
+{"index":"semeval.hom_956","text":"No bungee cords, but we encourage leaps of faith.","label":1,"QE-U + GloVe (centered)":1.2897669077,"QE-U + HF (centered)":1.230440855}
+{"index":"semeval.hom_958","text":"My friend's bakery burned down last night. Now his business is toast.","label":1,"QE-U + GloVe (centered)":2.1335434914,"QE-U + HF (centered)":2.0384130478}
+{"index":"semeval.hom_960","text":"The roulette dealer had a unique personality. He had a different spin on everything.","label":1,"QE-U + GloVe (centered)":2.0370328426,"QE-U + HF (centered)":1.9177088737}
+{"index":"semeval.hom_962","text":"She was only a Doctor's daughter, but she really knew how to operate.","label":1,"QE-U + GloVe (centered)":2.0386266708,"QE-U + HF (centered)":1.9635548592}
+{"index":"semeval.hom_967","text":"No pain, no gain.","label":0,"QE-U + GloVe (centered)":1.0979750156,"QE-U + HF (centered)":1.0233827829}
+{"index":"semeval.hom_971","text":"If you’re looking for a sign from god, this is it.","label":1,"QE-U + GloVe (centered)":2.2142224312,"QE-U + HF (centered)":2.1643514633}
+{"index":"semeval.hom_972","text":"OLD HIKERS never die, they just trail away.","label":1,"QE-U + GloVe (centered)":1.5893850327,"QE-U + HF (centered)":1.4897458553}
+{"index":"semeval.hom_977","text":"The gravity was so powerful, I couldn't stand it.","label":1,"QE-U + GloVe (centered)":1.766007185,"QE-U + HF (centered)":1.7260710001}
+{"index":"semeval.hom_978","text":"My name is Pat. I am a masseur","label":1,"QE-U + GloVe (centered)":1.5863218307,"QE-U + HF (centered)":1.5339739323}
+{"index":"semeval.hom_979","text":"I can't remember ever getting nits as a kid, although I do have a lousy memory.","label":1,"QE-U + GloVe (centered)":2.2088947296,"QE-U + HF (centered)":2.2852444649}
+{"index":"semeval.hom_980","text":"Dear Santa, all I want is your list of naughty girls.","label":0,"QE-U + GloVe (centered)":1.0878688097,"QE-U + HF (centered)":1.029581666}
+{"index":"semeval.hom_981","text":"I knew a woman who owned a taser, man was she stunning!","label":1,"QE-U + GloVe (centered)":1.9632530212,"QE-U + HF (centered)":2.0442698002}
+{"index":"semeval.hom_984","text":"Did you hear about the man who was jabbed in the back with a set of keys? His back locked up.","label":1,"QE-U + GloVe (centered)":2.6614942551,"QE-U + HF (centered)":2.5817556381}
+{"index":"semeval.hom_985","text":"OLD INTERPRETERS(for the deaf) never die, they just sign off.","label":1,"QE-U + GloVe (centered)":1.902249217,"QE-U + HF (centered)":2.0110514164}
+{"index":"semeval.hom_988","text":"He was a janitor in the restaurant. He did things under the table.","label":1,"QE-U + GloVe (centered)":2.0121386051,"QE-U + HF (centered)":1.9360433817}
+{"index":"semeval.hom_989","text":"If you think guests really enjoy your home movies, you are probably projecting.","label":1,"QE-U + GloVe (centered)":2.0320425034,"QE-U + HF (centered)":2.1106512547}
+{"index":"semeval.hom_991","text":"My father's father wanted to know if he could stay with the company in spite of the many changes. They ended up grandfathering him in.","label":1,"QE-U + GloVe (centered)":2.7536993027,"QE-U + HF (centered)":2.6071703434}
+{"index":"semeval.hom_992","text":"Getting this job managing a country estate has put me off fried eggs. I'm a gamekeeper turned poacher.","label":1,"QE-U + GloVe (centered)":2.5411360264,"QE-U + HF (centered)":2.4751865864}
+{"index":"semeval.hom_993","text":"I wanted to have dinner at a native American themed restaurant, but I didn't have reservations.","label":1,"QE-U + GloVe (centered)":2.3780884743,"QE-U + HF (centered)":2.2742464542}
+{"index":"semeval.hom_994","text":"Why did the termites eat the wooden barrel? To stave off hunger.","label":1,"QE-U + GloVe (centered)":1.9268453121,"QE-U + HF (centered)":1.967800498}
+{"index":"semeval.hom_995","text":"She was only a Rancher's daughter, but she couldn't keep her calves together.","label":1,"QE-U + GloVe (centered)":2.0314815044,"QE-U + HF (centered)":1.987351656}
+{"index":"semeval.hom_998","text":"A boy told his parents he wanted to raise goats for a living, but he was only kidding.","label":1,"QE-U + GloVe (centered)":2.4375071526,"QE-U + HF (centered)":2.4210629463}
+{"index":"semeval.hom_999","text":"A guy went to a costume party dressed as a knife, and he really looked sharp.","label":1,"QE-U + GloVe (centered)":2.1513385773,"QE-U + HF (centered)":2.2162640095}
+{"index":"semeval.hom_1002","text":"OLD SEAMSTRESSES never die, they just come to the point.","label":1,"QE-U + GloVe (centered)":1.5854313374,"QE-U + HF (centered)":1.4790122509}
+{"index":"semeval.hom_1006","text":"Old school principals never die, they just lose their faculties.","label":1,"QE-U + GloVe (centered)":1.7422227859,"QE-U + HF (centered)":1.7229399681}
+{"index":"semeval.hom_1007","text":"A hole has been found in the nudist camp wall. The police are looking into it.","label":1,"QE-U + GloVe (centered)":2.3070487976,"QE-U + HF (centered)":2.1618537903}
+{"index":"semeval.hom_1009","text":"A pirate with one hand often picked up the phone. He wanted to get off the hook.","label":1,"QE-U + GloVe (centered)":2.348338604,"QE-U + HF (centered)":2.280217886}
+{"index":"semeval.hom_1014","text":"He threw snow in his neighbor's driveway and shouted, DO YOU GET MY DRIFT?","label":1,"QE-U + GloVe (centered)":2.2716479301,"QE-U + HF (centered)":2.1878471375}
+{"index":"semeval.hom_1015","text":"Old colanders never die, they just can't take the strain anymore.","label":1,"QE-U + GloVe (centered)":1.588719964,"QE-U + HF (centered)":1.5292770863}
+{"index":"semeval.hom_1016","text":"A prisoner's favorite punctuation mark is the period. It marks the end of his sentence.","label":1,"QE-U + GloVe (centered)":2.2511162758,"QE-U + HF (centered)":2.1344742775}
+{"index":"semeval.hom_1017","text":"The fence builders were upset with their working conditions, so the started to picket.","label":1,"QE-U + GloVe (centered)":2.2509024143,"QE-U + HF (centered)":2.1177358627}
+{"index":"semeval.hom_1018","text":"If your waiting for something to turn up, try your sleeves.","label":1,"QE-U + GloVe (centered)":2.1046681404,"QE-U + HF (centered)":2.0633144379}
+{"index":"semeval.hom_1024","text":"OLD ELECTRICIANS never die, they just can't make connections","label":1,"QE-U + GloVe (centered)":1.5855776072,"QE-U + HF (centered)":1.5052771568}
+{"index":"semeval.hom_1025","text":"When the butter melted, it was rendered useless.","label":1,"QE-U + GloVe (centered)":1.5052679777,"QE-U + HF (centered)":1.5172102451}
+{"index":"semeval.hom_1026","text":"Q: What do you call six blondes placed ear to ear? A: A wind tunnel.","label":0,"QE-U + GloVe (centered)":2.2849712372,"QE-U + HF (centered)":2.2826340199}
+{"index":"semeval.hom_1027","text":"The airlines have become so cash- strapped, they charged me for my emotional baggage.","label":1,"QE-U + GloVe (centered)":1.8879760504,"QE-U + HF (centered)":1.9772210121}
+{"index":"semeval.hom_1028","text":"The cosmetic student was sick on the day of the final exam. Now she has to take a Make Up exam.","label":1,"QE-U + GloVe (centered)":2.2116365433,"QE-U + HF (centered)":2.2171754837}
+{"index":"semeval.hom_1030","text":"Q: River Ravi flows in which state? A: Liquid.","label":1,"QE-U + GloVe (centered)":2.084949255,"QE-U + HF (centered)":1.9278931618}
+{"index":"semeval.hom_1031","text":"OLD NEWSPAPER PUBLISHERS never die, they just lose their circulation.","label":1,"QE-U + GloVe (centered)":1.7503882647,"QE-U + HF (centered)":1.7094221115}
+{"index":"semeval.hom_1033","text":"Hell is full. The damned are now in Tech Support.","label":0,"QE-U + GloVe (centered)":1.3814573288,"QE-U + HF (centered)":1.2835632563}
+{"index":"semeval.hom_1036","text":"'' This movie will be very popular,'' Tom projected.","label":1,"QE-U + GloVe (centered)":1.9577383995,"QE-U + HF (centered)":1.9438226223}
+{"index":"semeval.hom_1038","text":"I'd love to, but I'm observing National Apathy Week.","label":0,"QE-U + GloVe (centered)":1.474801898,"QE-U + HF (centered)":1.5411205292}
+{"index":"semeval.hom_1045","text":"The man found something to catch fish, which was a net gain.","label":1,"QE-U + GloVe (centered)":2.0145778656,"QE-U + HF (centered)":1.9262384176}
+{"index":"semeval.hom_1046","text":"Quick at meat, quick at work.","label":0,"QE-U + GloVe (centered)":1.3772218227,"QE-U + HF (centered)":1.3032730818}
+{"index":"semeval.hom_1047","text":"She was only a Librarian's daughter, but she was checked out from cover to cover.","label":1,"QE-U + GloVe (centered)":2.0347898006,"QE-U + HF (centered)":1.976151228}
+{"index":"semeval.hom_1051","text":"John Hancock didn't retire, he just resigned.","label":1,"QE-U + GloVe (centered)":1.6569945812,"QE-U + HF (centered)":1.7019234896}
+{"index":"semeval.hom_1052","text":"I've planted part of a riding whip. I'm hoping for a nice crop.","label":1,"QE-U + GloVe (centered)":2.0919237137,"QE-U + HF (centered)":2.1166388988}
+{"index":"semeval.hom_1053","text":"' Coming ready or not! ’ – Jesus.","label":1,"QE-U + GloVe (centered)":1.9615433216,"QE-U + HF (centered)":1.8380551338}
+{"index":"semeval.hom_1057","text":"OLD TREE SURGEONS never die, they just pine away.","label":1,"QE-U + GloVe (centered)":1.7680323124,"QE-U + HF (centered)":1.6901105642}
+{"index":"semeval.hom_1058","text":"My mailman should be a comedian, his delivery is perfect!","label":1,"QE-U + GloVe (centered)":1.8377583027,"QE-U + HF (centered)":1.8536875248}
+{"index":"semeval.hom_1060","text":"If a judge loves the sound of his own voice, expect a long sentence.","label":1,"QE-U + GloVe (centered)":2.3005018234,"QE-U + HF (centered)":2.1671786308}
+{"index":"semeval.hom_1065","text":"A rock band set up on the exchange floor. They wanted to play the stock market.","label":1,"QE-U + GloVe (centered)":2.2135028839,"QE-U + HF (centered)":2.1119060516}
+{"index":"semeval.hom_1069","text":"She was always calling for her twins,'' on the double.''","label":1,"QE-U + GloVe (centered)":2.1106648445,"QE-U + HF (centered)":2.0940606594}
+{"index":"semeval.hom_1071","text":"She was only a Flag- waver's daughter, but she'd let her standards down for anyone.","label":1,"QE-U + GloVe (centered)":2.0304346085,"QE-U + HF (centered)":2.0960521698}
+{"index":"semeval.hom_1072","text":"When the thief fell in the wet cement and broke both legs, he became a hardened criminal.","label":1,"QE-U + GloVe (centered)":2.3447570801,"QE-U + HF (centered)":2.3292517662}
+{"index":"semeval.hom_1073","text":"I was fired from my job selling amplifiers. I didn't achieve the sufficient volume of sales.","label":1,"QE-U + GloVe (centered)":2.1244664192,"QE-U + HF (centered)":2.0654668808}
+{"index":"semeval.hom_1074","text":"Did you hear about the compulsive fisherman? He was really hooked on it.","label":1,"QE-U + GloVe (centered)":1.9647241831,"QE-U + HF (centered)":2.0005726814}
+{"index":"semeval.hom_1076","text":"If a job is worth doing, it is worth doing well.","label":0,"QE-U + GloVe (centered)":1.875448823,"QE-U + HF (centered)":1.8376634121}
+{"index":"semeval.hom_1080","text":"My name is Charity, a televangelist","label":1,"QE-U + GloVe (centered)":1.5746705532,"QE-U + HF (centered)":1.5310608149}
+{"index":"semeval.hom_1083","text":"As soon as the airplane was invented, things were looking up.","label":1,"QE-U + GloVe (centered)":1.8729026318,"QE-U + HF (centered)":1.9236185551}
+{"index":"semeval.hom_1085","text":"When the plane hit turbulence, the passengers went flying.","label":1,"QE-U + GloVe (centered)":1.7501971722,"QE-U + HF (centered)":1.7101418972}
+{"index":"semeval.hom_1086","text":"Gravity, it's always putting everyone down.","label":1,"QE-U + GloVe (centered)":0.6921607256,"QE-U + HF (centered)":0.5000439882}
+{"index":"semeval.hom_1088","text":"My name is Mark. I price items at the supermarket.","label":1,"QE-U + GloVe (centered)":1.5876290798,"QE-U + HF (centered)":1.5434687138}
+{"index":"semeval.hom_1090","text":"Did you hear about that new drug that makes people angry? It's all the rage now.","label":1,"QE-U + GloVe (centered)":2.2512676716,"QE-U + HF (centered)":2.2950735092}
+{"index":"semeval.hom_1092","text":"She memorized just what kind of locket she wanted, by heart.","label":1,"QE-U + GloVe (centered)":2.0686435699,"QE-U + HF (centered)":2.1051130295}
+{"index":"semeval.hom_1096","text":"There is no such thing as bravery; only degrees of fear.","label":0,"QE-U + GloVe (centered)":1.9846715927,"QE-U + HF (centered)":1.9195766449}
+{"index":"semeval.hom_1097","text":"Florida bumper sticker: DON'T SHOOT! I'M LOCAL!","label":0,"QE-U + GloVe (centered)":1.6875975132,"QE-U + HF (centered)":1.7704542875}
+{"index":"semeval.hom_1098","text":"Keep your friends close, but your enemies closer.","label":0,"QE-U + GloVe (centered)":1.5283260345,"QE-U + HF (centered)":1.5420027971}
+{"index":"semeval.hom_1101","text":"Eve showed up one morning wearing flowers instead of a fig leaf. She was the first woman to wear bloomers.","label":1,"QE-U + GloVe (centered)":2.476224184,"QE-U + HF (centered)":2.3927893639}
+{"index":"semeval.hom_1104","text":"Great beer bellies are made, not born.","label":0,"QE-U + GloVe (centered)":1.7749226093,"QE-U + HF (centered)":1.6844165325}
+{"index":"semeval.hom_1108","text":"It is not what you say, it is the way you say it.","label":0,"QE-U + GloVe (centered)":1.7549781799,"QE-U + HF (centered)":1.7697427273}
+{"index":"semeval.hom_1110","text":"OLD AUTO MECHANICS never die, they just retire.","label":1,"QE-U + GloVe (centered)":1.7492926121,"QE-U + HF (centered)":1.6810190678}
+{"index":"semeval.hom_1111","text":"I still miss my ex- husband. But my aim is improving.","label":1,"QE-U + GloVe (centered)":1.7123727798,"QE-U + HF (centered)":1.8663803339}
+{"index":"semeval.hom_1115","text":"It said\" Insert disk# 3\", but only 2 will fit!","label":0,"QE-U + GloVe (centered)":1.9560899734,"QE-U + HF (centered)":1.9530380964}
+{"index":"semeval.hom_1116","text":"She was only a Dentist's daughter, but everybody wanted to fill her cavity.","label":1,"QE-U + GloVe (centered)":2.0342650414,"QE-U + HF (centered)":1.9680297375}
+{"index":"semeval.hom_1118","text":"Limit Congress to 2 terms: one in office, one in jail!","label":0,"QE-U + GloVe (centered)":2.2341825962,"QE-U + HF (centered)":2.1470208168}
+{"index":"semeval.hom_1120","text":"The state police highway officer worked tirelessly in the heavy rain to assist a lady whose car was stuck in a ditch. He was a real trooper.","label":1,"QE-U + GloVe (centered)":2.8221988678,"QE-U + HF (centered)":2.6079697609}
+{"index":"semeval.hom_1122","text":"My coach got stung by a bee. The next day he had hives.","label":1,"QE-U + GloVe (centered)":2.0170681477,"QE-U + HF (centered)":2.0095777512}
+{"index":"semeval.hom_1123","text":"My friend asked me to carve a sculpture out of a large rock. It was the hardest thing I've ever had to make!","label":1,"QE-U + GloVe (centered)":2.4263019562,"QE-U + HF (centered)":2.333117485}
+{"index":"semeval.hom_1124","text":"Old accountants never die, they just lose their balance.","label":1,"QE-U + GloVe (centered)":1.5845515728,"QE-U + HF (centered)":1.5156292915}
+{"index":"semeval.hom_1127","text":"The math professor liked even numbers, but only the odd one.","label":1,"QE-U + GloVe (centered)":1.8918917179,"QE-U + HF (centered)":1.8252521753}
+{"index":"semeval.hom_1131","text":"I idiot- proof my programs, but along comes a bigger idiot.","label":0,"QE-U + GloVe (centered)":1.5057172775,"QE-U + HF (centered)":1.5982327461}
+{"index":"semeval.hom_1134","text":"She was only a Bottlemaker's daughter, but nothing could stop her.","label":1,"QE-U + GloVe (centered)":1.9097623825,"QE-U + HF (centered)":1.9934104681}
+{"index":"semeval.hom_1138","text":"Follow glory and it will flee, flee glory and it will follow thee.","label":0,"QE-U + GloVe (centered)":1.8897702694,"QE-U + HF (centered)":1.8282295465}
+{"index":"semeval.hom_1139","text":"She was only a Photographer's daughter, but she was really developed.","label":1,"QE-U + GloVe (centered)":2.0368921757,"QE-U + HF (centered)":1.9938242435}
+{"index":"semeval.hom_1141","text":"When the electrican apprentice made mistakes, his mother grounded him.","label":1,"QE-U + GloVe (centered)":1.7649825811,"QE-U + HF (centered)":1.8515363932}
+{"index":"semeval.hom_1148","text":"One night a banking tycoon fell overboard from his yacht. He was saved because he could float a loan.","label":1,"QE-U + GloVe (centered)":2.3345160484,"QE-U + HF (centered)":2.2541856766}
+{"index":"semeval.hom_1149","text":"\" Happiness is a warm puppy,\" said the anaconda.","label":0,"QE-U + GloVe (centered)":1.8657507896,"QE-U + HF (centered)":1.821744442}
+{"index":"semeval.hom_1158","text":"OLD HOOKERS never die, they just get laid off.","label":1,"QE-U + GloVe (centered)":1.5801428556,"QE-U + HF (centered)":1.5620096922}
+{"index":"semeval.hom_1161","text":"He recommended the restaurant to me, and said he had no reservations.","label":1,"QE-U + GloVe (centered)":1.9076418877,"QE-U + HF (centered)":1.8682818413}
+{"index":"semeval.hom_1162","text":"Old carpenters never die, they just lumber around.","label":1,"QE-U + GloVe (centered)":1.5892170668,"QE-U + HF (centered)":1.4972139597}
+{"index":"semeval.hom_1163","text":"OLD GARAGEMEN never die, they just retire","label":1,"QE-U + GloVe (centered)":1.3668295145,"QE-U + HF (centered)":1.4864890575}
+{"index":"semeval.hom_1164","text":"Tony attempted to join his thin crust pizza company with Zimo's Thick Crust Pizza, but somehow it didn't pan out.","label":1,"QE-U + GloVe (centered)":2.3899912834,"QE-U + HF (centered)":2.4041128159}
+{"index":"semeval.hom_1165","text":"OLD SKIERS never die, but they go downhill fast.","label":1,"QE-U + GloVe (centered)":1.5873881578,"QE-U + HF (centered)":1.5336084366}
+{"index":"semeval.hom_1167","text":"Nothing ventured, nothing gained.","label":0,"QE-U + GloVe (centered)":1.0807211399,"QE-U + HF (centered)":1.0021717548}
+{"index":"semeval.hom_1168","text":"'' My parents are called Billy and Nanny,'' Tom kidded.","label":1,"QE-U + GloVe (centered)":2.092274189,"QE-U + HF (centered)":2.0464026928}
+{"index":"semeval.hom_1170","text":"When thy friend asks, let there be no to- morrow.","label":0,"QE-U + GloVe (centered)":1.5633676052,"QE-U + HF (centered)":1.5266486406}
+{"index":"semeval.hom_1171","text":"I once knew a guy who had fish and chips every day for a year. His stomach took a battering.","label":1,"QE-U + GloVe (centered)":2.561311245,"QE-U + HF (centered)":2.451644659}
+{"index":"semeval.hom_1176","text":"If you want enemies excel others, if you want friends let others excel you.","label":0,"QE-U + GloVe (centered)":1.8011866808,"QE-U + HF (centered)":1.8515646458}
+{"index":"semeval.hom_1177","text":"I met a girl at an internet cafe, but we didn't click.","label":1,"QE-U + GloVe (centered)":2.1547813416,"QE-U + HF (centered)":2.0213723183}
+{"index":"semeval.hom_1181","text":"I was heading to Hooters but my wife said'Don't bother, they have gone bust'.","label":1,"QE-U + GloVe (centered)":2.1959712505,"QE-U + HF (centered)":2.2560563087}
+{"index":"semeval.hom_1182","text":"A man tried working in a shoe store, but he just couldn't seem to fit in.","label":1,"QE-U + GloVe (centered)":2.0024898052,"QE-U + HF (centered)":2.0609657764}
+{"index":"semeval.hom_1183","text":"The calculus teacher tried to keep his students on task, but the class discussion kept going off on tangents.","label":1,"QE-U + GloVe (centered)":2.3119492531,"QE-U + HF (centered)":2.2313702106}
+{"index":"semeval.hom_1184","text":"I got a deal on a new computer, and they threw in the operating system to boot.","label":1,"QE-U + GloVe (centered)":1.9945280552,"QE-U + HF (centered)":1.9463849068}
+{"index":"semeval.hom_1185","text":"OLD UPHOLSTERERS never die, they just recover..","label":1,"QE-U + GloVe (centered)":1.5867853165,"QE-U + HF (centered)":1.5143393278}
+{"index":"semeval.hom_1186","text":"A new batter joined the baseball team, and he was a real hit.","label":1,"QE-U + GloVe (centered)":2.0164783001,"QE-U + HF (centered)":1.8744012117}
+{"index":"semeval.hom_1187","text":"My name is Dick. I'm a plain- clothes policeman.","label":1,"QE-U + GloVe (centered)":1.5812427998,"QE-U + HF (centered)":1.5045125484}
+{"index":"semeval.hom_1190","text":"On being served an extravagant dessert:'' So rich, it has its own tax shelters.''","label":1,"QE-U + GloVe (centered)":2.3277602196,"QE-U + HF (centered)":2.1692605019}
+{"index":"semeval.hom_1191","text":"She was only a Musician's daughter, but she knew all the bars in town.","label":1,"QE-U + GloVe (centered)":2.0350055695,"QE-U + HF (centered)":1.9818177223}
+{"index":"semeval.hom_1193","text":"My name is Rob. I'm a thief.","label":1,"QE-U + GloVe (centered)":1.5850039721,"QE-U + HF (centered)":1.4823025465}
+{"index":"semeval.hom_1194","text":"A baseball pitcher asked if he had a good curve ball, but wanted a straight answer.","label":1,"QE-U + GloVe (centered)":2.2814853191,"QE-U + HF (centered)":2.2358624935}
+{"index":"semeval.hom_1196","text":"A family went to watch a 007 movie at the theatre, it was a bonding experience.","label":1,"QE-U + GloVe (centered)":2.3187274933,"QE-U + HF (centered)":2.1117482185}
+{"index":"semeval.hom_1197","text":"After dating the goalie on the local team for a while, she realized he was a real keeper.","label":1,"QE-U + GloVe (centered)":2.2977776527,"QE-U + HF (centered)":2.2121415138}
+{"index":"semeval.hom_1203","text":"OLD TRAIN ENGINEERS never die, they just get derailed.","label":1,"QE-U + GloVe (centered)":1.7508189678,"QE-U + HF (centered)":1.7127619982}
+{"index":"semeval.hom_1205","text":"If there is no God, who pops up the next Kleenex?","label":0,"QE-U + GloVe (centered)":1.7047822475,"QE-U + HF (centered)":1.6996023655}
+{"index":"semeval.hom_1206","text":"My name is Sherry. I'm a wine- master.","label":1,"QE-U + GloVe (centered)":1.5850775242,"QE-U + HF (centered)":1.5301291943}
+{"index":"semeval.hom_1209","text":"She was only an Archer's daughter, but to all the men she was the target.","label":1,"QE-U + GloVe (centered)":2.0400061607,"QE-U + HF (centered)":2.0056848526}
+{"index":"semeval.hom_1212","text":"My name is Holly, I'm a holiday decorator","label":1,"QE-U + GloVe (centered)":1.5700788498,"QE-U + HF (centered)":1.5054461956}
+{"index":"semeval.hom_1213","text":"He told me he could eat a 32 ounce steak, but I found that hard to swallow.","label":1,"QE-U + GloVe (centered)":2.1969304085,"QE-U + HF (centered)":2.2365031242}
+{"index":"semeval.hom_1215","text":"Why was the rabbit depressed? He was just going through a bad patch!","label":1,"QE-U + GloVe (centered)":1.7108123302,"QE-U + HF (centered)":1.7355341911}
+{"index":"semeval.hom_1217","text":"OLD GROCERS never die, they just get shelved.","label":1,"QE-U + GloVe (centered)":1.5854998827,"QE-U + HF (centered)":1.5440946817}
+{"index":"semeval.hom_1218","text":"If a program is useful, it will have to be changed.","label":0,"QE-U + GloVe (centered)":1.7552042007,"QE-U + HF (centered)":1.7059614658}
+{"index":"semeval.hom_1219","text":"He was almost persuaded to invest in a poultry farm, but chickened out at the last minute.","label":1,"QE-U + GloVe (centered)":2.3179614544,"QE-U + HF (centered)":2.2441959381}
+{"index":"semeval.hom_1221","text":"Rule 1: Don't sweat the small stuff. Rule 2: Everything is small stuff","label":0,"QE-U + GloVe (centered)":2.1719224453,"QE-U + HF (centered)":2.1070213318}
+{"index":"semeval.hom_1222","text":"The portrait artist made extra money as a census taker. He was good at canvasing people.","label":1,"QE-U + GloVe (centered)":2.3320074081,"QE-U + HF (centered)":2.2234115601}
+{"index":"semeval.hom_1224","text":"It's true that the earth rotates, but scientists are always putting their own spin on it.","label":1,"QE-U + GloVe (centered)":2.0179915428,"QE-U + HF (centered)":1.9931218624}
+{"index":"semeval.hom_1229","text":"She was only a Bootleggers daughter, but I loved her still.","label":1,"QE-U + GloVe (centered)":1.889778614,"QE-U + HF (centered)":1.8751788139}
+{"index":"semeval.hom_1231","text":"Have you ever wondered why baseball players get girlfriends? They're great at hitting it off.","label":1,"QE-U + GloVe (centered)":2.0829739571,"QE-U + HF (centered)":2.1581807137}
+{"index":"semeval.hom_1239","text":"A lawyer was defending a math teacher. He had to sum up.","label":1,"QE-U + GloVe (centered)":1.8429851532,"QE-U + HF (centered)":1.811598897}
+{"index":"semeval.hom_1240","text":"No man is born into this world, whose work is not born with him.","label":0,"QE-U + GloVe (centered)":2.0155057907,"QE-U + HF (centered)":1.9500834942}
+{"index":"semeval.hom_1243","text":"My name is Victor, and I'm a winner in everything I do.","label":1,"QE-U + GloVe (centered)":1.5673317909,"QE-U + HF (centered)":1.5149146318}
+{"index":"semeval.hom_1244","text":"My name is Faith. I'm a minister.","label":1,"QE-U + GloVe (centered)":1.584163785,"QE-U + HF (centered)":1.5403344631}
+{"index":"semeval.hom_1251","text":"Did you hear about these new reversible jackets? I'm excited to see how they turn out.","label":1,"QE-U + GloVe (centered)":2.0978870392,"QE-U + HF (centered)":2.0682942867}
+{"index":"semeval.hom_1252","text":"Do not merely believe in miracles, rely on them.","label":0,"QE-U + GloVe (centered)":1.8219692707,"QE-U + HF (centered)":1.8567795753}
+{"index":"semeval.hom_1254","text":"It's not the minutes spent at the table that put on weight, it's the seconds.","label":1,"QE-U + GloVe (centered)":2.4462766647,"QE-U + HF (centered)":2.4429636002}
+{"index":"semeval.hom_1255","text":"He that will not when he may, when he will he may have nay.","label":0,"QE-U + GloVe (centered)":1.8009303808,"QE-U + HF (centered)":1.7556791306}
+{"index":"semeval.hom_1257","text":"When he proposed to her, she found it very engaging.","label":1,"QE-U + GloVe (centered)":1.7681728601,"QE-U + HF (centered)":1.7207876444}
+{"index":"semeval.hom_1259","text":"When I asked the man how he became a ditch- digger, he said he just fell into it.","label":1,"QE-U + GloVe (centered)":2.3005695343,"QE-U + HF (centered)":2.3214960098}
+{"index":"semeval.hom_1260","text":"Anyone should know how to put a saddle on a horse so it won't slip and cause an injury. It's a cinch.","label":1,"QE-U + GloVe (centered)":2.7264916897,"QE-U + HF (centered)":2.6988565922}
+{"index":"semeval.hom_1268","text":"The farmer decided to get a cow, and milk the idea for all it was worth.","label":1,"QE-U + GloVe (centered)":2.0047259331,"QE-U + HF (centered)":1.84602952}
+{"index":"semeval.hom_1269","text":"OLD GANGSTERS never die, they just go to the underworld..","label":1,"QE-U + GloVe (centered)":1.5829203129,"QE-U + HF (centered)":1.5035659075}
+{"index":"semeval.hom_1272","text":"If there is a hypocrite between you and the church, he is closer to god than you.","label":1,"QE-U + GloVe (centered)":2.2793250084,"QE-U + HF (centered)":2.1876120567}
+{"index":"semeval.hom_1274","text":"Can I tell you a story about my bed? I made it up.","label":1,"QE-U + GloVe (centered)":2.0575127602,"QE-U + HF (centered)":2.1820762157}
+{"index":"semeval.hom_1278","text":"The dentist's alibi was full of holes, so the police performed a cavity search.","label":1,"QE-U + GloVe (centered)":2.1179103851,"QE-U + HF (centered)":2.0991358757}
+{"index":"semeval.hom_1279","text":"I'm going to be discussing global warming next week, it's quite a heated topic.","label":1,"QE-U + GloVe (centered)":2.2070837021,"QE-U + HF (centered)":2.1997761726}
+{"index":"semeval.hom_1282","text":"OLD VIOLINISTS never die, they just become unstrung.","label":1,"QE-U + GloVe (centered)":1.5882216692,"QE-U + HF (centered)":1.577129364}
+{"index":"semeval.hom_1284","text":"The car stopped with a jerk, then the jerk got out.","label":1,"QE-U + GloVe (centered)":1.9157431126,"QE-U + HF (centered)":1.8350391388}
+{"index":"semeval.hom_1286","text":"OLD CARDIOLOGISTS never die, they are just repulsed..","label":1,"QE-U + GloVe (centered)":1.5838661194,"QE-U + HF (centered)":1.5517271757}
+{"index":"semeval.hom_1287","text":"The safe was invented by a cop and a robber. It was quite a combination.","label":1,"QE-U + GloVe (centered)":2.2107553482,"QE-U + HF (centered)":2.1191623211}
+{"index":"semeval.hom_1288","text":"A woman cries before the wedding, a man after.","label":0,"QE-U + GloVe (centered)":1.9154415131,"QE-U + HF (centered)":1.8228929043}
+{"index":"semeval.hom_1289","text":"This building is so high, the elevator shows movies.","label":0,"QE-U + GloVe (centered)":1.7220596075,"QE-U + HF (centered)":1.6708003283}
+{"index":"semeval.hom_1290","text":"OLD TROMBONISTS never die, they just slide away...","label":1,"QE-U + GloVe (centered)":1.5793112516,"QE-U + HF (centered)":1.5501351357}
+{"index":"semeval.hom_1292","text":"She was only a Elevator operator's daughter, and she loved to go down.","label":1,"QE-U + GloVe (centered)":2.1449947357,"QE-U + HF (centered)":2.0883944035}
+{"index":"semeval.hom_1294","text":"We spent all day debating about housefires. It was quite a heated argument.","label":1,"QE-U + GloVe (centered)":1.8932151794,"QE-U + HF (centered)":1.9749426842}
+{"index":"semeval.hom_1297","text":"Of COURSE I'm on topic.( Which echo is this?)","label":0,"QE-U + GloVe (centered)":1.9854806662,"QE-U + HF (centered)":1.9516863823}
+{"index":"semeval.hom_1299","text":"Trespassers will be shot, survivors will be shot again!","label":0,"QE-U + GloVe (centered)":1.5342392921,"QE-U + HF (centered)":1.5083789825}
+{"index":"semeval.hom_1300","text":"OLD JUDGES never die, they just slur their sentences","label":1,"QE-U + GloVe (centered)":1.5890622139,"QE-U + HF (centered)":1.543939352}
+{"index":"semeval.hom_1301","text":"Have you heard the joke about the bomb? It had no impact.","label":1,"QE-U + GloVe (centered)":1.95028162,"QE-U + HF (centered)":1.9703066349}
+{"index":"semeval.hom_1302","text":"He got a job in a factory making needles, but soon got stuck.","label":1,"QE-U + GloVe (centered)":2.1195688248,"QE-U + HF (centered)":2.0183799267}
+{"index":"semeval.hom_1304","text":"OLD SALESMEN never die, they just go out of commission.","label":1,"QE-U + GloVe (centered)":1.5823085308,"QE-U + HF (centered)":1.5217049122}
+{"index":"semeval.hom_1307","text":"My name is Josh. I'm a talk show host","label":1,"QE-U + GloVe (centered)":1.5861427784,"QE-U + HF (centered)":1.467389822}
+{"index":"semeval.hom_1315","text":"Plenty of people give the lord credit. Few give him cash.","label":1,"QE-U + GloVe (centered)":2.0253772736,"QE-U + HF (centered)":1.9614031315}
+{"index":"semeval.hom_1321","text":"He's a good letter carrier. He always keeps you posted.","label":1,"QE-U + GloVe (centered)":1.9289119244,"QE-U + HF (centered)":1.8752894402}
+{"index":"semeval.hom_1328","text":"OLD LIBRARIANS never die, they just check out.","label":1,"QE-U + GloVe (centered)":1.586671114,"QE-U + HF (centered)":1.5440630913}
+{"index":"semeval.hom_1329","text":"Wal- Mart Is Not the Only Saving Place. Come On In.","label":1,"QE-U + GloVe (centered)":2.0216622353,"QE-U + HF (centered)":2.0360949039}
+{"index":"semeval.hom_1331","text":"An hobbituary to Tolkien appeared in each of the major newspapers, all had a familiar ring to them.","label":1,"QE-U + GloVe (centered)":2.3174657822,"QE-U + HF (centered)":2.2868967056}
+{"index":"semeval.hom_1332","text":"The passenger couldn't find where his next flight was, but then he made the connection.","label":1,"QE-U + GloVe (centered)":2.2911560535,"QE-U + HF (centered)":2.215590477}
+{"index":"semeval.hom_1333","text":"Hmmm, fence must still be down over at the funny farm....","label":0,"QE-U + GloVe (centered)":0.686942935,"QE-U + HF (centered)":0.59286654}
+{"index":"semeval.hom_1336","text":"OLD CHEMISTS never die, they just stop reacting.","label":1,"QE-U + GloVe (centered)":1.5827457905,"QE-U + HF (centered)":1.5436694622}
+{"index":"semeval.hom_1337","text":"Yo mama's so easy, that Madonna get tips from her!","label":0,"QE-U + GloVe (centered)":1.7252172232,"QE-U + HF (centered)":1.6356986761}
+{"index":"semeval.hom_1338","text":"Why do people preserve fruits and vegetables? Because they'can'.","label":1,"QE-U + GloVe (centered)":1.8824754953,"QE-U + HF (centered)":1.8832367659}
+{"index":"semeval.hom_1339","text":"He bought lots of pens before starting his new job. He wanted to make his mark.","label":1,"QE-U + GloVe (centered)":2.3103206158,"QE-U + HF (centered)":2.2036271095}
+{"index":"semeval.hom_1340","text":"In the room the curtains were drawn, but the rest of the furniture was real.","label":1,"QE-U + GloVe (centered)":1.8470616341,"QE-U + HF (centered)":1.8823316097}
+{"index":"semeval.hom_1344","text":"OLD COURIERS never die, they just keep on expressing it!","label":1,"QE-U + GloVe (centered)":1.584225893,"QE-U + HF (centered)":1.4839589596}
+{"index":"semeval.hom_1345","text":"She was only a Telephone operator's daughter, but she sure had good connections.","label":1,"QE-U + GloVe (centered)":2.1473355293,"QE-U + HF (centered)":2.0746917725}
+{"index":"semeval.hom_1346","text":"My name is Rusty. I undercoat cars.","label":1,"QE-U + GloVe (centered)":1.5799019337,"QE-U + HF (centered)":1.5161617994}
+{"index":"semeval.hom_1348","text":"'' It's a German song,'' Tom lied.","label":1,"QE-U + GloVe (centered)":1.8980779648,"QE-U + HF (centered)":1.8201339245}
+{"index":"semeval.hom_1353","text":"If you got it, flaunt it.","label":0,"QE-U + GloVe (centered)":1.4881708622,"QE-U + HF (centered)":1.5172698498}
+{"index":"semeval.hom_1354","text":"The man who worked at the watch factory was very funny. He stood about all day making faces.","label":1,"QE-U + GloVe (centered)":2.2931890488,"QE-U + HF (centered)":2.2640347481}
+{"index":"semeval.hom_1364","text":"I've got to fix the automobile, said Tom mechanically.","label":1,"QE-U + GloVe (centered)":1.9191141129,"QE-U + HF (centered)":1.9496387243}
+{"index":"semeval.hom_1365","text":"Is there a best month of spring? There May be.","label":1,"QE-U + GloVe (centered)":2.0167703629,"QE-U + HF (centered)":1.9718146324}
+{"index":"semeval.hom_1368","text":"The boy swallowed a pillow, the hospital described his condition as comfortable.","label":1,"QE-U + GloVe (centered)":1.7425931692,"QE-U + HF (centered)":1.6616380215}
+{"index":"semeval.hom_1370","text":"Captain we're at 1700 CPS. The UARTs canna take much more","label":0,"QE-U + GloVe (centered)":1.8371469975,"QE-U + HF (centered)":1.8159664869}
+{"index":"semeval.hom_1371","text":"Windows loading. Come back tomorrow.","label":0,"QE-U + GloVe (centered)":1.073573947,"QE-U + HF (centered)":0.9820563793}
+{"index":"semeval.hom_1372","text":"OLD JUDGES never die, they just cease to try","label":1,"QE-U + GloVe (centered)":1.5890622139,"QE-U + HF (centered)":1.543939352}
+{"index":"semeval.hom_1373","text":"What did the skeleton have for supper? Ribs.","label":1,"QE-U + GloVe (centered)":1.9962356091,"QE-U + HF (centered)":1.999606967}
+{"index":"semeval.hom_1374","text":"She was only a Swimmer's daughter, but she knew every dive in town..","label":1,"QE-U + GloVe (centered)":2.0422050953,"QE-U + HF (centered)":1.9912389517}
+{"index":"semeval.hom_1375","text":"My name is Woody. A Forester","label":1,"QE-U + GloVe (centered)":1.5846998692,"QE-U + HF (centered)":1.5417559147}
+{"index":"semeval.hom_1377","text":"When they bought a water bed, the couple started to drift apart.","label":1,"QE-U + GloVe (centered)":1.9161412716,"QE-U + HF (centered)":1.8513952494}
+{"index":"semeval.hom_1378","text":"My name is Guy. I install antennas.","label":1,"QE-U + GloVe (centered)":1.579980731,"QE-U + HF (centered)":1.5325587988}
+{"index":"semeval.hom_1380","text":"Can bankers count? Eight windows and only four tellers?","label":0,"QE-U + GloVe (centered)":1.3714776039,"QE-U + HF (centered)":1.2698276043}
+{"index":"semeval.hom_1392","text":"She played baseball and so did he. They hit it off.","label":1,"QE-U + GloVe (centered)":2.0034503937,"QE-U + HF (centered)":1.9250189066}
+{"index":"semeval.hom_1393","text":"A doorbell salesman joined the choir, and chimed right in.","label":1,"QE-U + GloVe (centered)":1.8854300976,"QE-U + HF (centered)":1.8594129086}
+{"index":"semeval.hom_1399","text":"Anarchists of the world, UNITE!!","label":0,"QE-U + GloVe (centered)":1.5475443602,"QE-U + HF (centered)":1.5159505606}
+{"index":"semeval.hom_1400","text":"It was a sad day for the rattlesnake family, the time had come for the children to strike out on their own.","label":1,"QE-U + GloVe (centered)":2.2621495724,"QE-U + HF (centered)":2.1005613804}
+{"index":"semeval.hom_1401","text":"When I had my PlayStation stolen, my family were there to console me.","label":1,"QE-U + GloVe (centered)":1.8492289782,"QE-U + HF (centered)":1.8704631329}
+{"index":"semeval.hom_1412","text":"Wally wasn't sure in which branch of the Army he wanted to serve, but he gravitated toward the paratroops.","label":1,"QE-U + GloVe (centered)":2.5368368626,"QE-U + HF (centered)":2.4211418629}
+{"index":"semeval.hom_1413","text":"Power tends to corrupt; absolute power corrupts absolutely.","label":0,"QE-U + GloVe (centered)":1.5892624855,"QE-U + HF (centered)":1.475535512}
+{"index":"semeval.hom_1416","text":"My new girlfriend and I are moving together into a tree house, I hope we won't fall out.","label":1,"QE-U + GloVe (centered)":2.4628772736,"QE-U + HF (centered)":2.3075861931}
+{"index":"semeval.hom_1418","text":"OLD PROCTOLOGISTS never die, they just face the end.","label":1,"QE-U + GloVe (centered)":1.3668295145,"QE-U + HF (centered)":1.5505031347}
+{"index":"semeval.hom_1419","text":"My dentist seems distracted, I think he was brushing me off.","label":1,"QE-U + GloVe (centered)":1.5483832359,"QE-U + HF (centered)":1.5764083862}
+{"index":"semeval.hom_1420","text":"We did it twice last night, she relayed.","label":1,"QE-U + GloVe (centered)":1.8860766888,"QE-U + HF (centered)":1.8526953459}
+{"index":"semeval.hom_1421","text":"She was only a Governor's daughter, but what a state she was in.","label":1,"QE-U + GloVe (centered)":2.0406661034,"QE-U + HF (centered)":1.9892709255}
+{"index":"semeval.hom_1422","text":"I never get lost, just momentarily disoriented.","label":0,"QE-U + GloVe (centered)":1.5048727989,"QE-U + HF (centered)":1.5225470066}
+{"index":"semeval.hom_1423","text":"On TV it's a maze of channels, luckily he had a guide.","label":1,"QE-U + GloVe (centered)":2.1414279938,"QE-U + HF (centered)":2.0835990906}
+{"index":"semeval.hom_1425","text":"Never invest in funerals, it's a dying industry.","label":1,"QE-U + GloVe (centered)":1.5837256908,"QE-U + HF (centered)":1.5053555965}
+{"index":"semeval.hom_1428","text":"OLD BOXERS never die, they just punch out","label":1,"QE-U + GloVe (centered)":1.5873001814,"QE-U + HF (centered)":1.5518063307}
+{"index":"semeval.hom_1431","text":"Sky divers don't jump, they just fall away.","label":1,"QE-U + GloVe (centered)":1.6392463446,"QE-U + HF (centered)":1.6377768517}
+{"index":"semeval.hom_1432","text":"OLD PLANETS never die, they just lose their attraction.","label":1,"QE-U + GloVe (centered)":1.5880893469,"QE-U + HF (centered)":1.5533155203}
+{"index":"semeval.hom_1434","text":"My name is Will, I'm a lawyer.","label":1,"QE-U + GloVe (centered)":1.5696108341,"QE-U + HF (centered)":1.5350022316}
+{"index":"semeval.hom_1435","text":"'' Here's your allowance for the next two weeks,'' Tom advanced.","label":1,"QE-U + GloVe (centered)":2.2946279049,"QE-U + HF (centered)":2.178882122}
+{"index":"semeval.hom_1436","text":"OLD CARD PLAYERS never die, they just shuffle off.","label":1,"QE-U + GloVe (centered)":1.7639935017,"QE-U + HF (centered)":1.6228429079}
+{"index":"semeval.hom_1440","text":"OLD ALCOHOLICS never die, they just lose their spirit.","label":1,"QE-U + GloVe (centered)":1.5855693817,"QE-U + HF (centered)":1.5012114048}
+{"index":"semeval.hom_1449","text":"He was the most dishonest and cleverest card shark in the city, the police said he will be dealt with.","label":1,"QE-U + GloVe (centered)":2.3557257652,"QE-U + HF (centered)":2.3052124977}
+{"index":"semeval.hom_1450","text":"Old electricians never die, they just get discharged.","label":1,"QE-U + GloVe (centered)":1.5855776072,"QE-U + HF (centered)":1.5052771568}
+{"index":"semeval.hom_1451","text":"The trampoline was on sale for fifty per cent off. Needless to say I jumped on the offer.","label":1,"QE-U + GloVe (centered)":2.3054969311,"QE-U + HF (centered)":2.2348079681}
+{"index":"semeval.hom_1452","text":"I wanted to be a sonar technician, but it was out of my depth.","label":1,"QE-U + GloVe (centered)":2.0003352165,"QE-U + HF (centered)":1.9589443207}
+{"index":"semeval.hom_1453","text":"Peter went overboard for the lord, why can’t we.","label":1,"QE-U + GloVe (centered)":1.9050904512,"QE-U + HF (centered)":1.8814361095}
+{"index":"semeval.hom_1454","text":"Stop talking! I'm out of aspirin!","label":0,"QE-U + GloVe (centered)":1.0677547455,"QE-U + HF (centered)":1.0586947203}
+{"index":"semeval.hom_1457","text":"The truth shall set you free, or The truth will set you free.","label":0,"QE-U + GloVe (centered)":1.9055347443,"QE-U + HF (centered)":1.851644516}
+{"index":"semeval.hom_1459","text":"My name is Art, I'm a museum curator.","label":1,"QE-U + GloVe (centered)":1.5734239817,"QE-U + HF (centered)":1.528861165}
+{"index":"semeval.hom_1461","text":"I'm sorry Mrs. Bobbitt, you can't send that in the mail.","label":0,"QE-U + GloVe (centered)":1.6180415154,"QE-U + HF (centered)":1.51491642}
+{"index":"semeval.hom_1462","text":"The mother kangaroo tried to instill good financial habits in her baby. She told him to pocket all his allowance.","label":1,"QE-U + GloVe (centered)":2.4416480064,"QE-U + HF (centered)":2.4167947769}
+{"index":"semeval.hom_1464","text":"Monkey see, monkey do.","label":0,"QE-U + GloVe (centered)":1.0796350241,"QE-U + HF (centered)":0.8298355341}
+{"index":"semeval.hom_1469","text":"Some jokes get dated, other jokes get married.","label":1,"QE-U + GloVe (centered)":1.563526392,"QE-U + HF (centered)":1.5376172066}
+{"index":"semeval.hom_1471","text":"Have you heard about that online origami store? It folded.","label":1,"QE-U + GloVe (centered)":2.0996720791,"QE-U + HF (centered)":2.0547103882}
+{"index":"semeval.hom_1473","text":"She was only an Attorney's daughter, but what a will to break.","label":1,"QE-U + GloVe (centered)":2.0372376442,"QE-U + HF (centered)":1.9817134142}
+{"index":"semeval.hom_1474","text":"Always smile. It makes people wonder what you're up to.","label":0,"QE-U + GloVe (centered)":1.0667937994,"QE-U + HF (centered)":1.0279072523}
+{"index":"semeval.hom_1477","text":"When he switched from horses to sailing, his life took on a new tack.","label":1,"QE-U + GloVe (centered)":2.0448346138,"QE-U + HF (centered)":1.9455826283}
+{"index":"semeval.hom_1479","text":"I wrote a novel about a fellow who had a small garden. It didn't have much of a plot.","label":1,"QE-U + GloVe (centered)":2.2304861546,"QE-U + HF (centered)":2.1687393188}
+{"index":"semeval.hom_1482","text":"Hell! I thought I’d gotten away with it!","label":1,"QE-U + GloVe (centered)":0.6226881742,"QE-U + HF (centered)":0.5019314885}
+{"index":"semeval.hom_1483","text":"'' I want a motorized bicycle,'' Tom moped.","label":1,"QE-U + GloVe (centered)":1.8006854057,"QE-U + HF (centered)":1.8733245134}
+{"index":"semeval.hom_1487","text":"Hell! I thought it didn't matter what you believed as long as you were sincere!","label":1,"QE-U + GloVe (centered)":0.6226881742,"QE-U + HF (centered)":0.5019314885}
+{"index":"semeval.hom_1488","text":"A thousand dogs were stolen from a pet shop on Saturday. Police say they have no leads.","label":1,"QE-U + GloVe (centered)":2.2823877335,"QE-U + HF (centered)":2.2793359756}
+{"index":"semeval.hom_1492","text":"At first he was was a sprinter, but then he decided to run for office.","label":1,"QE-U + GloVe (centered)":1.8573184013,"QE-U + HF (centered)":1.9003719091}
+{"index":"semeval.hom_1496","text":"I wondered why my geometry class was always tired. They were all out of shape.","label":1,"QE-U + GloVe (centered)":2.1540565491,"QE-U + HF (centered)":2.1974732876}
+{"index":"semeval.hom_1499","text":"OLD BOOTLEGGERS never die, they just keep still.","label":1,"QE-U + GloVe (centered)":1.5858440399,"QE-U + HF (centered)":1.5368750095}
+{"index":"semeval.hom_1504","text":"OLD MATHEMATICIANS never die, they just lose some functions.","label":1,"QE-U + GloVe (centered)":1.5883822441,"QE-U + HF (centered)":1.5417650938}
+{"index":"semeval.hom_1508","text":"Undertakers'Motto- Trust us. We are the very last ones to put you down.","label":1,"QE-U + GloVe (centered)":1.092911005,"QE-U + HF (centered)":1.3209956884}
+{"index":"semeval.hom_1515","text":"My name is Candy. I'm a confectioner.","label":1,"QE-U + GloVe (centered)":1.584854722,"QE-U + HF (centered)":1.4989316463}
+{"index":"semeval.hom_1517","text":"I'm buying a birthday present for a sculptor. Can you chip in?","label":1,"QE-U + GloVe (centered)":2.0703716278,"QE-U + HF (centered)":2.0365064144}
+{"index":"semeval.hom_1518","text":"My cavity wasn't fixed by my regular dentist, but by a guy who was filling in.","label":1,"QE-U + GloVe (centered)":2.081782341,"QE-U + HF (centered)":2.1143598557}
+{"index":"semeval.hom_1519","text":"OLD TYPISTS never die, they just lose their touch.","label":1,"QE-U + GloVe (centered)":1.5845301151,"QE-U + HF (centered)":1.5472459793}
+{"index":"semeval.hom_1525","text":"Engineers: often wrong, seldom in doubt.","label":0,"QE-U + GloVe (centered)":1.5932385921,"QE-U + HF (centered)":1.4686324596}
+{"index":"semeval.hom_1526","text":"OLD GRAVEDIGGERS never die, they just get buried in their work","label":1,"QE-U + GloVe (centered)":1.5859287977,"QE-U + HF (centered)":1.5381838083}
+{"index":"semeval.hom_1534","text":"When the shoe store owner discovered that someone had broken into his store, the police pumped him for information.","label":1,"QE-U + GloVe (centered)":2.4523949623,"QE-U + HF (centered)":2.3149895668}
+{"index":"semeval.hom_1535","text":"That's the seventh dip, Namaan said cleanly.","label":1,"QE-U + GloVe (centered)":1.7444882393,"QE-U + HF (centered)":1.7386238575}
+{"index":"semeval.hom_1539","text":"OLD TELEPHONE OPERATORS never die, they just become disconnected.","label":1,"QE-U + GloVe (centered)":1.7371528149,"QE-U + HF (centered)":1.6883932352}
+{"index":"semeval.hom_1540","text":"A streaker was found dead this morning. Police say the details are quite revealing.","label":1,"QE-U + GloVe (centered)":2.0258712769,"QE-U + HF (centered)":1.976568222}
+{"index":"semeval.hom_1541","text":"I strongly dislike the subject of math, however I am partial to fractions.","label":1,"QE-U + GloVe (centered)":1.9972674847,"QE-U + HF (centered)":1.9552143812}
+{"index":"semeval.hom_1544","text":"OLD GAMBLERS never die, they just get discarded.","label":1,"QE-U + GloVe (centered)":1.5817373991,"QE-U + HF (centered)":1.5362291336}
+{"index":"semeval.hom_1545","text":"My mate swallowed a cordless vacuum cleaner, they took him to hospital and he is picking up nicely.","label":1,"QE-U + GloVe (centered)":1.9838536978,"QE-U + HF (centered)":1.9464757442}
+{"index":"semeval.hom_1547","text":"OLD CREDIT CARD USERS never die, they just expire.","label":1,"QE-U + GloVe (centered)":1.874089241,"QE-U + HF (centered)":1.7185144424}
+{"index":"semeval.hom_1548","text":"The members of the oldest profession are not really lost women; they are just mislaid.","label":1,"QE-U + GloVe (centered)":2.2710351944,"QE-U + HF (centered)":2.2874464989}
+{"index":"semeval.hom_1550","text":"A wife lasts as long as a marriage, an ex- wife for ever.","label":0,"QE-U + GloVe (centered)":1.8457379341,"QE-U + HF (centered)":1.9436924458}
+{"index":"semeval.hom_1551","text":"My name is Gene, I'm a DNA researcher.","label":1,"QE-U + GloVe (centered)":1.568453908,"QE-U + HF (centered)":1.4705480337}
+{"index":"semeval.hom_1553","text":"He had to learn what the measles was, from scratch.","label":1,"QE-U + GloVe (centered)":2.1068110466,"QE-U + HF (centered)":2.063164711}
+{"index":"semeval.hom_1554","text":"My name is Lute. I'm a musician.","label":1,"QE-U + GloVe (centered)":1.5825932026,"QE-U + HF (centered)":1.4419503212}
+{"index":"semeval.hom_1555","text":"She had a boyfriend with a wooden leg, but broke it off.","label":1,"QE-U + GloVe (centered)":2.0183758736,"QE-U + HF (centered)":1.9629222155}
+{"index":"semeval.hom_1559","text":"Trust your calculator. It's something to count on.","label":1,"QE-U + GloVe (centered)":1.3681883812,"QE-U + HF (centered)":1.336204648}
+{"index":"semeval.hom_1563","text":"OLD RABBIS never die, they just get grey around the temples.","label":1,"QE-U + GloVe (centered)":1.5914793015,"QE-U + HF (centered)":1.4836754799}
+{"index":"semeval.hom_1565","text":"OLD GUITARISTS never die, they just become unstrung.","label":1,"QE-U + GloVe (centered)":1.5878885984,"QE-U + HF (centered)":1.5578389168}
+{"index":"semeval.hom_1567","text":"The date of the marathon was changed. She took it in stride.","label":1,"QE-U + GloVe (centered)":1.8416057825,"QE-U + HF (centered)":1.8745744228}
+{"index":"semeval.hom_1575","text":"Where ignorance is bliss,' tis folly to be wise.","label":0,"QE-U + GloVe (centered)":1.7562900782,"QE-U + HF (centered)":1.7216626406}
+{"index":"semeval.hom_1577","text":"Love me, love my dog.","label":0,"QE-U + GloVe (centered)":1.0374209881,"QE-U + HF (centered)":1.0602918863}
+{"index":"semeval.hom_1578","text":"For a long time, black holes were a dark secret.","label":1,"QE-U + GloVe (centered)":1.5736899376,"QE-U + HF (centered)":1.4853873253}
+{"index":"semeval.hom_1579","text":"She was only a Conductor's daughter, but she told you where to get off.","label":1,"QE-U + GloVe (centered)":2.0426869392,"QE-U + HF (centered)":1.9840443134}
+{"index":"semeval.hom_1580","text":"I'm not worthless. I can always serve as a bad example.","label":0,"QE-U + GloVe (centered)":1.4830955267,"QE-U + HF (centered)":1.5558789968}
+{"index":"semeval.hom_1587","text":"OLD LANDSCAPERS never die, they just get weeded out.","label":1,"QE-U + GloVe (centered)":1.5844465494,"QE-U + HF (centered)":1.5333263874}
+{"index":"semeval.hom_1588","text":"In medical school he worried about passing as a surgeon, but he made the cut.","label":1,"QE-U + GloVe (centered)":2.333032608,"QE-U + HF (centered)":2.2087490559}
+{"index":"semeval.hom_1589","text":"A cat found a mysterious sweater, but the mystery was soon unravelled.","label":1,"QE-U + GloVe (centered)":1.7204422951,"QE-U + HF (centered)":1.8114598989}
+{"index":"semeval.hom_1590","text":"Notice in a field: The farmer allows walkers to cross the field for free, but the bull charges.","label":1,"QE-U + GloVe (centered)":2.5338134766,"QE-U + HF (centered)":2.3289730549}
+{"index":"semeval.hom_1594","text":"The environmentalist rode his bike 20 miles in the morning and 20 more in the evening. He loved recycling.","label":1,"QE-U + GloVe (centered)":2.3368713856,"QE-U + HF (centered)":2.3911364079}
+{"index":"semeval.hom_1595","text":"... I multi- task, I read in the bathroom.","label":0,"QE-U + GloVe (centered)":1.3473392725,"QE-U + HF (centered)":1.4637715816}
+{"index":"semeval.hom_1597","text":"Enjoy the present day, trusting little to what tomorrow may bring.","label":0,"QE-U + GloVe (centered)":1.5831940174,"QE-U + HF (centered)":1.493134737}
+{"index":"semeval.hom_1599","text":"Deeds are fruits, words are but leaves.","label":0,"QE-U + GloVe (centered)":1.3740301132,"QE-U + HF (centered)":1.354757309}
+{"index":"semeval.hom_1601","text":"I forget the dream, but I'm missing a pajama button...","label":0,"QE-U + GloVe (centered)":1.5369285345,"QE-U + HF (centered)":1.498213172}
+{"index":"semeval.hom_1602","text":"She was only a Electrician's daughter, and she made house calls to remove her customers'shorts.","label":1,"QE-U + GloVe (centered)":2.0390350819,"QE-U + HF (centered)":1.9846118689}
+{"index":"semeval.hom_1603","text":"Yo mama's so ugly, she made an onion cry.","label":0,"QE-U + GloVe (centered)":1.7093362808,"QE-U + HF (centered)":1.6547260284}
+{"index":"semeval.hom_1604","text":"My name is Sherry. I work in a vineyard.","label":1,"QE-U + GloVe (centered)":1.5850775242,"QE-U + HF (centered)":1.5301291943}
+{"index":"semeval.hom_1609","text":"If they ever have a contest for the best looking mannequin, there will be stiff competition.","label":1,"QE-U + GloVe (centered)":2.3626995087,"QE-U + HF (centered)":2.2753591537}
+{"index":"semeval.hom_1610","text":"Set your drink on a skateboard, they make good coasters.","label":1,"QE-U + GloVe (centered)":1.9021010399,"QE-U + HF (centered)":1.8401246071}
+{"index":"semeval.hom_1614","text":"OLD PHILOSOPHERS never die, they just retire to their own premises.","label":1,"QE-U + GloVe (centered)":1.5910724401,"QE-U + HF (centered)":1.5267062187}
+{"index":"semeval.hom_1616","text":"I wanted to join my local rambling club, but the guy I spoke to on the phone just went on and on.","label":1,"QE-U + GloVe (centered)":2.0689666271,"QE-U + HF (centered)":2.0730605125}
+{"index":"semeval.hom_1617","text":"She was only a Porchclimber's daughter, but you should see her stoop","label":1,"QE-U + GloVe (centered)":1.9097623825,"QE-U + HF (centered)":1.9981424809}
+{"index":"semeval.hom_1618","text":"Have an optometrist run for president, because they are people of vision.","label":1,"QE-U + GloVe (centered)":1.9171271324,"QE-U + HF (centered)":1.8259615898}
+{"index":"semeval.hom_1622","text":"As usual, the chief meteorologist blustered his way through the staff meeting.","label":1,"QE-U + GloVe (centered)":1.0893704891,"QE-U + HF (centered)":0.989295125}
+{"index":"semeval.hom_1623","text":"As you sow, so you reap.","label":0,"QE-U + GloVe (centered)":1.3431624174,"QE-U + HF (centered)":1.3326246738}
+{"index":"semeval.hom_1624","text":"OLD BUTCHERS never die, they just get disjointed.","label":1,"QE-U + GloVe (centered)":1.5836137533,"QE-U + HF (centered)":1.5635294914}
+{"index":"semeval.hom_1626","text":"My name is Bud. I'm in flowers.","label":1,"QE-U + GloVe (centered)":1.5864104033,"QE-U + HF (centered)":1.4599080086}
+{"index":"semeval.hom_1629","text":"OLD WATCHMAKERS never die, they just wind down.","label":1,"QE-U + GloVe (centered)":1.5810425282,"QE-U + HF (centered)":1.4869365692}
+{"index":"semeval.hom_1631","text":"OLD HACKERS never die, they just go to bits","label":1,"QE-U + GloVe (centered)":1.5897941589,"QE-U + HF (centered)":1.5255796909}
+{"index":"semeval.hom_1632","text":"'' I've got to stop this motor,'' Tom choked.","label":1,"QE-U + GloVe (centered)":2.030195713,"QE-U + HF (centered)":2.1027913094}
+{"index":"semeval.hom_1636","text":"OLD HELICOPTER PILOTS never die, they just lose their choppers.","label":1,"QE-U + GloVe (centered)":1.7421045303,"QE-U + HF (centered)":1.6933429241}
+{"index":"semeval.hom_1640","text":"If you can't beat them, join them.","label":0,"QE-U + GloVe (centered)":1.6914150715,"QE-U + HF (centered)":1.8824578524}
+{"index":"semeval.hom_1644","text":"Be careful what you wish for, you just might get it.","label":0,"QE-U + GloVe (centered)":1.8538314104,"QE-U + HF (centered)":1.7624361515}
+{"index":"semeval.hom_1647","text":"OLD LIBRARIANS never die, they just lose their circulation.","label":1,"QE-U + GloVe (centered)":1.586671114,"QE-U + HF (centered)":1.5440630913}
+{"index":"semeval.hom_1651","text":"The star asked the sun why the moon was always up so late. Sun responded that it was just a phase.","label":1,"QE-U + GloVe (centered)":2.3012833595,"QE-U + HF (centered)":2.3306512833}
+{"index":"semeval.hom_1654","text":"My name is Oscar, and I'm a movie star.","label":1,"QE-U + GloVe (centered)":1.5720291138,"QE-U + HF (centered)":1.5148649216}
+{"index":"semeval.hom_1655","text":"For fast relief take two tablets. The ten commandments","label":1,"QE-U + GloVe (centered)":1.9206564426,"QE-U + HF (centered)":1.8231613636}
+{"index":"semeval.hom_1656","text":"I could not pull out of my parking space, so I used my back up plan.","label":1,"QE-U + GloVe (centered)":2.1697144508,"QE-U + HF (centered)":2.12961483}
+{"index":"semeval.hom_1659","text":"When Irish boys carry their little brothers, they get a Pat on the back.","label":1,"QE-U + GloVe (centered)":2.0277245045,"QE-U + HF (centered)":1.9827921391}
+{"index":"semeval.hom_1660","text":"He died leaving 100 clocks. His son is winding up the estate.","label":1,"QE-U + GloVe (centered)":1.7608664036,"QE-U + HF (centered)":1.7287437916}
+{"index":"semeval.hom_1663","text":"OLD WATCHMAKERS never die, they just unwind.","label":1,"QE-U + GloVe (centered)":1.5810425282,"QE-U + HF (centered)":1.4869365692}
+{"index":"semeval.hom_1665","text":"Did you hear about the pilot who always had work? He was great at landing a job.","label":1,"QE-U + GloVe (centered)":2.2599039078,"QE-U + HF (centered)":2.3055086136}
+{"index":"semeval.hom_1669","text":"Confidence is important; the computer can sense fear.","label":0,"QE-U + GloVe (centered)":1.3655807972,"QE-U + HF (centered)":1.2950533628}
+{"index":"semeval.hom_1675","text":"When the wheel was invented, it caused a revolution.","label":1,"QE-U + GloVe (centered)":1.7599685192,"QE-U + HF (centered)":1.6772280931}
+{"index":"semeval.hom_1676","text":"'' It's twelve noon,'' Tom chimed in.","label":1,"QE-U + GloVe (centered)":1.7212414742,"QE-U + HF (centered)":1.6932584047}
+{"index":"semeval.hom_1679","text":"Long absent, soon forgotten.","label":0,"QE-U + GloVe (centered)":1.0960685015,"QE-U + HF (centered)":1.0260959864}
+{"index":"semeval.hom_1680","text":"OLD CARDIOLOGISTS never die, they just lose heart.","label":1,"QE-U + GloVe (centered)":1.5838661194,"QE-U + HF (centered)":1.5517271757}
+{"index":"semeval.hom_1682","text":"After he invented the light bulb, people saw Edison in a new light.","label":1,"QE-U + GloVe (centered)":1.8795502186,"QE-U + HF (centered)":1.8556036949}
+{"index":"semeval.hom_1685","text":"OLD ELECTRICIANS never die, they just lose their spark.","label":1,"QE-U + GloVe (centered)":1.5855776072,"QE-U + HF (centered)":1.5052771568}
+{"index":"semeval.hom_1691","text":"She told me the drink was non- alcoholic, but where was the proof?","label":1,"QE-U + GloVe (centered)":1.9803423882,"QE-U + HF (centered)":2.1043057442}
+{"index":"semeval.hom_1696","text":"A girl and her boyfriend went to a party as a barcode. They were an item.","label":1,"QE-U + GloVe (centered)":2.2410941124,"QE-U + HF (centered)":2.3164701462}
+{"index":"semeval.hom_1698","text":"She was only a Fireman's daughter, but she's really going to blazes.","label":1,"QE-U + GloVe (centered)":2.0353734493,"QE-U + HF (centered)":1.9850941896}
+{"index":"semeval.hom_1699","text":"My name is Frank, the Hot- Dog vendor","label":1,"QE-U + GloVe (centered)":1.5730022192,"QE-U + HF (centered)":1.4996888638}
+{"index":"semeval.hom_1700","text":"Last week I was diagnosed with insomnia, and now I'm just so tired of it.","label":1,"QE-U + GloVe (centered)":1.9556417465,"QE-U + HF (centered)":1.9910577536}
+{"index":"semeval.hom_1704","text":"For a fish, the end of a barbed hook is the'' point'' of no return.","label":1,"QE-U + GloVe (centered)":1.3782465458,"QE-U + HF (centered)":1.3604094982}
+{"index":"semeval.hom_1706","text":"Give a man a fish and you feed him for a day. Teach a man to fish and you feed him for a lifetime.","label":0,"QE-U + GloVe (centered)":2.2422227859,"QE-U + HF (centered)":2.2225167751}
+{"index":"semeval.hom_1707","text":"Two silk worms had a race. They ended up in a tie.","label":1,"QE-U + GloVe (centered)":1.9138348103,"QE-U + HF (centered)":1.8663898706}
+{"index":"semeval.hom_1714","text":"OLD CASHIERS never die, they just change.","label":1,"QE-U + GloVe (centered)":1.5863711834,"QE-U + HF (centered)":1.4690510035}
+{"index":"semeval.hom_1719","text":"My dog has a lot of potential, you just have to unleash it.","label":1,"QE-U + GloVe (centered)":2.0280644894,"QE-U + HF (centered)":1.857562542}
+{"index":"semeval.hom_1722","text":"I'd love to, but I'm teaching my ferret to yodel.","label":0,"QE-U + GloVe (centered)":1.474801898,"QE-U + HF (centered)":1.5411205292}
+{"index":"semeval.hom_1726","text":"Years ago, changing TV channels from a sitting position was a remote possibility.","label":1,"QE-U + GloVe (centered)":0.9491158724,"QE-U + HF (centered)":1.0208542347}
+{"index":"semeval.hom_1728","text":"I've passed the exam this time, Tom remarked.","label":1,"QE-U + GloVe (centered)":1.9555875063,"QE-U + HF (centered)":1.9764591455}
+{"index":"semeval.hom_1731","text":"Two can live as cheaply as one, for half as long.","label":0,"QE-U + GloVe (centered)":1.8366961479,"QE-U + HF (centered)":1.9312001467}
+{"index":"semeval.hom_1732","text":"I got a small ticket for speeding. It's fine with me.","label":1,"QE-U + GloVe (centered)":2.0006542206,"QE-U + HF (centered)":1.9821228981}
+{"index":"semeval.hom_1733","text":"Sharks don't eat lawyers. Professional courtesy.","label":0,"QE-U + GloVe (centered)":1.6500911713,"QE-U + HF (centered)":1.7061258554}
+{"index":"semeval.hom_1739","text":"Professional rock climbers, the only people paid to get high.","label":1,"QE-U + GloVe (centered)":1.3624298573,"QE-U + HF (centered)":1.1663880348}
+{"index":"semeval.hom_1740","text":"Good girls go to heaven. Bad girls go EVERYwhere.","label":0,"QE-U + GloVe (centered)":1.7595865726,"QE-U + HF (centered)":1.6851371527}
+{"index":"semeval.hom_1741","text":"I'm not lost, I'm\" locationally challenged.\"","label":0,"QE-U + GloVe (centered)":1.4774401188,"QE-U + HF (centered)":1.5515438318}
+{"index":"semeval.hom_1742","text":"When the doctor asked the editor how he was doing, he said he had a problem with his circulation.","label":1,"QE-U + GloVe (centered)":2.1986188889,"QE-U + HF (centered)":2.0784664154}
+{"index":"semeval.hom_1744","text":"I didn't understand the math, so the teacher summed it up for me.","label":1,"QE-U + GloVe (centered)":1.7689809799,"QE-U + HF (centered)":1.8354995251}
+{"index":"semeval.hom_1745","text":"When in Rome, do as the Romans do.","label":0,"QE-U + GloVe (centered)":1.364243865,"QE-U + HF (centered)":1.3131504059}
+{"index":"semeval.hom_1748","text":"I wanted to do some research on anorexia, so I went to the library to get the skinny.","label":1,"QE-U + GloVe (centered)":2.1132097244,"QE-U + HF (centered)":2.0578379631}
+{"index":"semeval.hom_1750","text":"OLD ORGANISTS never die, they just come to a stop.","label":1,"QE-U + GloVe (centered)":1.5848648548,"QE-U + HF (centered)":1.5173954964}
+{"index":"semeval.hom_1753","text":"What did the triangle say to the circle? You're so pointless.","label":1,"QE-U + GloVe (centered)":1.907617569,"QE-U + HF (centered)":1.9884366989}
+{"index":"semeval.hom_1754","text":"I'm taking this ship back into harbor, Tom reported.","label":1,"QE-U + GloVe (centered)":2.0626165867,"QE-U + HF (centered)":2.0716860294}
+{"index":"semeval.hom_1755","text":"They call me Pops. I sell soft drinks.","label":1,"QE-U + GloVe (centered)":1.583343029,"QE-U + HF (centered)":1.5760575533}
+{"index":"semeval.hom_1756","text":"I tried wrapping Christmas presents, but I didn't have the gift.","label":1,"QE-U + GloVe (centered)":1.7074353695,"QE-U + HF (centered)":1.640684247}
+{"index":"semeval.hom_1757","text":"'' I love hot dogs,'' said Tom with relish.","label":1,"QE-U + GloVe (centered)":1.7083685398,"QE-U + HF (centered)":1.6986284256}
+{"index":"semeval.hom_1758","text":"In the army mess hall, the men were getting fed up.","label":1,"QE-U + GloVe (centered)":1.7474997044,"QE-U + HF (centered)":1.7150938511}
+{"index":"semeval.hom_1760","text":"I met this guy who said he loved children, then I found out he was on parole for it.","label":1,"QE-U + GloVe (centered)":2.1957101822,"QE-U + HF (centered)":2.1661925316}
+{"index":"semeval.hom_1763","text":"Some people take beautiful pictures and cut them into pieces. That's a puzzle to me.","label":1,"QE-U + GloVe (centered)":2.3007316589,"QE-U + HF (centered)":2.083353281}
+{"index":"semeval.hom_1764","text":"I found out that at the gym, their opinion on fitness carries a lot of weight.","label":1,"QE-U + GloVe (centered)":2.0353863239,"QE-U + HF (centered)":1.9506061077}
+{"index":"semeval.hom_1767","text":"When a new baby comes into a family, many changes are necessary.","label":1,"QE-U + GloVe (centered)":2.0170173645,"QE-U + HF (centered)":1.9248569012}
+{"index":"semeval.hom_1775","text":"OLD GEOLOGISTS never die, they just have their faults","label":1,"QE-U + GloVe (centered)":1.5884695053,"QE-U + HF (centered)":1.5177439451}
+{"index":"semeval.hom_1778","text":"Meet me at the clothes line. That's where I hang out!","label":1,"QE-U + GloVe (centered)":1.900908947,"QE-U + HF (centered)":1.848359704}
+{"index":"semeval.hom_1782","text":"He would promise to play golf, but he didn't know how to follow through.","label":1,"QE-U + GloVe (centered)":1.8771591187,"QE-U + HF (centered)":1.8488414288}
+{"index":"semeval.hom_1783","text":"The artist was great. He could always draw a crowd.","label":1,"QE-U + GloVe (centered)":1.5945556164,"QE-U + HF (centered)":1.5151019096}
+{"index":"semeval.hom_1788","text":"Though thou hast ever so many counsellors, yet do not forsake the counsel of thy own soul.","label":0,"QE-U + GloVe (centered)":1.938495636,"QE-U + HF (centered)":1.8960559368}
+{"index":"semeval.hom_1792","text":"The general started bowling before his aide had entered his name on the score sheet. He had launched a pre- emptive strike.","label":1,"QE-U + GloVe (centered)":2.5285148621,"QE-U + HF (centered)":2.4883885384}
+{"index":"semeval.hom_1795","text":"Biologists have recently produced immortal frogs by removing their vocal cords. They can't croak.","label":1,"QE-U + GloVe (centered)":2.3651242256,"QE-U + HF (centered)":2.2253351212}
+{"index":"semeval.hom_1797","text":"When the CEO dropped his brownie on the calculator, was he trying to fudge the numbers?","label":1,"QE-U + GloVe (centered)":2.1190237999,"QE-U + HF (centered)":2.0737543106}
+{"index":"semeval.hom_1804","text":"He tried to sell me glass with imperfections in it, but I saw through it.","label":1,"QE-U + GloVe (centered)":2.3117938042,"QE-U + HF (centered)":2.2723417282}
+{"index":"semeval.hom_1806","text":"I wondered why the baseball was getting bigger. Then it hit me.","label":1,"QE-U + GloVe (centered)":2.0869266987,"QE-U + HF (centered)":2.0900468826}
+{"index":"semeval.hom_1812","text":"OLD VACUUM CLEANER SALESMEN never die, they just get sucked in!","label":1,"QE-U + GloVe (centered)":1.8556523323,"QE-U + HF (centered)":1.8024897575}
+{"index":"semeval.hom_1814","text":"He worked in a chocolate factory, but always took his sweet time.","label":1,"QE-U + GloVe (centered)":1.883256197,"QE-U + HF (centered)":1.8158904314}
+{"index":"semeval.hom_1815","text":"Did you hear about the crab in financial difficulty? It was starting to feel the pinch.","label":1,"QE-U + GloVe (centered)":2.1898889542,"QE-U + HF (centered)":2.1930840015}
+{"index":"semeval.hom_1817","text":"Actions are usually right, but the reasons seldom are.","label":0,"QE-U + GloVe (centered)":1.5675503016,"QE-U + HF (centered)":1.5485019684}
+{"index":"semeval.hom_1818","text":"The enemy of my enemy, is my friend.","label":0,"QE-U + GloVe (centered)":1.4960482121,"QE-U + HF (centered)":1.5531556606}
+{"index":"semeval.hom_1822","text":"'' Don't add too much water,'' said Tom with great concentration.","label":1,"QE-U + GloVe (centered)":1.8943831921,"QE-U + HF (centered)":1.9880876541}
+{"index":"semeval.hom_1827","text":"WORK HARDER!... Millions on Welfare depend on YOU!","label":0,"QE-U + GloVe (centered)":1.3322759867,"QE-U + HF (centered)":1.1931971312}
+{"index":"semeval.hom_1828","text":"'' I like modern painting,'' said Tom abstractly.","label":1,"QE-U + GloVe (centered)":1.6850104332,"QE-U + HF (centered)":1.6851588488}
+{"index":"semeval.hom_1831","text":"OLD HOUSEWIVES never die, they just wash away.","label":1,"QE-U + GloVe (centered)":1.5840425491,"QE-U + HF (centered)":1.5678633451}
+{"index":"semeval.hom_1833","text":"My stuffing was bad, so I got some sage advice.","label":1,"QE-U + GloVe (centered)":1.5698330402,"QE-U + HF (centered)":1.5600134134}
+{"index":"semeval.hom_1841","text":"Bring your spirtual Marshmellows, our pastor is on fire!","label":1,"QE-U + GloVe (centered)":1.3358703852,"QE-U + HF (centered)":1.5364525318}
+{"index":"semeval.hom_1846","text":"'' I like ragged margins,'' said Tom without justification.","label":1,"QE-U + GloVe (centered)":1.6939182281,"QE-U + HF (centered)":1.7189517021}
+{"index":"semeval.hom_1847","text":"Don't open the darkroom door; it lets all the dark out.","label":0,"QE-U + GloVe (centered)":1.8050289154,"QE-U + HF (centered)":1.8539566994}
+{"index":"semeval.hom_1848","text":"Old photographers never die, they're just out of the picture for a while.","label":1,"QE-U + GloVe (centered)":1.5875028372,"QE-U + HF (centered)":1.5569212437}
+{"index":"semeval.hom_1850","text":"'' I don't work here on a regular basis,'' said Tom casually.","label":1,"QE-U + GloVe (centered)":2.2109289169,"QE-U + HF (centered)":2.2349152565}
+{"index":"semeval.hom_1851","text":"OLD FROGS never die, but they do croak.","label":1,"QE-U + GloVe (centered)":1.5853606462,"QE-U + HF (centered)":1.4839286804}
+{"index":"semeval.hom_1852","text":"What are you taking pictures of? Tom snapped.","label":1,"QE-U + GloVe (centered)":1.811198473,"QE-U + HF (centered)":1.8075163364}
+{"index":"semeval.hom_1856","text":"My word is final! Tom dictated to his secretary.","label":1,"QE-U + GloVe (centered)":1.581356883,"QE-U + HF (centered)":1.5061321259}
+{"index":"semeval.hom_1859","text":"To save money for the company he cut all the electricity. They were soon in the black.","label":1,"QE-U + GloVe (centered)":2.3173744678,"QE-U + HF (centered)":2.2997262478}
+{"index":"semeval.hom_1860","text":"I try wearing tight jeans, but I can never pull it off.","label":1,"QE-U + GloVe (centered)":1.6857676506,"QE-U + HF (centered)":1.6445102692}
+{"index":"semeval.hom_1861","text":"At first I hated my haircut, but now it's growing on me.","label":1,"QE-U + GloVe (centered)":1.8427760601,"QE-U + HF (centered)":1.9057722092}
+{"index":"semeval.hom_1865","text":"It's not the money I want, it's the stuff.","label":0,"QE-U + GloVe (centered)":1.9815785885,"QE-U + HF (centered)":1.9660201073}
+{"index":"semeval.hom_1868","text":"I'll corroborate that again, Tom reproved.","label":1,"QE-U + GloVe (centered)":1.7033362389,"QE-U + HF (centered)":1.7374651432}
+{"index":"semeval.hom_1869","text":"Why yes, I- do- work for a unit of the Illuminati.","label":0,"QE-U + GloVe (centered)":1.045360446,"QE-U + HF (centered)":0.8601764441}
+{"index":"semeval.hom_1870","text":"I had an appointment with the chiropractor, but I backed out.","label":1,"QE-U + GloVe (centered)":2.0166084766,"QE-U + HF (centered)":1.9094574451}
+{"index":"semeval.hom_1874","text":"Sow thin, shear thin.","label":0,"QE-U + GloVe (centered)":1.0914543867,"QE-U + HF (centered)":0.845110178}
+{"index":"semeval.hom_1883","text":"The duck said to the bartender,' put it on my bill.'","label":1,"QE-U + GloVe (centered)":1.8667100668,"QE-U + HF (centered)":1.8830381632}
+{"index":"semeval.hom_1887","text":"OLD WOOL COATS never die, they just become mothballed.","label":1,"QE-U + GloVe (centered)":1.7129666805,"QE-U + HF (centered)":1.4852868319}
+{"index":"semeval.hom_1890","text":"If it's too good to be true, then it probably is.","label":0,"QE-U + GloVe (centered)":2.10389781,"QE-U + HF (centered)":2.0246062279}
+{"index":"semeval.hom_1893","text":"Why do we have training bras? What can we teach them?","label":0,"QE-U + GloVe (centered)":1.750648737,"QE-U + HF (centered)":1.8495146036}
+{"index":"semeval.hom_1904","text":"We're all sitting in the same boat: I fish, you row.","label":0,"QE-U + GloVe (centered)":2.3338184357,"QE-U + HF (centered)":2.2807350159}
+{"index":"semeval.hom_1905","text":"'' I find you guilty,'' said the judge with conviction.","label":1,"QE-U + GloVe (centered)":1.6254940033,"QE-U + HF (centered)":1.7572083473}
+{"index":"semeval.hom_1906","text":"OLD YACHTSMEN never die, they just keel over.","label":1,"QE-U + GloVe (centered)":1.5852470398,"QE-U + HF (centered)":1.4436417818}
+{"index":"semeval.hom_1907","text":"She was only a Lighthouse keeper's daughter, but she never went out at night","label":1,"QE-U + GloVe (centered)":2.1451249123,"QE-U + HF (centered)":2.0517680645}
+{"index":"semeval.hom_1909","text":"You are confused; but this is your normal state.","label":0,"QE-U + GloVe (centered)":1.3761489391,"QE-U + HF (centered)":1.3138902187}
+{"index":"semeval.hom_1910","text":"Live by the sword, die by the sword.","label":0,"QE-U + GloVe (centered)":1.6002174616,"QE-U + HF (centered)":1.4947481155}
+{"index":"semeval.hom_1912","text":"'' I will now demonstrate how to dissect a sheep,'' delivered Tom.","label":1,"QE-U + GloVe (centered)":2.2647440434,"QE-U + HF (centered)":2.2936990261}
+{"index":"semeval.hom_1917","text":"OLD SHEET ROCKERS(dry wallers) never die, they just hang around.","label":1,"QE-U + GloVe (centered)":1.9000892639,"QE-U + HF (centered)":1.890188694}
+{"index":"semeval.hom_1919","text":"Took an hour to bury the cat. Silly thing kept moving...","label":0,"QE-U + GloVe (centered)":2.0473227501,"QE-U + HF (centered)":1.9097789526}
+{"index":"semeval.hom_1934","text":"She was only a Vacuum salesman's daughter, but she knew how to suck!","label":1,"QE-U + GloVe (centered)":2.1444826126,"QE-U + HF (centered)":2.0899391174}
+{"index":"semeval.hom_1937","text":"Plough deep while sluggards sleep, and you will have corn to sell and keep.","label":0,"QE-U + GloVe (centered)":1.5822206736,"QE-U + HF (centered)":1.6070466042}
+{"index":"semeval.hom_1939","text":"He's not dead, he's electroencephalographically challenged","label":0,"QE-U + GloVe (centered)":1.597325325,"QE-U + HF (centered)":1.5721350908}
+{"index":"semeval.hom_1946","text":"I just finished reading Newton's Principia Mathematica, and found much of it to be rather derivative.","label":1,"QE-U + GloVe (centered)":2.0348010063,"QE-U + HF (centered)":2.0562033653}
+{"index":"semeval.hom_1950","text":"Squirt guns don't soak people, People soak people.","label":0,"QE-U + GloVe (centered)":1.7736672163,"QE-U + HF (centered)":1.8667018414}
+{"index":"semeval.hom_1951","text":"The duke and the count had a fight. The duke was down for the count.","label":1,"QE-U + GloVe (centered)":2.0146198273,"QE-U + HF (centered)":1.9123283625}
+{"index":"semeval.hom_1953","text":"He sold candy and chocolate. A lot of girls were sweet on him.","label":1,"QE-U + GloVe (centered)":1.6768029928,"QE-U + HF (centered)":1.7232508659}
+{"index":"semeval.hom_1954","text":"I went to an invisible fairground but didn't think it was very good. I just couldn't see the attraction.","label":1,"QE-U + GloVe (centered)":2.4446468353,"QE-U + HF (centered)":2.4598445892}
+{"index":"semeval.hom_1956","text":"My buddy asked me to look after his pet goose while he was away. I told him I wasn't down with that.","label":1,"QE-U + GloVe (centered)":2.554795742,"QE-U + HF (centered)":2.438611269}
+{"index":"semeval.hom_1957","text":"OLD PROGRAMMERS never die, they just move to new addresses.","label":1,"QE-U + GloVe (centered)":1.5878871679,"QE-U + HF (centered)":1.5345423222}
+{"index":"semeval.hom_1963","text":"OLD CHEMISTS never die, they just fail to react.","label":1,"QE-U + GloVe (centered)":1.5827457905,"QE-U + HF (centered)":1.5436694622}
+{"index":"semeval.hom_1964","text":"Where do pancakes live? In a flat.","label":1,"QE-U + GloVe (centered)":1.5383713245,"QE-U + HF (centered)":1.5336873531}
+{"index":"semeval.hom_1968","text":"She was only a Janitor's daughter, and she was often swept off her feet.","label":1,"QE-U + GloVe (centered)":2.0362436771,"QE-U + HF (centered)":1.9997801781}
+{"index":"semeval.hom_1969","text":"OLD DENTISTS never die, they just lose their pull.","label":1,"QE-U + GloVe (centered)":1.5868173838,"QE-U + HF (centered)":1.5353540182}
+{"index":"semeval.hom_1971","text":"Due to inclement weather, the sandwich shop wrapped up early Tuesday night.","label":1,"QE-U + GloVe (centered)":1.4694914818,"QE-U + HF (centered)":1.5189366341}
+{"index":"semeval.hom_1973","text":"Never draw fire, it irritates everyone around you.","label":0,"QE-U + GloVe (centered)":1.3687872887,"QE-U + HF (centered)":1.1523873806}
+{"index":"semeval.hom_1974","text":"My name is Rich, A successful investment banker.","label":1,"QE-U + GloVe (centered)":1.5701372623,"QE-U + HF (centered)":1.4538465738}
+{"index":"semeval.hom_1979","text":"Old quarterbacks never die, they just pass away.","label":1,"QE-U + GloVe (centered)":1.5874323845,"QE-U + HF (centered)":1.5585017204}
+{"index":"semeval.hom_1982","text":"OLD NUMBER THEORISTS never die, they just get past their prime.","label":1,"QE-U + GloVe (centered)":1.7699117661,"QE-U + HF (centered)":1.6731773615}
+{"index":"semeval.hom_1986","text":"I tinted my hair today. It was the highlight of my day.","label":1,"QE-U + GloVe (centered)":1.6863405704,"QE-U + HF (centered)":1.717610836}
+{"index":"semeval.hom_1988","text":"A doctor drank while putting on patients'casts. He was soon plastered.","label":1,"QE-U + GloVe (centered)":1.8947114944,"QE-U + HF (centered)":1.9458920956}
+{"index":"semeval.hom_1989","text":"That's the third time my teacher changed my grade, Tom remarked.","label":1,"QE-U + GloVe (centered)":2.1907505989,"QE-U + HF (centered)":2.1485877037}
+{"index":"semeval.hom_1991","text":"Why do archers shoot arrows? Could it be they are trying to get a point across?","label":1,"QE-U + GloVe (centered)":1.588927269,"QE-U + HF (centered)":1.6793528795}
+{"index":"semeval.hom_1992","text":"Oh what a tangled web we weave. On the Internet.","label":1,"QE-U + GloVe (centered)":1.9646375179,"QE-U + HF (centered)":1.9760053158}
+{"index":"semeval.hom_1993","text":"Everyone talks about the weather, but nobody does anything about it.","label":0,"QE-U + GloVe (centered)":1.7712495327,"QE-U + HF (centered)":1.6917645931}
+{"index":"semeval.hom_1994","text":"OLD BUS DRIVERS never die, they just take a turn for the worse.","label":1,"QE-U + GloVe (centered)":1.7453517914,"QE-U + HF (centered)":1.7037901878}
+{"index":"semeval.hom_1997","text":"If it ain't broke, let me have a shot at it.","label":0,"QE-U + GloVe (centered)":1.6839154959,"QE-U + HF (centered)":1.7350381613}
+{"index":"semeval.hom_2003","text":"I used to have a life, now I have a modem.","label":0,"QE-U + GloVe (centered)":1.9089536667,"QE-U + HF (centered)":1.8386768103}
+{"index":"semeval.hom_2004","text":"During the meeting about earthquakes, there were several motions.","label":1,"QE-U + GloVe (centered)":1.7612928152,"QE-U + HF (centered)":1.6975592375}
+{"index":"semeval.hom_2006","text":"My name is Cookie, I'm a baker.","label":1,"QE-U + GloVe (centered)":1.5641729832,"QE-U + HF (centered)":1.4907883406}
+{"index":"semeval.hom_2008","text":"OLD PROCTOLOGISTS never die, they just butt out.","label":1,"QE-U + GloVe (centered)":1.3668295145,"QE-U + HF (centered)":1.5505031347}
+{"index":"semeval.hom_2009","text":"He sat in the magician's audience dressed as a cactus. He was a plant.","label":1,"QE-U + GloVe (centered)":2.4125640392,"QE-U + HF (centered)":2.2985210419}
+{"index":"semeval.hom_2010","text":"OLD WASHING MACHINE OPERATORS never die, they just keep agitating.","label":1,"QE-U + GloVe (centered)":1.894546032,"QE-U + HF (centered)":1.7657080889}
+{"index":"semeval.hom_2011","text":"I didn't know which hammer to get, but I think I nailed it.","label":1,"QE-U + GloVe (centered)":1.9128850698,"QE-U + HF (centered)":2.0874450207}
+{"index":"semeval.hom_2013","text":"Grasp all, lose all.","label":0,"QE-U + GloVe (centered)":1.0805797577,"QE-U + HF (centered)":1.0577991009}
+{"index":"semeval.hom_2014","text":"It was the first time she'd seen a live sponge on display, and she really soaked it in.","label":1,"QE-U + GloVe (centered)":2.5524001122,"QE-U + HF (centered)":2.4001040459}
+{"index":"semeval.hom_2018","text":"When they claimed to house two thousand campers, it sounded like a lot of bunk.","label":1,"QE-U + GloVe (centered)":2.1516871452,"QE-U + HF (centered)":2.0310897827}
+{"index":"semeval.hom_2023","text":"I'm very picky about my hair, so a strange barber just won't cut it.","label":1,"QE-U + GloVe (centered)":1.9058412313,"QE-U + HF (centered)":1.9864964485}
+{"index":"semeval.hom_2026","text":"I'm NOT stubborn! You can't convince me otherwise!!","label":0,"QE-U + GloVe (centered)":1.4714953899,"QE-U + HF (centered)":1.538443923}
+{"index":"semeval.hom_2029","text":"Did you hear about the farmer who got attacked by a cow? He milked it for all it was worth.","label":1,"QE-U + GloVe (centered)":2.4427204132,"QE-U + HF (centered)":2.3809502125}
+{"index":"semeval.hom_2042","text":"My name is Mike. I'm an announcer","label":1,"QE-U + GloVe (centered)":1.5893244743,"QE-U + HF (centered)":1.4714467525}
+{"index":"semeval.hom_2055","text":"When the Dalmatian ran away, he was spotted two blocks from home.","label":1,"QE-U + GloVe (centered)":1.7596071959,"QE-U + HF (centered)":1.7012864351}
+{"index":"semeval.hom_2056","text":"My name is Rusty, I'm an iron worker.","label":1,"QE-U + GloVe (centered)":1.5731458664,"QE-U + HF (centered)":1.491509676}
+{"index":"semeval.hom_2058","text":"We should make a beer commercial. It sounds simply intoxicating.","label":1,"QE-U + GloVe (centered)":1.8628399372,"QE-U + HF (centered)":1.8308722973}
+{"index":"semeval.hom_2060","text":"She was only a Insurance broker's daughter, but all the guys liked her policy.","label":1,"QE-U + GloVe (centered)":2.1513667107,"QE-U + HF (centered)":2.0791065693}
+{"index":"semeval.hom_2061","text":"She was only a Bookbinder's daughter, but she knew her way between the sheets.","label":1,"QE-U + GloVe (centered)":2.0360276699,"QE-U + HF (centered)":1.9822319746}
+{"index":"semeval.hom_2065","text":"'' This wind is awful,'' blustered Tom.","label":1,"QE-U + GloVe (centered)":1.7073996067,"QE-U + HF (centered)":1.7267817259}
+{"index":"semeval.hom_2067","text":"'' I won't buy a circuit breaker,'' Tom refused.","label":1,"QE-U + GloVe (centered)":2.0027134418,"QE-U + HF (centered)":2.0951623917}
+{"index":"semeval.hom_2073","text":"I know a rancher who has 100 head of cattle, but he thought there were only 99 until he rounded them up.","label":1,"QE-U + GloVe (centered)":2.2822437286,"QE-U + HF (centered)":2.274361372}
+{"index":"semeval.hom_2079","text":"Sure I can climb cliffs! Tom bluffed.","label":1,"QE-U + GloVe (centered)":1.7051721811,"QE-U + HF (centered)":1.7177282572}
+{"index":"semeval.hom_2083","text":"Why are all businessmen fat? Must be all the inflation.","label":1,"QE-U + GloVe (centered)":1.6983169317,"QE-U + HF (centered)":1.7474104166}
+{"index":"semeval.hom_2085","text":"He was trying to sell me new windows, but his motivations were transparent.","label":1,"QE-U + GloVe (centered)":2.1174912453,"QE-U + HF (centered)":2.0864439011}
+{"index":"semeval.hom_2086","text":"Despite the high cost of living, it remains popular.","label":0,"QE-U + GloVe (centered)":1.8814424276,"QE-U + HF (centered)":1.7903409004}
+{"index":"semeval.hom_2087","text":"OLD ELECTRICIANS never die, they just lose their resistance.","label":1,"QE-U + GloVe (centered)":1.5855776072,"QE-U + HF (centered)":1.5052771568}
+{"index":"semeval.hom_2091","text":"My name is Dusty, I run a cleaning service.","label":1,"QE-U + GloVe (centered)":1.5726462603,"QE-U + HF (centered)":1.5084621906}
+{"index":"semeval.hom_2092","text":"If you jump to conclusions, you make terrible landings.","label":1,"QE-U + GloVe (centered)":1.7127640247,"QE-U + HF (centered)":1.6944241524}
+{"index":"semeval.hom_2093","text":"If a clock had legs, time would run out.","label":1,"QE-U + GloVe (centered)":1.7715065479,"QE-U + HF (centered)":1.740347147}
+{"index":"semeval.hom_2094","text":"He always called his girlfriend his'luck'. Until he decided to push his luck.","label":1,"QE-U + GloVe (centered)":1.8751442432,"QE-U + HF (centered)":1.8999985456}
+{"index":"semeval.hom_2095","text":"53. 7% of all statistics are totally incorrect","label":0,"QE-U + GloVe (centered)":0.6925784349,"QE-U + HF (centered)":0.5040377975}
+{"index":"semeval.hom_2096","text":"The All- Pro wide receiver's wedding was a little bit shaky, but his reception was excellent.","label":1,"QE-U + GloVe (centered)":2.3948321342,"QE-U + HF (centered)":2.367577076}
+{"index":"semeval.hom_2098","text":"She said she had nothing to wear. I smiled.","label":0,"QE-U + GloVe (centered)":1.883564353,"QE-U + HF (centered)":1.8558660746}
+{"index":"semeval.hom_2101","text":"My name is Cliff. I'm a mountaineer.","label":1,"QE-U + GloVe (centered)":1.5821355581,"QE-U + HF (centered)":1.5085954666}
+{"index":"semeval.hom_2104","text":"OLD WRITERS never die, they just get erased.","label":1,"QE-U + GloVe (centered)":1.5913242102,"QE-U + HF (centered)":1.5570993423}
+{"index":"semeval.hom_2106","text":"OLD FORESTERS never die, they just pine away.","label":1,"QE-U + GloVe (centered)":1.5866678953,"QE-U + HF (centered)":1.5325405598}
+{"index":"semeval.hom_2111","text":"He hates his job selling used cars, but it's just his lot in life.","label":1,"QE-U + GloVe (centered)":2.0064792633,"QE-U + HF (centered)":1.9915397167}
+{"index":"semeval.hom_2112","text":"To hell with criticism. Praise is good enough for me.","label":0,"QE-U + GloVe (centered)":1.5853434801,"QE-U + HF (centered)":1.5092279911}
+{"index":"semeval.hom_2114","text":"I couldn't decide whether or not to make spiced apple cider, so I mulled it over.","label":1,"QE-U + GloVe (centered)":2.2749996185,"QE-U + HF (centered)":2.3185398579}
+{"index":"semeval.hom_2116","text":"I can't recall the last time I did any running, but I've been jogging my memory.","label":1,"QE-U + GloVe (centered)":2.1841821671,"QE-U + HF (centered)":2.2972431183}
+{"index":"semeval.hom_2120","text":"The Transformer always had a lot of quarters with him. He was a big fan of change.","label":1,"QE-U + GloVe (centered)":2.3195047379,"QE-U + HF (centered)":2.2438941002}
+{"index":"semeval.hom_2121","text":"A butcher was trying so hard to be funny, but he just wasn't making the cut.","label":1,"QE-U + GloVe (centered)":2.1873753071,"QE-U + HF (centered)":2.1654224396}
+{"index":"semeval.hom_2125","text":"Bowling Alley: Please be quiet. We need to hear a pin drop.","label":1,"QE-U + GloVe (centered)":1.8849023581,"QE-U + HF (centered)":1.8259296417}
+{"index":"semeval.hom_2129","text":"A train load of paint derailed. Nearby businesses were put in the red.","label":1,"QE-U + GloVe (centered)":1.8834738731,"QE-U + HF (centered)":1.7856287956}
+{"index":"semeval.hom_2130","text":"I'd love to, but my patent is pending.","label":0,"QE-U + GloVe (centered)":1.474801898,"QE-U + HF (centered)":1.5411205292}
+{"index":"semeval.hom_2132","text":"It was a lucky car. Until he had to push his luck.","label":1,"QE-U + GloVe (centered)":1.7643992901,"QE-U + HF (centered)":1.6985151768}
+{"index":"semeval.hom_2140","text":"Officer Jones takes his yearly bath every June. He is a characteristic example of a dirty cop.","label":1,"QE-U + GloVe (centered)":2.1500906944,"QE-U + HF (centered)":2.0613920689}
+{"index":"semeval.hom_2141","text":"Life’s a ledger, are we giving a good accounting of ourselves","label":1,"QE-U + GloVe (centered)":1.5986758471,"QE-U + HF (centered)":1.5105572939}
+{"index":"semeval.hom_2143","text":"Home improvement. Take your family to church.","label":1,"QE-U + GloVe (centered)":1.0978094339,"QE-U + HF (centered)":0.9774058461}
+{"index":"semeval.hom_2146","text":"Computers make very fast, very efficient mistakes.","label":0,"QE-U + GloVe (centered)":1.5726981163,"QE-U + HF (centered)":1.5410934687}
+{"index":"semeval.hom_2148","text":"Two duchesses were arguing about their husbands. They decided to duke it out.","label":1,"QE-U + GloVe (centered)":1.9925274849,"QE-U + HF (centered)":1.9397745132}
+{"index":"semeval.hom_2149","text":"In an empty head, you can hear forever....","label":0,"QE-U + GloVe (centered)":1.5936367512,"QE-U + HF (centered)":1.52105546}
+{"index":"semeval.hom_2150","text":"Pick your friends, but not to pieces","label":1,"QE-U + GloVe (centered)":1.3379677534,"QE-U + HF (centered)":1.3325065374}
+{"index":"semeval.hom_2152","text":"OLD SOCCER PLAYERS never die, they just go on dribbling.","label":1,"QE-U + GloVe (centered)":1.7397860289,"QE-U + HF (centered)":1.693300128}
+{"index":"semeval.hom_2155","text":"OLD PROFESSORS never die, they just lose their class.","label":1,"QE-U + GloVe (centered)":1.5889046192,"QE-U + HF (centered)":1.5513900518}
+{"index":"semeval.hom_2156","text":"WinError# 01: Unable to figure out own code. System crashed.","label":0,"QE-U + GloVe (centered)":2.22615695,"QE-U + HF (centered)":2.1590492725}
+{"index":"semeval.hom_2160","text":"I bought a metronome for 20 bucks. You can't beat that price.","label":1,"QE-U + GloVe (centered)":2.0155735016,"QE-U + HF (centered)":2.0109100342}
+{"index":"semeval.hom_2162","text":"Reality is not only stranger than we imagine, it is stranger than we can imagine.","label":0,"QE-U + GloVe (centered)":2.0729589462,"QE-U + HF (centered)":2.0977683067}
+{"index":"semeval.hom_2164","text":"She told a long story about a coil of rope, and then left us all hanging.","label":1,"QE-U + GloVe (centered)":2.2137339115,"QE-U + HF (centered)":2.1485385895}
+{"index":"semeval.hom_2169","text":"Those who choose not to eat, slowly get hungry-- and Fast.","label":1,"QE-U + GloVe (centered)":1.8744803667,"QE-U + HF (centered)":1.7541614771}
+{"index":"semeval.hom_2170","text":"The guitarist passed out on stage, he must have rocked himself to sleep.","label":1,"QE-U + GloVe (centered)":1.9224257469,"QE-U + HF (centered)":1.8116168976}
+{"index":"semeval.hom_2173","text":"OLD HOCKEY PLAYERS never die, they just achieve their final goal.","label":1,"QE-U + GloVe (centered)":1.7456943989,"QE-U + HF (centered)":1.6620955467}
+{"index":"semeval.hom_2174","text":"Shock me, say something intelligent!","label":0,"QE-U + GloVe (centered)":1.0742778778,"QE-U + HF (centered)":0.8756703734}
+{"index":"semeval.hom_2176","text":"For the orthodontist visit, the boy had to brace himself.","label":1,"QE-U + GloVe (centered)":1.5786393881,"QE-U + HF (centered)":1.5677042007}
+{"index":"semeval.hom_2180","text":"OLD SOCCER PLAYERS never die, they just achieve their final goal.","label":1,"QE-U + GloVe (centered)":1.7397860289,"QE-U + HF (centered)":1.693300128}
+{"index":"semeval.hom_2181","text":"There was a sale at the fish market today. I went to see what was the catch.","label":1,"QE-U + GloVe (centered)":2.2364113331,"QE-U + HF (centered)":2.0602610111}
+{"index":"semeval.hom_2184","text":"My name is Ira. I'm an investment advisor.","label":1,"QE-U + GloVe (centered)":1.5894088745,"QE-U + HF (centered)":1.5436030626}
+{"index":"semeval.hom_2185","text":"He was selling palm trees, but people thought it was a shady deal.","label":1,"QE-U + GloVe (centered)":1.739685297,"QE-U + HF (centered)":1.6397509575}
+{"index":"semeval.hom_2186","text":"Why don't people like to talk to garbage men? They mostly talk trash.","label":1,"QE-U + GloVe (centered)":2.055883646,"QE-U + HF (centered)":2.2268543243}
+{"index":"semeval.hom_2188","text":"Once again, Odo wins the Twister championship.","label":0,"QE-U + GloVe (centered)":1.0467156172,"QE-U + HF (centered)":0.970769763}
+{"index":"semeval.hom_2191","text":"My name is Iris. I'm an optometrist","label":1,"QE-U + GloVe (centered)":1.5839365721,"QE-U + HF (centered)":1.4944494963}
+{"index":"semeval.hom_2195","text":"I can SPELL, I just can't TYPE worth a hoot!","label":0,"QE-U + GloVe (centered)":1.3521871567,"QE-U + HF (centered)":1.3074810505}
+{"index":"semeval.hom_2197","text":"My name is Nick. I was a barber but I'm looking for a new job.","label":1,"QE-U + GloVe (centered)":1.5836931467,"QE-U + HF (centered)":1.4611341953}
+{"index":"semeval.hom_2198","text":"Don't marry for money; you can borrow it cheaper.","label":0,"QE-U + GloVe (centered)":1.6559786797,"QE-U + HF (centered)":1.7257547379}
+{"index":"semeval.hom_2199","text":"If it's useless, it will have to be documented.","label":0,"QE-U + GloVe (centered)":1.5702091455,"QE-U + HF (centered)":1.5699496269}
+{"index":"semeval.hom_2201","text":"Winning isn't everything, it's the only thing.","label":0,"QE-U + GloVe (centered)":1.5589216948,"QE-U + HF (centered)":1.5263438225}
+{"index":"semeval.hom_2207","text":"My name is Carol. I sing during the holidays.","label":1,"QE-U + GloVe (centered)":1.5844500065,"QE-U + HF (centered)":1.5082752705}
+{"index":"semeval.hom_2208","text":"Always trust a glue salesman. They tend to stick to their word.","label":1,"QE-U + GloVe (centered)":1.7444922924,"QE-U + HF (centered)":1.7310454845}
+{"index":"semeval.hom_2212","text":"A friend told me he dug a hole in my backyard and filled it with water. I thought he meant well.","label":1,"QE-U + GloVe (centered)":2.6075234413,"QE-U + HF (centered)":2.448264122}
+{"index":"semeval.hom_2213","text":"My name is Teddy, I'm in lingerie","label":1,"QE-U + GloVe (centered)":1.5695533752,"QE-U + HF (centered)":1.5175802708}
+{"index":"semeval.hom_2217","text":"'' I invested in a hi- tech startup,'' Tom ventured.","label":1,"QE-U + GloVe (centered)":1.9692709446,"QE-U + HF (centered)":2.0107197762}
+{"index":"semeval.hom_2218","text":"Love is not finding someone to live with; it's finding someone whom you can't live without.","label":0,"QE-U + GloVe (centered)":2.1647529602,"QE-U + HF (centered)":2.0465922356}
+{"index":"semeval.hom_2228","text":"If you have to pay to go to the river, we'd better stop at the bank.","label":1,"QE-U + GloVe (centered)":1.9840481281,"QE-U + HF (centered)":2.0937516689}
+{"index":"semeval.hom_2233","text":"Humpty Dumpty had a great fall- and a pretty good spring and summer, too.","label":1,"QE-U + GloVe (centered)":2.1723232269,"QE-U + HF (centered)":2.1794235706}
+{"index":"semeval.hom_2235","text":"The place that made rubber balls almost went bankrupt, but they bounced back.","label":1,"QE-U + GloVe (centered)":2.2551460266,"QE-U + HF (centered)":2.1878080368}
+{"index":"semeval.hom_2237","text":"Soon after he joined the band, the guitarist was instrumental.","label":1,"QE-U + GloVe (centered)":1.8754956722,"QE-U + HF (centered)":1.8414652348}
+{"index":"semeval.hom_2238","text":"OLD GEOGRAPHERS never die, they just become legends.","label":1,"QE-U + GloVe (centered)":1.5886691809,"QE-U + HF (centered)":1.5376467705}
+{"index":"semeval.hom_2240","text":"The man who worked in the gum factory fell in a vat of bubblegum. His boss had to chew him out.","label":1,"QE-U + GloVe (centered)":2.4031410217,"QE-U + HF (centered)":2.4469146729}
+{"index":"semeval.hom_2241","text":"She was only a Watchman's daughter, but any time suited her.","label":1,"QE-U + GloVe (centered)":2.0380892754,"QE-U + HF (centered)":2.0008645058}
+{"index":"semeval.hom_2244","text":"OLD SANITATION MEN never die, they just waste away","label":1,"QE-U + GloVe (centered)":1.7697064877,"QE-U + HF (centered)":1.6701593399}
+{"index":"semeval.hom_2249","text":"If you burn the candle on both ends, you’re not as bright as you think.","label":1,"QE-U + GloVe (centered)":2.0954613686,"QE-U + HF (centered)":2.0637631416}
