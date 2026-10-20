@@ -68,6 +68,7 @@ def _(corpora_enum, pl, results_paths):
             dfs.append(df)
 
     combined_df = pl.concat(dfs, how="diagonal_relaxed")
+
     df = (
         combined_df.drop("text")
         .drop_nulls(subset="funniness")

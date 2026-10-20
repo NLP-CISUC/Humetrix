@@ -354,12 +354,12 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
             _results["n non-humor"].append(_non_humor.len())
             _results["auc"].append(_auc)
 
-    _results_df = pl.DataFrame(_results).with_columns(
+    centered_results_df = pl.DataFrame(_results).with_columns(
         (pl.col("p-value") < 0.05).alias("different distributions")
     )
 
     mo.ui.table(
-        _results_df
+        centered_results_df
         .select("corpus", "metric", "auc")
         .pivot(index="corpus", on="metric")
         .select(pl.col("corpus").cast(corpora_enum),
@@ -374,6 +374,72 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
             "QE-U + GloVe (centered)": "{:.2%}",
             "QE-U + HF (centered)": "{:.2%}",
         },
+        selection=None,
+        pagination=False,
+    )
+    return (centered_results_df,)
+
+
+@app.cell
+def _(centered_results_df, corpora_enum, mo, pl):
+    mo.ui.table(
+        centered_results_df
+        .select("metric", "corpus", "p-value")
+        .pivot(on="metric", index="corpus")
+        .select(
+            pl.col("corpus").cast(corpora_enum),
+            "QE-U + GloVe",
+            "QE-U + GloVe (centered)",
+            "QE-U + HF",
+            "QE-U + HF (centered)"
+        )
+        .sort("corpus"),
+        format_mapping={
+            "QE-U + GloVe": "{:.2g}",
+            "QE-U + HF": "{:.2g}",
+            "QE-U + GloVe (centered)": "{:.2g}",
+            "QE-U + HF (centered)": "{:.2g}",
+        },
+        selection=None,
+        pagination=False,
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### Correlation with text length
+    """)
+    return
+
+
+@app.cell
+def _(df, mo, pl):
+    _qe_columns = [
+        "QE-U + GloVe",
+        "QE-U + GloVe (centered)",
+        "QE-U + HF",
+        "QE-U + HF (centered)",
+    ]
+
+    _length_df = pl.read_ndjson(
+        "results/qe_shortcuts.jsonl", infer_schema_length=None
+    ).select("index", "n_setup")
+
+    _correlations = (
+        df.join(_length_df, on="index")
+        .group_by("corpus")
+        .agg(
+            pl.corr(_col, "n_setup", method="spearman").alias(_col)
+            for _col in _qe_columns
+        )
+        .sort("corpus")
+    )
+
+    mo.ui.table(
+        _correlations,
+        format_mapping={_col: "{:.3f}" for _col in _qe_columns},
         selection=None,
         pagination=False,
     )

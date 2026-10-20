@@ -233,7 +233,7 @@ def _(mo):
 
 
 @app.cell
-def _(corpora_enum, df_no_outliers, sns):
+def _(corpora_enum, df_no_outliers, mo, sns):
     sns.set_theme(style="whitegrid", font_scale=1.2)
 
     corpus_palette = {
@@ -277,12 +277,12 @@ def _(corpora_enum, df_no_outliers, sns):
     _g.set_titles(col_template="{col_name}")
     _g.set_axis_labels("Metric Value", "Density")
 
-    _g
+    mo.mpl.interactive(_g.figure)
     return (corpus_palette,)
 
 
 @app.cell
-def _(corpus_palette, df_no_outliers, sns):
+def _(corpus_palette, df_no_outliers, mo, sns):
     _g = sns.catplot(
         data=df_no_outliers,
         x="value",
@@ -309,7 +309,7 @@ def _(corpus_palette, df_no_outliers, sns):
     _g.set_titles(col_template="{col_name}")
     _g.set_axis_labels("Metric Value", "Density")
 
-    _g
+    mo.mpl.interactive(_g.figure)
     return
 
 
@@ -358,7 +358,7 @@ def _(corpora_enum, df_no_outliers, mannwhitneyu, np, pl, ttost_ind):
                     _data_a, _data_b, -_delta, _delta, usevar="unequal"
                 )
                 _d = (np.mean(_data_a) - np.mean(_data_b)) / _pooled_sd
-            
+
                 _results.append(
                     {
                         "metric": _metric,
