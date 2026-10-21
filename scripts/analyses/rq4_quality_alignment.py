@@ -292,7 +292,7 @@ def _(df_no_outliers, pl):
 
 
 @app.cell
-def _(binned_df, corpora_enum, corpus_palette, sns):
+def _(binned_df, corpora_enum, corpus_palette, mo, sns):
     _g = sns.catplot(
         data=binned_df,
         x="funniness bin",
@@ -317,7 +317,7 @@ def _(binned_df, corpora_enum, corpus_palette, sns):
     _g.set_xlabels("Funniness bin")
     _g.legend.set_title("Corpus")
 
-    _g
+    mo.mpl.interactive(_g.figure)
     return
 
 

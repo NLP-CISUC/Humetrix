@@ -207,7 +207,10 @@ def _(Path, corpora_enum, corpora_langs, cs, pl):
     _uncentered_dfs = []
     for _corpus in corpora_langs:
         _corpus_path = _uncentered_results_path / f"{_corpus}.jsonl"
-        _df = pl.read_ndjson(_corpus_path).with_columns(corpus=pl.lit(_corpus_path.stem, corpora_enum))
+        _df = (
+            pl.read_ndjson(_corpus_path, infer_schema_length=None)
+                .with_columns(corpus=pl.lit(_corpus_path.stem, corpora_enum))
+        )
         _uncentered_dfs.append(_df)
 
     uncentered_df = (
@@ -228,7 +231,7 @@ def _(Path, pl):
 
     _centered_dfs = []
     for _corpus_path in _centered_results_path.iterdir():
-        _df = pl.read_ndjson(_corpus_path)
+        _df = pl.read_ndjson(_corpus_path, infer_schema_length=None)
         _centered_dfs.append(_df)
 
     centered_df = (
