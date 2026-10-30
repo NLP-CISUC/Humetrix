@@ -298,6 +298,46 @@ def _(corpus_palette, df_no_outliers, mo, sns):
         linewidth=1,
         inner="quart",
         dodge=False,
+        col_order=[
+            "QE-U + GloVe",
+            "QE-I + GloVe",
+            "distinctiveness",
+            "ambiguity",
+            "local global surprise"
+        ]
+    )
+
+    _separator_positions = [4.5, 7.5, 8.5, 11.5]
+    for _ax in _g.axes.flat:
+        for _y_pos in _separator_positions:
+            _ax.axhline(
+                _y_pos, color="gray", linestyle="--", linewidth=1, alpha=0.5, zorder=0
+            )
+    _g.set_titles(col_template="{col_name}")
+    _g.set_axis_labels("Metric Value", "Density")
+
+    mo.mpl.interactive(_g.figure)
+    return
+
+
+@app.cell
+def _(corpus_palette, df_no_outliers, mo, sns):
+    _g = sns.catplot(
+        data=df_no_outliers,
+        x="value",
+        y="corpus",
+        hue="corpus",
+        col="metric",
+        col_wrap=2,
+        sharex=False,
+        palette=corpus_palette,
+        kind="violin",
+        height=4,
+        aspect=1.5,
+        linewidth=1,
+        inner="quart",
+        dodge=False,
+        col_order=["QE-U + HF", "QE-I + HF"]
     )
 
     _separator_positions = [4.5, 7.5, 8.5, 11.5]
