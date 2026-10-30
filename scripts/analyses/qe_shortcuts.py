@@ -55,7 +55,6 @@ def _(Path, pl):
         "fr": "fr_dep_news_trf",
         "es": "es_dep_news_trf",
         "zh": "zh_core_web_trf",
-
     }
 
     corpora_enum = pl.Enum(

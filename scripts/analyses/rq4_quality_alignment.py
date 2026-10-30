@@ -6,8 +6,10 @@ app = marimo.App()
 
 @app.cell
 def _():
+    from functools import cache
     from pathlib import Path
 
+    # import spacy
     import marimo as mo
     import polars as pl
     import polars.selectors as cs
@@ -254,7 +256,7 @@ def _(corpora_enum, corpus_palette, corr_df, mo, plt, sns):
         hue="corpus",
         palette=corpus_palette,
         hue_order=corpora_enum.categories,
-        order=["QE-U + GloVe", "QE-U + HF", "QE-I + GloVe", "QE-I + HF"],
+        order=["QE-U + GloVe", "QE-I + GloVe"],
     )
 
     for _container in _g.containers:
@@ -309,7 +311,7 @@ def _(binned_df, corpora_enum, corpus_palette, mo, sns):
         markers=["o", "s", "D"],
         linewidth=2.5,
         hue_order=corpora_enum.categories,
-        col_order=["QE-U + GloVe", "QE-U + HF", "QE-I + GloVe", "QE-I + HF"],
+        col_order=["QE-U + GloVe", "QE-I + GloVe"],
     )
 
     _g.set_titles(col_template="{col_name}")
@@ -413,6 +415,28 @@ def _(binned_df, corpora_enum, kruskal, mo, pl, posthoc_dunn):
             "low vs high dunn": "{:.4g}",
             "mid vs high dunn": "{:.4g}",
         },
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Setup length
+    """)
+    return
+
+
+@app.cell
+def _(binned_df, pl):
+    _length_df = pl.read_ndjson("results/qe_shortcuts.jsonl", infer_schema_length=None)
+
+    (binned_df
+        .filter(pl.col("metric") == "QE-U + GloVe")
+        .join(_length_df.select("index", "n_setup"), on="index")
+        .group_by("metric", "corpus", "funniness bin")
+        .agg(pl.col("n_setup").median())
+        .sort("metric", "corpus", "funniness bin")
     )
     return
 
