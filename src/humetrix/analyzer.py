@@ -19,7 +19,7 @@ from spacy.language import Language
 import torch
 from transformers import AutoModelForMaskedLM, AutoTokenizer, Pipeline, pipeline
 
-from ._resources import download_embeddings, load_embeddings
+from ._resources import download_embeddings, download_resource, load_embeddings
 from .configs import SPACY_MODELS, TOKENIZER_MODELS, TRANSFORMER_MODELS
 from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
 from .quantum_entropy import QuantumIncongruity, QuantumUncertainty
@@ -72,7 +72,7 @@ class HumorAnalyzer:
     skipgram_path : str, optional
         Path to the skip-gram model file. Defaults to None.
     ngram_dir_path : str, optional
-        Path to the directory containing n-gram models. Defaults to None.
+        Directory with `1gram.csv` and `3gram.csv`. If None, the default n-gram tables for the language are downloaded.
     transformer_model_name : str, optional
         Name of the transformer model to use. Defaults to None.
 
@@ -147,13 +147,13 @@ class HumorAnalyzer:
                 if directory is None:
                     directory = download_embeddings(self.language)
                 self._models[name] = load_embeddings(Path(directory))
-            elif name == 'ngram1' or name == 'ngram3':
-                if not self._paths['ngram_dir']:
-                    raise ValueError(
-                        'Please provide `ngram_dir_path` to the HumorAnalyzer to use n-gram models.'
+            elif name == "ngram1" or name == "ngram3":
+                ngram_dir = self._paths["ngram_dir"]
+                if ngram_dir is None:
+                    ngram_dir = download_resource(
+                        ["1gram.csv", "3gram.csv"], subfolder=f"ngrams/{self.language}"
                     )
-                ngram_dir_path = Path(self._paths['ngram_dir'])
-                ngram_path = ngram_dir_path / f'{name[-1]}gram.csv'
+                ngram_path = Path(ngram_dir) / f"{name[-1]}gram.csv"
                 self._models[name] = pl.read_csv(ngram_path)
             elif name == 'kao_models':
                 if not self._paths['skipgram'] or not self._paths['skipgram_vocab'] or not self._paths['ngram_dir']:
