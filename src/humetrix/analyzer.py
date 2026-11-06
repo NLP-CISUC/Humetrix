@@ -19,7 +19,15 @@ from spacy.language import Language
 import torch
 from transformers import AutoModelForMaskedLM, AutoTokenizer, Pipeline, pipeline
 
-from .configs import TOKENIZER_MODELS, SPACY_MODELS, TRANSFORMER_MODELS
+from ._resources import download_resource, load_embeddings
+from .configs import (
+    EXTERNAL_EMBEDDINGS,
+    RESOURCES_REPO,
+    RESOURCES_REVISION,
+    SPACY_MODELS,
+    TOKENIZER_MODELS,
+    TRANSFORMER_MODELS,
+)
 from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
 from .quantum_entropy import QuantumIncongruity, QuantumUncertainty
 from .skipgram import SGNS, build_vocabulary
@@ -67,7 +75,7 @@ class HumorAnalyzer:
     language : str
         The language of analysis.
     embeddings_path : str, optional
-        Path to gensim-formatted word embeddings file. Defaults to None.
+        Directory with `embeddings.safetensors` and `vocab.txt`. If None, the default embeddings for the language are downloaded.
     skipgram_path : str, optional
         Path to the skip-gram model file. Defaults to None.
     ngram_dir_path : str, optional
@@ -142,13 +150,22 @@ class HumorAnalyzer:
                 lm = AutoModelForMaskedLM.from_pretrained(model_name, device_map=device)
                 self._models[name] = {'tokenizer': tokenizer, 'lm': lm}
             elif name == 'embeddings':
-                if not self._paths['embeddings']:
-                    raise ValueError(
-                        'Please provide `embeddings_path` to the HumorAnalyzer to use word embeddings.'
+                directory = self._paths["embeddings"]
+                if directory is None:
+                    if self.language in EXTERNAL_EMBEDDINGS:
+                        repo_id, revision = EXTERNAL_EMBEDDINGS[self.language]
+                        subfolder = None
+                    else:
+                        repo_id = RESOURCES_REPO
+                        revision = RESOURCES_REVISION
+                        subfolder = f"glove/{self.language}"
+                    directory = download_resource(
+                        repo_id,
+                        revision,
+                        ["embeddings.safetensors", "vocab.txt"],
+                        subfolder=subfolder,
                     )
-                self._models[name] = KeyedVectors.load(
-                    self._paths['embeddings']
-                )
+                self._models[name] = load_embeddings(Path(directory))
             elif name == 'ngram1' or name == 'ngram3':
                 if not self._paths['ngram_dir']:
                     raise ValueError(

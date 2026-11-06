@@ -1,0 +1,47 @@
+"""Download and load the external resources used by the metrics."""
+
+from pathlib import Path
+from typing import Iterable, Optional
+
+import safetensors.numpy
+from gensim.models import KeyedVectors
+from huggingface_hub import hf_hub_download
+
+
+def download_resource(
+    repo_id: str,
+    revision: str,
+    filenames: Iterable[str],
+    subfolder: Optional[str] = None,
+) -> Path:
+    """Download files from the Hugging Face Hub repository and return their directory."""
+
+    paths = [
+        hf_hub_download(repo_id, filename, subfolder=subfolder, revision=revision)
+        for filename in filenames
+    ]
+
+    if not paths:
+        raise ValueError("At least one filename is required.")
+    return Path(paths[0]).parent
+
+
+def load_embeddings(directory: Path) -> KeyedVectors:
+    """Load embeddings from `embeddings.safetensors` + `vocab.txt` files."""
+    tensors = safetensors.numpy.load_file(directory / "embeddings.safetensors")
+    vectors = tensors["embeddings"]
+
+    with open(directory / "vocab.txt", encoding="utf-8", newline="\n") as f:
+        vocab = f.read().split("\n")
+    if vocab[-1] == "":
+        vocab.pop()
+
+    if len(vocab) != len(vectors):
+        raise ValueError(
+            f"{directory}: vocab.txt has {len(vocab)} words, "
+            f"but the matrix has {len(vectors)} rows."
+        )
+
+    embeddings = KeyedVectors(vector_size=vectors.shape[1])
+    embeddings.add_vectors(vocab, vectors)
+    return embeddings
