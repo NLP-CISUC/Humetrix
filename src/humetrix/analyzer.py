@@ -12,11 +12,12 @@ import importlib
 from pathlib import Path
 from typing import Dict, Union
 
-from gensim.models import KeyedVectors
 import polars as pl
+import safetensors.torch
 import spacy
-from spacy.language import Language
 import torch
+from gensim.models import KeyedVectors
+from spacy.language import Language
 from transformers import AutoModelForMaskedLM, AutoTokenizer, Pipeline, pipeline
 
 from ._resources import download_embeddings, download_resource, load_embeddings
@@ -70,7 +71,9 @@ class HumorAnalyzer:
     embeddings_path : str, optional
         Directory with `embeddings.safetensors` and `vocab.txt`. If None, the default embeddings for the language are downloaded.
     skipgram_path : str, optional
-        Path to the skip-gram model file. Defaults to None.
+        Path to the skip-gram model file is safetensors format. If None (together with `skipgram_vocab_path`), the default model for the language is downloaded.
+    skipgram_vocab_path: str, optional
+        CSV vocabulary used to train the skipgram model (column `ngram`). Required when `skipgram_path` is given.
     ngram_dir_path : str, optional
         Directory with `1gram.csv` and `3gram.csv`. If None, the default n-gram tables for the language are downloaded.
     transformer_model_name : str, optional
@@ -155,25 +158,31 @@ class HumorAnalyzer:
                     )
                 ngram_path = Path(ngram_dir) / f"{name[-1]}gram.csv"
                 self._models[name] = pl.read_csv(ngram_path)
-            elif name == 'kao_models':
-                if not self._paths['skipgram'] or not self._paths['skipgram_vocab'] or not self._paths['ngram_dir']:
-                    raise ValueError(
-                        'To use Kao et al. (2016) models, provide `skipgram_path`, `skipgram_vocab_path`, and `ngram_dir_path`.'
+            elif name == "kao_models":
+                skipgram_path = self._paths["skipgram"]
+                vocab_path = self._paths["skipgram_vocab"]
+                if skipgram_path is None and vocab_path is None:
+                    skipgram_dir = download_resource(
+                        ["model.safetensors"], subfolder=f"skipgram/{self.language}"
                     )
-                vocab = build_vocabulary(self._paths['skipgram_vocab'])
-                device = torch.device(
-                    'cuda' if torch.cuda.is_available() else 'cpu'
-                )
+                    vocab_dir = download_resource(
+                        ["1gram.csv"], subfolder=f"ngrams/{self.language}"
+                    )
+                    skipgram_path = skipgram_dir / "model.safetensors"
+                    vocab_path = vocab_dir / "1gram.csv"
+                elif skipgram_path is None or vocab_path is None:
+                    raise ValueError(
+                        "Provide both `skipgram_path` and `skipgram_vocab_path`, "
+                        "or neither to use the default skipgram model."
+                    )
+                vocab = build_vocabulary(str(vocab_path))
                 sgns = SGNS(vocab, 300)
-                sgns.load_state_dict(
-                    torch.load(self._paths['skipgram'], map_location=device),
-                    strict=False
-                )
+                sgns.load_state_dict(safetensors.torch.load_file(skipgram_path))
                 sgns.eval()
                 self._models[name] = {
-                    'skipgram': sgns,
-                    'ngram1': self._load_model('ngram1'),
-                    'ngram3': self._load_model('ngram3'),
+                    "skipgram": sgns,
+                    "ngram1": self._load_model("ngram1"),
+                    "ngram3": self._load_model("ngram3"),
                 }
             elif name == 'transformer_pipeline':
                 if self._transformer_model_name:
