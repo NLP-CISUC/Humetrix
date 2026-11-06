@@ -89,6 +89,12 @@ Make sure to use the corresponding spacy model for each language.:
 - Portuguese: `pt_core_news_sm`
 - Spanish: `es_core_news_sm`
 
+These models are not installed with the library. Install them with the `training` dependency group:
+
+```bash
+uv sync --group training
+```
+
 If the dataset is already tokenized and lemmatized (such as BRWAC or Bookcorpus), you can skip this step with the `--no-spacy` flag.
 
 ### Build vocabulary
