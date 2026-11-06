@@ -19,15 +19,8 @@ from spacy.language import Language
 import torch
 from transformers import AutoModelForMaskedLM, AutoTokenizer, Pipeline, pipeline
 
-from ._resources import download_resource, load_embeddings
-from .configs import (
-    EXTERNAL_EMBEDDINGS,
-    RESOURCES_REPO,
-    RESOURCES_REVISION,
-    SPACY_MODELS,
-    TOKENIZER_MODELS,
-    TRANSFORMER_MODELS,
-)
+from ._resources import download_embeddings, load_embeddings
+from .configs import SPACY_MODELS, TOKENIZER_MODELS, TRANSFORMER_MODELS
 from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
 from .quantum_entropy import QuantumIncongruity, QuantumUncertainty
 from .skipgram import SGNS, build_vocabulary
@@ -152,19 +145,7 @@ class HumorAnalyzer:
             elif name == 'embeddings':
                 directory = self._paths["embeddings"]
                 if directory is None:
-                    if self.language in EXTERNAL_EMBEDDINGS:
-                        repo_id, revision = EXTERNAL_EMBEDDINGS[self.language]
-                        subfolder = None
-                    else:
-                        repo_id = RESOURCES_REPO
-                        revision = RESOURCES_REVISION
-                        subfolder = f"glove/{self.language}"
-                    directory = download_resource(
-                        repo_id,
-                        revision,
-                        ["embeddings.safetensors", "vocab.txt"],
-                        subfolder=subfolder,
-                    )
+                    directory = download_embeddings(self.language)
                 self._models[name] = load_embeddings(Path(directory))
             elif name == 'ngram1' or name == 'ngram3':
                 if not self._paths['ngram_dir']:

@@ -7,12 +7,14 @@ import safetensors.numpy
 from gensim.models import KeyedVectors
 from huggingface_hub import hf_hub_download
 
+from .configs import EXTERNAL_EMBEDDINGS, RESOURCES_REPO, RESOURCES_REVISION
+
 
 def download_resource(
-    repo_id: str,
-    revision: str,
     filenames: Iterable[str],
     subfolder: Optional[str] = None,
+    repo_id: str = RESOURCES_REPO,
+    revision: str = RESOURCES_REVISION,
 ) -> Path:
     """Download files from the Hugging Face Hub repository and return their directory."""
 
@@ -24,6 +26,15 @@ def download_resource(
     if not paths:
         raise ValueError("At least one filename is required.")
     return Path(paths[0]).parent
+
+
+def download_embeddings(language: str) -> Path:
+    """Download the default glove embeddings for a language."""
+    filenames = ["embeddings.safetensors", "vocab.txt"]
+    if language in EXTERNAL_EMBEDDINGS:
+        repo_id, revision = EXTERNAL_EMBEDDINGS[language]
+        return download_resource(filenames, repo_id=repo_id, revision=revision)
+    return download_resource(filenames, subfolder=f'glove/{language}')
 
 
 def load_embeddings(directory: Path) -> KeyedVectors:
