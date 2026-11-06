@@ -116,7 +116,7 @@ With the vocabulary generated, we can now convert the corpus text into token IDs
 ```bash
 python scripts/preprocessing/skipgram/convert_corpus_to_ids.py \
     --corpus data/skipgram/[CORPUS_NAME].parquet \
-    --vocab data/preprocessed_skipgram/[CORPUS_NAME]/vocab.csv \
+    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
     --output data/preprocessed_skipgram/[CORPUS_NAME]/corpus_ids.parquet
 ```
 
@@ -127,7 +127,7 @@ Finally, we can create the training data for the skip-gram model using the `scri
 ```bash
 python scripts/preprocessing/skipgram/create_context_windows.py \
     --corpus data/preprocessed_skipgram/[CORPUS_NAME]/corpus_ids.parquet \
-    --vocab data/preprocessed_skipgram/[CORPUS_NAME]/vocab.csv \
+    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
     --output data/preprocessed_skipgram/[CORPUS_NAME]/context_windows.parquet \
     --min-dist 5 \
     --max-dist 10
@@ -140,9 +140,11 @@ We provide a script to train the distant skip-gram models. The script is `script
 ```bash
 python scripts/training/train_skipgram.py \
     --context-windows data/preprocessed_skipgram/[CORPUS_NAME]/context_windows.parquet \
-    --vocab data/preprocessed_skipgram/[CORPUS_NAME]/vocab.csv \
+    --vocab data/ngrams/[LANGUAGE]/1gram.csv \
     --output results/skipgram/[LANGUAGE].pt \
     --epochs 10
 ```
 
 To check the parameters we used for training our models, check the `scripts/experiments/run_skipgram_training.sh` script.
+
+Our trained models were converted with `scripts/hub/export_skipgram.py` and published to [Hugging Face Hub](https://huggingface.co/NLP-CISUC/humetrix-resources).

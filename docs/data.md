@@ -4,18 +4,6 @@ The data is organized within the `data/` directory, which is not publicly distri
 
 ```
 data/
-├── embeddings
-│   ├── en
-│   │   ├── glove_s300.gensim
-│   │   └── glove_s300.gensim.vectors.npy
-│   ├── es
-│   │   └── ...
-│   ├── fr
-│   │   └── ...
-│   ├── pt
-│   │   └── ...
-│   └── zh
-│       └── ...
 ├── humor_interpretation
 │   ├── humicroedit.json
 │   └── puntuguese.json
@@ -24,23 +12,11 @@ data/
 │   ├── clemencio.json
 │   ├── HAHA@IberLEF2019.json
 │   └── ...
-├── large_corpora
-│   ├── bookcorpus.txt
-│   ├── brwac.txt
-│   ├── croissant.txt
-│   └── ...
-└── ngrams
-    ├── en
-    │   ├── 1gram.csv
-    │   └── 3gram.csv
-    ├── es
-    │   └── ...
-    ├── fr
-    │   └── ...
-    ├── pt
-    │   └── ...
-    └── zh
-        └── ...
+└── large_corpora
+    ├── bookcorpus.txt
+    ├── brwac.txt
+    ├── croissant.txt
+    └── ...
 ```
 
 The `data/` directory is organized according to the different tasks that the datasets are used for. In the following sections, we detail the datasets used, where to download them from, and how to prepare them.
@@ -183,17 +159,11 @@ For the Quantum Entropy-based metrics, we use GloVe embeddings with 300 dimensio
 - **French**: [French Word Embeddings](https://github.com/Ismailhachimi/French-Word-Embeddings)
 - **Chinese**: We trained our own embeddings using the Wikipedia corpus and the original GloVe code.
 
-These word embeddings are usually distributed with the Word2Vec format, but we convert them to the Gensim format for easier loading. To do this, we recommend creating a new virtual environment, with Python 3.10, since Gensim is not compatible with Python 3.12. Then, we can convert the embeddings using the following command:
-
-```bash
-import gensim
-
-word_vectors = gensim.models.KeyedVectors.load_word2vec_format('/path/to/glove/embeddings.txt', binary=False)
-word_vectors.save('glove_s300.gensim')
-```
-
-We highlight that the gensim format results in two files: `glove_s300.gensim` and `glove_s300.gensim.vectors.npy`. Both are needed for the code to work, so make sure to include them in the same directory.
+Humetrix downloads these embeddings automatically form the Hugging Face Hub ([NLP-CISUC/humetrix-resources](https://huggingface.co/NLP-CISUC/humetrix-resources); Portuguese from [nilc-nlp/glove-300d](https://huggingface.co/nilc-nlp/glove-300d)). The published files were converted form the original gensim format with `scripts/hub/export_embeddings.py`.
 
 ## N-gram counts
 
 To compute the local-global surprise metrics, we needed to have 1-gram and 3-gram counts for each language across large corpora. The n-grams counts for English, Spanish, French, and Chinese were obtained from the [Google Books n-gram frequency lists](https://github.com/orgtre/google-books-ngram-frequency). For Portuguese, we use [N-gram frequency counts from BRWaC](https://github.com/Superar/Portuguese-Ngram-Frequencies).
+
+Humetrix also automatically downloads these count tables from [our Hugging Face Hub repository](https://huggingface.co/NLP-CISUC/humetrix-resources).
+
