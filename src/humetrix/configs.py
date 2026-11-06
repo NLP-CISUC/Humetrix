@@ -9,6 +9,11 @@ SPACY_MODELS = {
     'es': 'es_dep_news_trf',
     'zh': 'zh_core_web_trf',
 }
+# Pipelines used only for tokenization in QE and Suprise metrics.
+# Languages not listed here use spacy.blank(language).
+TOKENIZER_MODELS = {
+    'zh': 'zh_core_web_sm'
+}
 TRANSFORMER_MODELS = {
     'pt': 'neuralmind/bert-base-portuguese-cased',
     'en': 'bert-base-cased',

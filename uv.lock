@@ -1088,6 +1088,7 @@ dependencies = [
     { name = "spacy" },
     { name = "torch" },
     { name = "transformers" },
+    { name = "zh-core-web-sm" },
     { name = "zh-core-web-trf" },
 ]
 
@@ -1136,6 +1137,7 @@ requires-dist = [
     { name = "spacy", specifier = ">=3.8.0" },
     { name = "torch", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cu126" },
     { name = "transformers", specifier = ">=4.49.0" },
+    { name = "zh-core-web-sm", url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_sm-3.8.0/zh_core_web_sm-3.8.0-py3-none-any.whl" },
     { name = "zh-core-web-trf", url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" },
 ]
 

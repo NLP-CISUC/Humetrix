@@ -18,7 +18,7 @@ from spacy.language import Language
 import torch
 from transformers import AutoModelForMaskedLM, AutoTokenizer, Pipeline, pipeline
 
-from .configs import SPACY_MODELS, TRANSFORMER_MODELS
+from .configs import TOKENIZER_MODELS, SPACY_MODELS, TRANSFORMER_MODELS
 from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
 from .quantum_entropy import QuantumIncongruity, QuantumUncertainty
 from .skipgram import SGNS, build_vocabulary
@@ -104,6 +104,12 @@ class HumorAnalyzer:
             if name == 'spacy':
                 model_name = SPACY_MODELS[self.language]
                 self._models[name] = spacy.load(model_name)
+            elif name == 'tokenizer':
+                if self.language in TOKENIZER_MODELS:
+                    model_name = TOKENIZER_MODELS[self.language]
+                    self._models[name] = spacy.load(model_name)
+                else:
+                    self._models[name] = spacy.blank(self.language)
             elif name == 'bert':
                 device = torch.device(
                     'cuda' if torch.cuda.is_available() else 'cpu'
@@ -196,7 +202,7 @@ class HumorAnalyzer:
         scorer = QuantumIncongruity(
             sentence=sentence,
             embeddings=embeddings,
-            spacy_model=self._load_model('spacy'),
+            spacy_model=self._load_model('tokenizer'),
         )
         return scorer.score()
 
@@ -238,7 +244,7 @@ class HumorAnalyzer:
         scorer = QuantumUncertainty(
             sentence=sentence,
             embeddings=embeddings,
-            spacy_model=self._load_model('spacy'),
+            spacy_model=self._load_model('tokenizer'),
         )
         return scorer.score()
 
@@ -271,7 +277,7 @@ class HumorAnalyzer:
             sentence=sentence,
             pun_sign=pun_sign,
             alt_sign=alt_sign,
-            spacy_model=self._load_model('spacy'),
+            spacy_model=self._load_model('tokenizer'),
         )
         return scorer.score(
             tokenizer=bert_models['tokenizer'], lm=bert_models['lm']
