@@ -26,12 +26,7 @@ def get_kaoetal_scores(row, analyzer):
 
 
 for language, datasets in corpora.items():
-    analyzer = HumorAnalyzer(
-        language,
-        skipgram_path=f'results/skipgram/{language}.pt',
-        skipgram_vocab_path=f'data/preprocessed_skipgram/{training_corpora[language]}/vocab.csv',
-        ngram_dir_path=f'data/ngrams/{language}',
-    )
+    analyzer = HumorAnalyzer(language)
     for corpus in datasets:
         print('- ' * 10 + corpus + ' -' * 10)
         df = pd.read_json(paths[corpus], orient='index').reset_index()

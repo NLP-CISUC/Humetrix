@@ -93,7 +93,7 @@ def mean_embedding(embeddings):
 rows = []
 for language, datasets in corpora.items():
     analyzer = HumorAnalyzer(
-        language, embeddings_path=glove[language], transformer_model_name=xlmr
+        language, transformer_model_name=xlmr
     )
     embedding_models = {
         "GloVe": analyzer._load_model("embeddings"),

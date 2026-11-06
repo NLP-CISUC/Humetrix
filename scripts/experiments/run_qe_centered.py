@@ -52,9 +52,7 @@ def centered_uncertainty(text, embeddings, spacy_model, mean_vector):
 
 
 for language, datasets in corpora.items():
-    analyzer = HumorAnalyzer(
-        language, embeddings_path=glove[language], transformer_model_name=xlmr
-    )
+    analyzer = HumorAnalyzer(language, transformer_model_name=xlmr)
     spacy_model = analyzer._load_model("spacy")
     # (column name, mean vector name, embedding model)
     models = [

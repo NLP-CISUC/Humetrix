@@ -32,9 +32,7 @@ results_path = Path('results/quantum_entropy')
 results_path.mkdir(exist_ok=True, parents=True)
 
 for language, datasets in corpora.items():
-    analyzer = HumorAnalyzer(language,
-                             embeddings_path=glove[language],
-                             transformer_model_name=xlmr)
+    analyzer = HumorAnalyzer(language, transformer_model_name=xlmr)
     for corpus in datasets:
         print('- '*10 + corpus + ' -'*10)
         df = pd.read_json(paths[corpus], orient='index').reset_index()

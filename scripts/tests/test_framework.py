@@ -22,9 +22,6 @@ alt_signs = ['senhoras', 'senhoras',
              'vidas secas', 'vidas secas',
              'óbito', 'óbito']
 analyzer = HumorAnalyzer(language='pt',
-                         embeddings_path='data/embeddings/pt/glove_s300.gensim',
-                         skipgram_path='results/skipgram/pt.pt',
-                         ngram_dir_path='data/ngrams/pt',
                          transformer_model_name='FacebookAI/xlm-roberta-base')
 
 for sent, sign, alt_sign in zip(sentences, signs, alt_signs):
