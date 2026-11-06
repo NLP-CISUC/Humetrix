@@ -8,6 +8,7 @@ may need to be provided.
 Resources are loaded as needed to optimize performance.
 """
 
+import importlib
 from pathlib import Path
 from typing import Dict, Union
 
@@ -23,6 +24,28 @@ from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
 from .quantum_entropy import QuantumIncongruity, QuantumUncertainty
 from .skipgram import SGNS, build_vocabulary
 from .surprise import LocalGlobalSurprise
+
+
+def _load_spacy_model(name: str) -> Language:
+    """Load a spacy mode, downloading it on first use if needed."""
+    try:
+        return spacy.load(name)
+    except OSError:
+        pass
+
+    from spacy.cli.download import download
+
+    try:
+        download(name)
+    except SystemExit:
+        raise OSError(
+            f"spacy model {name} is not installed and could not be "
+            f"downloaded automatically. Install it with:\n"
+            f"    python -m spacy download {name}"
+        ) from None
+
+    importlib.invalidate_caches()
+    return spacy.load(name)
 
 
 class HumorAnalyzer:
@@ -103,11 +126,11 @@ class HumorAnalyzer:
         if name not in self._models:
             if name == 'spacy':
                 model_name = SPACY_MODELS[self.language]
-                self._models[name] = spacy.load(model_name)
+                self._models[name] = _load_spacy_model(model_name)
             elif name == 'tokenizer':
                 if self.language in TOKENIZER_MODELS:
                     model_name = TOKENIZER_MODELS[self.language]
-                    self._models[name] = spacy.load(model_name)
+                    self._models[name] = _load_spacy_model(model_name)
                 else:
                     self._models[name] = spacy.blank(self.language)
             elif name == 'bert':
