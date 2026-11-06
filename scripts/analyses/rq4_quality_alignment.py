@@ -272,6 +272,32 @@ def _(corpora_enum, corpus_palette, corr_df, mo, plt, sns):
     return
 
 
+@app.cell
+def _(corpora_enum, corpus_palette, corr_df, mo, plt, sns):
+    plt.figure(figsize=(15, 6))
+    _g = sns.barplot(
+        data=corr_df,
+        x="correlation",
+        y="metric",
+        hue="corpus",
+        palette=corpus_palette,
+        hue_order=corpora_enum.categories,
+        order=["QE-U + HF", "QE-I + HF"],
+    )
+
+    for _container in _g.containers:
+        _g.bar_label(_container, fontsize=10, fmt="%.3f", padding=5)
+
+    _g.axvline(0, color="black", linewidth=1, linestyle="--")
+    _g.set_title("Spearman Correlation between Metrics and Funniness")
+    _g.set_xlabel("Correlation")
+    _g.set_ylabel("Metric")
+    _g.legend(title="Corpus", bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.tight_layout()
+    mo.mpl.interactive(_g)
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
