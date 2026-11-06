@@ -1073,23 +1073,17 @@ hf-xet = [
 name = "humetrix"
 version = "0.2.0"
 source = { editable = "." }
-default-groups = ["analysis", "dev"]
+default-groups = ["analysis", "dev", "models"]
 dependencies = [
     { name = "accelerate" },
-    { name = "en-core-web-trf" },
-    { name = "es-dep-news-trf" },
-    { name = "fr-dep-news-trf" },
     { name = "gensim" },
     { name = "numpy" },
     { name = "polars", extra = ["rt64"] },
     { name = "polars-u64-idx" },
-    { name = "pt-core-news-lg" },
     { name = "scipy" },
     { name = "spacy" },
     { name = "torch" },
     { name = "transformers" },
-    { name = "zh-core-web-sm" },
-    { name = "zh-core-web-trf" },
 ]
 
 [package.dev-dependencies]
@@ -1114,6 +1108,14 @@ dev = [
     { name = "pip" },
     { name = "ruff" },
 ]
+models = [
+    { name = "en-core-web-trf" },
+    { name = "es-dep-news-trf" },
+    { name = "fr-dep-news-trf" },
+    { name = "pt-core-news-lg" },
+    { name = "zh-core-web-sm" },
+    { name = "zh-core-web-trf" },
+]
 training = [
     { name = "en-core-web-sm" },
     { name = "es-core-news-sm" },
@@ -1125,20 +1127,14 @@ training = [
 [package.metadata]
 requires-dist = [
     { name = "accelerate", specifier = ">=1.11.0" },
-    { name = "en-core-web-trf", url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl" },
-    { name = "es-dep-news-trf", url = "https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.8.0/es_dep_news_trf-3.8.0-py3-none-any.whl" },
-    { name = "fr-dep-news-trf", url = "https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl" },
     { name = "gensim", specifier = ">=4.3.3" },
     { name = "numpy", specifier = ">=1.26.4" },
     { name = "polars", extras = ["rt64"], specifier = ">=1.27.1" },
     { name = "polars-u64-idx", specifier = ">=1.30.0" },
-    { name = "pt-core-news-lg", url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_lg-3.8.0/pt_core_news_lg-3.8.0-py3-none-any.whl" },
     { name = "scipy", specifier = ">=1.17.1" },
     { name = "spacy", specifier = ">=3.8.0" },
     { name = "torch", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cu126" },
     { name = "transformers", specifier = ">=4.49.0" },
-    { name = "zh-core-web-sm", url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_sm-3.8.0/zh_core_web_sm-3.8.0-py3-none-any.whl" },
-    { name = "zh-core-web-trf", url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" },
 ]
 
 [package.metadata.requires-dev]
@@ -1162,6 +1158,14 @@ dev = [
     { name = "numpydoc", specifier = ">=1.9.0" },
     { name = "pip", specifier = ">=25.0.1" },
     { name = "ruff", specifier = ">=0.5.5" },
+]
+models = [
+    { name = "en-core-web-trf", url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl" },
+    { name = "es-dep-news-trf", url = "https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.8.0/es_dep_news_trf-3.8.0-py3-none-any.whl" },
+    { name = "fr-dep-news-trf", url = "https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl" },
+    { name = "pt-core-news-lg", url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_lg-3.8.0/pt_core_news_lg-3.8.0-py3-none-any.whl" },
+    { name = "zh-core-web-sm", url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_sm-3.8.0/zh_core_web_sm-3.8.0-py3-none-any.whl" },
+    { name = "zh-core-web-trf", url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" },
 ]
 training = [
     { name = "en-core-web-sm", url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" },

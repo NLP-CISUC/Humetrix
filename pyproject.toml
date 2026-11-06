@@ -25,12 +25,6 @@ dependencies = [
     "torch>=2.6.0",
     "transformers>=4.49.0",
     "gensim>=4.3.3",
-    "en-core-web-trf",
-    "fr-dep-news-trf",
-    "es-dep-news-trf",
-    "pt-core-news-lg",
-    "zh-core-web-trf",
-    "zh-core-web-sm",
     "accelerate>=1.11.0",
     "spacy>=3.8.0",
     "numpy>=1.26.4",
@@ -70,6 +64,14 @@ analysis = [
     "altair>=6.1.0",
     "ollama>=0.6.3",
 ]
+models = [
+    "en-core-web-trf",
+    "fr-dep-news-trf",
+    "es-dep-news-trf",
+    "pt-core-news-lg",
+    "zh-core-web-trf",
+    "zh-core-web-sm",
+]
 
 [[tool.uv.index]]
 name = "pytorch"
@@ -90,4 +92,4 @@ pt-core-news-lg = { url = "https://github.com/explosion/spacy-models/releases/do
 zh-core-web-trf = { url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" }
 
 [tool.uv]
-default-groups = ["dev", "analysis"]
+default-groups = ["dev", "analysis", "models"]
