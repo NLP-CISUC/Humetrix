@@ -27,3 +27,12 @@ CONTENT_WORD_TAGS = {
     'fr': {'ADJ', 'ADV', 'AUX', 'NOUN', 'NUM', 'PART', 'PROPN', 'VERB'},
     'es': {'ADJ', 'ADV', 'AUX', 'NOUN', 'NUM', 'PART', 'PROPN', 'VERB'},
 }
+
+# Hugging Face Hub repository with GloVe, skip-gram and n-gram resources
+RESOURCES_REPO = "NLP-CISUC/humetrix-resources"
+RESOURCES_REVISION = "cef7d0ac55fae7c154b4bb588de0be2f6d43432b"
+
+# GloVe embeddings hosted elsewere: language -> (repo_id, revision)
+EXTERNAL_EMBEDDINGS = {
+    "pt": ("nilc-nlp/glove-300d", "44dac98d46b885135a7fe1565f5c67f0f897a4ea")
+}

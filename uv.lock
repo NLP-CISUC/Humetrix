@@ -1077,8 +1077,10 @@ default-groups = ["analysis", "dev", "models"]
 dependencies = [
     { name = "accelerate" },
     { name = "gensim" },
+    { name = "huggingface-hub" },
     { name = "numpy" },
     { name = "polars", extra = ["rt64"] },
+    { name = "safetensors" },
     { name = "scipy" },
     { name = "spacy" },
     { name = "torch" },
@@ -1127,8 +1129,10 @@ training = [
 requires-dist = [
     { name = "accelerate", specifier = ">=1.11.0" },
     { name = "gensim", specifier = ">=4.3.3" },
+    { name = "huggingface-hub", specifier = ">=1.14.0" },
     { name = "numpy", specifier = ">=1.26.4" },
     { name = "polars", extras = ["rt64"], specifier = ">=1.34.0" },
+    { name = "safetensors", specifier = ">=0.7.0" },
     { name = "scipy", specifier = ">=1.17.1" },
     { name = "spacy", specifier = ">=3.8.0" },
     { name = "torch", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cu126" },
