@@ -31,7 +31,7 @@ dependencies = [
     "pt-core-news-lg",
     "zh-core-web-trf",
     "accelerate>=1.11.0",
-    "spacy[cuda12x]>=3.8.0",
+    "spacy>=3.8.0",
     "numpy>=1.26.4",
     "scipy>=1.17.1",
 ]
