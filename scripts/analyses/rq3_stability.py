@@ -303,8 +303,8 @@ def _(corpus_palette, df_no_outliers, mo, sns):
             "QE-I + GloVe",
             "distinctiveness",
             "ambiguity",
-            "local global surprise"
-        ]
+            "local global surprise",
+        ],
     )
 
     _separator_positions = [4.5, 7.5, 8.5, 11.5]
@@ -337,7 +337,7 @@ def _(corpus_palette, df_no_outliers, mo, sns):
         linewidth=1,
         inner="quart",
         dodge=False,
-        col_order=["QE-U + HF", "QE-I + HF"]
+        col_order=["QE-U + HF", "QE-I + HF"],
     )
 
     _separator_positions = [4.5, 7.5, 8.5, 11.5]
@@ -373,12 +373,16 @@ def _(corpora_enum, df_no_outliers, mannwhitneyu, np, pl, ttost_ind):
         _df_metric = df_no_outliers.filter(pl.col("metric") == _metric)
         _combinations = itertools.combinations(corpora_enum.categories, 2)
         for _corpus_a, _corpus_b in _combinations:
-            _data_a = _df_metric.filter(pl.col("corpus") == _corpus_a)[
-                "value"
-            ].drop_nulls().to_numpy()
-            _data_b = _df_metric.filter(pl.col("corpus") == _corpus_b)[
-                "value"
-            ].drop_nulls().to_numpy()
+            _data_a = (
+                _df_metric.filter(pl.col("corpus") == _corpus_a)["value"]
+                .drop_nulls()
+                .to_numpy()
+            )
+            _data_b = (
+                _df_metric.filter(pl.col("corpus") == _corpus_b)["value"]
+                .drop_nulls()
+                .to_numpy()
+            )
 
             if len(_data_a) > 1 and len(_data_b) > 1:
                 _statistic, _pvalue = mannwhitneyu(
@@ -448,7 +452,7 @@ def _(mo, pl, results_df):
             "cohen_d": "{:.4g}".format,
             "tost_p_value": "{:.4g}".format,
         },
-        selection=None
+        selection=None,
     )
     return
 

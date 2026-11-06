@@ -50,21 +50,23 @@ def _(Path, pl):
         "puntuguese": "pt",
         "chumor": "cn",
     }
-    corpora_enum = pl.Enum([
-        "semeval",
-        "humicroedit",
-        "expunations",
-        "cup",
-        "joker_clef_en",
-        "joker_clef_es",
-        "HAHA@IberLEF2021",
-        "HUHU@IberLEF2023",
-        "joker_clef_fr",
-        "joker_clef_pt",
-        "clemencio",
-        "puntuguese",
-        "chumor",
-    ])
+    corpora_enum = pl.Enum(
+        [
+            "semeval",
+            "humicroedit",
+            "expunations",
+            "cup",
+            "joker_clef_en",
+            "joker_clef_es",
+            "HAHA@IberLEF2021",
+            "HUHU@IberLEF2023",
+            "joker_clef_fr",
+            "joker_clef_pt",
+            "clemencio",
+            "puntuguese",
+            "chumor",
+        ]
+    )
     embedding_models = ["GloVe", "XLM-R"]
 
     mean_vectors_path = Path("results/mean_vectors")
@@ -76,8 +78,7 @@ def _(corpora_enum, pl):
     anisotropy_df = (
         pl.read_ndjson("results/anisotropy.jsonl")
         .with_columns(pl.col("corpus").cast(corpora_enum))
-        .unpivot(index=["corpus", "embedding model"],
-                variable_name="similarity")
+        .unpivot(index=["corpus", "embedding model"], variable_name="similarity")
     )
     anisotropy_df
     return (anisotropy_df,)
@@ -93,23 +94,20 @@ def _(mo):
 
 @app.cell
 def _(anisotropy_df, mo, pl):
-    _sim_enum = pl.Enum([
-        "intersentence similarity",
-        "intrasentence similarity",
-        "intra-inter difference"
-    ])
+    _sim_enum = pl.Enum(
+        [
+            "intersentence similarity",
+            "intrasentence similarity",
+            "intra-inter difference",
+        ]
+    )
     mo.ui.table(
         anisotropy_df.group_by("embedding model", "similarity")
-        .agg(minimum=pl.col("value").min(),
-             maximum=pl.col("value").max())
+        .agg(minimum=pl.col("value").min(), maximum=pl.col("value").max())
         .sort("embedding model", pl.col("similarity").cast(_sim_enum)),
         selection=None,
         pagination=False,
-        format_mapping={
-            "minimum": "{:.3f}",
-            "maximum": "{:.3f}"
-
-        }
+        format_mapping={"minimum": "{:.3f}", "maximum": "{:.3f}"},
     )
     return
 
@@ -124,7 +122,6 @@ def _(anisotropy_df, mo, sns):
         jitter=False,
         col="similarity",
     )
-
 
     mo.mpl.interactive(_g.fig)
     return
@@ -162,21 +159,25 @@ def _(
 
     for _model in embedding_models:
         _mean_vectors = {
-            c: F.normalize(torch.load(mean_vectors_path / f"{c}_{_model}.pt").cpu(), dim=0)
+            c: F.normalize(
+                torch.load(mean_vectors_path / f"{c}_{_model}.pt").cpu(), dim=0
+            )
             for c in corpora_langs
         }
         for _corpus1, _corpus2 in combinations(corpora_langs, 2):
             if _model == "GloVe" and corpora_langs[_corpus1] != corpora_langs[_corpus2]:
                 continue
             sim = (_mean_vectors[_corpus1] @ _mean_vectors[_corpus2]).item()
-            _rows.append({
-                "model": _model,
-                "language 1": corpora_langs[_corpus1],
-                "language 2": corpora_langs[_corpus2],
-                "corpus 1": _corpus1,
-                "corpus 2": _corpus2,
-                "similarity": sim,
-            })
+            _rows.append(
+                {
+                    "model": _model,
+                    "language 1": corpora_langs[_corpus1],
+                    "language 2": corpora_langs[_corpus2],
+                    "corpus 1": _corpus1,
+                    "corpus 2": _corpus2,
+                    "similarity": sim,
+                }
+            )
     mean_vector_similarities = pl.from_records(_rows)
     mean_vector_similarities
     return (mean_vector_similarities,)
@@ -184,10 +185,10 @@ def _(
 
 @app.cell
 def _(mean_vector_similarities, pl):
-    (mean_vector_similarities
-        .group_by("model", same_language=pl.col("language 1") == pl.col("language 2"))
-        .agg(minimum=pl.col("similarity").min(),
-             maximum=pl.col("similarity").max())
+    (
+        mean_vector_similarities.group_by(
+            "model", same_language=pl.col("language 1") == pl.col("language 2")
+        ).agg(minimum=pl.col("similarity").min(), maximum=pl.col("similarity").max())
     )
     return
 
@@ -207,16 +208,23 @@ def _(Path, corpora_enum, corpora_langs, cs, pl):
     _uncentered_dfs = []
     for _corpus in corpora_langs:
         _corpus_path = _uncentered_results_path / f"{_corpus}.jsonl"
-        _df = (
-            pl.read_ndjson(_corpus_path, infer_schema_length=None)
-                .with_columns(corpus=pl.lit(_corpus_path.stem, corpora_enum))
+        _df = pl.read_ndjson(_corpus_path, infer_schema_length=None).with_columns(
+            corpus=pl.lit(_corpus_path.stem, corpora_enum)
         )
         _uncentered_dfs.append(_df)
 
     uncentered_df = (
         pl.concat(_uncentered_dfs, how="diagonal_relaxed")
         .filter(pl.col("label").is_not_null())
-        .select("index", "corpus", "label", "QE-U + GloVe", "QE-U + HF", "QE-I + GloVe", "QE-I + HF")
+        .select(
+            "index",
+            "corpus",
+            "label",
+            "QE-U + GloVe",
+            "QE-U + HF",
+            "QE-I + GloVe",
+            "QE-I + HF",
+        )
         .drop_nulls()
         .drop(cs.starts_with("QE-I"))
     )
@@ -247,12 +255,11 @@ def _(Path, pl):
 @app.cell
 def _(centered_df, pl, uncentered_df):
     df = (
-        uncentered_df
-        .join(centered_df, on="index")
+        uncentered_df.join(centered_df, on="index")
         .with_columns(
             label=pl.when(pl.col("label") == 1)
-                .then(pl.lit("Humor"))
-                .otherwise(pl.lit("Non-humor"))
+            .then(pl.lit("Humor"))
+            .otherwise(pl.lit("Non-humor"))
         )
         .sort(pl.col("corpus"))
     )
@@ -263,9 +270,13 @@ def _(centered_df, pl, uncentered_df):
 @app.cell
 def _(df, pl):
     df_unpivot = (
-        df
-        .unpivot(
-            on=["QE-U + GloVe", "QE-U + HF", "QE-U + GloVe (centered)", "QE-U + HF (centered)"],
+        df.unpivot(
+            on=[
+                "QE-U + GloVe",
+                "QE-U + HF",
+                "QE-U + GloVe (centered)",
+                "QE-U + HF (centered)",
+            ],
             index=["index", "label", "corpus"],
             variable_name="metric",
         )
@@ -362,14 +373,15 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
     )
 
     mo.ui.table(
-        centered_results_df
-        .select("corpus", "metric", "auc")
+        centered_results_df.select("corpus", "metric", "auc")
         .pivot(index="corpus", on="metric")
-        .select(pl.col("corpus").cast(corpora_enum),
-                "QE-U + GloVe",
-                "QE-U + GloVe (centered)",
-                "QE-U + HF",
-                "QE-U + HF (centered)")
+        .select(
+            pl.col("corpus").cast(corpora_enum),
+            "QE-U + GloVe",
+            "QE-U + GloVe (centered)",
+            "QE-U + HF",
+            "QE-U + HF (centered)",
+        )
         .sort("corpus"),
         format_mapping={
             "QE-U + GloVe": "{:.2%}",
@@ -386,15 +398,14 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
 @app.cell
 def _(centered_results_df, corpora_enum, mo, pl):
     mo.ui.table(
-        centered_results_df
-        .select("metric", "corpus", "p-value")
+        centered_results_df.select("metric", "corpus", "p-value")
         .pivot(on="metric", index="corpus")
         .select(
             pl.col("corpus").cast(corpora_enum),
             "QE-U + GloVe",
             "QE-U + GloVe (centered)",
             "QE-U + HF",
-            "QE-U + HF (centered)"
+            "QE-U + HF (centered)",
         )
         .sort("corpus"),
         format_mapping={

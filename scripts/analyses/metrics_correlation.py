@@ -20,7 +20,9 @@ def _():
 
 @app.cell
 def _(Path, pl):
-    root = Path("/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix")
+    root = Path(
+        "/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix"
+    )
     data_path = root / "data"
     results_path = root / "results"
 
@@ -35,7 +37,8 @@ def _(Path, pl):
         "QE-I + HF": "QE-I (HF)",
         "ambiguity": "Ambiguity",
         "distinctiveness": "Distinctiveness",
-        "local global surprise": "Surprise Ratio"}
+        "local global surprise": "Surprise Ratio",
+    }
     return (
         corpora,
         corpora_enum,
@@ -50,9 +53,7 @@ def _(Path, pl):
 @app.cell
 def _(pd, pl):
     def read_json_index(path):
-        return pl.from_dataframe(
-            pd.read_json(path, orient="index").reset_index()
-        )
+        return pl.from_dataframe(pd.read_json(path, orient="index").reset_index())
 
     return (read_json_index,)
 
@@ -61,10 +62,9 @@ def _(pd, pl):
 def _(corpora, corpora_enum, data_path, pl, read_json_index):
     _dfs = []
     for _corpus in corpora:
-        _annotations = (
-            read_json_index(data_path / "humor_interpretation" / f"{_corpus}.json")
-                .with_columns(label=pl.lit(1))
-        )
+        _annotations = read_json_index(
+            data_path / "humor_interpretation" / f"{_corpus}.json"
+        ).with_columns(label=pl.lit(1))
 
         _labels_path = data_path / "humor_recognition" / f"{_corpus}.json"
         if _labels_path.exists():
@@ -72,25 +72,18 @@ def _(corpora, corpora_enum, data_path, pl, read_json_index):
                 read_json_index(_labels_path),
                 on=["index", "text", "label"],
                 how="full",
-                coalesce=True
+                coalesce=True,
             )
         else:
             _texts = _annotations
-        _dfs.append(
-            _texts
-            .with_columns(corpus=pl.lit(_corpus, corpora_enum))
-        )
+        _dfs.append(_texts.with_columns(corpus=pl.lit(_corpus, corpora_enum)))
 
-    texts_df = (
-        pl.concat(_dfs, how="diagonal_relaxed")
-        .with_columns(
-            n_chars=pl.col("text").str.len_chars(),
-            is_homographic=(
-                pl.col("location").str.strip_chars().str.to_lowercase()
-                ==
-                pl.col("interpretation").str.strip_chars().str.to_lowercase()
-            )
-        )
+    texts_df = pl.concat(_dfs, how="diagonal_relaxed").with_columns(
+        n_chars=pl.col("text").str.len_chars(),
+        is_homographic=(
+            pl.col("location").str.strip_chars().str.to_lowercase()
+            == pl.col("interpretation").str.strip_chars().str.to_lowercase()
+        ),
     )
     texts_df
     return (texts_df,)
@@ -102,7 +95,10 @@ def _(corpora, corpora_enum, metric_dirs, pl, results_path, text_attributes):
     for _metric_dir in metric_dirs:
         for _corpus in corpora:
             _dfs.append(
-                pl.read_ndjson(results_path / _metric_dir / f"{_corpus}.jsonl", infer_schema_length=None)
+                pl.read_ndjson(
+                    results_path / _metric_dir / f"{_corpus}.jsonl",
+                    infer_schema_length=None,
+                )
                 .drop(text_attributes, strict=False)
                 .with_columns(corpus=pl.lit(_corpus, corpora_enum))
             )
@@ -113,12 +109,10 @@ def _(corpora, corpora_enum, metric_dirs, pl, results_path, text_attributes):
         .drop_nulls("value")
         .with_columns(
             value=pl.when(
-                (pl.col("metric") == "local global surprise")
-                &
-                (pl.col("value") == -1)
+                (pl.col("metric") == "local global surprise") & (pl.col("value") == -1)
             )
-                .then(None)
-                .otherwise(pl.col("value"))
+            .then(None)
+            .otherwise(pl.col("value"))
         )
     )
     metrics_df
@@ -170,11 +164,10 @@ def _(mo):
 @app.cell
 def _(metrics, metrics_df, pl, texts_df):
     df = (
-        metrics_df
-            .pivot(on="metric", values="value")
-            .join(texts_df, on=["index", "corpus"])
-            .filter(pl.col("label") == 1)
-            .drop_nulls(subset=metrics)
+        metrics_df.pivot(on="metric", values="value")
+        .join(texts_df, on=["index", "corpus"])
+        .filter(pl.col("label") == 1)
+        .drop_nulls(subset=metrics)
     )
     df.group_by("corpus").len()
     return (df,)
@@ -184,8 +177,7 @@ def _(metrics, metrics_df, pl, texts_df):
 def _(df, metrics, pl):
     corr = {
         _corpus: (
-            _corpus_df
-            .select(metrics.keys())
+            _corpus_df.select(metrics.keys())
             .with_columns(pl.all().rank(method="average"))
             .corr(label="metric")
         )
@@ -201,8 +193,7 @@ def _(corr, corr_n, mo):
         return (
             _corr_df.to_pandas()
             .set_index("metric")
-            .style
-            .background_gradient(cmap="RdBu_r", vmin=-1, vmax=1)
+            .style.background_gradient(cmap="RdBu_r", vmin=-1, vmax=1)
             .format("{:.2f}")
         )
 
@@ -226,11 +217,18 @@ def _(corr, corr_n, metrics, mo, np, plt, sns):
     _fig, _ax = plt.subplots(figsize=(6.5, 5.5))
     sns.heatmap(
         _combined,
-        vmin=-1, vmax=1, center=0,
+        vmin=-1,
+        vmax=1,
+        center=0,
         cmap=sns.diverging_palette(250, 15, s=75, l=45, center="light", as_cmap=True),
-        annot=True, fmt=".2f", annot_kws={"size": 9},
-        square=True, linewidths=2, linecolor="white",
-        xticklabels=_labels, yticklabels=_labels,
+        annot=True,
+        fmt=".2f",
+        annot_kws={"size": 9},
+        square=True,
+        linewidths=2,
+        linecolor="white",
+        xticklabels=_labels,
+        yticklabels=_labels,
         cbar_kws={"label": "Spearman's rho", "shrink": 0.8},
         ax=_ax,
     )
@@ -239,7 +237,8 @@ def _(corr, corr_n, metrics, mo, np, plt, sns):
     _ax.set_title(
         f"Lower triangle: CUP (n = {corr_n['cup']})\n"
         f"Upper triangle: Puntuguese (n = {corr_n['puntuguese']})",
-        fontsize=9, loc="left"
+        fontsize=9,
+        loc="left",
     )
 
     _fig.tight_layout()

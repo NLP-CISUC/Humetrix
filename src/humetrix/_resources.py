@@ -34,7 +34,7 @@ def download_embeddings(language: str) -> Path:
     if language in EXTERNAL_EMBEDDINGS:
         repo_id, revision = EXTERNAL_EMBEDDINGS[language]
         return download_resource(filenames, repo_id=repo_id, revision=revision)
-    return download_resource(filenames, subfolder=f'glove/{language}')
+    return download_resource(filenames, subfolder=f"glove/{language}")
 
 
 def load_embeddings(directory: Path) -> KeyedVectors:

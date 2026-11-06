@@ -31,9 +31,7 @@ class SkipGramDataset(IterableDataset):
 
     def __iter__(self):
         for group_id in self._group_ids:
-            table = self.pf.read_row_group(
-                group_id, columns=['token ids', 'context']
-            )
+            table = self.pf.read_row_group(group_id, columns=["token ids", "context"])
             chunk_df = pl.from_arrow(table)
 
             chunk_df = chunk_df.sample(
@@ -48,13 +46,10 @@ class SkipGramDataset(IterableDataset):
             for i in range(0, len(chunk_df), self.batch_size):
                 batch_df = chunk_df.slice(i, self.batch_size)
 
-                targets = batch_df['token ids'].to_torch()
-                context_len = batch_df['context'][0].len()
+                targets = batch_df["token ids"].to_torch()
+                context_len = batch_df["context"][0].len()
                 contexts = (
-                    batch_df['context']
-                    .explode()
-                    .to_torch()
-                    .view(-1, context_len)
+                    batch_df["context"].explode().to_torch().view(-1, context_len)
                 )
 
                 yield targets, contexts
@@ -69,46 +64,46 @@ class SkipGramDataset(IterableDataset):
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument(
-        '--context-windows',
-        '-c',
-        help='Corpus file (.parquet) converted to token ids and context windows. Check scripts/preprocessing/skipgram/ scripts.',
+        "--context-windows",
+        "-c",
+        help="Corpus file (.parquet) converted to token ids and context windows. Check scripts/preprocessing/skipgram/ scripts.",
         type=Path,
         required=True,
     )
     parser.add_argument(
-        '--vocab',
-        '-v',
-        help='Vocabulary file (.csv) with token frequency counts.',
+        "--vocab",
+        "-v",
+        help="Vocabulary file (.csv) with token frequency counts.",
         type=Path,
         required=True,
     )
     parser.add_argument(
-        '--output',
-        '-o',
-        help='File to save trained model to.',
+        "--output",
+        "-o",
+        help="File to save trained model to.",
         type=Path,
         required=True,
     )
     parser.add_argument(
-        '--epochs',
-        '-e',
-        help='Number of epochs to train',
+        "--epochs",
+        "-e",
+        help="Number of epochs to train",
         type=int,
         required=False,
         default=10,
     )
     parser.add_argument(
-        '--batch-size',
-        '-b',
-        help='Training batch size.',
+        "--batch-size",
+        "-b",
+        help="Training batch size.",
         type=int,
         required=False,
         default=8192,
     )
     parser.add_argument(
-        '--number-examples',
-        '-n',
-        help='Fixed number of examples to train the model on',
+        "--number-examples",
+        "-n",
+        help="Fixed number of examples to train the model on",
         type=int,
         required=False,
         default=None,
@@ -120,7 +115,7 @@ def parse_args():
 def main(args):
     epochs = args.epochs
     batch_size = args.batch_size
-    device = torch.device('cuda:0') if torch.cuda.is_available() else 'cpu'
+    device = torch.device("cuda:0") if torch.cuda.is_available() else "cpu"
 
     vocab = build_vocabulary(args.vocab)
     vocab_counts = pl.read_csv(args.vocab)
@@ -163,17 +158,17 @@ def main(args):
             avg_loss = epoch_loss / (batch_idx + 1)
 
             pbar.update()
-            pbar.set_description_str(f'Epoch {epoch + 1}/{epochs}')
+            pbar.set_description_str(f"Epoch {epoch + 1}/{epochs}")
             pbar.set_postfix(
                 {
-                    'Loss': f'{batch_loss:.4f}',
-                    'Avg': f'{avg_loss:.4f}',
-                    'LR': f'{optimizer.param_groups[0]["lr"]:.2e}',
+                    "Loss": f"{batch_loss:.4f}",
+                    "Avg": f"{avg_loss:.4f}",
+                    "LR": f"{optimizer.param_groups[0]['lr']:.2e}",
                 }
             )
         epoch_time = time.time() - epoch_start_time
         print(
-            f'Epoch {epoch + 1} completed - Avg Loss: {avg_loss:.4f}, Time: {epoch_time:.1f}s'
+            f"Epoch {epoch + 1} completed - Avg Loss: {avg_loss:.4f}, Time: {epoch_time:.1f}s"
         )
     pbar.close()
 
@@ -181,6 +176,6 @@ def main(args):
     torch.save(model.state_dict(), args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = parse_args()
     main(args)

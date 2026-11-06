@@ -10,7 +10,16 @@ from humetrix.kaoetal import KaoConfig, KaoMetricBase
 
 
 class TestBase(KaoMetricBase):
-    def __init__(self, config, pun_sign, alt_sign, row_index, ngram1_df, ngram3_df, relatedness_df):
+    def __init__(
+        self,
+        config,
+        pun_sign,
+        alt_sign,
+        row_index,
+        ngram1_df,
+        ngram3_df,
+        relatedness_df,
+    ):
         self.config = config
         self.pun_sign = pun_sign
         self.alt_sign = alt_sign
@@ -22,11 +31,11 @@ class TestBase(KaoMetricBase):
     def _word_posterior(self, f_config, idx, sign):
         f_i = f_config[idx]
         word = self.config._tokens[idx]
-        col = 'm1_trigram' if sign == self.pun_sign else 'm2_trigram'
-        df_slice = self.ngram3_df.filter(pl.col('index') == self.row_index)
+        col = "m1_trigram" if sign == self.pun_sign else "m2_trigram"
+        df_slice = self.ngram3_df.filter(pl.col("index") == self.row_index)
         trigram_prob = df_slice[col].to_list()[idx] if len(df_slice) > idx else 1e-10
 
-        if f_i == 0: # Get trigram probability
+        if f_i == 0:  # Get trigram probability
             return trigram_prob
 
         # f_i == 1, get value from the relatedness annotation
@@ -36,19 +45,20 @@ class TestBase(KaoMetricBase):
             return float(np.exp(0.0) * trigram_prob)
 
         r = self.relatedness_df.filter(
-            ((pl.col('word1') == sign) & (pl.col('word2') == word)) |
-            ((pl.col('word1') == word) & (pl.col('word2') == sign))
+            ((pl.col("word1") == sign) & (pl.col("word2") == word))
+            | ((pl.col("word1") == word) & (pl.col("word2") == sign))
         )
         if len(r) == 0:
             return 1e-10
 
-        r_val = r['relatedness'].to_list()[0]
+        r_val = r["relatedness"].to_list()[0]
         return float(np.exp(r_val) * trigram_prob)
+
 
 class TestAmbiguity(TestBase):
     # Changed to use Kao et al.'s unigram probabilities
     def _sign_prior(self, sign: str):
-        prob = self.ngram1_df.filter(pl.col('word') == sign)['unigram']
+        prob = self.ngram1_df.filter(pl.col("word") == sign)["unigram"]
         if len(prob) > 0:
             return prob.item()
         return 1e-10
@@ -87,6 +97,7 @@ class TestAmbiguity(TestBase):
             + prob_alt_sign * np.log(prob_alt_sign)
         )
 
+
 class TestDistinctiveness(TestBase):
     # Exact same implementation, changing the base class
     def score(self) -> float:
@@ -122,30 +133,34 @@ class TestDistinctiveness(TestBase):
         kl2 = entropy(sampled_alt_sign, sampled_pun_sign)
         return kl1 + kl2
 
-nlp = load(SPACY_MODELS['en'])
-kaoetal_data = (pl.read_csv('data/kaoetal/data-agg.csv')
-                  .filter(pl.col('sentenceType') == 'pun')
-                  .with_columns(pl.col('sentence').str.replace('#', '')))
-kaoetal_results = pl.read_csv('data/kaoetal/data.csv')
-kaoetal_relatedness = pl.read_csv('data/kaoetal/relatedness_clean.csv')
-kaoetal_ngram1 = pl.read_csv('data/kaoetal/unigrams_clean.csv')
-kaoetal_ngram3 = pl.read_csv('data/kaoetal/trigrams_clean.csv')
+
+nlp = load(SPACY_MODELS["en"])
+kaoetal_data = (
+    pl.read_csv("data/kaoetal/data-agg.csv")
+    .filter(pl.col("sentenceType") == "pun")
+    .with_columns(pl.col("sentence").str.replace("#", ""))
+)
+kaoetal_results = pl.read_csv("data/kaoetal/data.csv")
+kaoetal_relatedness = pl.read_csv("data/kaoetal/relatedness_clean.csv")
+kaoetal_ngram1 = pl.read_csv("data/kaoetal/unigrams_clean.csv")
+kaoetal_ngram3 = pl.read_csv("data/kaoetal/trigrams_clean.csv")
 
 for row in kaoetal_data.iter_rows(named=True):
-    row_idx = row[''] - 1
-    tokens = kaoetal_ngram3.filter(pl.col('index') == row_idx)['word'].to_list()
-    kao_config = KaoConfig(row['sentence'], 'en', nlp, None)
+    row_idx = row[""] - 1
+    tokens = kaoetal_ngram3.filter(pl.col("index") == row_idx)["word"].to_list()
+    kao_config = KaoConfig(row["sentence"], "en", nlp, None)
 
     # Check tokens and POS cleaning
     try:
         assert len(set(tokens) - set(kao_config._tokens)) == 0
     except AssertionError:
-        doc = nlp(row['sentence'])
+        doc = nlp(row["sentence"])
         missing_toks = set(tokens) - set(kao_config._tokens)
-        missing_toks_pos = [(tok.lower_, tok.pos_) for tok in doc
-                            if tok.lower_ in missing_toks]
+        missing_toks_pos = [
+            (tok.lower_, tok.pos_) for tok in doc if tok.lower_ in missing_toks
+        ]
         if missing_toks_pos:
-            print(f'Missing in id {row_idx}: {missing_toks_pos}')
+            print(f"Missing in id {row_idx}: {missing_toks_pos}")
 
     # Ensure tokens are the same and recalculate configs
     kao_config._tokens = tokens
@@ -155,38 +170,44 @@ for row in kaoetal_data.iter_rows(named=True):
 
     ambiguity_metric = TestAmbiguity(
         config=kao_config,
-        pun_sign=row['m1'],
-        alt_sign=row['m2'],
+        pun_sign=row["m1"],
+        alt_sign=row["m2"],
         row_index=row_idx,
         ngram1_df=kaoetal_ngram1,
         ngram3_df=kaoetal_ngram3,
-        relatedness_df=kaoetal_relatedness
+        relatedness_df=kaoetal_relatedness,
     )
 
     score = ambiguity_metric.score()
-    target_score = kaoetal_results.filter(pl.col('idx') == row_idx)['ambiguity'].item()
+    target_score = kaoetal_results.filter(pl.col("idx") == row_idx)["ambiguity"].item()
     score_diff = abs(score - target_score)
 
     try:
         assert score_diff <= 1e-5
     except AssertionError:
-        print(f"Ambiguity: id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}")
+        print(
+            f"Ambiguity: id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}"
+        )
 
     distinctiveness_metric = TestDistinctiveness(
         config=kao_config,
-        pun_sign=row['m1'],
-        alt_sign=row['m2'],
+        pun_sign=row["m1"],
+        alt_sign=row["m2"],
         row_index=row_idx,
         ngram1_df=kaoetal_ngram1,
         ngram3_df=kaoetal_ngram3,
-        relatedness_df=kaoetal_relatedness
+        relatedness_df=kaoetal_relatedness,
     )
 
     score = distinctiveness_metric.score()
-    target_score = kaoetal_results.filter(pl.col('idx') == row_idx)['distinctiveness'].item()
+    target_score = kaoetal_results.filter(pl.col("idx") == row_idx)[
+        "distinctiveness"
+    ].item()
     score_diff = abs(score - target_score)
 
     try:
         assert score_diff <= 1e-5
     except AssertionError:
-        print(f"Distinctiveness: id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}")
+        print(
+            f"Distinctiveness: id {row_idx}: calculated {score:.6f}, target {target_score:.6f} -> Difference: {score_diff}"
+        )

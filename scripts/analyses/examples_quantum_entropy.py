@@ -25,29 +25,24 @@ def _(mo):
 @app.cell
 def _(Path, pl):
     results_paths = [
-        Path('results/quantum_entropy/semeval.jsonl'),
-        Path('results/quantum_entropy/humicroedit.jsonl'),
-        Path('results/quantum_entropy/expunations.jsonl')
+        Path("results/quantum_entropy/semeval.jsonl"),
+        Path("results/quantum_entropy/humicroedit.jsonl"),
+        Path("results/quantum_entropy/expunations.jsonl"),
     ]
 
     dfs = []
     for result_path in results_paths:
         dfs.append(
             pl.read_ndjson(result_path, infer_schema_length=None)
-            .with_columns(pl.lit(result_path.stem).alias('corpus'))
+            .with_columns(pl.lit(result_path.stem).alias("corpus"))
             .with_columns(
-                pl.col('corpus').cast(
-                    pl.Enum([
-                        'semeval',
-                        'humicroedit',
-                        'expunations'
-                    ])
+                pl.col("corpus").cast(
+                    pl.Enum(["semeval", "humicroedit", "expunations"])
                 )
             )
         )
-    df = (
-        pl.concat(dfs, how='diagonal')
-        .select('corpus', 'text', 'label', 'QE-U + GloVe')
+    df = pl.concat(dfs, how="diagonal").select(
+        "corpus", "text", "label", "QE-U + GloVe"
     )
     return (df,)
 
@@ -64,10 +59,11 @@ def _(mo):
 def _(df, pl):
     (
         df.filter(
-            pl.col('QE-U + GloVe') == pl.col('QE-U + GloVe').max().over('corpus', 'label')
+            pl.col("QE-U + GloVe")
+            == pl.col("QE-U + GloVe").max().over("corpus", "label")
         )
-            .unique()
-            .sort('corpus', 'QE-U + GloVe')
+        .unique()
+        .sort("corpus", "QE-U + GloVe")
     )
     return
 
@@ -82,15 +78,15 @@ def _(mo):
 
 @app.cell
 def _(df, pl):
-    _df_semeval = df.filter(pl.col('corpus') == 'semeval')
-    _df_expunations = df.filter(pl.col('corpus') == 'expunations')
+    _df_semeval = df.filter(pl.col("corpus") == "semeval")
+    _df_expunations = df.filter(pl.col("corpus") == "expunations")
 
     (
-        _df_semeval.join(_df_expunations, on='text', suffix=' expunations')
-        .filter(pl.col('label') != pl.col('label expunations'))
-        .rename({'label': 'label semeval'})
-        .select('text', 'label semeval', 'label expunations', 'QE-U + GloVe')
-        .sort('QE-U + GloVe', descending=True)
+        _df_semeval.join(_df_expunations, on="text", suffix=" expunations")
+        .filter(pl.col("label") != pl.col("label expunations"))
+        .rename({"label": "label semeval"})
+        .select("text", "label semeval", "label expunations", "QE-U + GloVe")
+        .sort("QE-U + GloVe", descending=True)
     )
     return
 

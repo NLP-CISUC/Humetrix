@@ -51,9 +51,7 @@ class KaoConfig:
         self.text = sentence
         self.language = language
         self._tokens, self._lemmas = self._tokenize_sentence()
-        self._f_configs = [
-            list(p) for p in product([0, 1], repeat=len(self._tokens))
-        ]
+        self._f_configs = [list(p) for p in product([0, 1], repeat=len(self._tokens))]
         self._f_config_prior = 1 / (2 ** len(self._tokens))  # p(\vec{f})
         self._log_f_config_prior = -len(self._tokens)
 
@@ -121,13 +119,17 @@ class KaoMetricBase:
         self._prepare_ngram_freqs()
         self.pun_sign = pun_sign
         self.alt_sign = alt_sign
-        
+
         # Lemmatize signs for skip-gram lookups
         doc_pun = self.config.spacy_model(self.pun_sign)
-        self.pun_sign_lemma = doc_pun[0].lemma_.lower() if doc_pun[0].lemma_ else doc_pun[0].lower_
-        
+        self.pun_sign_lemma = (
+            doc_pun[0].lemma_.lower() if doc_pun[0].lemma_ else doc_pun[0].lower_
+        )
+
         doc_alt = self.config.spacy_model(self.alt_sign)
-        self.alt_sign_lemma = doc_alt[0].lemma_.lower() if doc_alt[0].lemma_ else doc_alt[0].lower_
+        self.alt_sign_lemma = (
+            doc_alt[0].lemma_.lower() if doc_alt[0].lemma_ else doc_alt[0].lower_
+        )
 
     def _prepare_ngram_freqs(self):
         """
@@ -136,39 +138,35 @@ class KaoMetricBase:
         This method used Laplace (add-one) smoothing to handle any tokens that
         have a zero count.
         """
-        prior_smooth = (pl.col('freq') + 1) / (
-            pl.col('freq').sum() + pl.col('freq').len()
+        prior_smooth = (pl.col("freq") + 1) / (
+            pl.col("freq").sum() + pl.col("freq").len()
         )
-        self.ngram1 = self.ngram1.with_columns(prior_smooth.alias('prob'))
+        self.ngram1 = self.ngram1.with_columns(prior_smooth.alias("prob"))
 
-        bigram = pl.col('ngram').str.extract(r'^(.*) ')
-        bigram_sum = pl.col('freq').sum().over(bigram)
-        posterior_smooth = (pl.col('freq') + 1) / (
-            bigram_sum + pl.col('freq').len()
-        )
-        self.ngram3 = self.ngram3.with_columns(posterior_smooth.alias('prob'))
+        bigram = pl.col("ngram").str.extract(r"^(.*) ")
+        bigram_sum = pl.col("freq").sum().over(bigram)
+        posterior_smooth = (pl.col("freq") + 1) / (bigram_sum + pl.col("freq").len())
+        self.ngram3 = self.ngram3.with_columns(posterior_smooth.alias("prob"))
         self.ngram2 = self.ngram3.group_by(bigram).sum()
 
     def _get_trigram_prob(self, idx: int) -> float:
         """Calculate the smoothed trigram probability with bigram backoff."""
         tokens = self.config._tokens
         start_idx = max(0, idx - 2)
-        
-        trigram = ' '.join(tokens[start_idx : idx + 1])
-        trigram_match = self.ngram3.filter(pl.col('ngram') == trigram)
-        
+
+        trigram = " ".join(tokens[start_idx : idx + 1])
+        trigram_match = self.ngram3.filter(pl.col("ngram") == trigram)
+
         if len(trigram_match) > 0:
-            return trigram_match['prob'].item()
-            
-        bigram = ' '.join(tokens[start_idx : idx])
-        bigram_match = self.ngram2.filter(pl.col('ngram') == bigram)
-        
-        freq_bigram = bigram_match['freq'].item() if len(bigram_match) > 0 else 0
+            return trigram_match["prob"].item()
+
+        bigram = " ".join(tokens[start_idx:idx])
+        bigram_match = self.ngram2.filter(pl.col("ngram") == bigram)
+
+        freq_bigram = bigram_match["freq"].item() if len(bigram_match) > 0 else 0
         return 1.0 / (freq_bigram + len(self.ngram3))
 
-    def _word_posterior(
-        self, f_config: List[int], idx: int, sign: str
-    ) -> float:
+    def _word_posterior(self, f_config: List[int], idx: int, sign: str) -> float:
         r"""
         Calculate a word's posterior probability: :math:`P(w_i|m,f_i)`.
 
@@ -211,18 +209,20 @@ class KaoMetricBase:
             return float(np.exp(13.0) * prob_trigram)
         if word in (self.pun_sign, self.alt_sign):
             return float(np.exp(0.0) * prob_trigram)
-        
+
         # Using skip-gram to calculate e^{R(w_i,m)}, where the sign is
         # treated as the target and the current word as the context.
         # We must use lemmas because the skip-gram vocabulary was lemmatized.
-        sign_lemma = self.pun_sign_lemma if sign == self.pun_sign else self.alt_sign_lemma
-        
+        sign_lemma = (
+            self.pun_sign_lemma if sign == self.pun_sign else self.alt_sign_lemma
+        )
+
         skipgram_model = self.config.skipgram
         exp_relatedness = skipgram_model.predict_prob(
-            input_word_idx=skipgram_model.get_word_idx(sign_lemma), 
-            output_word_idx=skipgram_model.get_word_idx(lemma)
+            input_word_idx=skipgram_model.get_word_idx(sign_lemma),
+            output_word_idx=skipgram_model.get_word_idx(lemma),
         )
-        
+
         return exp_relatedness * prob_trigram
 
     def _f_config_posteriors(self, sign: str) -> Dict:
@@ -276,11 +276,9 @@ class KaoAmbiguity(KaoMetricBase):
             The prior probability of the sentence meaning.
         """
         sign_lower = sign.lower()
-        if sign_lower in self.ngram1['ngram']:
-            return self.ngram1.filter(pl.col('ngram') == sign_lower)[
-                'prob'
-            ].item()
-        prob_sign = 1 / (self.ngram1['freq'].sum() + len(self.ngram1))
+        if sign_lower in self.ngram1["ngram"]:
+            return self.ngram1.filter(pl.col("ngram") == sign_lower)["prob"].item()
+        prob_sign = 1 / (self.ngram1["freq"].sum() + len(self.ngram1))
         return prob_sign
 
     def _sign_posterior(self, sign: str) -> float:

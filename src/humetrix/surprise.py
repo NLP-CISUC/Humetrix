@@ -59,19 +59,19 @@ class LocalGlobalSurprise:
             The surprisal score.
         """
         sign_regex_variations = [
-            rf'\b{re.escape(self.pun_sign)}\b',
-            rf'\b{re.escape(self.pun_sign)}',
-            rf'{re.escape(self.pun_sign)}',
+            rf"\b{re.escape(self.pun_sign)}\b",
+            rf"\b{re.escape(self.pun_sign)}",
+            rf"{re.escape(self.pun_sign)}",
         ]
         for sign_regex in sign_regex_variations:
             sign_loc = re.search(sign_regex, context, re.IGNORECASE)
             if sign_loc:
                 break
         sign_start, sign_end = sign_loc.span()
-        masked_txt = ''.join(
+        masked_txt = "".join(
             (
                 context[:sign_start],
-                f'{tokenizer.mask_token}',
+                f"{tokenizer.mask_token}",
                 context[sign_end:],
             )
         )
@@ -83,10 +83,9 @@ class LocalGlobalSurprise:
         first_layer_name = list(lm.hf_device_map.keys())[0]
         device = lm.hf_device_map[first_layer_name]
 
-        token_ids = tokenizer.encode(masked_txt, return_tensors='pt').to(device)
+        token_ids = tokenizer.encode(masked_txt, return_tensors="pt").to(device)
         masked_position = token_ids.squeeze() == tokenizer.mask_token_id
         masked_position = masked_position.nonzero().item()
-
 
         # Get global probabilities
         output = lm(token_ids)
@@ -118,9 +117,9 @@ class LocalGlobalSurprise:
             The local context.
         """
         sign_regex_variations = [
-            rf'\b{re.escape(self.pun_sign)}\b',
-            rf'\b{re.escape(self.pun_sign)}',
-            rf'{re.escape(self.pun_sign)}',
+            rf"\b{re.escape(self.pun_sign)}\b",
+            rf"\b{re.escape(self.pun_sign)}",
+            rf"{re.escape(self.pun_sign)}",
         ]
         for sign_regex in sign_regex_variations:
             sign_loc = re.search(sign_regex, self.text, re.IGNORECASE)
@@ -136,7 +135,7 @@ class LocalGlobalSurprise:
         ]
         tokens_start = max(0, tokens_idx[0] - window_size)
         tokens_end = min(len(doc), tokens_idx[-1] + window_size)
-        return ''.join(
+        return "".join(
             [
                 token.text_with_ws
                 for i, token in enumerate(doc)
@@ -144,9 +143,7 @@ class LocalGlobalSurprise:
             ]
         )
 
-    def score(
-        self, tokenizer: PreTrainedTokenizer, lm: PreTrainedModel
-    ) -> float:
+    def score(self, tokenizer: PreTrainedTokenizer, lm: PreTrainedModel) -> float:
         """
         Calculate the local-global surprise score.
 

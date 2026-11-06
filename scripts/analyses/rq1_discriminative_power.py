@@ -366,7 +366,7 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
             if _corpus in ["humicroedit", "puntuguese"]:
                 _diff = _humor - _non_humor
                 _auc = (_diff > 0).mean() + 0.5 * (_diff == 0).mean()
-        
+
             _results["metric"].append(_metric)
             _results["corpus"].append(_corpus)
             _results["test"].append(_test.__name__)
@@ -382,10 +382,7 @@ def _(corpora_enum, df_microedit, df_unpivot, mannwhitneyu, mo, pl, wilcoxon):
 
     mo.ui.table(
         _results_df,
-        format_mapping={
-            "p-value": "{:.3g}".format,
-            "auc": "{:.2%}"
-        },
+        format_mapping={"p-value": "{:.3g}".format, "auc": "{:.2%}"},
         selection=None,
         pagination=False,
     )
@@ -479,13 +476,15 @@ def _(mo):
 @app.cell
 def _(df_microedit, mo, pl):
     _diff = pl.col("Humor") - pl.col("Non-humor")
-    _df_paired_d = df_microedit.group_by("corpus", "metric").agg(d_z=_diff.mean() / _diff.std(ddof=1))
+    _df_paired_d = df_microedit.group_by("corpus", "metric").agg(
+        d_z=_diff.mean() / _diff.std(ddof=1)
+    )
 
     mo.ui.table(
         _df_paired_d.sort("metric", "corpus"),
         selection=None,
         pagination=False,
-        format_mapping={"d_z": "{:.2%}"}
+        format_mapping={"d_z": "{:.2%}"},
     )
     return
 

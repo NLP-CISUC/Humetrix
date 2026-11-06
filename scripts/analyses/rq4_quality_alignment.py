@@ -457,8 +457,8 @@ def _(mo):
 def _(binned_df, pl):
     _length_df = pl.read_ndjson("results/qe_shortcuts.jsonl", infer_schema_length=None)
 
-    (binned_df
-        .filter(pl.col("metric") == "QE-U + GloVe")
+    (
+        binned_df.filter(pl.col("metric") == "QE-U + GloVe")
         .join(_length_df.select("index", "n_setup"), on="index")
         .group_by("metric", "corpus", "funniness bin")
         .agg(pl.col("n_setup").median())

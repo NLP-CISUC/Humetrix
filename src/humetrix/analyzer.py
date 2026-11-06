@@ -96,13 +96,13 @@ class HumorAnalyzer:
     ) -> None:
         self.language = language
         if language not in SPACY_MODELS:
-            raise ValueError(f'Unsupported language: {language}')
+            raise ValueError(f"Unsupported language: {language}")
         self._transformer_model_name = transformer_model_name
         self._paths = {
-            'embeddings': embeddings_path,
-            'skipgram': skipgram_path,
-            'skipgram_vocab': skipgram_vocab_path,
-            'ngram_dir': ngram_dir_path,
+            "embeddings": embeddings_path,
+            "skipgram": skipgram_path,
+            "skipgram_vocab": skipgram_vocab_path,
+            "ngram_dir": ngram_dir_path,
         }
         self._models = {}
 
@@ -128,24 +128,22 @@ class HumorAnalyzer:
             If the model type is unknown or required paths are not provided.
         """
         if name not in self._models:
-            if name == 'spacy':
+            if name == "spacy":
                 model_name = SPACY_MODELS[self.language]
                 self._models[name] = _load_spacy_model(model_name)
-            elif name == 'tokenizer':
+            elif name == "tokenizer":
                 if self.language in TOKENIZER_MODELS:
                     model_name = TOKENIZER_MODELS[self.language]
                     self._models[name] = _load_spacy_model(model_name)
                 else:
                     self._models[name] = spacy.blank(self.language)
-            elif name == 'bert':
-                device = torch.device(
-                    'cuda' if torch.cuda.is_available() else 'cpu'
-                )
+            elif name == "bert":
+                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                 model_name = TRANSFORMER_MODELS[self.language]
                 tokenizer = AutoTokenizer.from_pretrained(model_name)
                 lm = AutoModelForMaskedLM.from_pretrained(model_name, device_map=device)
-                self._models[name] = {'tokenizer': tokenizer, 'lm': lm}
-            elif name == 'embeddings':
+                self._models[name] = {"tokenizer": tokenizer, "lm": lm}
+            elif name == "embeddings":
                 directory = self._paths["embeddings"]
                 if directory is None:
                     directory = download_embeddings(self.language)
@@ -184,18 +182,18 @@ class HumorAnalyzer:
                     "ngram1": self._load_model("ngram1"),
                     "ngram3": self._load_model("ngram3"),
                 }
-            elif name == 'transformer_pipeline':
+            elif name == "transformer_pipeline":
                 if self._transformer_model_name:
                     model_name = self._transformer_model_name
                 else:
                     model_name = TRANSFORMER_MODELS[self.language]
-                self._models[name] = pipeline('feature-extraction', model_name)
+                self._models[name] = pipeline("feature-extraction", model_name)
             else:
-                raise ValueError(f'Unknown model type: {name}')
+                raise ValueError(f"Unknown model type: {name}")
         return self._models[name]
 
     def quantum_incongruity(
-        self, sentence: str, backend: str = 'word_embeddings'
+        self, sentence: str, backend: str = "word_embeddings"
     ) -> Union[float, None]:
         """
         Calculate the quantum incongruity of a sentence.
@@ -221,23 +219,21 @@ class HumorAnalyzer:
         --------
         quantum_entropy.QuantumIncongruity.score : Method that performs the actual scoring.
         """
-        if backend == 'word_embeddings':
-            embeddings = self._load_model('embeddings')
-        elif backend == 'transformer':
-            embeddings = self._load_model('transformer_pipeline')
+        if backend == "word_embeddings":
+            embeddings = self._load_model("embeddings")
+        elif backend == "transformer":
+            embeddings = self._load_model("transformer_pipeline")
         else:
-            raise ValueError(
-                f'Unknown backend for quantum incongruity: {backend}'
-            )
+            raise ValueError(f"Unknown backend for quantum incongruity: {backend}")
         scorer = QuantumIncongruity(
             sentence=sentence,
             embeddings=embeddings,
-            spacy_model=self._load_model('tokenizer'),
+            spacy_model=self._load_model("tokenizer"),
         )
         return scorer.score()
 
     def quantum_uncertainty(
-        self, sentence: str, backend: str = 'word_embeddings'
+        self, sentence: str, backend: str = "word_embeddings"
     ) -> Union[float, None]:
         """
         Calculate the quantum uncertainty of a sentence.
@@ -263,18 +259,16 @@ class HumorAnalyzer:
         --------
         quantum_entropy.QuantumUncertainty.score : Method that performs the actual scoring.
         """
-        if backend == 'word_embeddings':
-            embeddings = self._load_model('embeddings')
-        elif backend == 'transformer':
-            embeddings = self._load_model('transformer_pipeline')
+        if backend == "word_embeddings":
+            embeddings = self._load_model("embeddings")
+        elif backend == "transformer":
+            embeddings = self._load_model("transformer_pipeline")
         else:
-            raise ValueError(
-                f'Unknown backend for quantum uncertainty: {backend}'
-            )
+            raise ValueError(f"Unknown backend for quantum uncertainty: {backend}")
         scorer = QuantumUncertainty(
             sentence=sentence,
             embeddings=embeddings,
-            spacy_model=self._load_model('tokenizer'),
+            spacy_model=self._load_model("tokenizer"),
         )
         return scorer.score()
 
@@ -302,20 +296,16 @@ class HumorAnalyzer:
         --------
         surprise.LocalGlobalSurprise.score : Method that performs the actual scoring.
         """
-        bert_models = self._load_model('bert')
+        bert_models = self._load_model("bert")
         scorer = LocalGlobalSurprise(
             sentence=sentence,
             pun_sign=pun_sign,
             alt_sign=alt_sign,
-            spacy_model=self._load_model('tokenizer'),
+            spacy_model=self._load_model("tokenizer"),
         )
-        return scorer.score(
-            tokenizer=bert_models['tokenizer'], lm=bert_models['lm']
-        )
+        return scorer.score(tokenizer=bert_models["tokenizer"], lm=bert_models["lm"])
 
-    def kao_ambiguity(
-        self, sentence: str, pun_sign: str, alt_sign: str
-    ) -> float:
+    def kao_ambiguity(self, sentence: str, pun_sign: str, alt_sign: str) -> float:
         """
         Calculate Kao et al.'s ambiguity of a sentence.
 
@@ -337,25 +327,23 @@ class HumorAnalyzer:
         --------
         kaoetal.KaoAmbiguity.score : Method that performs the actual scoring.
         """
-        kao_models = self._load_model('kao_models')
+        kao_models = self._load_model("kao_models")
         config = KaoConfig(
             sentence=sentence,
             language=self.language,
-            spacy_model=self._load_model('spacy'),
-            skipgram=kao_models['skipgram'],
+            spacy_model=self._load_model("spacy"),
+            skipgram=kao_models["skipgram"],
         )
         scorer = KaoAmbiguity(
             config=config,
             pun_sign=pun_sign,
             alt_sign=alt_sign,
-            ngram1=kao_models['ngram1'],
-            ngram3=kao_models['ngram3'],
+            ngram1=kao_models["ngram1"],
+            ngram3=kao_models["ngram3"],
         )
         return scorer.score()
 
-    def kao_distinctiveness(
-        self, sentence: str, pun_sign: str, alt_sign: str
-    ) -> float:
+    def kao_distinctiveness(self, sentence: str, pun_sign: str, alt_sign: str) -> float:
         """
         Calculate Kao et al.'s distinctiveness of a sentence.
 
@@ -377,18 +365,18 @@ class HumorAnalyzer:
         --------
         kaoetal.KaoDistinctiveness.score : Method that performs the actual scoring.
         """
-        kao_models = self._load_model('kao_models')
+        kao_models = self._load_model("kao_models")
         config = KaoConfig(
             sentence=sentence,
             language=self.language,
-            spacy_model=self._load_model('spacy'),
-            skipgram=kao_models['skipgram'],
+            spacy_model=self._load_model("spacy"),
+            skipgram=kao_models["skipgram"],
         )
         scorer = KaoDistinctiveness(
             config=config,
             pun_sign=pun_sign,
             alt_sign=alt_sign,
-            ngram1=kao_models['ngram1'],
-            ngram3=kao_models['ngram3'],
+            ngram1=kao_models["ngram1"],
+            ngram3=kao_models["ngram3"],
         )
         return scorer.score()

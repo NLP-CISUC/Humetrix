@@ -16,7 +16,7 @@ from gensim.models import KeyedVectors
 from spacy.language import Language
 from transformers import Pipeline
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class QuantumEntropy:
@@ -69,14 +69,14 @@ class QuantumEntropy:
         lowercased. A ValueError is raised unless the text produces exactly
         two segments.
         """
-        if 'sentencizer' not in self.spacy_model.pipe_names:
+        if "sentencizer" not in self.spacy_model.pipe_names:
             punct_chars = spacy.pipeline.Sentencizer.default_punct_chars
-            punct_chars.extend([',', ';'])
+            punct_chars.extend([",", ";"])
             self.spacy_model.add_pipe(
-                'sentencizer', config={'punct_chars': punct_chars}
+                "sentencizer", config={"punct_chars": punct_chars}
             )
 
-        with self.spacy_model.select_pipes(enable='sentencizer'):
+        with self.spacy_model.select_pipes(enable="sentencizer"):
             doc = self.spacy_model(self.text)
 
         setup, punchline = list(doc.sents)
