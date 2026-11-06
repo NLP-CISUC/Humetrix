@@ -1107,34 +1107,37 @@ hf-xet = [
 name = "humetrix"
 version = "0.2.0"
 source = { editable = "." }
+default-groups = ["analysis", "dev"]
 dependencies = [
     { name = "accelerate" },
-    { name = "altair" },
-    { name = "datasets" },
     { name = "en-core-web-trf" },
     { name = "es-dep-news-trf" },
     { name = "fr-dep-news-trf" },
-    { name = "func-timeout" },
     { name = "gensim" },
-    { name = "ipython" },
-    { name = "marimo" },
-    { name = "matplotlib" },
-    { name = "ollama" },
     { name = "polars", extra = ["rt64"] },
     { name = "polars-u64-idx" },
     { name = "pt-core-news-lg" },
-    { name = "pyspark" },
-    { name = "python-dotenv" },
-    { name = "scikit-posthocs" },
-    { name = "seaborn" },
     { name = "spacy", extra = ["cuda12x"] },
-    { name = "statsmodels" },
     { name = "torch" },
     { name = "transformers" },
     { name = "zh-core-web-trf" },
 ]
 
 [package.dev-dependencies]
+analysis = [
+    { name = "altair" },
+    { name = "datasets" },
+    { name = "func-timeout" },
+    { name = "ipython" },
+    { name = "marimo" },
+    { name = "matplotlib" },
+    { name = "ollama" },
+    { name = "pyspark" },
+    { name = "python-dotenv" },
+    { name = "scikit-posthocs" },
+    { name = "seaborn" },
+    { name = "statsmodels" },
+]
 dev = [
     { name = "huggingface-hub", extra = ["hf-xet"] },
     { name = "isort" },
@@ -1153,32 +1156,34 @@ training = [
 [package.metadata]
 requires-dist = [
     { name = "accelerate", specifier = ">=1.11.0" },
-    { name = "altair", specifier = ">=6.1.0" },
-    { name = "datasets", specifier = ">=3.5.0" },
     { name = "en-core-web-trf", url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl" },
     { name = "es-dep-news-trf", url = "https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.8.0/es_dep_news_trf-3.8.0-py3-none-any.whl" },
     { name = "fr-dep-news-trf", url = "https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl" },
-    { name = "func-timeout", specifier = ">=4.3.5" },
     { name = "gensim", specifier = ">=4.3.3" },
-    { name = "ipython", specifier = ">=9.6.0" },
-    { name = "marimo", specifier = ">=0.23.6" },
-    { name = "matplotlib", specifier = ">=3.10.7" },
-    { name = "ollama", specifier = ">=0.6.3" },
     { name = "polars", extras = ["rt64"], specifier = ">=1.27.1" },
     { name = "polars-u64-idx", specifier = ">=1.30.0" },
     { name = "pt-core-news-lg", url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_lg-3.8.0/pt_core_news_lg-3.8.0-py3-none-any.whl" },
-    { name = "pyspark", specifier = ">=3.5.5" },
-    { name = "python-dotenv", specifier = ">=1.1.1" },
-    { name = "scikit-posthocs", specifier = ">=0.11.4" },
-    { name = "seaborn", specifier = ">=0.13.2" },
     { name = "spacy", extras = ["cuda12x"], specifier = ">=3.8.0" },
-    { name = "statsmodels", specifier = ">=0.14.5" },
     { name = "torch", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cu126" },
     { name = "transformers", specifier = ">=4.49.0" },
     { name = "zh-core-web-trf", url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.8.0/zh_core_web_trf-3.8.0-py3-none-any.whl" },
 ]
 
 [package.metadata.requires-dev]
+analysis = [
+    { name = "altair", specifier = ">=6.1.0" },
+    { name = "datasets", specifier = ">=3.5.0" },
+    { name = "func-timeout", specifier = ">=4.3.5" },
+    { name = "ipython", specifier = ">=9.6.0" },
+    { name = "marimo", specifier = ">=0.23.6" },
+    { name = "matplotlib", specifier = ">=3.10.7" },
+    { name = "ollama", specifier = ">=0.6.3" },
+    { name = "pyspark", specifier = ">=3.5.5" },
+    { name = "python-dotenv", specifier = ">=1.1.1" },
+    { name = "scikit-posthocs", specifier = ">=0.11.4" },
+    { name = "seaborn", specifier = ">=0.13.2" },
+    { name = "statsmodels", specifier = ">=0.14.5" },
+]
 dev = [
     { name = "huggingface-hub", extras = ["hf-xet"], specifier = ">=0.30.2" },
     { name = "isort", specifier = ">=6.0.1" },
