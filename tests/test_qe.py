@@ -7,7 +7,6 @@ import pytest
 from humetrix import HumorAnalyzer
 
 GOLD_PATH = Path(__file__).parent / "gold" / "quantum_entropy.jsonl"
-TRANSFORMER = "FacebookAI/xlm-roberta-base"
 EXAMPLES = pl.read_ndjson(GOLD_PATH).to_dicts()
 METRICS = {
     "QE-I + GloVe": ("quantum_incongruity", {}),
@@ -17,13 +16,9 @@ METRICS = {
 }
 
 
-@lru_cache(maxsize=1)
-def get_analyzer(language: str) -> HumorAnalyzer:
-    return HumorAnalyzer(language, transformer_model_name=TRANSFORMER)
-
 @pytest.mark.parametrize("column", METRICS)
 @pytest.mark.parametrize("example", EXAMPLES, ids=lambda e: e["corpus"])
-def test_quantum_entropy(example, column):
+def test_quantum_entropy(example, column, get_analyzer):
     method, kwargs = METRICS[column]
     analyzer = get_analyzer(example["language"])
     score = getattr(analyzer, method)(example["text"], **kwargs)

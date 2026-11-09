@@ -1,0 +1,6 @@
+{"text":"He said, \"I'll take that.\"","location":"take","interpretation":"take","ambiguity":0.6931471806,"distinctiveness":0.0,"language":"en","corpus":"cup"}
+{"text":"The bug spray is loud, not for ticks","location":"ticks","interpretation":"ticks","ambiguity":0.6931471806,"distinctiveness":0.0,"language":"en","corpus":"cup"}
+{"text":"I met a nice apple, it was very sweet","location":"sweet","interpretation":"sweet","ambiguity":0.6931471806,"distinctiveness":0.0,"language":"en","corpus":"cup"}
+{"text":"Sementes. Deus castiga.","location":"sementes","interpretation":"se mentes","ambiguity":1.3e-9,"distinctiveness":6.5024231128,"language":"pt","corpus":"puntuguese"}
+{"text":"Qual verdura grita? Ai, pô!","location":"ai, pô","interpretation":"aipo","ambiguity":0.6742150519,"distinctiveness":1.6731405153,"language":"pt","corpus":"puntuguese"}
+{"text":"Qual o doce chinês? Kin Jin ","location":"kin jin","interpretation":"quindim","ambiguity":0.6661980573,"distinctiveness":1.4454427546,"language":"pt","corpus":"puntuguese"}
