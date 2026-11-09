@@ -13,6 +13,7 @@ paths = {
     "cup": "data/humor_interpretation/cup.json",
     "puntuguese": "data/humor_interpretation/puntuguese.json",
 }
+results_path = Path('results/kaoetal')
 
 
 def get_kaoetal_scores(row, analyzer):
