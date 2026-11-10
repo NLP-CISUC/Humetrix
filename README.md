@@ -53,6 +53,8 @@ Metrics return `None` when they cannot be computed.
 
 Use `HumorAnalyzer(<language>, device="cpu")` too choose where neural models run, and `transformer_model_name` to choose the model for the `transformer` backend.
 
+Full API Documentation is available at [https://nlp-cisuc.github.io/Humetrix/](https://nlp-cisuc.github.io/Humetrix/).
+
 ## Resources
 
 Embeddings, skip-gram models, n-gram tables, spaCy and transformer models are downloaded on first use and cached locally, so the first call of each metric may take a while. They are hosted at [NLP-CISUC/humetrix-resources](https://huggingface.co/NLP-CISUC/humetrix-resources).

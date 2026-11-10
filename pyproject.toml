@@ -36,6 +36,7 @@ dependencies = [
 Repository = "https://github.com/NLP-CISUC/Humetrix"
 Issues = "https://github.com/NLP-CISUC/Humetrix/issues"
 Resources = "https://huggingface.co/NLP-CISUC/humetrix-resources"
+Documentation = "https://nlp-cisuc.github.io/Humetrix/"
 
 [build-system]
 requires = ["hatchling"]
