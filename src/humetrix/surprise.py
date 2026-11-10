@@ -38,6 +38,7 @@ class LocalGlobalSurprise:
         self.alt_sign = alt_sign
         self.spacy_model = spacy_model
 
+    @torch.no_grad()
     def surprisal(
         self, context: str, tokenizer: PreTrainedTokenizer, lm: PreTrainedModel
     ) -> float:
@@ -77,7 +78,6 @@ class LocalGlobalSurprise:
         )
 
         lm.eval()
-        torch.set_grad_enabled(False)
 
         # Prepare input
         device = lm.device
