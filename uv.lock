@@ -1071,7 +1071,7 @@ hf-xet = [
 
 [[package]]
 name = "humetrix"
-version = "0.2.0"
+version = "0.3.0"
 source = { editable = "." }
 default-groups = ["analysis", "dev", "models"]
 dependencies = [
@@ -1083,6 +1083,7 @@ dependencies = [
     { name = "safetensors" },
     { name = "scipy" },
     { name = "spacy" },
+    { name = "spacy-curated-transformers" },
     { name = "torch" },
     { name = "transformers" },
 ]
@@ -1136,6 +1137,7 @@ requires-dist = [
     { name = "safetensors", specifier = ">=0.7.0" },
     { name = "scipy", specifier = ">=1.17.1" },
     { name = "spacy", specifier = ">=3.8.0" },
+    { name = "spacy-curated-transformers", specifier = ">=0.3.1" },
     { name = "torch", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cu126" },
     { name = "transformers", specifier = ">=4.49.0" },
 ]
