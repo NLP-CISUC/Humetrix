@@ -1,7 +1,7 @@
 from .analyzer import HumorAnalyzer
 from .quantum_entropy import QuantumUncertainty, QuantumIncongruity
 from .surprise import LocalGlobalSurprise
-from .kaoetal import KaoConfig, KaoAmbiguity
+from .kaoetal import KaoConfig, KaoAmbiguity, KaoDistinctiveness
 
 __all__ = [
     "HumorAnalyzer",
@@ -10,4 +10,5 @@ __all__ = [
     "LocalGlobalSurprise",
     "KaoConfig",
     "KaoAmbiguity",
+    "KaoDistinctiveness"
 ]

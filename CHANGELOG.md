@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Initial release of Humetrix.
 
-## [Unreleased]
+## 0.3.0 - 2026-11-10
 
 ### Changed
 - spacy models are no longer installed as package dependencies; they are downloaded automatically on first use.
@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - GloVe embeddings, skip-gram models and n-gram tables are downloaded automatically from the Hugging Face Hub when no path is given.
 - `huggingface-hub` and `safetensors` as explicit dependencies.
 - `device` parameter in `HumorAnalyzer` to choose where neural models run.
+- Added `KaoDistinctiveness` to package's `__init__.py`.
 
 ### Removed
 - Analysis and plotting packages (`marimo`, `seaborn`, `matplotlib`, `altair`, `pyspark`, `datasets`, etc.) from the package requirements.
