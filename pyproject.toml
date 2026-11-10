@@ -79,6 +79,10 @@ models = [
     "zh-core-web-trf",
     "zh-core-web-sm",
 ]
+docs = [
+    "mkdocstrings-python>=2.0.10",
+    "zensical>=0.0.52",
+]
 
 [[tool.uv.index]]
 name = "pytorch"

@@ -1,0 +1,3 @@
+# API reference
+
+::: humetrix.HumorAnalyzer

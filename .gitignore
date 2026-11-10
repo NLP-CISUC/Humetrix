@@ -18,3 +18,6 @@ dist/
 
 # Marimo runs
 **/__marimo__/
+
+# Zensical docs pages
+site/
