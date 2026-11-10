@@ -70,8 +70,7 @@ class QuantumEntropy:
         two segments.
         """
         if "sentencizer" not in self.spacy_model.pipe_names:
-            punct_chars = spacy.pipeline.Sentencizer.default_punct_chars
-            punct_chars.extend([",", ";"])
+            punct_chars = spacy.pipeline.Sentencizer.default_punct_chars + [",", ";"]
             self.spacy_model.add_pipe(
                 "sentencizer", config={"punct_chars": punct_chars}
             )
