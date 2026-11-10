@@ -159,9 +159,9 @@ class QuantumEntropy:
         -----
         The density matrix is calculated as the mean of the outer products of
         the normalized token embeddings:
-        :math:`\rho = \frac{1}{n} \sum_{i=1}^n |w_i\rangle\langle w_i|`,
-        where :math:`|w_i\rangle = \frac{\vec{w_i} - \mu}{\|\vec{w_i} - \mu\|}`
-        and :math:`\mu` is the mean vector (zero if not provided).
+        $\rho = \frac{1}{n} \sum_{i=1}^n |w_i\rangle\langle w_i|$,
+        where $|w_i\rangle = \frac{\vec{w_i} - \mu}{\|\vec{w_i} - \mu\|}$
+        and $\mu$ is the mean vector (zero if not provided).
         """
         tok_embeddings = self.token_embeddings(tokens)
 
@@ -204,8 +204,8 @@ class QuantumEntropy:
         Notes
         -----
         The entropy is calculated from the eigenvalues:
-        :math:`-\sum_i \lambda_i \log \lambda_i`, ignoring eigenvalues
-        smaller than :math:`10^{-12}`. We use the natural logarithm.
+        $-\sum_i \lambda_i \log \lambda_i$, ignoring eigenvalues
+        smaller than $10^{-12}$. We use the natural logarithm.
         """
         eigenvalues = (
             torch.linalg.eigvalsh(d_matrix)
@@ -266,7 +266,7 @@ class QuantumIncongruity(QuantumEntropy):
 
         Notes
         -----
-        :math:`\rho_p\rho_s` is usually non-Hermitian nor has a unit trace.
+        $\rho_p\rho_s$ is usually non-Hermitian nor has a unit trace.
         We normalize it by its trace and calculate its entropy using
         `hermitian=False`.
         """

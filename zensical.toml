@@ -3,6 +3,10 @@ site_name = "Humetrix"
 site_description = "Automatic metrics for humorous texts"
 site_url = "https://nlp-cisuc.github.io/Humetrix/"
 repo_url = "https://github.com/NLP-CISUC/Humetrix"
+extra_javascript = [
+  "javascripts/mathjax.js",
+  "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"
+]
 
 [project.plugins.mkdocstrings.handlers.python]
 paths = ["src"]
@@ -12,3 +16,6 @@ docstring_style = "numpy"
 show_source = false
 show_root_heading = true
 show_root_full_path = false
+
+[project.markdown_extensions.pymdownx.arithmatex]
+generic = true

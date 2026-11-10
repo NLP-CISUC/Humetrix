@@ -81,7 +81,7 @@ class KaoMetricBase:
     This class provides common functions for calculating both metrics proposed
     by Kao et al. (2016)_[1]: ambiguity and distinctiveness. Namely, it handles
     the preparation of n-gram probabilities and the calculation of word
-    posteriors given a hidden variable configuration (:math:`P(w_i|m,f_i)`).
+    posteriors given a hidden variable configuration ($P(w_i|m,f_i)$).
 
     Parameters
     ----------
@@ -168,7 +168,7 @@ class KaoMetricBase:
 
     def _word_posterior(self, f_config: List[int], idx: int, sign: str) -> float:
         r"""
-        Calculate a word's posterior probability: :math:`P(w_i|m,f_i)`.
+        Calculate a word's posterior probability: $P(w_i|m,f_i)$.
 
         Parameters
         ----------
@@ -187,10 +187,10 @@ class KaoMetricBase:
 
         Notes
         -----
-        If the hidden variable :math:`f_i = 1`, we estimate the relatedness
-        measures :math:`R(w_i,m)` using a distant skip-gram model_[1]
-        to calculate the probability :math:`P(w_i|m) = e^{R(w_i,m)*p(w_i|\mathrm{bigram}_i)}`.
-        Otherwise, we use smoothed n-gram probabilities :math:`P(w_i|\mathrm{bigram}_i)`.
+        If the hidden variable $f_i = 1$, we estimate the relatedness
+        measures $R(w_i,m)$ using a distant skip-gram model_[1]
+        to calculate the probability $P(w_i|m) = e^{R(w_i,m)*p(w_i|\mathrm{bigram}_i)}$.
+        Otherwise, we use smoothed n-gram probabilities $P(w_i|\mathrm{bigram}_i)$.
 
         References
         ----------
@@ -239,7 +239,7 @@ class KaoMetricBase:
         -------
         dict
             A dictionary mapping (word index, f_i) to the posterior probability
-            :math:`P(w_i|m,f_i)`.
+            $P(w_i|m,f_i)$.
 
         Notes
         -----
@@ -262,7 +262,7 @@ class KaoAmbiguity(KaoMetricBase):
 
     def _sign_prior(self, sign: str):
         """
-        Calculate the prior probability of a sentence meaning: :math:`P(m)`.
+        Calculate the prior probability of a sentence meaning: $P(m)$.
 
         Parameters
         ----------
@@ -283,7 +283,7 @@ class KaoAmbiguity(KaoMetricBase):
 
     def _sign_posterior(self, sign: str) -> float:
         r"""
-        Calculate the posterior probability of a sentence meaning: :math:`P(m|\vec{w})`.
+        Calculate the posterior probability of a sentence meaning: $P(m|\vec{w})$.
 
         Parameters
         ----------
@@ -299,7 +299,7 @@ class KaoAmbiguity(KaoMetricBase):
         Notes
         -----
         This method marginalizes over all hidden variable configurations:
-        :math:`P(m|\vec{w}) = \sum_{\vec{f}} P(m) P(\vec{f}) \prod_i P(w_i|m, f_i)`.
+        $P(m|\vec{w}) = \sum_{\vec{f}} P(m) P(\vec{f}) \prod_i P(w_i|m, f_i)$.
         We work on the log scale to avoid underflow.
         """
         # Work on log scale to avoid underflow
@@ -328,7 +328,7 @@ class KaoAmbiguity(KaoMetricBase):
 
         Notes
         -----
-        Since :math:`P(m_a|\vec{w}) + P(m_b|\vec{w})` is not necessarily 1, we
+        Since $P(m_a|\vec{w}) + P(m_b|\vec{w})$ is not necessarily 1, we
         normalize the posteriors before calculating the entropy.
         """
         prob_pun_sign = self._sign_posterior(self.pun_sign)

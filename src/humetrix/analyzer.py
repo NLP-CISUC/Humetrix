@@ -58,6 +58,7 @@ class HumorAnalyzer:
     skip-gram models, and n-gram models.
 
     Supported metrics include:
+
     - Quantum Incongruity
     - Quantum Uncertainty
     - Local-Global Surprise
