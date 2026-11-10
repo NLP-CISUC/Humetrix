@@ -174,8 +174,10 @@ class HumorAnalyzer:
                         "or neither to use the default skipgram model."
                     )
                 vocab = build_vocabulary(str(vocab_path))
-                sgns = SGNS(vocab, 300)
-                sgns.load_state_dict(safetensors.torch.load_file(skipgram_path))
+                state_dict = safetensors.torch.load_file(skipgram_path)
+                embedding_dim = state_dict["embeddings.weight"].shape[1]
+                sgns = SGNS(vocab, embedding_dim)
+                sgns.load_state_dict(state_dict)
                 sgns.eval()
                 self._models[name] = {
                     "skipgram": sgns,
