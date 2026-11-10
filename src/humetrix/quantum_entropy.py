@@ -53,21 +53,23 @@ class QuantumEntropy:
         self.spacy_model = spacy_model
         self.mean_vector = mean_vector
 
-    def tokenize_sentence(self) -> Tuple[List[str], List[str]]:
+    def tokenize_sentence(self) -> Union[Tuple[List[str], List[str]], None]:
         """
         Tokenize the sentence into setup and punchline.
 
         Returns
         -------
-        tuple containing two lists of str:
-            The tokens in the joke setup and punchline, respectively.
+        tuple containing two lists of str or None:
+            The tokens in the joke setup and punchline, respectively, or None
+            if the text produces less or more than two segments.
 
         Notes
         -----
         The spaCy model is modified to include a sentencizer component.
-        Sentences are also split at commas and semicolons, and tokens are
-        lowercased. A ValueError is raised unless the text produces exactly
-        two segments.
+        Sentences are also split at commas and semicolons, and tokens are lowercased.
+
+        Returns None unless the text produces exactly two segements,
+        since the metrics are only defined for a setup followed by a punchline.
         """
         if "sentencizer" not in self.spacy_model.pipe_names:
             punct_chars = spacy.pipeline.Sentencizer.default_punct_chars + [",", ";"]
@@ -78,7 +80,10 @@ class QuantumEntropy:
         with self.spacy_model.select_pipes(enable="sentencizer"):
             doc = self.spacy_model(self.text)
 
-        setup, punchline = list(doc.sents)
+        sentences = list(doc.sents)
+        if len(sentences) != 2:
+            return None
+        setup, punchline = sentences
         setup_toks = [token.lower_ for token in setup]
         punchline_toks = [token.lower_ for token in punchline]
         return setup_toks, punchline_toks
@@ -224,10 +229,14 @@ class QuantumUncertainty(QuantumEntropy):
         Returns
         -------
         float or None
-            The quantum uncertainty score, or None if the density matrix
-            could not be calculated.
+            The quantum uncertainty score, or None if the thext does not have
+            exactly two segments density matrix could not be calculated.
         """
-        setup_toks, _ = self.tokenize_sentence()
+        segments = self.tokenize_sentence()
+        if segments is None:
+            return None
+
+        setup_toks, _ = segments
         d_matrix = self.density_matrix(setup_toks)
 
         if d_matrix is None:
@@ -247,8 +256,8 @@ class QuantumIncongruity(QuantumEntropy):
         Returns
         -------
         float or None
-            The quantum incongruity score, or None if the density matrices
-            could not be calculated.
+            The quantum incongruity score, or None if the text does not have
+            exactly two segments or if density matrices could not be calculated.
 
         Notes
         -----
@@ -256,7 +265,11 @@ class QuantumIncongruity(QuantumEntropy):
         We normalize it by its trace and calculate its entropy using
         `hermitian=False`.
         """
-        setup_toks, punchline_toks = self.tokenize_sentence()
+        segments = self.tokenize_sentence()
+        if segments is None:
+            return None
+
+        setup_toks, punchline_toks = segments
         setup_d_matrix = self.density_matrix(setup_toks)
         punch_d_matrix = self.density_matrix(punchline_toks)
 
