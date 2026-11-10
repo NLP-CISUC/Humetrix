@@ -5,7 +5,7 @@ site_url = "https://nlp-cisuc.github.io/Humetrix/"
 repo_url = "https://github.com/NLP-CISUC/Humetrix"
 
 [project.plugins.mkdocstrings.handlers.python]
-pahts = ["src"]
+paths = ["src"]
 
 [project.plugins.mkdocstrings.handlers.python.options]
 docstring_style = "numpy"
