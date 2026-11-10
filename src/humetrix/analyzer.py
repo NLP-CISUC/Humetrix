@@ -78,6 +78,8 @@ class HumorAnalyzer:
         Directory with `1gram.csv` and `3gram.csv`. If None, the default n-gram tables for the language are downloaded.
     transformer_model_name : str, optional
         Name of the transformer model to use. Defaults to None.
+    device: str or torch.device, optional
+        Device for the neural models. If None, eses a GPU when available.
 
     Raises
     ------
@@ -93,10 +95,16 @@ class HumorAnalyzer:
         skipgram_vocab_path: Union[str, None] = None,
         ngram_dir_path: Union[str, None] = None,
         transformer_model_name: Union[str, None] = None,
+        device: Union[str, torch.device, None] = None,
     ) -> None:
         self.language = language
         if language not in SPACY_MODELS:
             raise ValueError(f"Unsupported language: {language}")
+
+        if device is None:
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.device = torch.device(device)
+
         self._transformer_model_name = transformer_model_name
         self._paths = {
             "embeddings": embeddings_path,
@@ -138,10 +146,11 @@ class HumorAnalyzer:
                 else:
                     self._models[name] = spacy.blank(self.language)
             elif name == "bert":
-                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                 model_name = TRANSFORMER_MODELS[self.language]
                 tokenizer = AutoTokenizer.from_pretrained(model_name)
-                lm = AutoModelForMaskedLM.from_pretrained(model_name, device_map=device)
+                lm = AutoModelForMaskedLM.from_pretrained(
+                    model_name, device_map=self.device
+                )
                 self._models[name] = {"tokenizer": tokenizer, "lm": lm}
             elif name == "embeddings":
                 directory = self._paths["embeddings"]
@@ -189,7 +198,9 @@ class HumorAnalyzer:
                     model_name = self._transformer_model_name
                 else:
                     model_name = TRANSFORMER_MODELS[self.language]
-                self._models[name] = pipeline("feature-extraction", model_name)
+                self._models[name] = pipeline(
+                    "feature-extraction", model_name, device=self.device
+                )
             else:
                 raise ValueError(f"Unknown model type: {name}")
         return self._models[name]
@@ -231,6 +242,7 @@ class HumorAnalyzer:
             sentence=sentence,
             embeddings=embeddings,
             spacy_model=self._load_model("tokenizer"),
+            device=self.device,
         )
         return scorer.score()
 
@@ -271,6 +283,7 @@ class HumorAnalyzer:
             sentence=sentence,
             embeddings=embeddings,
             spacy_model=self._load_model("tokenizer"),
+            device=self.device,
         )
         return scorer.score()
 

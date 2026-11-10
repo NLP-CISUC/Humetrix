@@ -52,3 +52,12 @@ def test_default_punc_chars_not_changed(get_analyzer):
     )
     assert "," not in spacy.pipeline.Sentencizer.default_punct_chars
     assert ";" not in spacy.pipeline.Sentencizer.default_punct_chars
+
+
+def test_correct_torch_device(get_analyzer):
+    analyzer = get_analyzer("pt", device="cpu")
+    pipeline = analyzer._load_model("transformer_pipeline")
+    assert pipeline.model.device.type == "cpu"
+
+    bert = analyzer._load_model("bert")
+    assert bert["lm"].device.type == "cpu"

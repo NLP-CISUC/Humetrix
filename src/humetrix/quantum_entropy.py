@@ -16,8 +16,6 @@ from gensim.models import KeyedVectors
 from spacy.language import Language
 from transformers import Pipeline
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 
 class QuantumEntropy:
     """
@@ -38,6 +36,8 @@ class QuantumEntropy:
     mean_vector : torch.Tensor or None, default=None
         A vector of shape (dim,) subtracted from every embedding before
         normalization. If None, no centering is applied.
+    device : str or torch.device or None, default=None
+        Device for the density matrix computations. If None, uses a GPU when available.
     """
 
     def __init__(
@@ -46,12 +46,17 @@ class QuantumEntropy:
         embeddings: Union[KeyedVectors, Pipeline],
         spacy_model: Language,
         mean_vector: Union[None, torch.Tensor] = None,
+        device: Union[str, torch.device, None] = None,
     ) -> None:
         super().__init__()
         self.text = sentence
         self.embeddings = embeddings
         self.spacy_model = spacy_model
         self.mean_vector = mean_vector
+
+        if device is None:
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.device = torch.device(device)
 
     def tokenize_sentence(self) -> Union[Tuple[List[str], List[str]], None]:
         """
@@ -133,7 +138,7 @@ class QuantumEntropy:
                 tokens_avg = torch.mean(token_embeddings, dim=0).cpu()
                 tok_embeddings.append(tokens_avg)
         tok_embeddings = np.array(tok_embeddings)
-        tok_embeddings = torch.tensor(tok_embeddings).to(device)
+        tok_embeddings = torch.tensor(tok_embeddings).to(self.device)
         return tok_embeddings
 
     def density_matrix(self, tokens: List[str]) -> Union[torch.Tensor, None]:
