@@ -3,6 +3,7 @@ from pathlib import Path
 
 import polars as pl
 import pytest
+import spacy
 
 from humetrix import HumorAnalyzer
 
@@ -28,3 +29,26 @@ def test_quantum_entropy(example, column, get_analyzer):
         assert score is None
     else:
         assert score == pytest.approx(expected, abs=1e-4)
+
+
+@pytest.mark.parametrize("column", METRICS)
+def test_requires_two_segments(column, get_analyzer):
+    method, kwargs = METRICS[column]
+    analyzer = get_analyzer("pt")
+
+    one_segment = "Nós chamamos de meio ambiente porque já destruímos metade?"
+    score = getattr(analyzer, method)(one_segment, **kwargs)
+    assert score is None
+
+    multiple_segments = "Era uma vez um homem tão pequeno, mas tão pequeno, que não andava de metro. Andava de centímetro."
+    score = getattr(analyzer, method)(multiple_segments, **kwargs)
+    assert score is None
+
+
+def test_default_punc_chars_not_changed(get_analyzer):
+    analyzer = get_analyzer("pt")
+    analyzer.quantum_uncertainty(
+        "O que é um javaqui? Um javali que está muito próximo."
+    )
+    assert "," not in spacy.pipeline.Sentencizer.default_punct_chars
+    assert ";" not in spacy.pipeline.Sentencizer.default_punct_chars
