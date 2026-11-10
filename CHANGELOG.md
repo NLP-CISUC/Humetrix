@@ -18,12 +18,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Replaced deprecated `polars-u64-idx` with `polars[rt64]>=1.34`.
 - **Breaking:** `embeddings_path` now expects a directory with `embeddings.safetensors` and `vocab.txt`; gensim files are no longer supported.
 - **Breaking:** `skipgram_path` now expects safetensors weights, and must be given together with `skipgram_vocab_path`.
+- Quantum Entropy metrics return `None` for texts that do not split into exactly two segments (setup and punchline), instead of throwing an error.
 
 ### Added
 - `numpy` and `scipy` as explicit dependencies.
 - GloVe embeddings, skip-gram models and n-gram tables are downloaded automatically from the Hugging Face Hub when no path is given.
 - `huggingface-hub` and `safetensors` as explicit dependencies.
+- `device` parameter in `HumorAnalyzer` to choose where neural models run.
 
 ### Removed
 - Analysis and plotting packages (`marimo`, `seaborn`, `matplotlib`, `altair`, `pyspark`, `datasets`, etc.) from the package requirements.
 - Unused `spacy[cuda12x]` extra.
+
+### Fixed
+- Local-Global Surprise failed with recent `transformers` versions.
+- Spacy's default sentencizer punctuation list is no longer modified globally.
+- Local-Global Surprise no longer disables pytorch gradients globally.
+- Skipgram emdedding dimension is read from the weights instead of being fixed at 300.
