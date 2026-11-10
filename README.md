@@ -1,6 +1,7 @@
 # Humetrix
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/license/mit)
+[![PyPI](https://img.shields.io/pypi/v/humetrix)](https://pypi.org/project/humetrix/)
 
 Automatic metrics for humorous texts. Currently supporting English, Spanish, French, Portuguese and Mandarin Chinese.
 
