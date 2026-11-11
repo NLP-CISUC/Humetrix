@@ -242,6 +242,8 @@ def _(corr, corr_n, metrics, mo, np, plt, sns):
     )
 
     _fig.tight_layout()
+
+    _fig.savefig("results/img/all_metrics_correlation.pdf", bbox_inches="tight")
     mo.mpl.interactive(_fig)
     return
 

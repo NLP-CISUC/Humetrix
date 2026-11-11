@@ -277,6 +277,7 @@ def _(corpora_enum, df_no_outliers, mo, sns):
     _g.set_titles(col_template="{col_name}")
     _g.set_axis_labels("Metric Value", "Density")
 
+    _g.savefig("results/img/stability_kde_plots.png", dpi=300, bbox_inches="tight")
     mo.mpl.interactive(_g.figure)
     return (corpus_palette,)
 
@@ -316,6 +317,7 @@ def _(corpus_palette, df_no_outliers, mo, sns):
     _g.set_titles(col_template="{col_name}")
     _g.set_axis_labels("Metric Value", "Density")
 
+    _g.savefig("results/img/stability_violin_plots.png", dpi=300, bbox_inches="tight")
     mo.mpl.interactive(_g.figure)
     return
 
@@ -349,6 +351,7 @@ def _(corpus_palette, df_no_outliers, mo, sns):
     _g.set_titles(col_template="{col_name}")
     _g.set_axis_labels("Metric Value", "Density")
 
+    _g.savefig("results/img/stability_violin_plots_multilingual.png", dpi=300, bbox_inches="tight")
     mo.mpl.interactive(_g.figure)
     return
 
