@@ -216,10 +216,13 @@ def _(mo):
 def _(df_no_outliers, mo, pl):
     mo.ui.table(
         df_no_outliers.group_by(["metric", "corpus"])
-        .agg(pl.col("value").mean().alias("mean"), pl.col("value").std().alias("std"))
+        .agg(pl.col("value").mean().alias("mean"),
+             pl.col("value").std().alias("std"),
+             pl.col("value").min().alias("min"),
+             pl.col("value").max().alias("max"))
         .sort("metric", "corpus"),
         selection=None,
-        format_mapping={"mean": "{:.3g}", "std": "{:.3g}"},
+        format_mapping={"mean": "{:.3g}", "std": "{:.3g}", "min": "{:.3g}", "max": "{:.4g}"},
     )
     return
 
@@ -351,7 +354,7 @@ def _(corpus_palette, df_no_outliers, mo, sns):
     _g.set_titles(col_template="{col_name}")
     _g.set_axis_labels("Metric Value", "Density")
 
-    _g.savefig("results/img/stability_violin_plots_multilingual.png", dpi=300, bbox_inches="tight")
+    _g.savefig("results/img/stability_violin_plots_multilinguallhj.png", dpi=300, bbox_inches="tight")
     mo.mpl.interactive(_g.figure)
     return
 
