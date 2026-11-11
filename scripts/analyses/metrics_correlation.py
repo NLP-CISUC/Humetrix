@@ -28,7 +28,7 @@ def _(Path, pl):
 
     corpora = ["cup", "puntuguese"]
     corpora_enum = pl.Enum(corpora)
-    metric_dirs = ["quantum_entropy", "kaoetal", "local_global_surprise"]
+    metric_dirs = ["quantum_entropy", "kaoetal", "surprise_ratio"]
     text_attributes = ["text", "label", "location", "interpretation", "char_count"]
     metrics = {
         "QE-U + GloVe": "QE-U (GloVe)",
@@ -37,7 +37,7 @@ def _(Path, pl):
         "QE-I + HF": "QE-I (HF)",
         "ambiguity": "Ambiguity",
         "distinctiveness": "Distinctiveness",
-        "local global surprise": "Surprise Ratio",
+        "surprise ratio": "Surprise Ratio",
     }
     return (
         corpora,
@@ -109,7 +109,7 @@ def _(corpora, corpora_enum, metric_dirs, pl, results_path, text_attributes):
         .drop_nulls("value")
         .with_columns(
             value=pl.when(
-                (pl.col("metric") == "local global surprise") & (pl.col("value") == -1)
+                (pl.col("metric") == "surprise ratio") & (pl.col("value") == -1)
             )
             .then(None)
             .otherwise(pl.col("value"))

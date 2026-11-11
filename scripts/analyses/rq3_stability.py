@@ -39,7 +39,7 @@ def _(Path, pl):
             "/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix/results/kaoetal"
         ),
         Path(
-            "/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix/results/local_global_surprise"
+            "/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix/results/surprise_ratio"
         ),
     ]
 
@@ -87,7 +87,7 @@ def _(corpora_enum, pl, results_paths):
         combined_df.drop("label", "text")
         # Remove error values (-1 for surprise ratio and 0 for Kao et al.)
         .with_columns(
-            pl.col("local global surprise").replace(-1, None),
+            pl.col("surprise ratio").replace(-1, None),
             pl.col("ambiguity").replace(0, None),
             pl.col("distinctiveness").replace(0, None),
         )
@@ -307,7 +307,7 @@ def _(corpus_palette, df_no_outliers, mo, sns):
             "QE-I + GloVe",
             "distinctiveness",
             "ambiguity",
-            "local global surprise",
+            "surprise ratio",
         ],
     )
 
@@ -354,7 +354,7 @@ def _(corpus_palette, df_no_outliers, mo, sns):
     _g.set_titles(col_template="{col_name}")
     _g.set_axis_labels("Metric Value", "Density")
 
-    _g.savefig("results/img/stability_violin_plots_multilinguallhj.png", dpi=300, bbox_inches="tight")
+    _g.savefig("results/img/stability_violin_plots_multilingual.png", dpi=300, bbox_inches="tight")
     mo.mpl.interactive(_g.figure)
     return
 
@@ -447,7 +447,7 @@ def _(corpora_enum, df_no_outliers, mannwhitneyu, np, pl, ttost_ind):
 def _(mo, pl, results_df):
     non_qe_results = results_df.filter(
         pl.col("metric").is_in(
-            ["ambiguity", "distinctiveness", "local global surprise"]
+            ["ambiguity", "distinctiveness", "surprise ratio"]
         )
     ).select(pl.all().exclude("u_statistic"))
 

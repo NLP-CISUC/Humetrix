@@ -8,7 +8,7 @@ Automatic metrics for humorous texts. Currently supporting English, Spanish, Fre
 | Metric | Method | Reference |
 |---|---|---|
 | Quantum Uncertainty / Incongruity | `quantum_uncertainty`, `quantum_incongruity` | [Liu and Hou (2023)](https://aclanthology.org/2023.findings-eacl.152) |
-| Surprise Ratio | `local_global_surprise` | [He et al. (2019)](http://aclweb.org/anthology/N19-1172) |
+| Surprise Ratio | `surprise_ratio` | [He et al. (2019)](http://aclweb.org/anthology/N19-1172) |
 | Ambiguity / Distinctiveness | `kao_ambiguity`, `kao_distinctiveness` | [Kao et al. (2016)](https://onlinelibrary.wiley.com/doi/10.1111/cogs.12269) |
 
 ## Description
@@ -44,7 +44,7 @@ qi_score = analyzer.quantum_incongruity(sent)
 qi_xlm_score = analyzer.quantum_incongruity(sent, backend='transformer')
 qu_score = analyzer.quantum_uncertainty(sent)
 qu_xlm_score = analyzer.quantum_uncertainty(sent, backend='transformer')
-lgs_score = analyzer.local_global_surprise(sent, sign, alt_sign)
+sr_score = analyzer.surprise_ratio(sent, sign, alt_sign)
 kao_amb_score = analyzer.kao_ambiguity(sent, sign, alt_sign)
 kao_dist_score = analyzer.kao_distinctiveness(sent, sign, alt_sign)
 ```

@@ -36,3 +36,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Spacy's default sentencizer punctuation list is no longer modified globally.
 - Local-Global Surprise no longer disables pytorch gradients globally.
 - Skipgram emdedding dimension is read from the weights instead of being fixed at 300.
+
+## 0.4.0 - 2026-11-11
+
+### Changed
+- **Breaking:** renamed `local_global_surprise` to `surprise_ratio` and `LocalGlobalSurprise` to `SurpriseRatio`.

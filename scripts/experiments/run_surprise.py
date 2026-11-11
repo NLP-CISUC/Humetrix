@@ -10,12 +10,12 @@ paths = {
     "cup": "data/humor_interpretation/cup.json",
     "puntuguese": "data/humor_interpretation/puntuguese.json",
 }
-results_path = Path("results/local_global_surprise")
+results_path = Path("results/surprise_ratio")
 results_path.mkdir(exist_ok=True, parents=True)
 
 
 def get_surprise_score(row, analyzer):
-    return analyzer.local_global_surprise(
+    return analyzer.surprise_ratio(
         row["text"], row["location"], row["interpretation"]
     )
 
@@ -26,8 +26,8 @@ for language, datasets in corpora.items():
         print("- " * 10 + corpus + " -" * 10)
         df = pd.read_json(paths[corpus], orient="index").reset_index()
 
-        tqdm.pandas(desc="Local Global Surprise")
-        df["local global surprise"] = df.progress_apply(
+        tqdm.pandas(desc="Surprise Ratio")
+        df["surprise ratio"] = df.progress_apply(
             get_surprise_score, axis="columns", analyzer=analyzer
         )
 

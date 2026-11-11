@@ -1,0 +1,6 @@
+{"text":"When the hail storm hit, it would knock out the bombshell.","location":"bombshell","interpretation":"bombshell","surprise ratio":-1.0,"language":"en","corpus":"cup"}
+{"text":"The vender daughter was not very rich, but at least she was peasant to be around!","location":"peasant","interpretation":"pleasant","surprise ratio":0.362563723,"language":"en","corpus":"cup"}
+{"text":"The threatened man could not post brail, so he stayed in jail","location":"brail","interpretation":"bail","surprise ratio":0.6295729775,"language":"en","corpus":"cup"}
+{"text":"Ao perceber turbulência, a aeromoça havia perguntado se o piloto estava se sentindo bem. O que ele respondeu antes de caírem? Stall.","location":"stall","interpretation":"estou","surprise ratio":1.0301343163,"language":"pt","corpus":"puntuguese"}
+{"text":"Qual escritor parou de tomar cerveja? Miguel de cerva antes!","location":"cerva antes","interpretation":"cervantes","surprise ratio":0.6696549855,"language":"pt","corpus":"puntuguese"}
+{"text":"Qual cantor virou desenho da Disney? Stitch Wonder.","location":"stitch","interpretation":"steve","surprise ratio":0.7540785988,"language":"pt","corpus":"puntuguese"}

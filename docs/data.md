@@ -163,7 +163,7 @@ Humetrix downloads these embeddings automatically form the Hugging Face Hub ([NL
 
 ## N-gram counts
 
-To compute the local-global surprise metrics, we needed to have 1-gram and 3-gram counts for each language across large corpora. The n-grams counts for English, Spanish, French, and Chinese were obtained from the [Google Books n-gram frequency lists](https://github.com/orgtre/google-books-ngram-frequency). For Portuguese, we use [N-gram frequency counts from BRWaC](https://github.com/Superar/Portuguese-Ngram-Frequencies).
+To compute the Surprise Ratio metrics, we needed to have 1-gram and 3-gram counts for each language across large corpora. The n-grams counts for English, Spanish, French, and Chinese were obtained from the [Google Books n-gram frequency lists](https://github.com/orgtre/google-books-ngram-frequency). For Portuguese, we use [N-gram frequency counts from BRWaC](https://github.com/Superar/Portuguese-Ngram-Frequencies).
 
 Humetrix also automatically downloads these count tables from [our Hugging Face Hub repository](https://huggingface.co/NLP-CISUC/humetrix-resources).
 

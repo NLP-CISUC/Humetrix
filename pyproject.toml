@@ -1,6 +1,6 @@
 [project]
 name = "humetrix"
-version = "0.3.0"
+version = "0.4.0"
 description = "Automatic metrics for evaluation of humorous content"
 authors = [
     {name = "Marcio Lima Inácio", email = "mlinacio@dei.uc.pt"},

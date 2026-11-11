@@ -9,13 +9,12 @@ References
 import re
 
 import numpy as np
-import spacy
 from spacy.language import Language
 import torch
 from transformers import PreTrainedModel, PreTrainedTokenizer
 
 
-class LocalGlobalSurprise:
+class SurpriseRatio:
     """
     Calculate the surprise-based humor metric from He et al. (2019).
 
@@ -144,7 +143,7 @@ class LocalGlobalSurprise:
 
     def score(self, tokenizer: PreTrainedTokenizer, lm: PreTrainedModel) -> float:
         """
-        Calculate the local-global surprise score.
+        Calculate the Surprise Ratio score.
 
         Parameters
         ----------
@@ -156,7 +155,7 @@ class LocalGlobalSurprise:
         Returns
         -------
         float
-            The local-global surprise score. If any error occurs, returns -1.
+            The Surprise Ratio score. If any error occurs, returns -1.
         """
         if self.pun_sign.lower() not in self.text.lower():
             return -1

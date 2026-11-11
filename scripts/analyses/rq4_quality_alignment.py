@@ -41,7 +41,7 @@ def _(Path, pl):
             "/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix/results/kaoetal"
         ),
         Path(
-            "/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix/results/local_global_surprise"
+            "/home/mlinacio/HDD/Documentos/Doutorado/Projeto/Criatividade/Projetos/Recognition/Humetrix/results/surprise_ratio"
         ),
     ]
 

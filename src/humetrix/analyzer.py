@@ -25,7 +25,7 @@ from .configs import SPACY_MODELS, TOKENIZER_MODELS, TRANSFORMER_MODELS
 from .kaoetal import KaoAmbiguity, KaoConfig, KaoDistinctiveness
 from .quantum_entropy import QuantumIncongruity, QuantumUncertainty
 from .skipgram import SGNS, build_vocabulary
-from .surprise import LocalGlobalSurprise
+from .surprise import SurpriseRatio
 
 
 def _load_spacy_model(name: str) -> Language:
@@ -61,7 +61,7 @@ class HumorAnalyzer:
 
     - Quantum Incongruity
     - Quantum Uncertainty
-    - Local-Global Surprise
+    - Surprise Ratio
     - Kao et al.'s Ambiguity
     - Kao et al.'s Distinctiveness
 
@@ -288,11 +288,11 @@ class HumorAnalyzer:
         )
         return scorer.score()
 
-    def local_global_surprise(
+    def surprise_ratio(
         self, sentence: str, pun_sign: str, alt_sign: str
     ) -> float:
         """
-        Calculate the local-global surprise of a sentence.
+        Calculate the surprise ratio of a sentence.
 
         Parameters
         ----------
@@ -306,14 +306,14 @@ class HumorAnalyzer:
         Returns
         -------
         float
-            The local-global surprise score.
+            The surprise ratio score.
 
         See Also
         --------
-        surprise.LocalGlobalSurprise.score : Method that performs the actual scoring.
+        surprise.SurpriseRatio.score : Method that performs the actual scoring.
         """
         bert_models = self._load_model("bert")
-        scorer = LocalGlobalSurprise(
+        scorer = SurpriseRatio(
             sentence=sentence,
             pun_sign=pun_sign,
             alt_sign=alt_sign,

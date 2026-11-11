@@ -7,7 +7,7 @@ OUTPUT = Path("tests/gold")
 CORPORA = {"en": "cup", "pt": "puntuguese"}
 TEXT_COLUMNS = ["text", "location", "interpretation"]
 METRICS_COLUMNS = {
-    "local_global_surprise": ["local global surprise"],
+    "surprise_ratio": ["surprise ratio"],
     "kaoetal": ["ambiguity", "distinctiveness"],
 }
 N_EXAMPLES = 3
